@@ -1,0 +1,23 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "layers" : [
+    {
+      "filename" : "front.imagestacklayer"
+    },
+    {
+      "filename" : "middle.imagestacklayer"
+    },
+    {
+      "filename" : "back.imagestacklayer"
+    }
+  ],
+  "properties" : {
+    "canvasSize" : {
+      "height" : 240,
+      "width" : 400
+    }
+  }
+}

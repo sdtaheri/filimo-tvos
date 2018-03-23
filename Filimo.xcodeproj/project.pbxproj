@@ -7,14 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
+		30BF891C2062F426009FAB4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF891B2062F426009FAB4D /* main.swift */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
+		3015FFA52063A51A0029F8FF /* DataLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataLoader.js; sourceTree = "<group>"; };
+		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
+		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
+		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
+		302418072065246700B46686 /* Index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Index.js; sourceTree = "<group>"; };
+		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
+		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
+		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		30C5790B20448110007E728F /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
+		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -30,6 +42,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3015FFA62063A55A0029F8FF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
+				3015FFA52063A51A0029F8FF /* DataLoader.js */,
+				30241805206514C300B46686 /* DocumentController.js */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3024180A2065335C00B46686 /* XMLs */ = {
+			isa = PBXGroup;
+			children = (
+				302418082065246700B46686 /* Index.xml */,
+				30241804206501F500B46686 /* Home.xml */,
+			);
+			path = XMLs;
+			sourceTree = "<group>";
+		};
+		307D82772063157800848244 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				30C5790920448110007E728F /* AppDelegate.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		30BF891D20631288009FAB4D /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				3015FFA62063A55A0029F8FF /* Utilities */,
+				3024180A2065335C00B46686 /* XMLs */,
+				30C5790B20448110007E728F /* Application.js */,
+				30241809206525F700B46686 /* MenuBarController.js */,
+				302418062065246700B46686 /* HomeDocumentController.js */,
+				302418072065246700B46686 /* Index.js */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		30BF891E20631298009FAB4D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30BF891B2062F426009FAB4D /* main.swift */,
+				30C5790C20448110007E728F /* Assets.xcassets */,
+				30BF89182062F2B7009FAB4D /* InfoPlist.strings */,
+				30C5790E20448110007E728F /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		30C578FD20448110007E728F = {
 			isa = PBXGroup;
 			children = (
@@ -49,10 +112,9 @@
 		30C5790820448110007E728F /* Filimo */ = {
 			isa = PBXGroup;
 			children = (
-				30C5790920448110007E728F /* AppDelegate.swift */,
-				30C5790B20448110007E728F /* application.js */,
-				30C5790C20448110007E728F /* Assets.xcassets */,
-				30C5790E20448110007E728F /* Info.plist */,
+				307D82772063157800848244 /* Client */,
+				30BF891D20631288009FAB4D /* Server */,
+				30BF891E20631298009FAB4D /* Supporting Files */,
 			);
 			path = Filimo;
 			sourceTree = "<group>";
@@ -99,6 +161,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fa,
 			);
 			mainGroup = 30C578FD20448110007E728F;
 			productRefGroup = 30C5790720448110007E728F /* Products */;
@@ -116,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
+				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,11 +190,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30BF891C2062F426009FAB4D /* main.swift in Sources */,
 				30C5790A20448110007E728F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		30BF89182062F2B7009FAB4D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30BF89192062F2B7009FAB4D /* fa */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		30C5790F20448110007E728F /* Debug */ = {
@@ -245,7 +321,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HM2L63PQ2B;
-				INFOPLIST_FILE = Filimo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Filimo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -262,7 +338,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HM2L63PQ2B;
-				INFOPLIST_FILE = Filimo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Filimo/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";

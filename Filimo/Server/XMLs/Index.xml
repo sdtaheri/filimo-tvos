@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <menuBarTemplate>
+        <menuBar>
+            <menuItem homeDocumentURL="/XMLs/Home.xml" autoHighlight="true">
+                <title>پیشنهادها</title>
+            </menuItem>
+            <menuItem documentURL="/XMLs/Search.xml">
+                <title>جستجو</title>
+            </menuItem>
+        </menuBar>
+    </menuBarTemplate>
+</document>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <stackTemplate>
+        <prototypes>
+            <lockup prototype="artwork">
+                <img binding="@src:{data};" width="225" height="300" />
+                <title binding="textContent:{title};" />
+            </lockup>
+        </prototypes>
+        <banner>
+            <title>فیلیمو</title>
+        </banner>
+        <collectionList>
+            <shelf>
+                <section binding="items:{homepage};" />
+            </shelf>
+        </collectionList>
+    </stackTemplate>
+</document>
