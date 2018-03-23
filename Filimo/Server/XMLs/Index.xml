@@ -6,6 +6,9 @@
                 <title>پیشنهادها</title>
             </menuItem>
             <menuItem documentURL="/XMLs/Search.xml">
+                <title>دسته‌بندی‌ها</title>
+            </menuItem>
+            <menuItem documentURL="/XMLs/Search.xml">
                 <title>جستجو</title>
             </menuItem>
         </menuBar>

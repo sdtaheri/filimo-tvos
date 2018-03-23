@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <document>
+    <head>
+        <style>
+            .headerLogo {
+                width: 295;
+                height: 90;
+            }
+            .artworkTitle {
+                tv-align: right;
+                tv-text-max-lines: 2;
+            }
+            .lockup {
+                padding: 0 0 72 0;
+            }
+        </style>
+    </head>
     <stackTemplate>
         <prototypes>
-            <lockup prototype="artwork">
-                <img binding="@src:{data};" width="225" height="300" />
-                <title binding="textContent:{title};" />
+            <lockup prototype="homeArtwork" class="lockup">
+                <img binding="@src:{movie_img_b};" width="262" height="350" />
+                <title class="artworkTitle" binding="textContent:{movie_title};" />
             </lockup>
         </prototypes>
         <banner>
-            <title>فیلیمو</title>
+            <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
         </banner>
-        <collectionList>
-            <shelf>
-                <section binding="items:{homepage};" />
-            </shelf>
+        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">
         </collectionList>
     </stackTemplate>
 </document>

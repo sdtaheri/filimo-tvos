@@ -51,9 +51,7 @@ class MenuBarController extends DocumentController {
         if (!existingDocument) {
             const controllerOptions = resolveControllerFromElement(menuItemElem);
             if (controllerOptions) {
-                if (!isInitialItem) {
-                    menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
-                }
+                menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
                 controllerOptions.documentLoader = this._documentLoader;
                 const controllerClass = controllerOptions.type;
                 const controller = new controllerClass(controllerOptions);

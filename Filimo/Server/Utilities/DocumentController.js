@@ -18,13 +18,10 @@ class DocumentController {
         this._documentLoader.fetch({
             url: documentURL,
             success: (document) => {
-                // Resolve data first.
-                this._dataLoader.prepareDocument(document, () => {
-                    // Add the event listener for document
-                    this.setupDocument(document);
-                    // Allow subclass to do custom handling for this document
-                    this.handleDocument(document, loadingDocument);
-                });
+               // Add the event listener for document
+               this.setupDocument(document);
+               // Allow subclass to do custom handling for this document
+               this.handleDocument(document, loadingDocument);
             },
             error: (xhr) => {
                 const alertDocument = createLoadErrorAlertDocument(documentURL, xhr, false);
@@ -73,7 +70,7 @@ class DocumentController {
     fetchNextPageAtURL(url, section) {
         //fetch the next page
         this._dataLoader._fetchJSONData(this._dataLoader._documentLoader.prepareURL(url), (dataObj) => {
-            let newItems = this._dataLoader._dataItemFromJSONItems(dataObj.items)
+            let newItems = this.dataItemFromJSONItems(dataObj.items)
 
             //append them to the list of current items 
             if (newItems == undefined || newItems.length == 0) { return }

@@ -22,6 +22,7 @@
 		302418072065246700B46686 /* Index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Index.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
+		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +30,7 @@
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30EDFBFE20655FC100B7BF40 /* Home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Home.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,14 @@
 			path = XMLs;
 			sourceTree = "<group>";
 		};
+		3024180B2065567400B46686 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3024180C2065568B00B46686 /* logo.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		307D82772063157800848244 /* Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +82,9 @@
 		30BF891D20631288009FAB4D /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				30EDFBFD20655FAA00B7BF40 /* Mock */,
 				3015FFA62063A55A0029F8FF /* Utilities */,
+				3024180B2065567400B46686 /* Resources */,
 				3024180A2065335C00B46686 /* XMLs */,
 				30C5790B20448110007E728F /* Application.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,
@@ -117,6 +129,14 @@
 				30BF891E20631298009FAB4D /* Supporting Files */,
 			);
 			path = Filimo;
+			sourceTree = "<group>";
+		};
+		30EDFBFD20655FAA00B7BF40 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				30EDFBFE20655FC100B7BF40 /* Home.json */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
