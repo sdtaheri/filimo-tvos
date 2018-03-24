@@ -47,6 +47,7 @@ App.onLaunch = function(options) {
         "MenuBarController",
         "HomeDocumentController",
         "CategoriesDocumentController",
+        "ProductDocumentController",
         "Index"
     ].map(
         moduleName => `${baseURL}${moduleName}.js`

@@ -2,10 +2,10 @@
 <document>
     <menuBarTemplate>
         <menuBar>
-            <menuItem homeDocumentURL="/XMLs/Home.xml">
-                <title>پیشنهادها</title>
+            <menuItem homeDocumentURL="/XMLs/Home.xml" autoHighlight="true">
+                <title>پیشخوان</title>
             </menuItem>
-            <menuItem categoriesDocumentURL="/XMLs/Categories.xml" autoHighlight="true">
+            <menuItem categoriesDocumentURL="/XMLs/Categories.xml">
                 <title>دسته‌بندی‌ها</title>
             </menuItem>
             <menuItem documentURL="/XMLs/Search.xml">

@@ -55,7 +55,7 @@ class DocumentController {
             }
             controllerOptions.event = event;
             controllerOptions.documentLoader = this._documentLoader;
-            // Create the subsequent controller based on the atribute and its value. Controller would handle its presentation.
+            // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.
             new controllerClass(controllerOptions);
         }
         else if (targetElem.tagName === "description") {

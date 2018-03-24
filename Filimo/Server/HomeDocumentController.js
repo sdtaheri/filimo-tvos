@@ -39,5 +39,13 @@ class HomeDocumentController extends DocumentController {
             }
         })
     }
+
+    handleEvent(event) {
+        if (event.type === "play") {
+            console.log("PLAY")
+        } else {
+            super.handleEvent(event)
+        }
+    }
 }
 registerAttributeName("homeDocumentURL", HomeDocumentController)

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .badge {
+                tv-tint-color: rgb(0, 0, 0);
+            }
+            @media tv-template and (tv-theme:dark) {
+                .badge {
+                    tv-tint-color: rgb(255, 255, 255);
+                }
+            }
+        </style>
+    </head>
+    <productTemplate>
+        <banner>
+            <infoList>
+                <info id="genreInfo">
+                    <header>
+                        <title>ژانر</title>
+                    </header>
+                    <text id="genre1"></text>
+                </info>
+                <info>
+                    <header>
+                        <title>کارگردان</title>
+                    </header>
+                    <text id="directorInfo"></text>
+                </info>
+            </infoList>
+            <stack>
+                <title></title>
+                <row id="infoRow"></row>
+                <description id="productDescription" handlesOverflow="true"></description>
+                <row>
+                    <buttonLockup>
+                        <badge src="resource://button-play"/>
+                        <title></title>
+                    </buttonLockup>
+                    <buttonLockup>
+                        <badge src="resource://button-add"/>
+                        <title></title>
+                    </buttonLockup>
+                </row>
+            </stack>
+            <heroImg src="" width="400" height="600" />
+        </banner>
+        <shelf recommendation="true">
+            <prototypes>
+                <lockup prototype="similarArtwork">
+                    <img binding="@src:{movie_img_b};" width="262" height="350" />
+                    <title binding="textContent:{movie_title};" />
+                </lockup>
+            </prototypes>
+            <header>
+                <title>فیلم‌های مشابه</title>
+            </header>
+            <section binding="items:{items};">
+            </section>
+        </shelf>
+        <shelf>
+            <header>
+                <title>امتیاز</title>
+            </header>
+            <section>
+                <ratingCard>
+                    <title></title>
+                    <ratingBadge></ratingBadge>
+                    <description></description>
+                </ratingCard>
+            </section>
+        </shelf>
+    </productTemplate>
+</document>
