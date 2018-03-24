@@ -54,6 +54,15 @@ class ProductDocumentController extends DocumentController {
         } else {
             directorNode.textContent = this._productInfo.director_fa 
         }
+
+        let ratingCardNode = document.getElementsByTagName("ratingCard").item(0)
+        if (this._productInfo.rate_avrage != null) {
+            ratingCardNode.getElementsByTagName("title").item(0).textContent = this._productInfo.rate_avrage + " از " + "5"
+            ratingCardNode.getElementsByTagName("ratingBadge").item(0).setAttribute("value", this._productInfo.rate_avrage / 5.0)
+            ratingCardNode.getElementsByTagName("description").item(0).textContent = "میانگین امتیاز از بین " + this._productInfo.rate_cnt + " نظر"
+        } else {
+            ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
+        }
     }
 
 }
