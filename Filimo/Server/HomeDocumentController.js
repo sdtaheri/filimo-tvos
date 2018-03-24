@@ -1,7 +1,7 @@
 class HomeDocumentController extends DocumentController {
     
-    dataItemFromJSONItem(item) {
-        let data = item.data
+    dataItemsFromJSONItems(items) {
+        let data = items.data
         return data.map((movie) => {
             let dataItem = new DataItem("homeArtwork", movie.uid)
             Object.keys(movie).forEach((key) => {
@@ -35,7 +35,7 @@ class HomeDocumentController extends DocumentController {
 
                let section = (collectionList.getElementsByTagName("section")).item(i)
                section.dataItem = new DataItem()
-               section.dataItem.setPropertyPath("items", this.dataItemFromJSONItem(sections[i]))
+               section.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(sections[i]))
             }
         })
     }

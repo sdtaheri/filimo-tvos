@@ -9,6 +9,7 @@
             .artworkTitle {
                 tv-align: right;
                 tv-text-max-lines: 2;
+                tv-placeholder: movie;
             }
             .lockup {
                 padding: 0 0 72 0;
@@ -25,7 +26,8 @@
         <banner>
             <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
         </banner>
-        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">
+<!--        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">-->
+        <collectionList lazyDataURL="/Mock/Home.json">
         </collectionList>
     </stackTemplate>
 </document>

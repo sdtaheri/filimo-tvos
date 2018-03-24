@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .roundedImage {
+                border-radius: small;
+                tv-img-treatment: corner-small;
+                tv-tint-color: linear-gradient(top, 0.20, transparent, 0.55, rgba(0,0,0,0.35), 1.00, rgba(0,0,0,0.5));
+            }
+            .paddedOverlay {
+                padding: 0 16 16 0;
+            }
+            .shadowedTitle {
+                text-shadow: 2px 2px 8px #000000;
+            }
+        </style>
+    </head>
+    <stackTemplate>
+        <banner>
+            <title>دسته‌بندی‌ها</title>
+        </banner>
+        <collectionList>
+            <grid>
+                <prototypes>
+                    <lockup prototype="categoryArtwork">
+                        <img class="roundedImage" binding="@src:{cover};" width="800" height="256"/>
+                        <overlay class="paddedOverlay">
+                            <title class="shadowedTitle" binding="textContent:{title};" />
+                        </overlay>
+                    </lockup>
+                </prototypes>
+                <section binding="items:{items};" lazyDataURL="/Mock/Categories.json" />
+            </grid>
+        </collectionList>
+    </stackTemplate>
+</document>

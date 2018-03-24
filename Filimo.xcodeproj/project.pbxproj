@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		309D289820663183001148BE /* Categories.xml in Resources */ = {isa = PBXBuildFile; fileRef = 309D289720663183001148BE /* Categories.xml */; };
+		309D289A2066332B001148BE /* Categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 309D28992066332B001148BE /* Categories.json */; };
+		309D289C20663390001148BE /* CategoriesDocumentController.js in Resources */ = {isa = PBXBuildFile; fileRef = 309D289B20663390001148BE /* CategoriesDocumentController.js */; };
 		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
 		30BF891C2062F426009FAB4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF891B2062F426009FAB4D /* main.swift */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
@@ -23,6 +26,9 @@
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
 		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		309D289720663183001148BE /* Categories.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Categories.xml; sourceTree = "<group>"; };
+		309D28992066332B001148BE /* Categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Categories.json; sourceTree = "<group>"; };
+		309D289B20663390001148BE /* CategoriesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CategoriesDocumentController.js; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +65,7 @@
 			children = (
 				302418082065246700B46686 /* Index.xml */,
 				30241804206501F500B46686 /* Home.xml */,
+				309D289720663183001148BE /* Categories.xml */,
 			);
 			path = XMLs;
 			sourceTree = "<group>";
@@ -87,9 +94,10 @@
 				3024180B2065567400B46686 /* Resources */,
 				3024180A2065335C00B46686 /* XMLs */,
 				30C5790B20448110007E728F /* Application.js */,
+				302418072065246700B46686 /* Index.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,
 				302418062065246700B46686 /* HomeDocumentController.js */,
-				302418072065246700B46686 /* Index.js */,
+				309D289B20663390001148BE /* CategoriesDocumentController.js */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				30EDFBFE20655FC100B7BF40 /* Home.json */,
+				309D28992066332B001148BE /* Categories.json */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -199,7 +208,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
+				309D289A2066332B001148BE /* Categories.json in Resources */,
 				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
+				309D289820663183001148BE /* Categories.xml in Resources */,
+				309D289C20663390001148BE /* CategoriesDocumentController.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
