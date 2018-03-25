@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .artworkTitle {
+                tv-align: right;
+                tv-text-max-lines: 2;
+                tv-placeholder: movie;
+            }
+        </style>
+    </head>
+    <stackTemplate>
+        <banner>
+            <title></title>
+        </banner>
+        <collectionList>
+            <grid>
+                <prototypes>
+                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsInCategory">
+                        <img binding="@src:{movie_img_b};" width="360" height="480" />
+                        <title class="artworkTitle" binding="textContent:{movie_title};" />
+                    </lockup>
+                </prototypes>
+                <section binding="items:{items};" />
+            </grid>
+        </collectionList>
+    </stackTemplate>
+</document>

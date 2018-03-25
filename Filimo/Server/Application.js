@@ -47,6 +47,7 @@ App.onLaunch = function(options) {
         "MenuBarController",
         "HomeDocumentController",
         "CategoriesDocumentController",
+        "ProductsInCategoryDocumentController",
         "ProductDocumentController",
         "Index"
     ].map(

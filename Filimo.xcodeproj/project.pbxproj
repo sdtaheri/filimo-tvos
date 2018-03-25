@@ -35,6 +35,8 @@
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30D5167720682D8C007995AF /* ProductsInCategory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProductsInCategory.xml; sourceTree = "<group>"; };
+		30D5167920682EEF007995AF /* ProductsInCategoryDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductsInCategoryDocumentController.js; sourceTree = "<group>"; };
 		30EDFBFE20655FC100B7BF40 /* Home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Home.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,6 +67,7 @@
 				302418082065246700B46686 /* Index.xml */,
 				30241804206501F500B46686 /* Home.xml */,
 				309D289720663183001148BE /* Categories.xml */,
+				30D5167720682D8C007995AF /* ProductsInCategory.xml */,
 				309D289D206649DF001148BE /* Product.xml */,
 			);
 			path = XMLs;
@@ -98,6 +101,7 @@
 				30241809206525F700B46686 /* MenuBarController.js */,
 				302418062065246700B46686 /* HomeDocumentController.js */,
 				309D289B20663390001148BE /* CategoriesDocumentController.js */,
+				30D5167920682EEF007995AF /* ProductsInCategoryDocumentController.js */,
 				309D289F20664A00001148BE /* ProductDocumentController.js */,
 			);
 			path = Server;

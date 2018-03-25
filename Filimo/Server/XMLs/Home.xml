@@ -3,6 +3,7 @@
     <head>
         <style>
             .headerLogo {
+                tv-align: right;
                 width: 295;
                 height: 90;
             }
@@ -14,6 +15,9 @@
             .lockup {
                 padding: 0 0 72 0;
             }
+            .loginButton {
+                tv-align: left;
+            }
         </style>
     </head>
     <stackTemplate>
@@ -24,10 +28,14 @@
             </lockup>
         </prototypes>
         <banner>
-            <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
+            <row>
+                <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
+                <buttonLockup class="loginButton">
+                    <title>ورود</title>
+                </buttonLockup>
+            </row>
         </banner>
-<!--        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">-->
-        <collectionList lazyDataURL="/Mock/Home.json">
+        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">
         </collectionList>
     </stackTemplate>
 </document>
