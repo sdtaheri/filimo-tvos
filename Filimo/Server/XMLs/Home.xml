@@ -30,7 +30,7 @@
         <banner>
             <row>
                 <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
-                <buttonLockup class="loginButton">
+                <buttonLockup loginDocumentURL="/XMLs/Login.xml" class="loginButton">
                     <title>ورود</title>
                 </buttonLockup>
             </row>

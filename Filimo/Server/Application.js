@@ -46,6 +46,7 @@ App.onLaunch = function(options) {
         "Utilities/DataLoader",
         "MenuBarController",
         "HomeDocumentController",
+        "LoginController",
         "CategoriesDocumentController",
         "ProductsInCategoryDocumentController",
         "ProductDocumentController",
