@@ -3,6 +3,7 @@ class ProductDocumentController extends DocumentController {
     constructor(controllerOptions) {
         super(controllerOptions)        
         this._productInfo = controllerOptions.event.target.dataItem
+        this._shouldPlayMovie = (controllerOptions.event.type === "play")
     }
 
     productDuration() {
@@ -21,8 +22,57 @@ class ProductDocumentController extends DocumentController {
         return duration
     }
 
+    dataItemsFromJSONItems(items) {
+        return items.filter((movie) => { return movie.uid != null }).map((movie) => {
+            let dataItem = new DataItem("similarArtwork", movie.uid)
+            Object.keys(movie).forEach((key) => {
+                dataItem.setPropertyPath(key, movie[key])
+            })
+            return dataItem
+        })
+    }
+
     setupDocument(document) {
         super.setupDocument(document)
+
+        let moreInfoURL = 'https://www.filimo.com/etc/api/movie/uid/' + this._productInfo.uid
+        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+            this._movieMoreInfo = dataObj.movie
+            
+            if (this._movieMoreInfo.produced_year > 0) {
+                let yearInfo = `<text>${this._movieMoreInfo.produced_year}</text>`
+                document.getElementById("infoRow").firstElementChild.insertAdjacentHTML('afterend', yearInfo)
+            }
+
+            let playButton = document.getElementById("playButton")
+            if (this._movieMoreInfo.watch_permision) {
+                playButton.getElementsByTagName("title").item(0).textContent = "نمایش فیلم"
+            } else {
+                playButton.getElementsByTagName("title").item(0).textContent = "ورود به فیلیمو"
+            }    
+
+            if (this._shouldPlayMovie) {
+                playMovie(this._movieMoreInfo)
+            }
+        })    
+
+        if (this._productInfo.is_serial) {
+            let seriesURL = 'https://www.filimo.com/etc/api/movieserial/uid/' + this._productInfo.uid
+            this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(seriesURL), (dataObj) => {
+                let seriesAllEpisodes = dataObj.movieserial
+                
+                let episodesShelf = document.getElementById("allEpisodes")
+                let nodesToAdd = `<header>
+                <title>سایر قسمت‌ها</title>
+                </header>
+                <section binding="items:{episodes};">
+                </section>`
+                episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
+
+                episodesShelf.dataItem = new DataItem()
+                episodesShelf.dataItem.setPropertyPath("episodes", this.dataItemsFromJSONItems(seriesAllEpisodes))    
+            })    
+        }
 
         let stack = document.getElementsByTagName("stack").item(0)
         
@@ -30,8 +80,7 @@ class ProductDocumentController extends DocumentController {
         document.getElementById("productDescription").textContent = this._productInfo.descr
 
         let infoRowToAdd = `
-                <text>ساخت ${this._productInfo.country_1}</text>
-                <text>گروه سنی: ${this._productInfo.audience}</text>
+                <text>محصول ${this._productInfo.country_1}</text>
                 <text>${this.productDuration()}</text>`
         if (this._productInfo.hd) {
             infoRowToAdd += `
@@ -63,7 +112,25 @@ class ProductDocumentController extends DocumentController {
         } else {
             ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
         }
+
+        let recommendationSectionNode = document.getElementById("recommendation")
+        let recommendationURL = 'https://www.filimo.com/etc/api/recom/uid/' + this._productInfo.uid
+        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(recommendationURL), (dataObj) => {
+            let movies = dataObj.recom
+            recommendationSectionNode.dataItem = new DataItem()
+            recommendationSectionNode.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(movies))
+
+            document.getElementById("recommendationStaticTitle").textContent = "پیشنهادها"
+        })
+
     }
 
+    handleEvent(event) {
+        if (event.target.getAttribute("id") === "playButton") {
+            playMovie(this._movieMoreInfo)
+        } else {
+            super.handleEvent(event)
+        }
+    }
 }
 registerAttributeName("productDocumentURL", ProductDocumentController)

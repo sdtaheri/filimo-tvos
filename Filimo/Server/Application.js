@@ -168,3 +168,25 @@ function resolveControllerFromElement(elem) {
         }
     }
 }
+
+function playMovie(movieFullInfo) {
+    if (movieFullInfo == null) {
+        return
+    }
+    if (movieFullInfo.watch_permision) {
+        if (movieFullInfo.watch_action.movie_src != null && movieFullInfo.watch_action.movie_src != "") {
+            var player = new Player()
+            var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
+            video.title = movieFullInfo.movie_title
+            video.resumeTime = movieFullInfo.watch_action.last_watch_position
+            video.artworkImageURL = movieFullInfo.movie_img_b
+          
+            player.playlist = new Playlist()
+            player.playlist.push(video)
+          
+            player.play()
+        }    
+    } else {
+
+    }
+}
