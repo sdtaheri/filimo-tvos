@@ -14,7 +14,17 @@ class DataLoader {
     _fetchJSONData(dataURL, itemCallback) {
         return new Promise((resolve, reject) => {
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", dataURL);
+
+            let url = dataURL
+            if (dataURL.substr(-1) !== "/") {
+                url += "/"
+            }
+            if (isLoggedIn()) {
+                url += "luser/" + localStorage.getItem("username")
+                url += "/ltoken/" + localStorage.getItem("token") + "/"
+            }
+
+            xhr.open("GET", url);
             xhr.responseType = "json";
             xhr.onload = () => {
                 itemCallback(xhr.response);

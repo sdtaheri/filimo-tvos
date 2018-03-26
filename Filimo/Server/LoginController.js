@@ -5,19 +5,21 @@ class LoginController extends DocumentController {
 
         let dataLoader = this._dataLoader
         let documentLoader = this._documentLoader
-        this._refreshIntervalId = setInterval(function() {
+        let refreshIntervalId = setInterval(function() {
             let verifyURL = 'https://www.filimo.com/etc/api/verifycodecheck/ref_type/tv/code/' 
             + code + '/devicetype/tvweb'
             dataLoader._fetchJSONData(documentLoader.prepareURL(verifyURL), (dataObj) => {
             let token = dataObj.verifycodecheck.ltoken
             if (token !== null && token !== undefined) {
-                clearInterval(this._refreshIntervalId)
+                clearInterval(refreshIntervalId)
                 localStorage.setItem("token", token)
                 localStorage.setItem("username", dataObj.verifycodecheck.username)
+
                 navigationDocument.dismissModal()
             }
         })
         }, 5000)
+        this._refreshIntervalId = refreshIntervalId
     }
 
     setupDocument(document) {
@@ -36,5 +38,8 @@ class LoginController extends DocumentController {
         }
     }
 
+    handleEvent(event) {
+        clearInterval(this._refreshIntervalId)
+    }
 }
 registerAttributeName("loginDocumentURL", LoginController)

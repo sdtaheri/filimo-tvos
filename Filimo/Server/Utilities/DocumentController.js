@@ -33,6 +33,7 @@ class DocumentController {
     setupDocument(document) {
         document.addEventListener("select", this.handleEvent);
         document.addEventListener("play", this.handleEvent);
+        document.addEventListener("unload", this.handleEvent);
     }
 
     handleDocument(document, loadingDocument) {
@@ -44,27 +45,33 @@ class DocumentController {
     }
 
     handleEvent(event) {
-        const targetElem = event.target;
-        let controllerOptions = resolveControllerFromElement(targetElem);
-        if (controllerOptions) {
-            const controllerClass = controllerOptions.type;
-            if (!controllerClass.preventLoadingDocument) {
-                let loadingDocument = createLoadingDocument();
-                navigationDocument.pushDocument(loadingDocument);
-                controllerOptions.loadingDocument = loadingDocument;
-            }
-            controllerOptions.event = event;
-            controllerOptions.documentLoader = this._documentLoader;
-            // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.
-            new controllerClass(controllerOptions);
+        switch (event.type) {
+            case "select":
+            case "play":
+                const targetElem = event.target;
+                let controllerOptions = resolveControllerFromElement(targetElem);
+                if (controllerOptions) {
+                    const controllerClass = controllerOptions.type;
+                    if (!controllerClass.preventLoadingDocument) {
+                        let loadingDocument = createLoadingDocument();
+                        navigationDocument.pushDocument(loadingDocument);
+                        controllerOptions.loadingDocument = loadingDocument;
+                    }
+                    controllerOptions.event = event;
+                    controllerOptions.documentLoader = this._documentLoader;
+                    // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.
+                    new controllerClass(controllerOptions);
+                }
+                else if (targetElem.tagName === "description") {
+                    // Handle description tag, if no URL was specified
+                    const body = targetElem.textContent;
+                    const alertDocument = createDescriptiveAlertDocument('', body);
+                    navigationDocument.presentModal(alertDocument);
+                }
+                return createLoadingDocument();
+            case "unload":
+                break;
         }
-        else if (targetElem.tagName === "description") {
-            // Handle description tag, if no URL was specified
-            const body = targetElem.textContent;
-            const alertDocument = createDescriptiveAlertDocument('', body);
-            navigationDocument.presentModal(alertDocument);
-        }
-        return createLoadingDocument();
     }
 
     fetchNextPageAtURL(url, section) {

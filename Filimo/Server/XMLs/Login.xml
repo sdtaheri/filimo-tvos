@@ -5,11 +5,13 @@
             .top {
                 tv-align: center;
                 tv-position: center;
+                margin: -200 0 0 0;
             }
             .middle {
                 tv-align: center;
                 tv-position: center;
-                margin: 32 0 16 0;
+                text-align: center;
+                margin: 32 200 16 200;
                 tv-text-style: subtitle1;
                 color: rgb(255,255,255);
                 tv-text-max-lines: 6;
@@ -24,7 +26,7 @@
     </head>
     <divTemplate>
         <img src="/Resources/logo_icon.png" class="top" width="150" height="150"/>
-        <title class="middle">برای ورود به فیلیمو با استفاده از مرورگر موبایل یا رایانه شخصی خود به آدرس filimo.com/activate مراجعه نموده و کد زیر را وارد کنید. در ادامه با وارد کردن مشخصات حساب کاربری خود به فیلیمیو وارد شده و منتظر به روز  رسانی خودکار این صفحه باشید.</title>
+        <title class="middle">برای ورود به فیلیمو با استفاده از مرورگر موبایل یا رایانه شخصی خود به آدرس <b>filimo.com/activate</b> مراجعه نموده و کد زیر را وارد کنید. در ادامه با وارد کردن مشخصات حساب کاربری خود به فیلیمیو وارد شده و منتظر به روز  رسانی خودکار این صفحه باشید.</title>
         <title id="verificationCode" class="bottom"></title>
     </divTemplate>
 </document>

@@ -17,6 +17,8 @@
             }
             .loginButton {
                 tv-align: left;
+                text-align: center;
+                tv-text-style: body;
             }
         </style>
     </head>
@@ -30,9 +32,9 @@
         <banner>
             <row>
                 <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
-                <buttonLockup loginDocumentURL="/XMLs/Login.xml" class="loginButton">
+                <button id="loginButton" loginDocumentURL="/XMLs/Login.xml" class="loginButton">
                     <title>ورود</title>
-                </buttonLockup>
+                </button>
             </row>
         </banner>
         <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">

@@ -135,6 +135,39 @@ var createAlertDocument = function(title, description) {
 }
 
 /**
+ * Convenience function to create a TVML alert for asking user with two options as answers.
+ */
+function presentAlertQuestion(title, description, defaultTitle, cancelTitle, defaultHandler) {
+    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
+        <document>
+          <alertTemplate>
+            <title>${title}</title>
+            <description>${description}</description>
+            <button id="alertDefaultButton">
+                <text>${defaultTitle}</text>
+            </button>
+            <button id="alertCancelButton">
+                <text>${cancelTitle}</text>
+            </button>
+          </alertTemplate>
+        </document>`
+
+    var parser = new DOMParser();
+
+    var alertDoc = parser.parseFromString(alertString, "application/xml");
+
+    alertDoc.getElementById("alertDefaultButton").addEventListener("select", function(element, event) {
+        navigationDocument.dismissModal()
+        defaultHandler()
+    })
+    alertDoc.getElementById("alertCancelButton").addEventListener("select", function(element, event) {
+        navigationDocument.dismissModal()
+    })
+
+    navigationDocument.presentModal(alertDoc)
+}
+
+/**
  * Convenience function to create a TVML alert for failed evaluateScripts.
  */
 function createEvalErrorAlertDocument() {
@@ -191,4 +224,12 @@ function playMovie(movieFullInfo) {
     } else {
 
     }
+}
+
+function isLoggedIn() {
+    if (localStorage.getItem("token") != null 
+    && localStorage.getItem("username") != null) {
+        return true
+    }
+    return false
 }

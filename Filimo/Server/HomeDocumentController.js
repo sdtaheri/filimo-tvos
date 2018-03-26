@@ -11,9 +11,36 @@ class HomeDocumentController extends DocumentController {
         })
     }
     
+    setupLoginButtonAppearance(button) {
+        if (isLoggedIn()) {
+            button.getElementsByTagName("title").item(0).textContent = "خروج از حساب کاربری"
+            button.removeAttribute("loginDocumentURL")
+        } else {
+            button.getElementsByTagName("title").item(0).textContent = "ورود به حساب کاربری"
+            button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")
+        }
+    }
+
+    handleEvent(event) {
+        if (isLoggedIn() && event.target == this._loginButton) {
+            let button = this._loginButton
+            let setupLoginButtonAppearance = this.setupLoginButtonAppearance
+            presentAlertQuestion("خروج از فیلیمو", "آیا می‌خواهید از حساب کاربری خود خارج شوید؟", "بله", "خیر", function() {
+                localStorage.removeItem("token")
+                localStorage.removeItem("username")
+                setupLoginButtonAppearance(button)
+            })
+        } else {
+            super.handleEvent(event)
+        }
+    }
+
     setupDocument(document) {
         super.setupDocument(document)
         
+        this._loginButton = document.getElementById("loginButton")
+        this.setupLoginButtonAppearance(this._loginButton)
+
         let collectionList = document.getElementsByTagName("collectionList").item(0)
         let url = collectionList.getAttribute("lazyDataURL")
         if (!url) {
