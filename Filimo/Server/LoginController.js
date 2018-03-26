@@ -39,7 +39,10 @@ class LoginController extends DocumentController {
     }
 
     handleEvent(event) {
-        clearInterval(this._refreshIntervalId)
+        if (event.type === "unload") {
+            clearInterval(this._refreshIntervalId)
+        }
+        super.handleEvent(event)
     }
 }
 registerAttributeName("loginDocumentURL", LoginController)

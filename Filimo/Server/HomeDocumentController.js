@@ -26,10 +26,10 @@ class HomeDocumentController extends DocumentController {
             let button = this._loginButton
             let setupLoginButtonAppearance = this.setupLoginButtonAppearance
             presentAlertQuestion("خروج از فیلیمو", "آیا می‌خواهید از حساب کاربری خود خارج شوید؟", "بله", "خیر", function() {
-                localStorage.removeItem("token")
-                localStorage.removeItem("username")
-                setupLoginButtonAppearance(button)
-            })
+                                 localStorage.removeItem("token")
+                                 localStorage.removeItem("username")
+                                 setupLoginButtonAppearance(button)
+                                 })
         } else {
             super.handleEvent(event)
         }

@@ -24,7 +24,6 @@
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
 		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		309D289720663183001148BE /* Categories.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Categories.xml; sourceTree = "<group>"; };
-		309D28992066332B001148BE /* Categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Categories.json; sourceTree = "<group>"; };
 		309D289B20663390001148BE /* CategoriesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CategoriesDocumentController.js; sourceTree = "<group>"; };
 		309D289D206649DF001148BE /* Product.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Product.xml; sourceTree = "<group>"; };
 		309D289F20664A00001148BE /* ProductDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductDocumentController.js; sourceTree = "<group>"; };
@@ -40,7 +39,6 @@
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
 		30D5167C20683595007995AF /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
-		30EDFBFE20655FC100B7BF40 /* Home.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Home.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +95,6 @@
 		30BF891D20631288009FAB4D /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				30EDFBFD20655FAA00B7BF40 /* Mock */,
 				3015FFA62063A55A0029F8FF /* Utilities */,
 				3024180B2065567400B46686 /* Resources */,
 				3024180A2065335C00B46686 /* XMLs */,
@@ -148,15 +145,6 @@
 				30BF891E20631298009FAB4D /* Supporting Files */,
 			);
 			path = Filimo;
-			sourceTree = "<group>";
-		};
-		30EDFBFD20655FAA00B7BF40 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				30EDFBFE20655FC100B7BF40 /* Home.json */,
-				309D28992066332B001148BE /* Categories.json */,
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

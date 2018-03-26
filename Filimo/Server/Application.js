@@ -135,6 +135,24 @@ var createAlertDocument = function(title, description) {
 }
 
 /**
+ * Convenience function to create a TVML alert document with a title and description.
+ */
+function createDescriptiveAlertDocument(title, description) {
+    const template = `<?xml version="1.0" encoding="UTF-8" ?>
+        <document>
+            <descriptiveAlertTemplate>
+                <title>${title}</title>
+                <description></description>
+            </descriptiveAlertTemplate>
+        </document>
+    `;
+    let doc = (new DOMParser()).parseFromString(template, "application/xml");
+    doc.getElementsByTagName("description").item(0).textContent = description;
+
+    return doc
+}
+
+/**
  * Convenience function to create a TVML alert for asking user with two options as answers.
  */
 function presentAlertQuestion(title, description, defaultTitle, cancelTitle, defaultHandler) {

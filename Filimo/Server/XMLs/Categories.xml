@@ -2,11 +2,6 @@
 <document>
     <head>
         <style>
-            .roundedImage {
-                border-radius: small;
-                tv-img-treatment: corner-small;
-                tv-tint-color: linear-gradient(top, 0.20, transparent, 0.55, rgba(0,0,0,0.35), 1.00, rgba(0,0,0,0.5));
-            }
             .paddedOverlay {
                 padding: 0 16 16 0;
             }
@@ -22,14 +17,14 @@
         <collectionList>
             <grid>
                 <prototypes>
-                    <lockup productsInCategoryDocumentURL="/XMLs/ProductsInCategory.xml" prototype="categoryArtwork">
-                        <img class="roundedImage" binding="@src:{cover};" width="800" height="256"/>
+                    <lockup productsInCategoryDocumentURL="/XMLs/ProductsInCategory.xml" prototype="categoryArtwork" class="lockup">
+                        <img binding="@src:{cover};" width="830" height="230"/>
                         <overlay class="paddedOverlay">
                             <title class="shadowedTitle" binding="textContent:{title};" />
                         </overlay>
                     </lockup>
                 </prototypes>
-                <section binding="items:{items};" lazyDataURL="/Mock/Categories.json" />
+                <section binding="items:{items};" lazyDataURL="https://www.filimo.com/etc/api/category/devicetype/tvweb" />
             </grid>
         </collectionList>
     </stackTemplate>

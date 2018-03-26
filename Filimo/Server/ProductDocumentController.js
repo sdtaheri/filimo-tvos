@@ -35,7 +35,9 @@ class ProductDocumentController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document)
 
-        let moreInfoURL = 'https://www.filimo.com/etc/api/movie/uid/' + this._productInfo.uid
+        let moreInfoURL = 'https://www.filimo.com/etc/api/movie/uid/' + this._productInfo.uid + "/devicetype/tvweb"
+
+        let shouldPlay = this._shouldPlayMovie
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
             this._movieMoreInfo = dataObj.movie
             
@@ -44,20 +46,14 @@ class ProductDocumentController extends DocumentController {
                 document.getElementById("infoRow").firstElementChild.insertAdjacentHTML('afterend', yearInfo)
             }
 
-            let playButton = document.getElementById("playButton")
-            if (this._movieMoreInfo.watch_permision) {
-                playButton.getElementsByTagName("title").item(0).textContent = "نمایش فیلم"
-            } else {
-                playButton.getElementsByTagName("title").item(0).textContent = "ورود به فیلیمو"
-            }    
-
-            if (this._shouldPlayMovie) {
-                playMovie(this._movieMoreInfo)
+            if (shouldPlay) {
+                let button = document.getElementById("playButton")
+                button.select()
             }
         })    
 
         if (this._productInfo.is_serial) {
-            let seriesURL = 'https://www.filimo.com/etc/api/movieserial/uid/' + this._productInfo.uid
+            let seriesURL = 'https://www.filimo.com/etc/api/movieserial/uid/' + this._productInfo.uid + "/devicetype/tvweb"
             this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(seriesURL), (dataObj) => {
                 let seriesAllEpisodes = dataObj.movieserial
                 
@@ -114,7 +110,7 @@ class ProductDocumentController extends DocumentController {
         }
 
         let recommendationSectionNode = document.getElementById("recommendation")
-        let recommendationURL = 'https://www.filimo.com/etc/api/recom/uid/' + this._productInfo.uid
+        let recommendationURL = 'https://www.filimo.com/etc/api/recom/uid/' + this._productInfo.uid + "/devicetype/tvweb"
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(recommendationURL), (dataObj) => {
             let movies = dataObj.recom
             recommendationSectionNode.dataItem = new DataItem()
@@ -127,7 +123,15 @@ class ProductDocumentController extends DocumentController {
 
     handleEvent(event) {
         if (event.target.getAttribute("id") === "playButton") {
-            playMovie(this._movieMoreInfo)
+            if (isLoggedIn()) {
+                if (this._movieMoreInfo.watch_permision) {
+                    playMovie(this._movieMoreInfo)
+                } else {
+                    navigationDocument.presentModal(createAlertDocument("خطای پخش", "امکان پخش این فیلم وجود ندارد. اعتبار حساب کاربری خود را بررسی کنید."))
+                }
+            } else {
+                super.handleEvent(event)
+            }    
         } else {
             super.handleEvent(event)
         }

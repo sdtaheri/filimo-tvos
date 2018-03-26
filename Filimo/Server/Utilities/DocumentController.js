@@ -69,21 +69,9 @@ class DocumentController {
                     navigationDocument.presentModal(alertDocument);
                 }
                 return createLoadingDocument();
-            case "unload":
+            default:
                 break;
         }
-    }
-
-    fetchNextPageAtURL(url, section) {
-        //fetch the next page
-        this._dataLoader._fetchJSONData(this._dataLoader._documentLoader.prepareURL(url), (dataObj) => {
-            let newItems = this.dataItemFromJSONItems(dataObj.items)
-
-            //append them to the list of current items 
-            if (newItems == undefined || newItems.length == 0) { return }
-            section.dataItem.items = section.dataItem.items.concat(newItems)
-            section.dataItem.touchPropertyPath("items")
-        });
     }
 }
 registerAttributeName("documentURL", DocumentController);
