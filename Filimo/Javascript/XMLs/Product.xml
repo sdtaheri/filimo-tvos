@@ -31,7 +31,7 @@
             <stack>
                 <title></title>
                 <row id="infoRow"></row>
-                <description allowsZooming="true" moreLabel="بیشتر" id="productDescription" handlesOverflow="true"></description>
+                <description id="productDescription" handlesOverflow="true"></description>
                 <row>
                     <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton">
                         <badge src="resource://button-play"/>

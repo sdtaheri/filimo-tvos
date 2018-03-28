@@ -1,14 +1,4 @@
 class CategoriesDocumentController extends DocumentController {
-    dataItemsFromJSONItems(items) {
-        return items.map((category) => {
-            let dataItem = new DataItem("categoryArtwork", category.id)
-            Object.keys(category).forEach((key) => {
-                dataItem.setPropertyPath(key, category[key])
-            })
-            return dataItem
-        })
-    }
-
     setupDocument(document) {
         super.setupDocument(document)
 
@@ -17,8 +7,18 @@ class CategoriesDocumentController extends DocumentController {
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let categories = dataObj.category
             section.dataItem = new DataItem()
-            section.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(categories))
+            section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(categories))
         })
+
+        function dataItemsFromJSONItems(items) {
+            return items.map((category) => {
+                let dataItem = new DataItem("categoryArtwork", category.id)
+                Object.keys(category).forEach((key) => {
+                    dataItem.setPropertyPath(key, category[key])
+                })
+                return dataItem
+            })
+        }    
     }
 }
 registerAttributeName("categoriesDocumentURL", CategoriesDocumentController)

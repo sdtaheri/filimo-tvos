@@ -1,43 +1,31 @@
 class HomeDocumentController extends DocumentController {
-    
-    dataItemsFromJSONItems(items) {
-        let data = items.data
-        return data.map((movie) => {
-            let dataItem = new DataItem("homeArtwork", movie.uid)
-            Object.keys(movie).forEach((key) => {
-                dataItem.setPropertyPath(key, movie[key])
-            })
-            return dataItem
-        })
-    }
-    
-    setupLoginButtonAppearance(button) {
-        if (button === "undefined" || button === "null") {
-            return
-        }
-        if (isLoggedIn()) {
-            button.getElementsByTagName("title").item(0).textContent = "خروج از حساب کاربری"
-            button.removeAttribute("loginDocumentURL")
-        } else {
-            button.getElementsByTagName("title").item(0).textContent = "ورود به حساب کاربری"
-            button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")
-        }
-    }
-
+        
     handleEvent(event) {
         if (isLoggedIn() && event.target == this._loginButton) {
             let button = this._loginButton
-            let setupLoginButtonAppearance = this.setupLoginButtonAppearance
             presentAlertQuestion("خروج از فیلیمو", "آیا می‌خواهید از حساب کاربری خود خارج شوید؟", "بله", "خیر", function() {
                                  localStorage.removeItem("token")
                                  localStorage.removeItem("username")
                                  setupLoginButtonAppearance(button)
                                  })
         } else if (event.type === "appear") {
-            this.setupLoginButtonAppearance(this._loginButton)
+            setupLoginButtonAppearance(this._loginButton)
         } else {
             super.handleEvent(event)
         }
+
+        function setupLoginButtonAppearance(button) {
+            if (button === "undefined" || button === "null") {
+                return
+            }
+            if (isLoggedIn()) {
+                button.getElementsByTagName("title").item(0).textContent = "خروج از حساب کاربری"
+                button.removeAttribute("loginDocumentURL")
+            } else {
+                button.getElementsByTagName("title").item(0).textContent = "ورود به حساب کاربری"
+                button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")
+            }
+        }    
     }
 
     setupDocument(document) {
@@ -63,9 +51,24 @@ class HomeDocumentController extends DocumentController {
 
                let section = (collectionList.getElementsByTagName("section")).item(i)
                section.dataItem = new DataItem()
-               section.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(sections[i]))
+               section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(sections[i]))
             }
         })
+
+        function dataItemsFromJSONItems(items) {
+            let data = items.data
+            return data.map((movie) => {
+                let dataItem = new DataItem("homeArtwork", movie.uid)
+                Object.keys(movie).forEach((key) => {
+                    let value = movie[key]
+                    if (key === 'movie_title' || key === 'descr') {
+                        value = toPersianDigits(value)
+                    }
+                    dataItem.setPropertyPath(key, value)
+                })
+                return dataItem
+            })
+        }    
     }
 }
 registerAttributeName("homeDocumentURL", HomeDocumentController)

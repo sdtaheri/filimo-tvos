@@ -4,16 +4,6 @@ class ProductsInCategoryDocumentController extends DocumentController {
         this._category = controllerOptions.event.target.dataItem
     }
     
-    dataItemsFromJSONItems(items) {
-        return items.map((movie) => {
-            let dataItem = new DataItem("productsInCategory", movie.uid)
-            Object.keys(movie).forEach((key) => {
-                dataItem.setPropertyPath(key, movie[key])
-            })
-            return dataItem
-        })
-    }
-
     setupDocument(document) {
         super.setupDocument(document)
 
@@ -29,8 +19,22 @@ class ProductsInCategoryDocumentController extends DocumentController {
             let grid = document.getElementsByTagName("grid").item(0)
             let section = grid.getElementsByTagName("section").item(0)    
             section.dataItem = new DataItem()
-            section.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(movies))
+            section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
         })
+
+        function dataItemsFromJSONItems(items) {
+            return items.map((movie) => {
+                let dataItem = new DataItem("productsInCategory", movie.uid)
+                Object.keys(movie).forEach((key) => {
+                    let value = movie[key]
+                    if (key === 'movie_title' || key === 'descr') {
+                        value = toPersianDigits(value)
+                    }
+                    dataItem.setPropertyPath(key, value)
+                })
+                return dataItem
+            })
+        }    
     }
 }
 registerAttributeName("productsInCategoryDocumentURL", ProductsInCategoryDocumentController)

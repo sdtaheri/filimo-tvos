@@ -6,32 +6,6 @@ class ProductDocumentController extends DocumentController {
         this._shouldPlayMovie = (controllerOptions.event.type === "play")
     }
 
-    productDuration() {
-        let durationHour = parseInt(this._productInfo.duration / 60 + "", 10)
-        let durationMinute = parseInt(this._productInfo.duration % 60 + "", 10)
-        let duration = ""
-        if (durationHour > 0) {
-            duration += durationHour + " ساعت"
-        }
-        if (durationMinute > 0) {
-            if (duration !== "") {
-                duration += " و "
-            }
-            duration += durationMinute + " دقیقه"
-        }
-        return duration
-    }
-
-    dataItemsFromJSONItems(items) {
-        return items.filter((movie) => { return movie.uid != null }).map((movie) => {
-            let dataItem = new DataItem("similarArtwork", movie.uid)
-            Object.keys(movie).forEach((key) => {
-                dataItem.setPropertyPath(key, movie[key])
-            })
-            return dataItem
-        })
-    }
-
     setupDocument(document) {
         super.setupDocument(document)
 
@@ -41,8 +15,8 @@ class ProductDocumentController extends DocumentController {
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
             this._movieMoreInfo = dataObj.movie
             
-            if (this._movieMoreInfo.produced_year > 0) {
-                let yearInfo = `<text>${this._movieMoreInfo.produced_year}</text>`
+            if (this._movieMoreInfo.produced_year && this._movieMoreInfo.produced_year > 0) {
+                let yearInfo = `<text>${toPersianDigits(this._movieMoreInfo.produced_year)}</text>`
                 document.getElementById("infoRow").firstElementChild.insertAdjacentHTML('afterend', yearInfo)
             }
 
@@ -66,7 +40,7 @@ class ProductDocumentController extends DocumentController {
                 episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
 
                 episodesShelf.dataItem = new DataItem()
-                episodesShelf.dataItem.setPropertyPath("episodes", this.dataItemsFromJSONItems(seriesAllEpisodes))    
+                episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(seriesAllEpisodes))    
             })    
         }
 
@@ -75,12 +49,24 @@ class ProductDocumentController extends DocumentController {
         stack.getElementsByTagName("title").item(0).textContent = this._productInfo.movie_title
         document.getElementById("productDescription").textContent = this._productInfo.descr
 
-        let infoRowToAdd = `
-                <text>محصول ${this._productInfo.country_1}</text>
-                <text>${this.productDuration()}</text>`
-        if (this._productInfo.hd) {
-            infoRowToAdd += `
-            <badge src="resource://hd" class="badge" />`
+        let ratingCardNode = document.getElementsByTagName("ratingCard").item(0)
+        let rateValue = null
+        if (this._productInfo.rate_avrage != null) {
+            rateValue = Math.max(0, Math.min(5, this._productInfo.rate_avrage))
+            ratingCardNode.getElementsByTagName("title").item(0).textContent = toPersianDigits(rateValue + " از " + "5")
+            ratingCardNode.getElementsByTagName("ratingBadge").item(0).setAttribute("value", rateValue / 5.0)
+            ratingCardNode.getElementsByTagName("description").item(0).textContent = toPersianDigits("میانگین امتیاز از بین " + this._productInfo.rate_cnt + " نظر")
+        } else {
+            ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
+        }
+
+        let infoRowToAdd = `<text>محصول ${this._productInfo.country_1}</text>
+                <text>${productDuration(this._productInfo)}</text>`
+        if (rateValue) {
+            infoRowToAdd += `<ratingBadge value="${rateValue / 5.0}" />`
+        }
+        if (this._productInfo.hd === 'yes') {
+            infoRowToAdd += `<badge src="resource://hd" class="badge" />`
         }
         document.getElementById("infoRow").insertAdjacentHTML('beforeend', infoRowToAdd)
 
@@ -100,25 +86,46 @@ class ProductDocumentController extends DocumentController {
             directorNode.textContent = this._productInfo.director_fa 
         }
 
-        let ratingCardNode = document.getElementsByTagName("ratingCard").item(0)
-        if (this._productInfo.rate_avrage != null) {
-            ratingCardNode.getElementsByTagName("title").item(0).textContent = this._productInfo.rate_avrage + " از " + "5"
-            ratingCardNode.getElementsByTagName("ratingBadge").item(0).setAttribute("value", this._productInfo.rate_avrage / 5.0)
-            ratingCardNode.getElementsByTagName("description").item(0).textContent = "میانگین امتیاز از بین " + this._productInfo.rate_cnt + " نظر"
-        } else {
-            ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
-        }
-
         let recommendationSectionNode = document.getElementById("recommendation")
         let recommendationURL = filimoAPIBaseURL + '/recom/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(recommendationURL), (dataObj) => {
             let movies = dataObj.recom
             recommendationSectionNode.dataItem = new DataItem()
-            recommendationSectionNode.dataItem.setPropertyPath("items", this.dataItemsFromJSONItems(movies))
+            recommendationSectionNode.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
 
             document.getElementById("recommendationStaticTitle").textContent = "پیشنهادها"
         })
 
+        function productDuration(productInfo) {
+            let durationHour = parseInt(productInfo.duration / 60 + "", 10)
+            let durationMinute = parseInt(productInfo.duration % 60 + "", 10)
+            let duration = ""
+            if (durationHour > 0) {
+                duration += durationHour + " ساعت"
+            }
+            if (durationMinute > 0) {
+                if (duration !== "") {
+                    duration += " و "
+                }
+                duration += durationMinute + " دقیقه"
+            }
+            return toPersianDigits(duration)
+        }    
+
+
+        function dataItemsFromJSONItems(items) {
+            return items.filter((movie) => { return movie.uid != null }).map((movie) => {
+                let dataItem = new DataItem("similarArtwork", movie.uid)
+                Object.keys(movie).forEach((key) => {
+                    let value = movie[key]
+                    if (key === 'movie_title' || key === 'descr') {
+                        value = toPersianDigits(value)
+                    }
+                    dataItem.setPropertyPath(key, value)
+                })
+                return dataItem
+            })
+        }
     }
 
     handleEvent(event) {
