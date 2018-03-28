@@ -20,9 +20,9 @@ class ProductsInCategoryDocumentController extends DocumentController {
         let banner = document.getElementsByTagName("banner").item(0)
         banner.getElementsByTagName("title").item(0).textContent = this._category.title
 
-        let url = "https://www.filimo.com/etc/api/movielistbycat/catid/" 
+        let url = filimoAPIBaseURL + '/movielistbycat/catid/'
             + this._category.id 
-            + "/perpage/50/devicetype/tvweb"
+            + "/perpage/50/"
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let movies = dataObj.movielistbycat
 

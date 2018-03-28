@@ -24,7 +24,7 @@
                         </overlay>
                     </lockup>
                 </prototypes>
-                <section binding="items:{items};" lazyDataURL="https://www.filimo.com/etc/api/category/devicetype/tvweb" />
+                <section binding="items:{items};" />
             </grid>
         </collectionList>
     </stackTemplate>

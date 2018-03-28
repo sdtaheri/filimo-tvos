@@ -31,13 +31,13 @@
         </prototypes>
         <banner>
             <row>
-                <img class="headerLogo" src="/Resources/logo.png" alt="Filimo Logo" />
+                <img class="headerLogo" srcset="/Resources/logo.png (theme:light), /Resources/logo_dark.png (theme:dark)" alt="Filimo Logo" />
                 <button id="loginButton" loginDocumentURL="/XMLs/Login.xml" class="loginButton">
-                    <title>ورود</title>
+                    <title>خروج از حساب کاربری</title>
                 </button>
             </row>
         </banner>
-        <collectionList lazyDataURL="https://www.filimo.com/etc/api/homepage/devicetype/tvweb">
+        <collectionList>
         </collectionList>
     </stackTemplate>
 </document>

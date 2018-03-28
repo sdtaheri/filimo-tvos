@@ -12,6 +12,9 @@ class HomeDocumentController extends DocumentController {
     }
     
     setupLoginButtonAppearance(button) {
+        if (button === "undefined" || button === "null") {
+            return
+        }
         if (isLoggedIn()) {
             button.getElementsByTagName("title").item(0).textContent = "خروج از حساب کاربری"
             button.removeAttribute("loginDocumentURL")
@@ -30,6 +33,8 @@ class HomeDocumentController extends DocumentController {
                                  localStorage.removeItem("username")
                                  setupLoginButtonAppearance(button)
                                  })
+        } else if (event.type === "appear") {
+            this.setupLoginButtonAppearance(this._loginButton)
         } else {
             super.handleEvent(event)
         }
@@ -39,13 +44,9 @@ class HomeDocumentController extends DocumentController {
         super.setupDocument(document)
         
         this._loginButton = document.getElementById("loginButton")
-        this.setupLoginButtonAppearance(this._loginButton)
 
         let collectionList = document.getElementsByTagName("collectionList").item(0)
-        let url = collectionList.getAttribute("lazyDataURL")
-        if (!url) {
-            return
-        }
+        let url = filimoAPIBaseURL + '/homepage'
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let sections = dataObj.homepage.filter((item) => {
                 return item.data !== undefined

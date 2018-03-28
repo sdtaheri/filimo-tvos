@@ -34,6 +34,7 @@ class DocumentController {
         document.addEventListener("select", this.handleEvent);
         document.addEventListener("play", this.handleEvent);
         document.addEventListener("unload", this.handleEvent);
+        document.addEventListener("appear", this.handleEvent);
     }
 
     handleDocument(document, loadingDocument) {

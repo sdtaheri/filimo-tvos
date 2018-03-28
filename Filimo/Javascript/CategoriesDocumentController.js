@@ -13,10 +13,7 @@ class CategoriesDocumentController extends DocumentController {
         super.setupDocument(document)
 
         let section = document.getElementsByTagName("section").item(0)
-        let url = section.getAttribute("lazyDataURL")
-        if (!url) {
-            return
-        }
+        let url = filimoAPIBaseURL + '/category'
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let categories = dataObj.category
             section.dataItem = new DataItem()

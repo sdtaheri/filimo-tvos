@@ -35,7 +35,7 @@ class ProductDocumentController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document)
 
-        let moreInfoURL = 'https://www.filimo.com/etc/api/movie/uid/' + this._productInfo.uid + "/devicetype/tvweb"
+        let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._productInfo.uid
 
         let shouldPlay = this._shouldPlayMovie
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
@@ -53,7 +53,7 @@ class ProductDocumentController extends DocumentController {
         })    
 
         if (this._productInfo.is_serial) {
-            let seriesURL = 'https://www.filimo.com/etc/api/movieserial/uid/' + this._productInfo.uid + "/devicetype/tvweb"
+            let seriesURL = filimoAPIBaseURL + '/movieserial/uid/' + this._productInfo.uid
             this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(seriesURL), (dataObj) => {
                 let seriesAllEpisodes = dataObj.movieserial
                 
@@ -110,7 +110,7 @@ class ProductDocumentController extends DocumentController {
         }
 
         let recommendationSectionNode = document.getElementById("recommendation")
-        let recommendationURL = 'https://www.filimo.com/etc/api/recom/uid/' + this._productInfo.uid + "/devicetype/tvweb"
+        let recommendationURL = filimoAPIBaseURL + '/recom/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(recommendationURL), (dataObj) => {
             let movies = dataObj.recom
             recommendationSectionNode.dataItem = new DataItem()

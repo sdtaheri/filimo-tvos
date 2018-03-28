@@ -8,7 +8,7 @@
             <menuItem categoriesDocumentURL="/XMLs/Categories.xml">
                 <title>دسته‌بندی‌ها</title>
             </menuItem>
-            <menuItem documentURL="/XMLs/Search.xml">
+            <menuItem searchDocumentURL="/XMLs/Search.xml">
                 <title>جستجو</title>
             </menuItem>
         </menuBar>

@@ -5,6 +5,8 @@ Abstract:
 This class handles loading of data for prototypes in templates.
 */
 
+var filimoAPIBaseURL = 'https://www.filimo.com/etc/api'
+
 class DataLoader {
 
     constructor(documentLoader) {
@@ -23,6 +25,8 @@ class DataLoader {
                 url += "luser/" + localStorage.getItem("username")
                 url += "/ltoken/" + localStorage.getItem("token") + "/"
             }
+
+            url += "devicetype/tvweb/"
 
             xhr.open("GET", url);
             xhr.responseType = "json";

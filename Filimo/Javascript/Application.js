@@ -48,6 +48,7 @@ App.onLaunch = function(options) {
         "HomeDocumentController",
         "LoginController",
         "CategoriesDocumentController",
+        "SearchDocumentController",
         "ProductsInCategoryDocumentController",
         "ProductDocumentController",
         "Index"
@@ -175,8 +176,8 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
     var alertDoc = parser.parseFromString(alertString, "application/xml");
 
     alertDoc.getElementById("alertDefaultButton").addEventListener("select", function(element, event) {
-        navigationDocument.dismissModal()
         defaultHandler()
+        navigationDocument.dismissModal()
     })
     alertDoc.getElementById("alertCancelButton").addEventListener("select", function(element, event) {
         navigationDocument.dismissModal()

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301E480A206B92CE00D44269 /* SearchDocumentController.js in Resources */ = {isa = PBXBuildFile; fileRef = 301E4809206B92CE00D44269 /* SearchDocumentController.js */; };
 		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
 		30BF891C2062F426009FAB4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF891B2062F426009FAB4D /* main.swift */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
@@ -16,6 +17,8 @@
 /* Begin PBXFileReference section */
 		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
 		3015FFA52063A51A0029F8FF /* DataLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataLoader.js; sourceTree = "<group>"; };
+		301E4808206B8D9800D44269 /* logo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_dark.png; sourceTree = "<group>"; };
+		301E4809206B92CE00D44269 /* SearchDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SearchDocumentController.js; sourceTree = "<group>"; };
 		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
 		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
@@ -80,19 +83,20 @@
 			children = (
 				30D5167C20683595007995AF /* logo_icon.png */,
 				3024180C2065568B00B46686 /* logo.png */,
+				301E4808206B8D9800D44269 /* logo_dark.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		307D82772063157800848244 /* Client */ = {
+		307D82772063157800848244 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				30C5790920448110007E728F /* AppDelegate.swift */,
 			);
-			path = Client;
+			path = Swift;
 			sourceTree = "<group>";
 		};
-		30BF891D20631288009FAB4D /* Server */ = {
+		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
 				3015FFA62063A55A0029F8FF /* Utilities */,
@@ -106,8 +110,9 @@
 				309D289B20663390001148BE /* CategoriesDocumentController.js */,
 				30D5167920682EEF007995AF /* ProductsInCategoryDocumentController.js */,
 				309D289F20664A00001148BE /* ProductDocumentController.js */,
+				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
 			);
-			path = Server;
+			path = Javascript;
 			sourceTree = "<group>";
 		};
 		30BF891E20631298009FAB4D /* Supporting Files */ = {
@@ -140,8 +145,8 @@
 		30C5790820448110007E728F /* Filimo */ = {
 			isa = PBXGroup;
 			children = (
-				307D82772063157800848244 /* Client */,
-				30BF891D20631288009FAB4D /* Server */,
+				307D82772063157800848244 /* Swift */,
+				30BF891D20631288009FAB4D /* Javascript */,
 				30BF891E20631298009FAB4D /* Supporting Files */,
 			);
 			path = Filimo;
@@ -207,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
+				301E480A206B92CE00D44269 /* SearchDocumentController.js in Resources */,
 				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
