@@ -6,7 +6,7 @@ class LoginController extends DocumentController {
     }
 
     verificationCodeReceived(code, document) {
-        document.getElementById("verificationCode").textContent = code
+        document.getElementById("verificationCode").textContent = code.toUpperCase()
 
         let dataLoader = this._dataLoader
         let documentLoader = this._documentLoader

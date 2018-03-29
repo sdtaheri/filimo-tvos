@@ -9,9 +9,8 @@ class ProductDocumentController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document)
 
-        let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._productInfo.uid
-
         let shouldPlay = this._shouldPlayMovie
+        let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
             this._movieMoreInfo = dataObj.movie
             

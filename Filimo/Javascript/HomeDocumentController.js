@@ -10,6 +10,8 @@ class HomeDocumentController extends DocumentController {
                                  })
         } else if (event.type === "appear") {
             setupLoginButtonAppearance(this._loginButton)
+        } else if (event.type === 'select' && event.target == this._reloadButton) {
+            App.reload()
         } else {
             super.handleEvent(event)
         }
@@ -19,10 +21,12 @@ class HomeDocumentController extends DocumentController {
                 return
             }
             if (isLoggedIn()) {
-                button.getElementsByTagName("title").item(0).textContent = "خروج از حساب کاربری"
+                button.getElementsByTagName("title").item(0).textContent = "خروج"
+                button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/logout.png 1x, " + baseURL + "Resources/logout@2x.png 2x")
                 button.removeAttribute("loginDocumentURL")
             } else {
-                button.getElementsByTagName("title").item(0).textContent = "ورود به حساب کاربری"
+                button.getElementsByTagName("title").item(0).textContent = "ورود"
+                button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/login.png 1x, " + baseURL + "Resources/login@2x.png 2x")
                 button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")
             }
         }    
@@ -32,6 +36,7 @@ class HomeDocumentController extends DocumentController {
         super.setupDocument(document)
         
         this._loginButton = document.getElementById("loginButton")
+        this._reloadButton = document.getElementById("reloadButton")
 
         let collectionList = document.getElementsByTagName("collectionList").item(0)
         let url = filimoAPIBaseURL + '/homepage'
