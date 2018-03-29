@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .grid {
+                margin: 60 0 0 0;
+            }
+            .spinner {
+                margin: 60 0 0 0;
+            }
+        </style>
+    </head>
+    <stackTemplate>
+        <banner>
+            <title>فیلم‌های من</title>
+        </banner>
+        <separator>
+            <segmentBar id="resultsMode">
+                <segmentBarItem id="watchSegmentBarItem">
+                    <title>مشاهده‌ها</title>
+                </segmentBarItem>
+                <segmentBarItem id="wishSegmentBarItem">
+                    <title>نشان‌ها</title>
+                </segmentBarItem>
+            </segmentBar>
+        </separator>
+        <collectionList>
+            <prototypes>
+                <lockup productDocumentURL="/XMLs/Product.xml" prototype="wishArtwork">
+                    <img binding="@src:{movie_img_b};" width="300" height="400" />
+                    <title class="artworkTitle" binding="textContent:{movie_title};" />
+                </lockup>
+            </prototypes>
+            <grid class="grid">
+                <section binding="items:{items};" />
+            </grid>
+        </collectionList>
+    </stackTemplate>
+    <alertTemplate>
+        <title>فیلم‌های من</title>
+        <description>برای استفاده از این بخش می‌بایست وارد حساب کاربری خود شوید</description>
+        <button loginDocumentURL="/XMLs/Login.xml">
+            <text>ورود به حساب کاربری</text>
+        </button>
+    </alertTemplate>
+</document>

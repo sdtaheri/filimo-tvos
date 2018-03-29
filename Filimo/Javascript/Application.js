@@ -49,6 +49,7 @@ App.onLaunch = function(options) {
         "LoginController",
         "CategoriesDocumentController",
         "SearchDocumentController",
+        "MyMoviesDocumentController",
         "ProductsInCategoryDocumentController",
         "ProductDocumentController",
         "Index"
@@ -234,28 +235,6 @@ function toPersianDigits(str) {
                 .replace(/7/g, "۷")
                 .replace(/8/g, "۸")
                 .replace(/9/g, "۹")
-}
-
-function playMovie(movieFullInfo) {
-    if (movieFullInfo == null) {
-        return
-    }
-    if (movieFullInfo.watch_permision) {
-        if (movieFullInfo.watch_action.movie_src != null && movieFullInfo.watch_action.movie_src != "") {
-            var player = new Player()
-            var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
-            video.title = movieFullInfo.movie_title
-            video.resumeTime = movieFullInfo.watch_action.last_watch_position
-            video.artworkImageURL = movieFullInfo.movie_img_b
-          
-            player.playlist = new Playlist()
-            player.playlist.push(video)
-          
-            player.play()
-        }    
-    } else {
-
-    }
 }
 
 function isLoggedIn() {

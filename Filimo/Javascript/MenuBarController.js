@@ -72,7 +72,6 @@ class MenuBarController extends DocumentController {
             }
         }
     }
-
 }
 
 registerAttributeName('menuBarDocumentURL', MenuBarController);

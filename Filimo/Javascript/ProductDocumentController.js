@@ -142,5 +142,28 @@ class ProductDocumentController extends DocumentController {
             super.handleEvent(event)
         }
     }
+
+    playMovie(movieFullInfo) {
+        if (movieFullInfo == null) {
+            return
+        }
+        if (movieFullInfo.watch_permision) {
+            if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src != "") {
+                var player = new Player()
+                var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
+                video.title = toPersianDigits(movieFullInfo.movie_title)
+                video.description = toPersianDigits(movieFullInfo.description)
+                video.resumeTime = movieFullInfo.watch_action.last_watch_position
+                video.artworkImageURL = movieFullInfo.movie_img_b
+              
+                player.playlist = new Playlist()
+                player.playlist.push(video)
+              
+                player.play()
+            }    
+        } else {
+    
+        }
+    }    
 }
 registerAttributeName("productDocumentURL", ProductDocumentController)
