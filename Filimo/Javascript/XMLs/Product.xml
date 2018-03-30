@@ -37,6 +37,10 @@
                         <badge src="resource://button-play"/>
                         <title>پخش فیلم</title>
                     </buttonLockup>
+                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="bookmarkButton">
+                        <badge src="resource://button-add" class="badge"/>
+                        <title>افزودن به نشان‌ها</title>
+                    </buttonLockup>
                 </row>
             </stack>
             <heroImg src="" width="400" height="600" />

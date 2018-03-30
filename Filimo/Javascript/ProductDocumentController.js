@@ -10,18 +10,39 @@ class ProductDocumentController extends DocumentController {
         super.setupDocument(document)
 
         let shouldPlay = this._shouldPlayMovie
+
+        const playButton = document.getElementById("playButton")
+        const bookmarkButton = document.getElementById('bookmarkButton')
+
         let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
-            this._movieMoreInfo = dataObj.movie
+            let movieInfo = dataObj.movie
             
-            if (this._movieMoreInfo.produced_year && this._movieMoreInfo.produced_year > 0) {
-                let yearInfo = `<text>${toPersianDigits(this._movieMoreInfo.produced_year)}</text>`
+            if (movieInfo.produced_year && movieInfo.produced_year > 0) {
+                let yearInfo = `<text>${toPersianDigits(movieInfo.produced_year)}</text>`
                 document.getElementById("infoRow").firstElementChild.insertAdjacentHTML('afterend', yearInfo)
             }
 
+            playButton.addEventListener('select', (event) => {
+                handlePlayScenario(movieInfo)
+            })
+
+            playButton.addEventListener('play', (event) => {
+                handlePlayScenario(movieInfo)
+            })
+
+            setupBookmarkButton(movieInfo)
+
+            bookmarkButton.addEventListener('select', (event) => {
+                handleBookmarkScenario(movieInfo)
+            })
+
+            bookmarkButton.addEventListener('appear', (event) => {
+                setupBookmarkButton(movieInfo)
+            })
+
             if (shouldPlay) {
-                let button = document.getElementById("playButton")
-                button.select()
+                handlePlayScenario(movieInfo)
             }
         })    
 
@@ -95,6 +116,81 @@ class ProductDocumentController extends DocumentController {
             document.getElementById("recommendationStaticTitle").textContent = "پیشنهادها"
         })
 
+        function setupBookmarkButton(movieMoreInfo) {
+            if (movieMoreInfo.has_wish) {
+                bookmarkButton.getElementsByTagName("badge").item(0).setAttribute('src', 'resource://button-remove')
+                bookmarkButton.getElementsByTagName("title").item(0).textContent = 'حذف از نشان‌ها'
+            } else {
+                bookmarkButton.getElementsByTagName("badge").item(0).setAttribute('src', 'resource://button-add')
+                bookmarkButton.getElementsByTagName("title").item(0).textContent = 'افزودن به نشان‌ها'
+            }
+        }
+
+        function handleBookmarkScenario(movieMoreInfo) {
+            if (movieMoreInfo.wish_link && movieMoreInfo.wish_link !== '') {
+                movieMoreInfo.has_wish = !movieMoreInfo.has_wish
+                setupBookmarkButton(movieMoreInfo)
+
+                let xhr = new XMLHttpRequest()
+                xhr.open("POST", movieMoreInfo.wish_link)
+                xhr.responseType = "json";
+                xhr.onload = () => {
+                    let response = xhr.response
+
+                    let success = false
+                    if (movieMoreInfo.wish_link.includes('wishadd')) {
+                        success = response.wishadd === 'success'
+                    } else if (movieMoreInfo.wish_link.includes('wishdel')) {
+                        success = response.wishdel === 'success'
+                    }
+                    if (!success) {
+                        movieMoreInfo.has_wish = !movieMoreInfo.has_wish
+                        setupBookmarkButton(movieMoreInfo)
+                    } else {
+                        movieMoreInfo.wish_link = response.link
+                    }
+                }
+                xhr.onerror = () => {
+                    movieMoreInfo.has_wish = !movieMoreInfo.has_wish
+                    setupBookmarkButton(movieMoreInfo)
+                }
+                xhr.send()
+            }
+        }
+
+        function handlePlayScenario(movieInfo) {
+            if (isLoggedIn()) {
+                if (movieInfo.watch_permision) {
+                    playMovie(movieInfo)
+                } else {
+                    navigationDocument.presentModal(createAlertDocument("خطای پخش", "امکان پخش این فیلم وجود ندارد. اعتبار حساب کاربری خود را بررسی کنید."))
+                }
+            }
+        }
+
+        function playMovie(movieFullInfo) {
+            if (movieFullInfo == null) {
+                return
+            }
+            if (movieFullInfo.watch_permision) {
+                if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src != "") {
+                    var player = new Player()
+                    var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
+                    video.title = toPersianDigits(movieFullInfo.movie_title)
+                    video.description = toPersianDigits(movieFullInfo.description)
+                    video.resumeTime = movieFullInfo.watch_action.last_watch_position
+                    video.artworkImageURL = movieFullInfo.movie_img_b
+                  
+                    player.playlist = new Playlist()
+                    player.playlist.push(video)
+                  
+                    player.play()
+                }    
+            } else {
+        
+            }
+        }        
+
         function productDuration(productInfo) {
             let durationHour = parseInt(productInfo.duration / 60 + "", 10)
             let durationMinute = parseInt(productInfo.duration % 60 + "", 10)
@@ -128,42 +224,11 @@ class ProductDocumentController extends DocumentController {
     }
 
     handleEvent(event) {
-        if (event.target.getAttribute("id") === "playButton") {
-            if (isLoggedIn()) {
-                if (this._movieMoreInfo.watch_permision) {
-                    playMovie(this._movieMoreInfo)
-                } else {
-                    navigationDocument.presentModal(createAlertDocument("خطای پخش", "امکان پخش این فیلم وجود ندارد. اعتبار حساب کاربری خود را بررسی کنید."))
-                }
-            } else {
-                super.handleEvent(event)
-            }    
-        } else {
-            super.handleEvent(event)
-        }
-    }
-
-    playMovie(movieFullInfo) {
-        if (movieFullInfo == null) {
+        if (isLoggedIn() && 
+            (event.target.getAttribute("id") === "playButton" || event.target.getAttribute("id") === "bookmarkButton")) {
             return
         }
-        if (movieFullInfo.watch_permision) {
-            if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src != "") {
-                var player = new Player()
-                var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
-                video.title = toPersianDigits(movieFullInfo.movie_title)
-                video.description = toPersianDigits(movieFullInfo.description)
-                video.resumeTime = movieFullInfo.watch_action.last_watch_position
-                video.artworkImageURL = movieFullInfo.movie_img_b
-              
-                player.playlist = new Playlist()
-                player.playlist.push(video)
-              
-                player.play()
-            }    
-        } else {
-    
-        }
-    }    
+        super.handleEvent(event)
+    }
 }
 registerAttributeName("productDocumentURL", ProductDocumentController)
