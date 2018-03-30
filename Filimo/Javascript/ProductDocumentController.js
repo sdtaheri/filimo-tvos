@@ -88,8 +88,11 @@ class ProductDocumentController extends DocumentController {
                 for(let i = 0; i < crew.length; i++) {
                     let item = crew[i]
                     item.profile.forEach((profile) => {
+                        if (profile.name_fa === 'null' || profile.name_fa === '') {
+                            return
+                        }
                         let names = profile.name_fa.split(' ')
-                        let lockup = `<monogramLockup>
+                        let lockup = `<monogramLockup productsListDocumentURL="/XMLs/ProductsList.xml">
                         <monogram firstName="${names[0]}" lastName="${names[names.length - 1]}" />
                             <title>${profile.name_fa}</title>
                             <subtitle>${item.post_info.title_fa}</subtitle>
@@ -103,6 +106,11 @@ class ProductDocumentController extends DocumentController {
                             actors.push(profile.name_fa)
                         }
                         castsSection.insertAdjacentHTML('beforeend', lockup)
+
+                        let dataItem = new DataItem()
+                        dataItem.setPropertyPath('requestType', 'search')
+                        dataItem.setPropertyPath('queryString', profile.name_fa)
+                        castsSection.lastChild['dataItem'] = dataItem
                     })
                 }
                 if (directorNode.textContent === '') {

@@ -16,6 +16,7 @@ class CategoriesDocumentController extends DocumentController {
                 Object.keys(category).forEach((key) => {
                     dataItem.setPropertyPath(key, category[key])
                 })
+                dataItem.setPropertyPath('requestType', 'category')
                 return dataItem
             })
         }    

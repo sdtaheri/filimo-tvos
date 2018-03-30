@@ -50,7 +50,7 @@ App.onLaunch = function(options) {
         "CategoriesDocumentController",
         "SearchDocumentController",
         "MyMoviesDocumentController",
-        "ProductsInCategoryDocumentController",
+        "ProductsListDocumentController",
         "ProductDocumentController",
         "Index"
     ].map(

@@ -16,7 +16,7 @@
         <collectionList>
             <grid>
                 <prototypes>
-                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsInCategory">
+                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsList">
                         <img binding="@src:{movie_img_b};" width="300" height="400" />
                         <title class="artworkTitle" binding="textContent:{movie_title};" />
                     </lockup>

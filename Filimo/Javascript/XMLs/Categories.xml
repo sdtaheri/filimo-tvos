@@ -17,7 +17,7 @@
         <collectionList>
             <grid>
                 <prototypes>
-                    <lockup productsInCategoryDocumentURL="/XMLs/ProductsInCategory.xml" prototype="categoryArtwork" class="lockup">
+                    <lockup productsListDocumentURL="/XMLs/ProductsList.xml" prototype="categoryArtwork" class="lockup">
                         <img binding="@src:{cover};" width="830" height="230"/>
                         <overlay class="paddedOverlay">
                             <title class="shadowedTitle" binding="textContent:{title};" />
