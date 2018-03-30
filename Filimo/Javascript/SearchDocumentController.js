@@ -109,7 +109,11 @@ class SearchDocumentController extends DocumentController {
             return items.map((movie) => {
                 let dataItem = new DataItem("searchArtwork", movie.uid)
                 Object.keys(movie).forEach((key) => {
-                    dataItem.setPropertyPath(key, movie[key])
+                    let value = movie[key]
+                    if (key === 'movie_title' || key === 'descr') {
+                        value = toPersianDigits(value)
+                    }
+                    dataItem.setPropertyPath(key, value)
                 })
                 return dataItem
             })

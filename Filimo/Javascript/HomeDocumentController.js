@@ -47,7 +47,7 @@ class HomeDocumentController extends DocumentController {
             for (let i = 0; i < sections.length; i++) {
                let sectionToAdd = `<shelf>
                <header>
-               <title>${sections[i].category.title}</title>
+               <title>${toPersianDigits(sections[i].category.title)}</title>
                </header>
                <section binding="items:{items};">
                </section>
