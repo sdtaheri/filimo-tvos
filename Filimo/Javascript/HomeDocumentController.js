@@ -17,7 +17,7 @@ class HomeDocumentController extends DocumentController {
         }
 
         function setupLoginButtonAppearance(button) {
-            if (button === "undefined" || button === "null") {
+            if (button == undefined || button == null) {
                 return
             }
             if (isLoggedIn()) {
@@ -33,16 +33,24 @@ class HomeDocumentController extends DocumentController {
     }
 
     setupDocument(document) {
+
         super.setupDocument(document)
-        
+
+        const loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0)
+        const stackTemplate = document.getElementsByTagName('stackTemplate').item(0)
+        const mainNode = loadingTemplate.parentNode
+
         this._loginButton = document.getElementById("loginButton")
         this._reloadButton = document.getElementById("reloadButton")
 
-        let collectionList = document.getElementsByTagName("collectionList").item(0)
+        const collectionList = document.getElementsByTagName("collectionList").item(0)
+
+        mainNode.removeChild(stackTemplate)
+
         let url = filimoAPIBaseURL + '/homepage'
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let sections = dataObj.homepage.filter((item) => {
-                return item.data !== undefined
+                return item.data != undefined
             })
             for (let i = 0; i < sections.length; i++) {
                let sectionToAdd = `<shelf>
@@ -58,6 +66,9 @@ class HomeDocumentController extends DocumentController {
                section.dataItem = new DataItem()
                section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(sections[i]))
             }
+
+            mainNode.removeChild(loadingTemplate)
+            mainNode.appendChild(stackTemplate)
         })
 
         function dataItemsFromJSONItems(items) {

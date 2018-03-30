@@ -101,7 +101,6 @@ App.onWillTerminate = function() {
  * Convenience function to create a TVML loading document with a specified title.
  */
 function createLoadingDocument(title) {
-    // If no title has been specified, fall back to "Loading...".
     title = title || "در حال دریافت اطلاعات …";
 
     const template = `<?xml version="1.0" encoding="UTF-8" ?>

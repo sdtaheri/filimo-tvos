@@ -45,8 +45,8 @@
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30D5167720682D8C007995AF /* ProductsInCategory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProductsInCategory.xml; sourceTree = "<group>"; };
-		30D5167920682EEF007995AF /* ProductsInCategoryDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductsInCategoryDocumentController.js; sourceTree = "<group>"; };
+		30D5167720682D8C007995AF /* ProductsList.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProductsList.xml; sourceTree = "<group>"; };
+		30D5167920682EEF007995AF /* ProductsListDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductsListDocumentController.js; sourceTree = "<group>"; };
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
 		30D5167C20683595007995AF /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 				302418082065246700B46686 /* Index.xml */,
 				30241804206501F500B46686 /* Home.xml */,
 				309D289720663183001148BE /* Categories.xml */,
-				30D5167720682D8C007995AF /* ProductsInCategory.xml */,
+				30D5167720682D8C007995AF /* ProductsList.xml */,
 				309D289D206649DF001148BE /* Product.xml */,
 				30D5167A20683283007995AF /* Login.xml */,
 				30B503E4206E158A00D08682 /* MyMovies.xml */,
@@ -123,7 +123,7 @@
 				30D5167B206832A5007995AF /* LoginController.js */,
 				302418062065246700B46686 /* HomeDocumentController.js */,
 				309D289B20663390001148BE /* CategoriesDocumentController.js */,
-				30D5167920682EEF007995AF /* ProductsInCategoryDocumentController.js */,
+				30D5167920682EEF007995AF /* ProductsListDocumentController.js */,
 				309D289F20664A00001148BE /* ProductDocumentController.js */,
 				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
 				30B503E5206E159500D08682 /* MyMoviesDocumentController.js */,

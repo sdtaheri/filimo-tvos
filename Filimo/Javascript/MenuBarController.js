@@ -51,7 +51,9 @@ class MenuBarController extends DocumentController {
         if (!existingDocument) {
             const controllerOptions = resolveControllerFromElement(menuItemElem);
             if (controllerOptions) {
-                menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
+                if (!isInitialItem) {
+                    menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
+                }
                 controllerOptions.documentLoader = this._documentLoader;
                 const controllerClass = controllerOptions.type;
                 const controller = new controllerClass(controllerOptions);
@@ -59,11 +61,7 @@ class MenuBarController extends DocumentController {
                     if (isInitialItem) {
                         menuBarFeature.setDocument(document, menuItemElem);
                     } else {
-                        // Force timeout to convey intent of displaying loading while the
-                        // content is being loaded from server
                         setTimeout(function() {
-                            // Override the presentation of controller since this controller
-                            // is child of menuBar and doesn't get pushed on the navigation stack
                             menuBarFeature.setDocument(document, menuItemElem);
                         }, 1000);
                     }

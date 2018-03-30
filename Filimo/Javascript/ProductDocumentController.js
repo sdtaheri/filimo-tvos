@@ -62,7 +62,7 @@ class ProductDocumentController extends DocumentController {
 
         let detailInfoURL = filimoAPIBaseURL + '/moviedetail/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(detailInfoURL), (dataObj) => {
-            if (dataObj.moviedetail === 'null' || dataObj.moviedetail === 'undefined') {
+            if (dataObj.moviedetail == null || dataObj.moviedetail == undefined) {
                 return
             }
 

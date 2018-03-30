@@ -31,6 +31,11 @@
             }
         </style>
     </head>
+    <loadingTemplate>
+        <activityIndicator>
+            <title>در حال دریافت اطلاعات …</title>
+        </activityIndicator>
+    </loadingTemplate>
     <stackTemplate>
         <banner>
             <organizer>
