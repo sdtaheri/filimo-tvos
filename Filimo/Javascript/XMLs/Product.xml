@@ -23,7 +23,7 @@
                 </info>
                 <info>
                     <header>
-                        <title>کارگردان</title>
+                        <title></title>
                     </header>
                     <text id="directorInfo"></text>
                 </info>
@@ -37,7 +37,7 @@
                         <badge src="resource://button-preview"/>
                         <title>پیش نمایش</title>
                     </buttonLockup>
-                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton">
+                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton" autoHightlight="true">
                         <badge src="resource://button-play"/>
                         <title>پخش فیلم</title>
                     </buttonLockup>
@@ -73,6 +73,13 @@
                     <ratingBadge></ratingBadge>
                     <description></description>
                 </ratingCard>
+            </section>
+        </shelf>
+        <shelf id="castsShelf">
+            <header>
+                <title></title>
+            </header>
+            <section>
             </section>
         </shelf>
     </productTemplate>
