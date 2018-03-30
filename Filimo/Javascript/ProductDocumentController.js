@@ -13,6 +13,9 @@ class ProductDocumentController extends DocumentController {
 
         const playButton = document.getElementById("playButton")
         const bookmarkButton = document.getElementById('bookmarkButton')
+        const previewButton = document.getElementById('previewButton')
+
+        previewButton.parentNode.removeChild(previewButton)
 
         let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._productInfo.uid
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(moreInfoURL), (dataObj) => {
@@ -45,6 +48,20 @@ class ProductDocumentController extends DocumentController {
                 handlePlayScenario(movieInfo)
             }
         })    
+
+        let detailInfoURL = filimoAPIBaseURL + '/moviedetail/uid/' + this._productInfo.uid
+        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(detailInfoURL), (dataObj) => {
+            
+            if (dataObj.moviedetail && dataObj.moviedetail.trailer && dataObj.moviedetail.trailer.length > 0) {
+                playButton.parentNode.insertBefore(previewButton, playButton)
+                previewButton.addEventListener('select', (event) => {
+                    playTrailer(dataObj.moviedetail.trailer[0])
+                })
+                previewButton.addEventListener('play', (event) => {
+                    playTrailer(dataObj.moviedetail.trailer[0])
+                })
+            }
+        })
 
         if (this._productInfo.is_serial) {
             let seriesURL = filimoAPIBaseURL + '/movieserial/uid/' + this._productInfo.uid
@@ -186,10 +203,23 @@ class ProductDocumentController extends DocumentController {
                   
                     player.play()
                 }    
-            } else {
-        
             }
-        }        
+        }
+        
+        function playTrailer(movieTrailer) {
+            if (movieTrailer == null) {
+                return
+            }
+            var player = new Player()
+            var video = new MediaItem('video', movieTrailer.file_link)
+            video.title = movieTrailer.title
+            video.artworkImageURL = movieTrailer.thumb
+            
+            player.playlist = new Playlist()
+            player.playlist.push(video)
+          
+            player.play()
+        }
 
         function productDuration(productInfo) {
             let durationHour = parseInt(productInfo.duration / 60 + "", 10)
@@ -225,7 +255,9 @@ class ProductDocumentController extends DocumentController {
 
     handleEvent(event) {
         if (isLoggedIn() && 
-            (event.target.getAttribute("id") === "playButton" || event.target.getAttribute("id") === "bookmarkButton")) {
+            (event.target.getAttribute("id") === "playButton" || 
+            event.target.getAttribute("id") === "bookmarkButton" ||
+            event.target.getAttribute("id") === "previewButton")) {
             return
         }
         super.handleEvent(event)
