@@ -2,9 +2,7 @@
 <document>
     <head>
         <style>
-            .artworkTitle {
-                tv-align: right;
-                tv-text-max-lines: 2;
+            .placeholder {
                 tv-placeholder: movie;
             }
         </style>
@@ -17,8 +15,8 @@
             <grid>
                 <prototypes>
                     <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsList">
-                        <img binding="@src:{movie_img_b};" width="300" height="400" />
-                        <title class="artworkTitle" binding="textContent:{movie_title};" />
+                        <img class="placeholder" binding="@src:{movie_img_b};" width="300" height="400" />
+                        <title binding="textContent:{movie_title};" />
                     </lockup>
                 </prototypes>
                 <section binding="items:{items};" />

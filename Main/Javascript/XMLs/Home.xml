@@ -7,9 +7,7 @@
                 width: 295;
                 height: 90;
             }
-            .artworkTitle {
-                tv-align: right;
-                tv-text-max-lines: 2;
+            .placeholder {
                 tv-placeholder: movie;
             }
             .lockup {
@@ -55,8 +53,8 @@
         <collectionList>
             <prototypes>
                 <lockup productDocumentURL="/XMLs/Product.xml" prototype="homeArtwork" class="lockup">
-                    <img binding="@src:{movie_img_b};" width="262" height="350" />
-                    <title class="artworkTitle" binding="textContent:{movie_title};" />
+                    <img class="placeholder" binding="@src:{movie_img_b};" width="262" height="350" />
+                    <title binding="textContent:{movie_title};" />
                 </lockup>
             </prototypes>
         </collectionList>

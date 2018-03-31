@@ -5,6 +5,9 @@
             .badge {
                 tv-tint-color: rgb(0, 0, 0);
             }
+            .placeholder {
+                tv-placeholder: movie;
+            }
             @media tv-template and (tv-theme:dark) {
                 .badge {
                     tv-tint-color: rgb(255, 255, 255);
@@ -51,7 +54,7 @@
         </banner>
         <prototypes>
             <lockup productDocumentURL="/XMLs/Product.xml" prototype="similarArtwork">
-                <img binding="@src:{movie_img_b};" width="200" height="266" />
+                <img class="placeholder" binding="@src:{movie_img_b};" width="200" height="266" />
                 <title binding="textContent:{movie_title};" />
             </lockup>
         </prototypes>
@@ -65,9 +68,9 @@
         </shelf>
         <shelf>
             <header>
-                <title>امتیاز</title>
+                <title>امتیاز و نظرات</title>
             </header>
-            <section>
+            <section id="reviewsSection">
                 <ratingCard>
                     <title></title>
                     <ratingBadge></ratingBadge>

@@ -88,10 +88,16 @@ class ProductDocumentController extends DocumentController {
                 for(let i = 0; i < crew.length; i++) {
                     let item = crew[i]
                     item.profile.forEach((profile) => {
-                        if (profile.name_fa === 'null' || profile.name_fa === '') {
+                        if (profile.name_fa == null || profile.name_fa === '') {
+                            return
+                        }
+                        if (item.post_info.title_fa == null || item.post_info.title_fa === '') {
                             return
                         }
                         let names = profile.name_fa.split(' ')
+                        if (names.length < 2) {
+                            return
+                        }
                         let lockup = `<monogramLockup productsListDocumentURL="/XMLs/ProductsList.xml">
                         <monogram firstName="${names[0]}" lastName="${names[names.length - 1]}" />
                             <title>${profile.name_fa}</title>
@@ -168,6 +174,26 @@ class ProductDocumentController extends DocumentController {
         } else {
             ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
         }
+
+        let reviewsURL = filimoAPIBaseURL + '/commentList/uid/' + this._productInfo.uid + '/perpage/25/'
+        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(reviewsURL), (dataObj) => {
+            let commentList = dataObj.commentlist
+            if (commentList && commentList.length > 0) {
+                const reviewsSection = document.getElementById("reviewsSection")
+                commentList.forEach((comment) => {
+                    let jalaliDate = t2j(Date.parse(comment.sdate.replace(' ','T')) / 1000, true)
+                    let hourSection = comment.sdate.split(' ')[1].substr(0,5)
+                    
+                    let nodeToAdd = `<reviewCard>
+                    <title>${comment.name || comment.username || 'بی نام'}</title>
+                    <description>${toPersianDigits(comment.body)}</description>
+                    <text>${toPersianDigits(jalaliDate + ' ' + hourSection)}</text>
+                    </reviewCard>
+                    `
+                    reviewsSection.insertAdjacentHTML('beforeend', nodeToAdd)
+                })
+            }
+        })
 
         let infoRowToAdd = `<text>محصول ${this._productInfo.country_1}</text>
                 <text>${productDuration(this._productInfo)}</text>`

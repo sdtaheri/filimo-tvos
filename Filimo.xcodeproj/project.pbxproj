@@ -69,6 +69,7 @@
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		30B503EF206FD52500D08682 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		30B503F1206FD52500D08682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +106,7 @@
 		3015FFA62063A55A0029F8FF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				30B503F9207034FC00D08682 /* Jalali.js */,
 				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
 				3015FFA52063A51A0029F8FF /* DataLoader.js */,
 				30241805206514C300B46686 /* DocumentController.js */,

@@ -41,6 +41,7 @@ App.onLaunch = function(options) {
     
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
+        "Utilities/Jalali",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
         "Utilities/DataLoader",

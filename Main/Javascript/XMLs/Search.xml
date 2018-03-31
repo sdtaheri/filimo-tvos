@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <document>
+    <head>
+        <style>
+            .placeholder {
+                tv-placeholder: movie;
+            }
+        </style>
+    </head>
     <searchTemplate layoutDirection="rtl">
         <searchField>در فیلیمو جستجو کنید</searchField>
         <text id="message">Message Text</text>
@@ -7,7 +14,7 @@
             <grid id="resultsGridContainer">
                 <prototypes>
                     <lockup productDocumentURL="/XMLs/Product.xml" prototype="searchArtwork">
-                        <img binding="@src:{movie_img_b};" width="200" height="266" />
+                        <img class="placeholder" binding="@src:{movie_img_b};" width="200" height="266" />
                         <title binding="textContent:{movie_title};" />
                     </lockup>
                 </prototypes>

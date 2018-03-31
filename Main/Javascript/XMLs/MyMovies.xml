@@ -8,6 +8,9 @@
             .spinner {
                 margin: 60 0 0 0;
             }
+            .placeholder {
+                tv-placeholder: movie;
+            }
         </style>
     </head>
     <stackTemplate>
@@ -27,7 +30,7 @@
         <collectionList>
             <prototypes>
                 <lockup productDocumentURL="/XMLs/Product.xml" prototype="wishArtwork">
-                    <img binding="@src:{movie_img_b};" width="300" height="400" />
+                    <img class="placeholder" binding="@src:{movie_img_b};" width="300" height="400" />
                     <title class="artworkTitle" binding="textContent:{movie_title};" />
                 </lockup>
             </prototypes>
