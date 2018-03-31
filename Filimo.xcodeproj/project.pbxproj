@@ -8,11 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		301E480A206B92CE00D44269 /* SearchDocumentController.js in Resources */ = {isa = PBXBuildFile; fileRef = 301E4809206B92CE00D44269 /* SearchDocumentController.js */; };
+		30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
+		30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503EF206FD52500D08682 /* ServiceProvider.swift */; };
+		30B503F4206FD52500D08682 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30B503EA206FD52500D08682 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
 		30BF891C2062F426009FAB4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF891B2062F426009FAB4D /* main.swift */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		30B503F2206FD52500D08682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30C578FE20448110007E728F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30B503E9206FD52500D08682;
+			remoteInfo = TopShelf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		30B503F8206FD52500D08682 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				30B503F4206FD52500D08682 /* TopShelf.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
@@ -38,6 +65,10 @@
 		30B503E3206E157C00D08682 /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
 		30B503E4206E158A00D08682 /* MyMovies.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyMovies.xml; sourceTree = "<group>"; };
 		30B503E5206E159500D08682 /* MyMoviesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MyMoviesDocumentController.js; sourceTree = "<group>"; };
+		30B503EA206FD52500D08682 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
+		30B503EF206FD52500D08682 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		30B503F1206FD52500D08682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +84,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		30B503E7206FD52500D08682 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C5790320448110007E728F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,6 +150,23 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
+		30B503EB206FD52500D08682 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30B503EC206FD52500D08682 /* TVServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30B503EE206FD52500D08682 /* TopShelf */ = {
+			isa = PBXGroup;
+			children = (
+				30B503EF206FD52500D08682 /* ServiceProvider.swift */,
+				30B503F1206FD52500D08682 /* Info.plist */,
+			);
+			path = TopShelf;
+			sourceTree = "<group>";
+		};
 		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +201,9 @@
 		30C578FD20448110007E728F = {
 			isa = PBXGroup;
 			children = (
-				30C5790820448110007E728F /* Filimo */,
+				30C5790820448110007E728F /* Main */,
+				30B503EE206FD52500D08682 /* TopShelf */,
+				30B503EB206FD52500D08682 /* Frameworks */,
 				30C5790720448110007E728F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -154,23 +212,41 @@
 			isa = PBXGroup;
 			children = (
 				30C5790620448110007E728F /* Filimo.app */,
+				30B503EA206FD52500D08682 /* TopShelf.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30C5790820448110007E728F /* Filimo */ = {
+		30C5790820448110007E728F /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				307D82772063157800848244 /* Swift */,
 				30BF891D20631288009FAB4D /* Javascript */,
 				30BF891E20631298009FAB4D /* Supporting Files */,
 			);
-			path = Filimo;
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		30B503E9206FD52500D08682 /* TopShelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf" */;
+			buildPhases = (
+				30B503E6206FD52500D08682 /* Sources */,
+				30B503E7206FD52500D08682 /* Frameworks */,
+				30B503E8206FD52500D08682 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TopShelf;
+			productName = TopShelf;
+			productReference = 30B503EA206FD52500D08682 /* TopShelf.appex */;
+			productType = "com.apple.product-type.tv-app-extension";
+		};
 		30C5790520448110007E728F /* Filimo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30C5791120448110007E728F /* Build configuration list for PBXNativeTarget "Filimo" */;
@@ -178,10 +254,12 @@
 				30C5790220448110007E728F /* Sources */,
 				30C5790320448110007E728F /* Frameworks */,
 				30C5790420448110007E728F /* Resources */,
+				30B503F8206FD52500D08682 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				30B503F3206FD52500D08682 /* PBXTargetDependency */,
 			);
 			name = Filimo;
 			productName = Filimo;
@@ -194,10 +272,14 @@
 		30C578FE20448110007E728F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Filimo;
 				TargetAttributes = {
+					30B503E9206FD52500D08682 = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+					};
 					30C5790520448110007E728F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -218,11 +300,19 @@
 			projectRoot = "";
 			targets = (
 				30C5790520448110007E728F /* Filimo */,
+				30B503E9206FD52500D08682 /* TopShelf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		30B503E8206FD52500D08682 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C5790420448110007E728F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,6 +326,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		30B503E6206FD52500D08682 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30C5790220448110007E728F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +344,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30B503F3206FD52500D08682 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30B503E9206FD52500D08682 /* TopShelf */;
+			targetProxy = 30B503F2206FD52500D08682 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		30BF89182062F2B7009FAB4D /* InfoPlist.strings */ = {
@@ -259,6 +365,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		30B503F5206FD52500D08682 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HM2L63PQ2B;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos.TopShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		30B503F6206FD52500D08682 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HM2L63PQ2B;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos.TopShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 		30C5790F20448110007E728F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -373,11 +517,12 @@
 		30C5791220448110007E728F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HM2L63PQ2B;
-				INFOPLIST_FILE = "$(SRCROOT)/Filimo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -390,11 +535,12 @@
 		30C5791320448110007E728F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HM2L63PQ2B;
-				INFOPLIST_FILE = "$(SRCROOT)/Filimo/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.tvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,6 +553,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30B503F5206FD52500D08682 /* Debug */,
+				30B503F6206FD52500D08682 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		30C5790120448110007E728F /* Build configuration list for PBXProject "Filimo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
