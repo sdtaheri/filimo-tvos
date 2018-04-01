@@ -282,6 +282,8 @@ class ProductDocumentController extends DocumentController {
                     player.playlist = new Playlist()
                     player.playlist.push(video)
                   
+                    setPlaybackEventListeners(player, movieFullInfo)
+
                     player.play()
                 }    
             }
@@ -300,6 +302,62 @@ class ProductDocumentController extends DocumentController {
             player.playlist.push(video)
           
             player.play()
+        }
+
+        function setPlaybackEventListeners(currentPlayer, movie) {
+            if (movie.visit_url.formAction == null || movie.visit_url.formAction == undefined) {
+                return
+            }
+
+            let elapsedTime = 0
+            let formAction = movie.visit_url.formAction
+            let frmID = movie.visit_url["frm-id"]
+
+            currentPlayer.addEventListener("stateDidChange", function(event) {
+                if (event.state === 'end') {
+                    movie.watch_action.last_watch_position = elapsedTime                    
+                }
+            });
+
+            currentPlayer.addEventListener("timeDidChange", function(event) {
+                elapsedTime = event.time
+                postWatchTime()
+            }, { interval: movie.visit_url.visitCallPeriod });
+
+            function postWatchTime() {
+                if (elapsedTime < 60) {
+                    return
+                }
+                let xhr = new XMLHttpRequest()
+                xhr.open("POST", formAction)
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.responseType = 'json'
+                xhr.onload = () => {
+                    if (xhr.response.visitpost) {
+                        formAction = xhr.response.visitpost.formAction
+                        frmID = xhr.response.visitpost['frm-id'] || frmID
+                    }
+                }
+                xhr.onerror = () => {
+                    console.log("ERROR")
+                }
+
+                if (frmID == undefined) {
+                    console.log("ERROR GETTING FRM-ID")
+                    return
+                }
+                let payload = `frm-id=${frmID}&movie_id=${movie.uid}&movie_type=${movie.is_serial ? 'serial' : 'film'}&`
+                payload += 'data[user_stat]='
+            
+                let stat = "["
+                for (let i = 0; i < 6; i++) {
+                    stat += `{"current_buffer_length":0,"current_player_time":${Math.max(0, elapsedTime - 10 * i)},"playing_buffer_time":0,"current_state":"PLAYER_PLAYING","player_type":"hexagon","counter":${(5 - i) * 10 + 10}},`
+                }
+                stat = stat.slice(0, -1) + ']'
+                payload += stat
+
+                xhr.send(payload)
+           }
         }
 
         function productDuration(productInfo) {
