@@ -64,6 +64,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         return true
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        /*
+         Request a JavaScript context from the `TVApplicationController` to pass the URL into JavaScript.
+         */
+        appController?.evaluate(inJavaScriptContext: { context in
+            if let appObj = context.globalObject.objectForKeyedSubscript("App") {
+                if appObj.hasProperty("onOpenURL") {
+                    appObj.invokeMethod("onOpenURL", withArguments: [url.absoluteString])
+                }
+            }
+        }, completion: nil)
+        
+        return true
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and stop playback

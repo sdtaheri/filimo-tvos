@@ -77,6 +77,14 @@ App.onLaunch = function(options) {
     });
 }
 
+App.onOpenURL = function(url) {
+    const [protocol, path] = url.split("://");
+
+    let documentLoader = new DocumentLoader(baseURL)
+    let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
+    let movieUID = path
+    new ProductDocumentController({ documentLoader, documentURL, movieUID })
+}
 
 App.onWillResignActive = function() {
 

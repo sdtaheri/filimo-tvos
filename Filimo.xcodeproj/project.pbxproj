@@ -11,6 +11,7 @@
 		30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503EF206FD52500D08682 /* ServiceProvider.swift */; };
 		30B503F4206FD52500D08682 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30B503EA206FD52500D08682 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		30B503FC20711F4E00D08682 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
 		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
 		30BF891C2062F426009FAB4D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BF891B2062F426009FAB4D /* main.swift */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		30B503EF206FD52500D08682 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		30B503F1206FD52500D08682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
+		30B503FB20711F4E00D08682 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30BF891B2062F426009FAB4D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				30B503EF206FD52500D08682 /* ServiceProvider.swift */,
+				30B503FB20711F4E00D08682 /* Model.swift */,
 				30B503F1206FD52500D08682 /* Info.plist */,
 			);
 			path = TopShelf;
@@ -332,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30B503FC20711F4E00D08682 /* Model.swift in Sources */,
 				30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
