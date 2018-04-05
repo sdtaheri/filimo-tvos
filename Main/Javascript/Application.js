@@ -66,7 +66,6 @@ App.onLaunch = function(options) {
 
     evaluateScripts(helperScriptURLs, function(scriptsAreLoaded) {
         if (scriptsAreLoaded) {
-            console.log("Scripts have been successfully evaluated.");
         } else {
             // Handle error cases in your code. You should present a readable and user friendly
             // error message to the user in an alert dialog.

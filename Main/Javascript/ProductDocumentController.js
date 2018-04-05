@@ -334,12 +334,12 @@ class ProductDocumentController extends DocumentController {
             });
 
             currentPlayer.addEventListener("timeDidChange", function(event) {
-                elapsedTime = event.time
+                elapsedTime = Math.floor(event.time)
                 postWatchTime()
             }, { interval: movie.visit_url.visitCallPeriod });
 
             function postWatchTime() {
-                if (elapsedTime < 60) {
+                if (elapsedTime < movie.visit_url.visitCallPeriod) {
                     return
                 }
                 let xhr = new XMLHttpRequest()
@@ -353,19 +353,19 @@ class ProductDocumentController extends DocumentController {
                     }
                 }
                 xhr.onerror = () => {
-                    console.log("ERROR")
                 }
 
                 if (frmID == undefined) {
-                    console.log("ERROR GETTING FRM-ID")
                     return
                 }
                 let payload = `frm-id=${frmID}&movie_id=${movie.uid}&movie_type=${movie.is_serial ? 'serial' : 'film'}&`
                 payload += 'data[user_stat]='
             
                 let stat = "["
-                for (let i = 0; i < 6; i++) {
-                    stat += `{"current_buffer_length":0,"current_player_time":${Math.max(0, elapsedTime - 10 * i)},"playing_buffer_time":0,"current_state":"PLAYER_PLAYING","player_type":"hexagon","counter":${(5 - i) * 10 + 10}},`
+
+                let count = movie.visit_url.visitCallPeriod / 10
+                for (let i = 0; i < count; i++) {
+                    stat += `{"current_buffer_length":0,"current_player_time":${Math.max(0, elapsedTime - 10 * (count - (i + 1)))},"playing_buffer_time":0,"current_state":"playing","player_type":"tvos","counter":${i * 10 + 10}},`
                 }
                 stat = stat.slice(0, -1) + ']'
                 payload += stat
