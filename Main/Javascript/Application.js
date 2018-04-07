@@ -19,11 +19,11 @@
  * application lifecycle events.
  */
 
-// Registry of attribute name used to define the URL to template (e.g. documentURL or GridDocumentURL)
-// to controller type (e.g. DocumentController or GridDocumentController)
 const attributeToController = {};
 const attributeKeys = [];
 var baseURL;
+var menubarLoaded = false;
+var pendingPlayURL = null;
 
 /**
  * @description The onLaunch callback is invoked after the application JavaScript 
@@ -67,8 +67,6 @@ App.onLaunch = function(options) {
     evaluateScripts(helperScriptURLs, function(scriptsAreLoaded) {
         if (scriptsAreLoaded) {
         } else {
-            // Handle error cases in your code. You should present a readable and user friendly
-            // error message to the user in an alert dialog.
             const alertDocument = createEvalErrorAlertDocument();
             navigationDocument.replaceDocument(alertDocument, loadingDocument);
             throw new EvalError("Application.js: unable to evaluate scripts.");
@@ -77,12 +75,10 @@ App.onLaunch = function(options) {
 }
 
 App.onOpenURL = function(url) {
-    const [protocol, path] = url.split("://");
-
-    let documentLoader = new DocumentLoader(baseURL)
-    let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
-    let movieUID = path
-    new ProductDocumentController({ documentLoader, documentURL, movieUID })
+    pendingPlayURL = url
+    if (menubarLoaded) {
+        playMovieFromURL(pendingPlayURL)
+    }
 }
 
 App.onWillResignActive = function() {
@@ -103,6 +99,20 @@ App.onDidBecomeActive = function() {
 
 App.onWillTerminate = function() {
     
+}
+
+function playMovieFromURL(url) {
+    if (url == null || url === "") {
+        return
+    }
+    const [protocol, path] = url.split("://");
+    const [movieUID, type] = path.split("/")
+    
+    let documentLoader = new DocumentLoader(baseURL)
+    let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
+    let shouldPlayMovie = type === 'play'
+    new ProductDocumentController({ documentLoader, documentURL, movieUID, shouldPlayMovie })
+    pendingPlayURL = null
 }
 
 /**

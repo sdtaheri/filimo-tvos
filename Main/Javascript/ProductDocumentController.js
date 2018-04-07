@@ -7,6 +7,7 @@ class ProductDocumentController extends DocumentController {
             this._shouldPlayMovie = (controllerOptions.event.type === "play")
         } else if (controllerOptions.movieUID) {
             this._movieUID = controllerOptions.movieUID
+            this._shouldPlayMovie = controllerOptions.shouldPlayMovie
         }     
     }
 

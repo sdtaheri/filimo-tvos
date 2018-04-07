@@ -56,8 +56,8 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                             item.setImageURL(imageURL, forTraits: .userInterfaceStyleDark)
                             item.setImageURL(imageURL, forTraits: .screenScale1x)
                             item.setImageURL(imageURL, forTraits: .screenScale2x)
-                            item.displayURL = URL(string: "Filimo://\(compactMovie.id)")
-                            item.playURL = URL(string: "Filimo://\(compactMovie.id)")
+                            item.displayURL = URL(string: "Filimo://\(compactMovie.id)/display")
+                            item.playURL = URL(string: "Filimo://\(compactMovie.id)/play")
                             return item
                         }
                         break
