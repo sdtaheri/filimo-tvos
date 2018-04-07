@@ -8,6 +8,7 @@
 
 import UIKit
 import TVMLKit
+import TVServices
 
 class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDelegate {
     
@@ -103,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NotificationCenter.default.post(name: NSNotification.Name.TVTopShelfItemsDidChange, object: nil)
         executeRemoteMethod("onDidBecomeActive", completion: { (success: Bool) in
             // ...
         })
