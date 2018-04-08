@@ -57,34 +57,44 @@ class HomeDocumentController extends DocumentController {
                <header>
                <title>${toPersianDigits(sections[i].category.title)}</title>
                </header>
-               <section binding="items:{items};">
+               <section>
                </section>
                </shelf>`
                collectionList.insertAdjacentHTML('beforeend', sectionToAdd)
 
                let section = (collectionList.getElementsByTagName("section")).item(i)
-               section.dataItem = new DataItem()
-               section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(sections[i]))
+               for (let j = 0; j < (sections[i]).data.length; j++) {
+                   let item = ((sections[i]).data)[j]
+                   let hasOverlay = item.movie_status_txt && item.movie_status_txt !== ''
+                   
+                   let lockup = `<lockup productDocumentURL="/XMLs/Product.xml">
+                    <img class="${hasOverlay ? 'imageDisabled' : 'image'}" src="${item.movie_img_b}" width="262" height="350" />
+                    <title>${toPersianDigits(item.movie_title)}</title>`
+                   if (hasOverlay) {
+                       lockup += `<overlay>
+                       <title class="overlayTitle">${item.movie_status_txt}</title>
+                       </overlay>`
+                   }
+                   lockup += `</lockup>`
+                   
+                   let dataItem = new DataItem("homeArtwork", item.uid)
+                   Object.keys(item).forEach((key) => {
+                       let value = item[key]
+                       if (key === 'movie_title' || key === 'descr') {
+                           value = toPersianDigits(value)
+                       }
+                       dataItem.setPropertyPath(key, value)
+                   })   
+
+                   section.insertAdjacentHTML('beforeend', lockup)
+                   let lockupNode = section.getElementsByTagName('lockup').item(j)
+                   lockupNode.dataItem = dataItem
+               }
             }
 
             mainNode.removeChild(loadingTemplate)
             mainNode.appendChild(stackTemplate)
         })
-
-        function dataItemsFromJSONItems(items) {
-            let data = items.data
-            return data.map((movie) => {
-                let dataItem = new DataItem("homeArtwork", movie.uid)
-                Object.keys(movie).forEach((key) => {
-                    let value = movie[key]
-                    if (key === 'movie_title' || key === 'descr') {
-                        value = toPersianDigits(value)
-                    }
-                    dataItem.setPropertyPath(key, value)
-                })
-                return dataItem
-            })
-        }    
     }
 }
 registerAttributeName("homeDocumentURL", HomeDocumentController)

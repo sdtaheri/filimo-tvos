@@ -42,6 +42,8 @@ class ProductDocumentController extends DocumentController {
 
             let movieInfo = dataObj.movie
             
+            playButton.getElementsByTagName('title').item(0).textContent = movieInfo.price_txt || 'پخش فیلم'
+
             document.getElementsByTagName("stack").item(0).getElementsByTagName("title").item(0).textContent = toPersianDigits(movieInfo.movie_title)
             document.getElementById("productDescription").textContent = toPersianDigits(movieInfo.description)
             document.getElementsByTagName("heroImg").item(0).setAttribute("src", movieInfo.movie_img_b)

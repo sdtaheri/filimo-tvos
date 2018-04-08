@@ -242,6 +242,7 @@ function resolveControllerFromElement(elem) {
 }
 
 function toPersianDigits(str) {
+    if (str == null) { return null }
     return str.replace(/0/g, "۰")
                 .replace(/1/g, "۱")
                 .replace(/2/g, "۲")
