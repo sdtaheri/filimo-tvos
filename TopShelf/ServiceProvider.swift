@@ -70,7 +70,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                 section.title = sectionName.persianDigits()
                 section.topShelfItems = sectionItems
                 
-                self?.items.append(section)
+                self?.items = [section]
                 
                 semaphore.signal()
             } catch {
