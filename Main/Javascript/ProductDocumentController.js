@@ -8,7 +8,8 @@ class ProductDocumentController extends DocumentController {
         } else if (controllerOptions.movieUID) {
             this._movieUID = controllerOptions.movieUID
             this._shouldPlayMovie = controllerOptions.shouldPlayMovie
-        }     
+        }   
+        this._isLoggedInAtLaunch = isLoggedIn()
     }
 
     setupDocument(document) {
@@ -22,6 +23,7 @@ class ProductDocumentController extends DocumentController {
             return
         }
 
+        var isLoggedInAtLaunch = this._isLoggedInAtLaunch
         const dataLoader = this._dataLoader
         const documentLoader = this._documentLoader
 
@@ -216,6 +218,12 @@ class ProductDocumentController extends DocumentController {
                 handlePlayScenario(movieInfo)
             })
 
+            document.addEventListener('appear', (event) => {
+                if (isLoggedIn() && !isLoggedInAtLaunch) {
+                    playButton.getElementsByTagName('title').item(0).textContent = 'پخش فیلم'
+                }
+            })
+
             setupBookmarkButton(movieInfo)
 
             bookmarkButton.addEventListener('select', (event) => {
@@ -242,35 +250,51 @@ class ProductDocumentController extends DocumentController {
         }
 
         function handleBookmarkScenario(movieMoreInfo) {
-            if (movieMoreInfo.wish_link && movieMoreInfo.wish_link !== '') {
-                movieMoreInfo.has_wish = !movieMoreInfo.has_wish
-                setupBookmarkButton(movieMoreInfo)
-
-                let xhr = new XMLHttpRequest()
-                xhr.open("POST", movieMoreInfo.wish_link)
-                xhr.responseType = "json";
-                xhr.onload = () => {
-                    let response = xhr.response
-
-                    let success = false
-                    if (movieMoreInfo.wish_link.includes('wishadd')) {
-                        success = response.wishadd === 'success'
-                    } else if (movieMoreInfo.wish_link.includes('wishdel')) {
-                        success = response.wishdel === 'success'
-                    }
-                    if (!success) {
-                        movieMoreInfo.has_wish = !movieMoreInfo.has_wish
-                        setupBookmarkButton(movieMoreInfo)
-                    } else {
-                        movieMoreInfo.wish_link = response.link
-                    }
-                }
-                xhr.onerror = () => {
+            if (isLoggedIn()) {
+                if (movieMoreInfo.wish_link && movieMoreInfo.wish_link !== '') {
                     movieMoreInfo.has_wish = !movieMoreInfo.has_wish
                     setupBookmarkButton(movieMoreInfo)
+
+                    let xhr = new XMLHttpRequest()
+                    xhr.open("POST", movieMoreInfo.wish_link)
+                    xhr.responseType = "json";
+                    xhr.onload = () => {
+                        let response = xhr.response
+
+                        let success = false
+                        if (movieMoreInfo.wish_link.includes('wishadd')) {
+                            success = response.wishadd === 'success'
+                        } else if (movieMoreInfo.wish_link.includes('wishdel')) {
+                            success = response.wishdel === 'success'
+                        }
+                        if (!success) {
+                            movieMoreInfo.has_wish = !movieMoreInfo.has_wish
+                            setupBookmarkButton(movieMoreInfo)
+                        } else {
+                            movieMoreInfo.wish_link = response.link
+                        }
+                    }
+                    xhr.onerror = () => {
+                        movieMoreInfo.has_wish = !movieMoreInfo.has_wish
+                        setupBookmarkButton(movieMoreInfo)
+                    }
+                    xhr.send()
+                } else if (!isLoggedInAtLaunch) {
+                    isLoggedInAtLaunch = true
+                    dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+                        updateOldInfoWithNew(newMovieInfo, dataObj.movie)
+                        handleBookmarkScenario(movieMoreInfo)
+                    })
                 }
-                xhr.send()
             }
+        }
+
+        function updateOldInfoWithNew(oldMovieInfo, newMovieInfo) {
+            oldMovieInfo.wish_link = newMovieInfo.wish_link
+            oldMovieInfo.has_wish = newMovieInfo.has_wish
+            oldMovieInfo.watch_permision = newMovieInfo.watch_permision
+            oldMovieInfo.watch_action = newMovieInfo.watch_action
+            oldMovieInfo.visit_url = newMovieInfo.visit_url
         }
 
         function handlePlayScenario(movieInfo) {
@@ -278,7 +302,13 @@ class ProductDocumentController extends DocumentController {
                 if (movieInfo.watch_permision) {
                     playMovie(movieInfo)
                 } else {
-                    navigationDocument.presentModal(createAlertDocument("خطای پخش", "امکان پخش این فیلم وجود ندارد. اعتبار حساب کاربری خود را بررسی کنید."))
+                    if (!isLoggedInAtLaunch) {
+                        isLoggedInAtLaunch = true
+                        dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+                            updateOldInfoWithNew(movieInfo, dataObj.movie)
+                            handlePlayScenario(movieInfo)
+                        })
+                    }
                 }
             }
         }
