@@ -104,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: NSNotification.Name.TVTopShelfItemsDidChange, object: nil)
         executeRemoteMethod("onDidBecomeActive", completion: { (success: Bool) in
             // ...
         })

@@ -20,6 +20,16 @@ struct Homepage: Codable {
     var category: Category
     var data: [MovieCompact]?
     
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let data = try container.decodeIfPresent([MovieCompact]?.self, forKey: .data) {
+            self.data = data
+        } else {
+            self.data = nil
+        }
+        category = try container.decode(Category.self, forKey: .category)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case category
         case data
@@ -28,12 +38,12 @@ struct Homepage: Codable {
 
 struct Category: Codable {
     var id: String
-    var title: String
+    var title: String?
     var listType: String
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        title = try container.decode(String.self, forKey: .title)
+        title = try container.decode(String?.self, forKey: .title)
         listType = try container.decode(String.self, forKey: .listType)
         if let value = try? container.decode(Int.self, forKey: .id) {
             id = String(value)
@@ -50,8 +60,8 @@ struct Category: Codable {
 }
 
 struct MovieCompact: Codable {
-    var id: String
-    var title: String
+    var id: String?
+    var title: String?
     var thumbnailURLString: String
     
     enum CodingKeys: String, CodingKey {

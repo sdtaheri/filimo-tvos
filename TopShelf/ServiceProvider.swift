@@ -15,7 +15,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
     
     private let homepageURL = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/tvweb")!
     private var items = [TVContentItem]()
-    
+
     override init() {
         super.init()
     }
@@ -27,7 +27,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
     }
 
     var topShelfItems: [TVContentItem] {
-        
+
         let semaphore = DispatchSemaphore(value: 0)
         
         var urlRequest = URLRequest(url: homepageURL)
@@ -46,18 +46,18 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                 
                 for homepage in shelfData.homepage {
                     if let firstValuableItems = homepage.data {
-                        sectionName = homepage.category.title
-                        sectionItems = firstValuableItems.map() { compactMovie -> TVContentItem in
-                            let item = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: compactMovie.id, container: nil)!)!
-                            item.title = compactMovie.title.persianDigits()
+                        sectionName = homepage.category.title ?? ""
+                        sectionItems = firstValuableItems.filter({ $0.id != nil }).map() { compactMovie -> TVContentItem in
+                            let item = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: compactMovie.id!, container: nil)!)!
+                            item.title = compactMovie.title?.persianDigits() ?? ""
                             item.imageShape = .poster
                             let imageURL = URL(string: compactMovie.thumbnailURLString)
                             item.setImageURL(imageURL, forTraits: .userInterfaceStyleLight)
                             item.setImageURL(imageURL, forTraits: .userInterfaceStyleDark)
                             item.setImageURL(imageURL, forTraits: .screenScale1x)
                             item.setImageURL(imageURL, forTraits: .screenScale2x)
-                            item.displayURL = URL(string: "Filimo://\(compactMovie.id)/display")
-                            item.playURL = URL(string: "Filimo://\(compactMovie.id)/play")
+                            item.displayURL = URL(string: "Filimo://\(compactMovie.id!)/display")
+                            item.playURL = URL(string: "Filimo://\(compactMovie.id!)/play")
                             return item
                         }
                         break
@@ -66,7 +66,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                     }
                 }
                 
-                let section = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: "SpecialSection", container: nil)!)!
+                let section = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: "TopShelf", container: nil)!)!
                 section.title = sectionName.persianDigits()
                 section.topShelfItems = sectionItems
                 
