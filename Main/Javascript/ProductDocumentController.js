@@ -114,7 +114,7 @@ class ProductDocumentController extends DocumentController {
                 }
 
                 if (dataObj.moviedetail.trailer && dataObj.moviedetail.trailer.length > 0) {
-                    playButton.parentNode.insertBefore(previewButton, playButton)
+                    playButton.parentNode.insertBefore(previewButton, bookmarkButton)
                     previewButton.addEventListener('select', (event) => {
                         playTrailer(dataObj.moviedetail.trailer[0])
                     })

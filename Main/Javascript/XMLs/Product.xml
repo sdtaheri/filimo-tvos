@@ -41,13 +41,13 @@
                 <row id="infoRow"></row>
                 <description id="productDescription" handlesOverflow="true"></description>
                 <row>
-                    <buttonLockup id="previewButton">
-                        <badge src="resource://button-preview"/>
-                        <title>پیش نمایش</title>
-                    </buttonLockup>
                     <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton" autoHightlight="true">
                         <badge src="resource://button-play"/>
                         <title>پخش فیلم</title>
+                    </buttonLockup>
+                    <buttonLockup id="previewButton">
+                        <badge src="resource://button-preview"/>
+                        <title>پیش نمایش</title>
                     </buttonLockup>
                     <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="bookmarkButton">
                         <badge src="resource://button-add" class="badge"/>
