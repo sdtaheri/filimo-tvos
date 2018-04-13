@@ -30,7 +30,7 @@
         <collectionList>
             <prototypes>
                 <lockup productDocumentURL="/XMLs/Product.xml" prototype="wishArtwork">
-                    <img class="placeholder" binding="@src:{movie_img_b};" width="300" height="400" />
+                    <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
                     <title class="artworkTitle" binding="textContent:{movie_title};" />
                 </lockup>
             </prototypes>

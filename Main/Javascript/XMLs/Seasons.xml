@@ -10,19 +10,20 @@
             }
         </style>
     </head>
-    <searchTemplate layoutDirection="rtl">
-        <searchField>در فیلیمو جستجو کنید</searchField>
-        <text id="message">Message Text</text>
-        <collectionList id="resultsList">
-            <grid id="resultsGridContainer">
+
+    <catalogTemplate>
+        <banner>
+            <title>فصل‌ها</title>
+        </banner>
+        <list>
+            <section>
                 <prototypes>
-                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="searchArtwork">
+                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsList">
                         <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
                         <title class="marquee" binding="textContent:{movie_title};" />
                     </lockup>
-                </prototypes>
-                <section id="resultsSection" binding="items:{items};" />
-            </grid>
-        </collectionList>
-    </searchTemplate>
+                </prototypes>    
+            </section>
+        </list>
+    </catalogTemplate>
 </document>

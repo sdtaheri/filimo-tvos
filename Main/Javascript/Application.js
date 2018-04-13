@@ -53,6 +53,7 @@ App.onLaunch = function(options) {
         "MyMoviesDocumentController",
         "ProductsListDocumentController",
         "ProductDocumentController",
+        "SeasonsDocumentController",
         "Index"
     ].map(
         moduleName => `${baseURL}${moduleName}.js`

@@ -30,7 +30,8 @@ class ProductDocumentController extends DocumentController {
         const playButton = document.getElementById("playButton")
         const bookmarkButton = document.getElementById('bookmarkButton')
         const previewButton = document.getElementById('previewButton')
-        
+        const seasonsButton = document.getElementById('seasonsButton')
+
         const castsShelf = document.getElementById('castsShelf')
 
         previewButton.parentNode.removeChild(previewButton)
@@ -86,17 +87,49 @@ class ProductDocumentController extends DocumentController {
                 dataLoader._fetchJSONData(documentLoader.prepareURL(seriesURL), (dataObj) => {
                     let seriesAllEpisodes = dataObj.movieserial
                     
-                    let episodesShelf = document.getElementById("allEpisodes")
-                    let nodesToAdd = `<header>
-                    <title>سایر قسمت‌ها</title>
-                    </header>
-                    <section binding="items:{episodes};">
-                    </section>`
-                    episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
-    
-                    episodesShelf.dataItem = new DataItem()
-                    episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(seriesAllEpisodes))    
+                    let partNumber = movieInfo.serial_part
+                    let filteredItemsBasedOnUID = seriesAllEpisodes.filter( (item) => { return item.uid === movieInfo.uid })
+                    let seasonNumber = -1
+                    if (filteredItemsBasedOnUID.length > 0) {
+                        seasonNumber = filteredItemsBasedOnUID[0].serial_season
+                    }
+
+                    let allSeasons = {}
+                    seriesAllEpisodes.forEach( (item) => {
+                        if (allSeasons[item.serial_season] == undefined) {
+                            allSeasons[item.serial_season] = []
+                        }
+                        allSeasons[item.serial_season].push(item)
+                    })
+
+                    let episodesForCurrentSeason = seriesAllEpisodes.filter ( (item) => { return item.serial_season === seasonNumber })
+
+                    let allSeasonsCount = Object.keys(allSeasons).length
+                    if (allSeasonsCount == 1) {
+                        seasonsButton.parentNode.removeChild(seasonsButton)
+                    } else {
+                        seasonsButton.getElementsByTagName('title').item(0).textContent = toPersianDigits(allSeasonsCount + " فصل")
+
+                        let dataItem = new DataItem()
+                        dataItem.setPropertyPath('allSeasons', allSeasons)
+                        seasonsButton['dataItem'] = dataItem
+                    }
+
+                    if (episodesForCurrentSeason.length > 0) {
+                        let episodesShelf = document.getElementById("allEpisodes")
+                        let nodesToAdd = `<header>
+                        <title>${allSeasonsCount > 1 ? `قسمت‌های فصل ${toPersianDigits(seasonNumber)}` : 'سایر قسمت‌ها'}</title>
+                        </header>
+                        <section binding="items:{episodes};">
+                        </section>`
+                        episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
+        
+                        episodesShelf.dataItem = new DataItem()
+                        episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(episodesForCurrentSeason))        
+                    }
                 })    
+            } else {
+                seasonsButton.parentNode.removeChild(seasonsButton)
             }
 
             let recommendationSectionNode = document.getElementById("recommendation")

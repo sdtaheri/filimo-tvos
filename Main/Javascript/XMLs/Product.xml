@@ -53,13 +53,17 @@
                         <badge src="resource://button-add" class="badge"/>
                         <title>افزودن به نشان‌ها</title>
                     </buttonLockup>
+                    <buttonLockup seasonsDocumentURL="/XMLs/Seasons.xml" id="seasonsButton">
+                        <badge srcset="/Resources/seasons.png 1x, /Resources/seasons@2x.png 2x" width="54" height="36"/>
+                        <title>فصل</title>
+                    </buttonLockup>
                 </row>
             </stack>
             <heroImg src="" width="400" height="600" />
         </banner>
         <prototypes>
             <lockup productDocumentURL="/XMLs/Product.xml" prototype="similarArtwork">
-                <img class="placeholder" binding="@src:{movie_img_b};" width="200" height="266" />
+                <img class="placeholder" binding="@src:{movie_img_b};" width="225" height="300" />
                 <title binding="textContent:{movie_title};" />
             </lockup>
         </prototypes>
