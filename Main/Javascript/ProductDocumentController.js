@@ -4,9 +4,11 @@ class ProductDocumentController extends DocumentController {
         super(controllerOptions)  
         if (controllerOptions.event) {
             this._movieUID = controllerOptions.event.target.dataItem.uid
+            this._movieName = toPersianDigits(controllerOptions.event.target.dataItem.movie_title)
             this._shouldPlayMovie = (controllerOptions.event.type === "play")
         } else if (controllerOptions.movieUID) {
             this._movieUID = controllerOptions.movieUID
+            this._movieName = null
             this._shouldPlayMovie = controllerOptions.shouldPlayMovie
         }   
         this._isLoggedInAtLaunch = isLoggedIn()
@@ -16,6 +18,7 @@ class ProductDocumentController extends DocumentController {
         super.setupDocument(document)
 
         const loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0)
+        const loadingTitle = loadingTemplate.getElementsByTagName('title').item(0)
         const productTemplate = document.getElementsByTagName('productTemplate').item(0)
         const mainNode = loadingTemplate.parentNode
 
@@ -35,6 +38,12 @@ class ProductDocumentController extends DocumentController {
         const castsShelf = document.getElementById('castsShelf')
 
         previewButton.parentNode.removeChild(previewButton)
+        
+        if (this._movieName && this._movieName.length > 0) {
+            loadingTitle.textContent = this._movieName
+        } else {
+            loadingTitle.textContent = 'در حال دریافت اطلاعات …'
+        }
         mainNode.removeChild(productTemplate)
 
         let shouldPlay = this._shouldPlayMovie || false
@@ -482,4 +491,6 @@ class ProductDocumentController extends DocumentController {
         super.handleEvent(event)
     }
 }
+
+ProductDocumentController.preventLoadingDocument = true
 registerAttributeName("productDocumentURL", ProductDocumentController)

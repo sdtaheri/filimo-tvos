@@ -17,7 +17,7 @@
     </head>
     <loadingTemplate>
         <activityIndicator>
-            <title>در حال دریافت اطلاعات …</title>
+            <title></title>
         </activityIndicator>
     </loadingTemplate>
     <productTemplate>
