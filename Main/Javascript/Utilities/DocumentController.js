@@ -68,6 +68,13 @@ class DocumentController {
                     const body = targetElem.textContent;
                     const alertDocument = createDescriptiveAlertDocument('', body);
                     navigationDocument.presentModal(alertDocument);
+                } else if (targetElem.tagName === 'reviewCard') {
+                    // Handle reviewCard tag, if no URL was specified
+                    const title = targetElem.getElementsByTagName('title').item(0).textContent
+                    const body = targetElem.getElementsByTagName('description').item(0).textContent
+
+                    const alertDocument = createDescriptiveAlertDocument(title, body);
+                    navigationDocument.presentModal(alertDocument);
                 }
                 return createLoadingDocument();
             default:
