@@ -22,12 +22,12 @@ struct Homepage: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let data = try container.decodeIfPresent([MovieCompact]?.self, forKey: .data) {
+        category = try container.decode(Category.self, forKey: .category)
+        if let data = try? container.decodeIfPresent([MovieCompact].self, forKey: .data) {
             self.data = data
         } else {
             self.data = nil
         }
-        category = try container.decode(Category.self, forKey: .category)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -62,7 +62,7 @@ struct Category: Codable {
 struct MovieCompact: Codable {
     var id: String?
     var title: String?
-    var thumbnailURLString: String
+    var thumbnailURLString: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "uid"

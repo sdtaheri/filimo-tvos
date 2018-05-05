@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         executeRemoteMethod("onDidEnterBackground", completion: { (success: Bool) in
             // ...
         })
+        NotificationCenter.default.post(name: .TVTopShelfItemsDidChange, object: nil)
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {

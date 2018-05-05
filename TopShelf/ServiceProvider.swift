@@ -28,6 +28,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
 
     var topShelfItems: [TVContentItem] {
 
+        items = [TVContentItem]()
         let semaphore = DispatchSemaphore(value: 0)
         
         var urlRequest = URLRequest(url: homepageURL)
@@ -35,6 +36,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
         
         URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
             guard let data = data else {
+                semaphore.signal()
                 return
             }
             do {
@@ -51,11 +53,12 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                             let item = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: compactMovie.id!, container: nil)!)!
                             item.title = compactMovie.title?.persianDigits() ?? ""
                             item.imageShape = .poster
-                            let imageURL = URL(string: compactMovie.thumbnailURLString)
-                            item.setImageURL(imageURL, forTraits: .userInterfaceStyleLight)
-                            item.setImageURL(imageURL, forTraits: .userInterfaceStyleDark)
-                            item.setImageURL(imageURL, forTraits: .screenScale1x)
-                            item.setImageURL(imageURL, forTraits: .screenScale2x)
+                            if let thumbnail = compactMovie.thumbnailURLString, let imageURL = URL(string: thumbnail) {
+                                item.setImageURL(imageURL, forTraits: .userInterfaceStyleLight)
+                                item.setImageURL(imageURL, forTraits: .userInterfaceStyleDark)
+                                item.setImageURL(imageURL, forTraits: .screenScale1x)
+                                item.setImageURL(imageURL, forTraits: .screenScale2x)
+                            }
                             item.displayURL = URL(string: "Filimo://\(compactMovie.id!)/display")
                             item.playURL = URL(string: "Filimo://\(compactMovie.id!)/play")
                             return item
