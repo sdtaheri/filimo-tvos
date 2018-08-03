@@ -19,11 +19,11 @@
         </banner>
         <separator>
             <segmentBar id="resultsMode">
-                <segmentBarItem id="watchSegmentBarItem">
-                    <title>مشاهده‌ها</title>
-                </segmentBarItem>
                 <segmentBarItem id="wishSegmentBarItem">
                     <title>نشان‌ها</title>
+                </segmentBarItem>
+                <segmentBarItem id="watchSegmentBarItem">
+                    <title>مشاهده‌ها</title>
                 </segmentBarItem>
             </segmentBar>
         </separator>

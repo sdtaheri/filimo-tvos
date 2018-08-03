@@ -14,7 +14,7 @@ class MyMoviesDocumentController extends DocumentController {
         const dataLoader = this._dataLoader
         const documentLoader = this._documentLoader
 
-        let selectedSegmentBarId = 'watchSegmentBarItem'
+        let selectedSegmentBarId = 'wishSegmentBarItem'
 
         mainDocument.addEventListener('appear', (event) => {
             toggleLoginAlert()
