@@ -9,7 +9,7 @@
 import Foundation
 import TVServices
 
-class ServiceProvider: NSObject, TVTopShelfProvider {
+final class ServiceProvider: NSObject, TVTopShelfProvider {
 
     //MARK: - Properties
     
@@ -50,7 +50,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                     if let firstValuableItems = homepage.data {
                         sectionName = homepage.category.title ?? ""
                         sectionItems = firstValuableItems.filter({ $0.id != nil }).map() { compactMovie -> TVContentItem in
-                            let item = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: compactMovie.id!, container: nil)!)!
+                            let item = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: compactMovie.id!, container: nil))
                             item.title = compactMovie.title?.persianDigits() ?? ""
                             item.imageShape = .poster
                             if let thumbnail = compactMovie.thumbnailURLString, let imageURL = URL(string: thumbnail) {
@@ -69,7 +69,7 @@ class ServiceProvider: NSObject, TVTopShelfProvider {
                     }
                 }
                 
-                let section = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: "TopShelf", container: nil)!)!
+                let section = TVContentItem(contentIdentifier: TVContentIdentifier(identifier: "TopShelf", container: nil))
                 section.title = sectionName.persianDigits()
                 section.topShelfItems = sectionItems
                 

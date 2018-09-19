@@ -287,10 +287,12 @@
 				TargetAttributes = {
 					30B503E9206FD52500D08682 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					30C5790520448110007E728F = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -391,7 +393,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
@@ -414,7 +416,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
@@ -554,7 +556,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
@@ -577,7 +579,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
 			};
