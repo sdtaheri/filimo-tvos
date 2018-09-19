@@ -20,7 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
         #if DEBUG
             return "http://localhost:9001/"
         #else
-            return "http://filimo.saeedtaheri.com:6870/"
+            return "https://filimo.saeedtaheri.com/"
         #endif
     }()
     
