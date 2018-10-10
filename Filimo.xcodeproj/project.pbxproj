@@ -153,6 +153,7 @@
 		307D82772063157800848244 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				30BF891B2062F426009FAB4D /* main.swift */,
 				30C5790920448110007E728F /* AppDelegate.swift */,
 			);
 			path = Swift;
@@ -199,7 +200,6 @@
 		30BF891E20631298009FAB4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				30BF891B2062F426009FAB4D /* main.swift */,
 				30C5790C20448110007E728F /* Assets.xcassets */,
 				30BF89182062F2B7009FAB4D /* InfoPlist.strings */,
 				30C5790E20448110007E728F /* Info.plist */,
@@ -301,7 +301,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				fa,
 			);
 			mainGroup = 30C578FD20448110007E728F;
@@ -382,14 +381,14 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66X5PJ3W4Y;
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -405,14 +404,14 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66X5PJ3W4Y;
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -426,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 1.0.1705052045;
+				APP_BUILD = 1810102120;
 				APP_VERSION = 1.0;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -488,7 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 1.0.1705052045;
+				APP_BUILD = 1810102120;
 				APP_VERSION = 1.0;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -547,13 +546,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66X5PJ3W4Y;
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -570,13 +569,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66X5PJ3W4Y;
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

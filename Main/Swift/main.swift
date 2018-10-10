@@ -9,9 +9,7 @@
 import UIKit
 import Foundation
 
-let defaults = UserDefaults.standard
-defaults.set(["fa_IR"], forKey: "AppleLanguages")
-defaults.synchronize()
+UserDefaults.standard.set(["fa_IR"], forKey: "AppleLanguages")
 
 UIView.appearance().semanticContentAttribute = .forceRightToLeft
 
