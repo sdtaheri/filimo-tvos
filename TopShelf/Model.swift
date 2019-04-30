@@ -23,7 +23,7 @@ struct Homepage: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         category = try container.decode(Category.self, forKey: .category)
-        if let data = try? container.decodeIfPresent([MovieCompact].self, forKey: .data) {
+		if let data = try? container.decodeIfPresent([MovieCompact].self, forKey: .data) {
             self.data = data
         } else {
             self.data = nil
