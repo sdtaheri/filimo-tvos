@@ -16,10 +16,11 @@
             }
             .overlayTitle {
 				tv-text-style: body;
-				padding: 30;
+				padding: 24;
                 text-align: center;
                 tv-align: center;
                 tv-position: center;
+				tv-text-max-lines: 0;
 				color: rgba(255, 255, 255, 1.0);
                 text-shadow: 2px 2px 8px #000000;
 			}
