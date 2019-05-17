@@ -39,10 +39,9 @@ class MyMoviesDocumentController extends DocumentController {
             while (dataSection.childNodes && dataSection.childNodes.length > 0) {
                 dataSection.removeChild(dataSection.lastChild)
             }
-            dataSection.dataItem = null
+            dataSection.dataItem = new DataItem()
             dataLoader._fetchJSONData(documentLoader.prepareURL(segmentURL), (dataObj) => {
                 let movies = dataObj['movielistby'+id]
-                dataSection.dataItem = new DataItem()
                 dataSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
             })    
         }

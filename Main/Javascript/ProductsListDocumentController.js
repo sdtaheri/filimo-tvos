@@ -11,6 +11,9 @@ class ProductsListDocumentController extends DocumentController {
         const banner = document.getElementsByTagName("banner").item(0)
         const grid = document.getElementsByTagName("grid").item(0)
         
+        let gridSection = grid.getElementsByTagName("section").item(0)    
+        gridSection.dataItem = new DataItem()
+
         const requestType = this._sourceDataItem.requestType
         let dataLoadingURL = null
 
@@ -67,14 +70,12 @@ class ProductsListDocumentController extends DocumentController {
                 dataLoadingURL = null
             }
 
-            let section = grid.getElementsByTagName("section").item(0)    
             if (movies) {
-                if (section.dataItem) {
-                    Array.prototype.push.apply(section.dataItem.items, dataItemsFromJSONItems(movies))
-                    section.dataItem.touchPropertyPath("items")
+                if (gridSection.dataItem.items) {
+                    Array.prototype.push.apply(gridSection.dataItem.items, dataItemsFromJSONItems(movies))
+                    gridSection.dataItem.touchPropertyPath("items")
                 } else {
-                    section.dataItem = new DataItem()
-                    section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
+                    gridSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
                 }
             }
         }

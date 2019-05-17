@@ -3,10 +3,11 @@ class CategoriesDocumentController extends DocumentController {
         super.setupDocument(document)
 
         let section = document.getElementsByTagName("section").item(0)
+        section.dataItem = new DataItem()
+
         let url = filimoAPIBaseURL + '/category'
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let categories = dataObj.category
-            section.dataItem = new DataItem()
             section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(categories))
         })
 

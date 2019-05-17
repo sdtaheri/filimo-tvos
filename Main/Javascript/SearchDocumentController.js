@@ -8,7 +8,9 @@ class SearchDocumentController extends DocumentController {
         const messageElem = document.getElementById("message");
         const resultsListElem = document.getElementById("resultsList")
         const resultsGridContainerElem = document.getElementById("resultsGridContainer")
-        const resultsSectionElem = document.getElementById("resultsSection");
+        
+        let resultsSectionElem = document.getElementById("resultsSection");
+        resultsSectionElem.dataItem = new DataItem()
 
         let resultsContainerElem = resultsGridContainerElem;
         toggleDefaultResults(true)
@@ -101,7 +103,6 @@ class SearchDocumentController extends DocumentController {
         }
 
         function appendSearchResults(results) {
-            resultsSectionElem.dataItem = new DataItem()
             resultsSectionElem.dataItem.setPropertyPath("items", dataItemsFromJSONItems(results))
         }
 

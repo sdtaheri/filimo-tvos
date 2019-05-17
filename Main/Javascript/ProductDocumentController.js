@@ -37,6 +37,12 @@ class ProductDocumentController extends DocumentController {
 
         const castsShelf = document.getElementById('castsShelf')
 
+        let episodesShelf = document.getElementById("allEpisodes")
+        episodesShelf.dataItem = new DataItem()
+
+        let recommendationSectionNode = document.getElementById("recommendation")
+        recommendationSectionNode.dataItem = new DataItem()
+
         previewButton.parentNode.removeChild(previewButton)
         
         if (this._movieName && this._movieName.length > 0) {
@@ -125,7 +131,6 @@ class ProductDocumentController extends DocumentController {
                     }
 
                     if (episodesForCurrentSeason.length > 0) {
-                        let episodesShelf = document.getElementById("allEpisodes")
                         let nodesToAdd = `<header>
                         <title>${allSeasonsCount > 1 ? `قسمت‌های فصل ${toPersianDigits(seasonNumber)}` : 'سایر قسمت‌ها'}</title>
                         </header>
@@ -133,7 +138,6 @@ class ProductDocumentController extends DocumentController {
                         </section>`
                         episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
         
-                        episodesShelf.dataItem = new DataItem()
                         episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(episodesForCurrentSeason))        
                     }
                 })    
@@ -141,11 +145,9 @@ class ProductDocumentController extends DocumentController {
                 seasonsButton.parentNode.removeChild(seasonsButton)
             }
 
-            let recommendationSectionNode = document.getElementById("recommendation")
             let recommendationURL = filimoAPIBaseURL + '/recom/uid/' + this._movieUID
             dataLoader._fetchJSONData(documentLoader.prepareURL(recommendationURL), (dataObj) => {
                 let movies = dataObj.recom
-                recommendationSectionNode.dataItem = new DataItem()
                 recommendationSectionNode.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
 
                 document.getElementById("recommendationStaticTitle").textContent = "پیشنهادها"
