@@ -11,7 +11,8 @@ class SeasonsDocumentController extends DocumentController {
         super.setupDocument(document)
 
         const allSeasons = this._allSeasons
-        const listSection = document.getElementsByTagName('list').item(0).lastChild
+        
+        let listSection = document.getElementsByTagName('list').item(0).lastChild
 
         const numberOfSeasons = Object.keys(allSeasons).length
 
@@ -27,9 +28,9 @@ class SeasonsDocumentController extends DocumentController {
                     </grid>
                 </relatedContent>
             </listItemLockup>`
-
-            listSection.insertAdjacentHTML('beforeend', nodeToAdd)
             
+            listSection.insertAdjacentHTML('beforeend', nodeToAdd)
+
             let itemsSection = listSection.getElementsByTagName('section').item(nodesCounter)
             itemsSection.dataItem = new DataItem()
             itemsSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(allSeasons[key]))

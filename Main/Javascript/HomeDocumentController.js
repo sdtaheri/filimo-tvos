@@ -17,17 +17,23 @@ class HomeDocumentController extends DocumentController {
         }
 
         function setupLoginButtonAppearance(button) {
-            if (button == undefined || button == null) {
+            if (button === undefined || button === null) {
                 return
             }
+
+            let attribute = button.getAttribute("loginDocumentURL")
             if (isLoggedIn()) {
-                button.getElementsByTagName("title").item(0).textContent = "خروج"
-                button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/logout.png 1x, " + baseURL + "Resources/logout@2x.png 2x")
-                button.removeAttribute("loginDocumentURL")
+                if (attribute !== "") {
+                    button.getElementsByTagName("title").item(0).textContent = "خروج"
+                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/logout.png 1x, " + baseURL + "Resources/logout@2x.png 2x")
+                    button.removeAttribute("loginDocumentURL")
+                }
             } else {
-                button.getElementsByTagName("title").item(0).textContent = "ورود"
-                button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/login.png 1x, " + baseURL + "Resources/login@2x.png 2x")
-                button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")
+                if (attribute === "") {
+                    button.getElementsByTagName("title").item(0).textContent = "ورود"
+                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/login.png 1x, " + baseURL + "Resources/login@2x.png 2x")
+                    button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")    
+                }
             }
         }    
     }

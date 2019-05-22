@@ -16,15 +16,16 @@
         </banner>
         <collectionList>
             <grid>
-                <prototypes>
-                    <lockup productsListDocumentURL="/XMLs/ProductsList.xml" prototype="categoryArtwork" class="lockup">
-                        <img binding="@src:{cover};" width="830" height="230"/>
-                        <overlay class="paddedOverlay">
-                            <title class="shadowedTitle" binding="textContent:{title};" />
-                        </overlay>
-                    </lockup>
-                </prototypes>
-                <section binding="items:{items};" />
+                <section binding="items:{items};" >
+                    <prototypes>
+                        <lockup productsListDocumentURL="/XMLs/ProductsList.xml" prototype="categoryArtwork" class="lockup">
+                            <img binding="@src:{cover};" width="830" height="230"/>
+                            <overlay class="paddedOverlay">
+                                <title class="shadowedTitle" binding="textContent:{title};" />
+                            </overlay>
+                        </lockup>
+                    </prototypes>
+                </section>
             </grid>
         </collectionList>
     </stackTemplate>

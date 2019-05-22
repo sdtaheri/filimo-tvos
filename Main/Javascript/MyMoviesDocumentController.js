@@ -7,9 +7,12 @@ class MyMoviesDocumentController extends DocumentController {
         const stackTemplate = document.getElementsByTagName("stackTemplate").item(0)
         const messageAlertTemplate = document.getElementsByTagName("alertTemplate").item(0)
         const segmentBar = document.getElementById("resultsMode")
-        const collectionList = document.getElementsByTagName("collectionList").item(0)
         const dataGrid = document.getElementsByTagName("grid").item(0)
-        const dataSection = document.getElementsByTagName("section").item(0)
+
+        let dataSection = document.getElementsByTagName("section").item(0)
+        if (dataSection.dataItem === undefined) {
+            dataSection.dataItem = new DataItem()
+        }
 
         const dataLoader = this._dataLoader
         const documentLoader = this._documentLoader
@@ -21,8 +24,8 @@ class MyMoviesDocumentController extends DocumentController {
         })
 
         segmentBar.addEventListener('highlight', (event) => {
+            loadData(event.target.getAttribute('id'))
             selectedSegmentBarId = event.target.getAttribute('id')
-            loadData(selectedSegmentBarId)
         })
 
         function loadData(segmentBarItemId) {
@@ -36,13 +39,21 @@ class MyMoviesDocumentController extends DocumentController {
             }
             let segmentURL = filimoAPIBaseURL + '/movielistby' + id
 
-            while (dataSection.childNodes && dataSection.childNodes.length > 0) {
-                dataSection.removeChild(dataSection.lastChild)
-            }
-            dataSection.dataItem = new DataItem()
             dataLoader._fetchJSONData(documentLoader.prepareURL(segmentURL), (dataObj) => {
                 let movies = dataObj['movielistby'+id]
-                dataSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
+                let newMoviesID = movies.map((movie) => {
+                    return movie.uid
+                }) || []
+                let oldMoviewsID = []
+                if (dataSection.dataItem.items !== undefined) {
+                    oldMoviewsID = dataSection.dataItem.items.map((item) => {
+                        return item.identifier
+                    })    
+                }
+
+                if (JSON.stringify(newMoviesID) !== JSON.stringify(oldMoviewsID)) {
+                    dataSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
+                }
             })    
         }
 
