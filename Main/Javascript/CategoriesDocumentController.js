@@ -5,6 +5,11 @@ class CategoriesDocumentController extends DocumentController {
         let section = document.getElementsByTagName("section").item(0)
         section.dataItem = new DataItem()
 
+		if (Device.systemVersion >= "13" && Device.appVersion >= "1906041830") {
+			let titleNode = document.getElementById("pageTitle")
+			titleNode.innerHTML = " "
+		}
+
         let url = filimoAPIBaseURL + '/category'
         this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
             let categories = dataObj.category

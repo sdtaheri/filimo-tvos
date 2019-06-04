@@ -14,6 +14,11 @@ class MyMoviesDocumentController extends DocumentController {
         const dataLoader = this._dataLoader
         const documentLoader = this._documentLoader
 
+		if (Device.systemVersion >= "13" && Device.appVersion >= "1906041830") {
+			let titleNode = document.getElementById("pageTitle")
+			titleNode.innerHTML = " "
+		}
+
         let selectedSegmentBarId = 'wishSegmentBarItem'
 
         mainDocument.addEventListener('appear', (event) => {

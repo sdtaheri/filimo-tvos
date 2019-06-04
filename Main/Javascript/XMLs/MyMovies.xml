@@ -15,7 +15,7 @@
     </head>
     <stackTemplate>
         <banner>
-            <title>فیلم‌های من</title>
+            <title id="pageTitle">فیلم‌های من</title>
         </banner>
         <separator>
             <segmentBar id="resultsMode">

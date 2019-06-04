@@ -12,7 +12,7 @@
     </head>
     <stackTemplate>
         <banner>
-            <title>دسته‌بندی‌ها</title>
+            <title id="pageTitle">دسته‌بندی‌ها</title>
         </banner>
         <collectionList>
             <grid>
