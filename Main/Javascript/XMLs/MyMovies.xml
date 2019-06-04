@@ -28,14 +28,15 @@
             </segmentBar>
         </separator>
         <collectionList>
-            <prototypes>
-                <lockup productDocumentURL="/XMLs/Product.xml" prototype="wishArtwork">
-                    <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
-                    <title class="artworkTitle" binding="textContent:{movie_title};" />
-                </lockup>
-            </prototypes>
             <grid class="grid">
-                <section binding="items:{items};" />
+                <prototypes>
+                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="wishArtwork">
+                        <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
+                        <title class="artworkTitle" binding="textContent:{movie_title};" />
+                    </lockup>
+                </prototypes>
+                <section binding="items:{items};">
+                </section>
             </grid>
         </collectionList>
     </stackTemplate>

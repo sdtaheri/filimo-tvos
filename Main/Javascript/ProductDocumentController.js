@@ -37,9 +37,6 @@ class ProductDocumentController extends DocumentController {
 
         const castsShelf = document.getElementById('castsShelf')
 
-        let episodesShelf = document.getElementById("allEpisodes")
-        episodesShelf.dataItem = new DataItem()
-
         let recommendationSectionNode = document.getElementById("recommendation")
         recommendationSectionNode.dataItem = new DataItem()
 
@@ -136,9 +133,11 @@ class ProductDocumentController extends DocumentController {
                         </header>
                         <section binding="items:{episodes};">
                         </section>`
+
+                        let episodesShelf = document.getElementById("allEpisodes")
+                        episodesShelf.dataItem = new DataItem()
+                        episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(episodesForCurrentSeason))
                         episodesShelf.insertAdjacentHTML('beforeend', nodesToAdd)
-        
-                        episodesShelf.dataItem.setPropertyPath("episodes", dataItemsFromJSONItems(episodesForCurrentSeason))        
                     }
                 })    
             } else {
