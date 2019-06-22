@@ -256,6 +256,11 @@ function toPersianDigits(str) {
                 .replace(/9/g, "۹")
 }
 
+function removeHTMLEntities(str) {
+    if (str == null) { return null }
+    return str.replace("&hellip;", "…").replace(/\&\w+;/g, '')
+}
+
 function isLoggedIn() {
     if (localStorage.getItem("token") != null 
     && localStorage.getItem("username") != null) {
