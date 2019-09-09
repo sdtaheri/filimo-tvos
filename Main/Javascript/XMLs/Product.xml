@@ -84,9 +84,9 @@
             </header>
             <section id="reviewsSection">
                 <ratingCard>
-                    <title></title>
-                    <ratingBadge></ratingBadge>
-                    <description></description>
+                    <title style="tv-minimum-scale-factor: 0.5; tv-position: top"></title>
+                    <ratingBadge style="tv-position: center"></ratingBadge>
+                    <description style="tv-position: bottom"></description>
                 </ratingCard>
             </section>
         </shelf>

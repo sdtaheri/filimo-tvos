@@ -56,7 +56,7 @@ class ProductDocumentController extends DocumentController {
         } else {
             loadingImage.parentNode.removeChild(loadingImage);
         }
-        
+
         mainNode.removeChild(productTemplate)
 
         let shouldPlay = this._shouldPlayMovie || false
@@ -85,7 +85,7 @@ class ProductDocumentController extends DocumentController {
                 rateValue = Math.max(0, Math.min(5, movieInfo.rate_avrage))
                 ratingCardNode.getElementsByTagName("title").item(0).textContent = toPersianDigits(rateValue + " از " + "5")
                 ratingCardNode.getElementsByTagName("ratingBadge").item(0).setAttribute("value", rateValue / 5.0)
-                ratingCardNode.getElementsByTagName("description").item(0).textContent = toPersianDigits("میانگین امتیاز از بین " + movieInfo.rate_cnt + " نظر")
+                ratingCardNode.getElementsByTagName("description").item(0).textContent = toPersianDigits("میانگین از بین " + movieInfo.rate_cnt + " نظر")
             } else {
                 ratingCardNode.parentNode.parentNode.parentNode.removeChild(ratingCardNode.parentNode.parentNode)
             }
@@ -253,9 +253,9 @@ class ProductDocumentController extends DocumentController {
                         let hourSection = comment.sdate.split(' ')[1].substr(0,5)
                         
                         let nodeToAdd = `<reviewCard>
-                        <title>${comment.name || comment.username || 'بی نام'}</title>
-                        <description>${toPersianDigits(comment.body)}</description>
-                        <text>${toPersianDigits(jalaliDate + ' ' + hourSection)}</text>
+                        <title style="tv-position: top;">${comment.name || comment.username || 'بی نام'}</title>
+                        <description style="tv-position: center;">${toPersianDigits(comment.body)}</description>
+                        <text style="tv-position: bottom;">${toPersianDigits(jalaliDate + ' ' + hourSection)}</text>
                         </reviewCard>
                         `
                         reviewsSection.insertAdjacentHTML('beforeend', nodeToAdd)
