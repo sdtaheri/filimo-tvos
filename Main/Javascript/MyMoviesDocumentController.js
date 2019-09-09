@@ -7,7 +7,6 @@ class MyMoviesDocumentController extends DocumentController {
         const stackTemplate = document.getElementsByTagName("stackTemplate").item(0)
         const messageAlertTemplate = document.getElementsByTagName("alertTemplate").item(0)
         const segmentBar = document.getElementById("resultsMode")
-        const dataGrid = document.getElementsByTagName("grid").item(0)
 
         let dataSection = document.getElementsByTagName("section").item(0)
         if (dataSection.dataItem === undefined) {
@@ -17,49 +16,81 @@ class MyMoviesDocumentController extends DocumentController {
         const dataLoader = this._dataLoader
         const documentLoader = this._documentLoader
 
+        let dataLoadingURL = null
+
 		if (Device.systemVersion >= "13" && Device.appVersion >= "1906041830") {
 			let titleNode = document.getElementById("pageTitle")
 			titleNode.innerHTML = " "
 		}
 
-        let selectedSegmentBarId = 'wishSegmentBarItem'
+        let selectedSegmentBarId = 'wish'
 
         mainDocument.addEventListener('appear', (event) => {
             toggleLoginAlert()
         })
 
         segmentBar.addEventListener('highlight', (event) => {
-            loadData(event.target.getAttribute('id'))
-            selectedSegmentBarId = event.target.getAttribute('id')
-        })
+            let targetId = event.target.getAttribute('id')
 
-        function loadData(segmentBarItemId) {
             let id
-            if (segmentBarItemId === 'watchSegmentBarItem') {
+            if (targetId === 'watchSegmentBarItem') {
                 id = 'watch'            
-            } else if (segmentBarItemId === 'wishSegmentBarItem') {
+            } else if (targetId === 'wishSegmentBarItem') {
                 id = 'wish'
             } else {
                 return
             }
-            let segmentURL = filimoAPIBaseURL + '/movielistby' + id
 
-            dataLoader._fetchJSONData(documentLoader.prepareURL(segmentURL), (dataObj) => {
-                let movies = dataObj['movielistby'+id]
-                let newMoviesID = movies.map((movie) => {
-                    return movie.uid
-                }) || []
-                let oldMoviewsID = []
-                if (dataSection.dataItem.items !== undefined) {
-                    oldMoviewsID = dataSection.dataItem.items.map((item) => {
-                        return item.identifier
-                    })    
-                }
+            loadData(id)
+        })
 
-                if (JSON.stringify(newMoviesID) !== JSON.stringify(oldMoviewsID)) {
+        stackTemplate.addEventListener('needsmore', (event) => {
+            if (dataLoadingURL == null) {
+                return
+            }
+            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                fillGrid(dataObj, selectedSegmentBarId)
+            })
+        })
+
+        function loadData(segmentBarId) {
+            dataLoadingURL = filimoAPIBaseURL + '/movielistby' + segmentBarId + '/perpage/20/'
+
+            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                fillGrid(dataObj, segmentBarId)
+            })    
+        }
+
+        function fillGrid(dataObj, id) {
+            let movies = dataObj['movielistby'+id]
+
+            if (dataObj.ui.pagingForward && dataObj.ui.pagingForward.length > 0) {
+                dataLoadingURL = dataObj.ui.pagingForward
+            } else {
+                dataLoadingURL = null
+            }
+
+            let newMoviesID = movies.map((movie) => {
+                return movie.uid
+            }) || []
+            
+            let oldMoviesID = []
+            if (dataSection.dataItem.items !== undefined) {
+                oldMoviesID = dataSection.dataItem.items.map((item) => {
+                    return item.identifier
+                })    
+            }
+
+            if (JSON.stringify(newMoviesID) !== JSON.stringify(oldMoviesID)) {
+                if (dataSection.dataItem.items && id === selectedSegmentBarId) {
+                    Array.prototype.push.apply(dataSection.dataItem.items, dataItemsFromJSONItems(movies))
+                    dataSection.dataItem.touchPropertyPath("items")
+                } else {
                     dataSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
                 }
-            })    
+            }
+
+            selectedSegmentBarId = id
         }
 
         function toggleLoginAlert() {
