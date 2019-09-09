@@ -62,6 +62,10 @@ App.onLaunch = function(options) {
     // Show a loading spinner while additional JavaScript files are being evaluated
     let loadingDocument = createLoadingDocument("فیلیمو");
     if (typeof navigationDocument !== "undefined") {
+        if (getActiveDocument()) {
+            navigationDocument.clear();
+        }
+
         navigationDocument.pushDocument(loadingDocument);
     }
 

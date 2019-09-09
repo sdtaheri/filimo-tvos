@@ -5,10 +5,12 @@ class ProductDocumentController extends DocumentController {
         if (controllerOptions.event) {
             this._movieUID = controllerOptions.event.target.dataItem.uid
             this._movieName = toPersianDigits(controllerOptions.event.target.dataItem.movie_title)
+            this._movieImgBig = controllerOptions.event.target.dataItem.movie_img_b
             this._shouldPlayMovie = (controllerOptions.event.type === "play")
         } else if (controllerOptions.movieUID) {
             this._movieUID = controllerOptions.movieUID
             this._movieName = null
+            this._movieImgBig = null
             this._shouldPlayMovie = controllerOptions.shouldPlayMovie
         }   
         this._isLoggedInAtLaunch = isLoggedIn()
@@ -19,6 +21,7 @@ class ProductDocumentController extends DocumentController {
 
         const loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0)
         const loadingTitle = loadingTemplate.getElementsByTagName('title').item(0)
+        const loadingImage = loadingTemplate.getElementsByTagName("heroImg").item(0)
         const productTemplate = document.getElementsByTagName('productTemplate').item(0)
         const mainNode = loadingTemplate.parentNode
 
@@ -47,6 +50,13 @@ class ProductDocumentController extends DocumentController {
         } else {
             loadingTitle.textContent = 'در حال دریافت اطلاعات …'
         }
+
+        if (this._movieImgBig && this._movieImgBig.length > 0) {
+            loadingImage.setAttribute("src", this._movieImgBig);
+        } else {
+            loadingImage.parentNode.removeChild(loadingImage);
+        }
+        
         mainNode.removeChild(productTemplate)
 
         let shouldPlay = this._shouldPlayMovie || false

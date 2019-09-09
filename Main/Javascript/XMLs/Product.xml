@@ -16,6 +16,9 @@
         </style>
     </head>
     <loadingTemplate>
+        <background>
+            <heroImg src="" />
+        </background>
         <activityIndicator>
             <title></title>
         </activityIndicator>
