@@ -29,6 +29,12 @@ class MyMoviesDocumentController extends DocumentController {
             toggleLoginAlert()
         })
 
+        mainDocument.addEventListener('myListUpdate', (event) => {
+            if (selectedSegmentBarId === 'wish') {
+                loadData(selectedSegmentBarId, true)
+            }
+        })
+
         segmentBar.addEventListener('highlight', (event) => {
             let targetId = event.target.getAttribute('id')
 
@@ -41,7 +47,7 @@ class MyMoviesDocumentController extends DocumentController {
                 return
             }
 
-            loadData(id)
+            loadData(id, false)
         })
 
         stackTemplate.addEventListener('needsmore', (event) => {
@@ -53,10 +59,13 @@ class MyMoviesDocumentController extends DocumentController {
             })
         })
 
-        function loadData(segmentBarId) {
+        function loadData(segmentBarId, shouldClear) {            
             dataLoadingURL = filimoAPIBaseURL + '/movielistby' + segmentBarId + '/perpage/20/'
 
             dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                if (shouldClear) {
+                    dataSection.dataItem = new DataItem()
+                }
                 fillGrid(dataObj, segmentBarId)
             })    
         }
@@ -102,7 +111,7 @@ class MyMoviesDocumentController extends DocumentController {
             }
             if (isLoggedIn()) {
                 mainDocument.appendChild(stackTemplate)
-                loadData(selectedSegmentBarId)
+                loadData(selectedSegmentBarId, true)
             } else {
                 mainDocument.appendChild(messageAlertTemplate)
             }

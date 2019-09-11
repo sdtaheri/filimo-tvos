@@ -325,6 +325,9 @@ class ProductDocumentController extends DocumentController {
                             setupBookmarkButton(movieMoreInfo)
                         } else {
                             movieMoreInfo.wish_link = response.link
+
+                            var event = new Event('myListUpdate');
+                            document.dispatchEvent(event);
                         }
                     }
                     xhr.onerror = () => {
