@@ -11,8 +11,6 @@ import Foundation
 
 UserDefaults.standard.set(["fa_IR"], forKey: "AppleLanguages")
 
-UIView.appearance().semanticContentAttribute = .forceRightToLeft
-
 _ = UIApplicationMain(
     CommandLine.argc,
     CommandLine.unsafeArgv,

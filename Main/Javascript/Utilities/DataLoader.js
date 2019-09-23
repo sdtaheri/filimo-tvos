@@ -26,7 +26,7 @@ class DataLoader {
                 url += "/ltoken/" + localStorage.getItem("token") + "/"
             }
 
-            url += "devicetype/tvweb/"
+            url += "devicetype/site/"
 
             xhr.open("GET", url);
             xhr.responseType = "json";

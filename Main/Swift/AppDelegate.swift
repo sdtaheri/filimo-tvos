@@ -39,7 +39,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
     }
     
     // MARK: UIApplicationDelegate
-    
+    	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -138,5 +138,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
     func appController(_ appController: TVApplicationController, didStop options: [String: Any]?) {
         print("\(#function) invoked with options: \(options ?? [:])")
     }
+	
+	func appController(_ appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext) {
+		jsContext.setObject(LocalPlaylist.self, forKeyedSubscript: "LocalPlaylist" as NSString)
+	}
 }
 
