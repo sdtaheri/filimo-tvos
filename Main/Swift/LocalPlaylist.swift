@@ -10,10 +10,7 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol LocalPlaylistProtocol: JSExport {
-	
 	static func urlWith(uid: String, movieSrc: String, subtitles: [[String: String]]?) -> String
-	
-	static func remove(uid: String)
 }
 
 class LocalPlaylist: NSObject, LocalPlaylistProtocol {
@@ -25,9 +22,5 @@ class LocalPlaylist: NSObject, LocalPlaylistProtocol {
 		
 		return movieSrc
 	}
-	
-	static func remove(uid: String) {
-		
-	}
-		
+
 }
