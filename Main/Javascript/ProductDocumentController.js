@@ -216,7 +216,12 @@ class ProductDocumentController extends DocumentController {
                             castsSection.insertAdjacentHTML('beforeend', lockup)
                             
                             let dataItem = new DataItem()
-                            dataItem.setPropertyPath('requestType', 'search')
+                            if (profile.movies != null && profile.movies !== '') {
+                                dataItem.setPropertyPath('requestType', 'castSearch')
+                                dataItem.setPropertyPath('searchURL', profile.movies)
+                            } else {
+                                dataItem.setPropertyPath('requestType', 'search')
+                            }
                             dataItem.setPropertyPath('queryString', profile.name_fa)
                             castsSection.lastChild['dataItem'] = dataItem
                         })

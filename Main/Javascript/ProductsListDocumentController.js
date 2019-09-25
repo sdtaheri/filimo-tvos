@@ -39,6 +39,16 @@ class ProductsListDocumentController extends DocumentController {
                 })
             
                 break
+            case 'castSearch':
+                banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.queryString
+            
+                dataLoadingURL = this._sourceDataItem.searchURL + '/perpage/20' 
+                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                    fillGrid(dataObj)
+                })
+
+                break
+    
             default: return
         }
 
@@ -60,6 +70,9 @@ class ProductsListDocumentController extends DocumentController {
                     break
                 case 'category':
                     movies = dataObj.movielistbycat
+                    break
+                case 'castSearch':
+                    movies = dataObj.movie
                     break
                 default: return
             }
