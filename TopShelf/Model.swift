@@ -60,13 +60,68 @@ struct Category: Codable {
 }
 
 struct MovieCompact: Codable {
+	struct Thumbplay: Codable {
+		var imageURLString: String?
+		
+		enum CodingKeys: String, CodingKey {
+			case imageURLString = "thumbplay_img_b"
+		}
+	}
+	
     var id: String?
     var title: String?
+	var description: String?
+	var duration: Int
+	var genre: String?
     var thumbnailURLString: String?
-    
+	var thumbplay: Thumbplay?
+
     enum CodingKeys: String, CodingKey {
         case id = "uid"
         case title = "movie_title"
+		case description = "descr"
         case thumbnailURLString = "movie_img_b"
+		case thumbplay
+		case duration = "duration_sec"
+		case genre = "category_1"
+    }
+}
+
+struct MovieDetailResponse: Codable {
+	var movieDetail: MovieDetail
+	
+	enum CodingKeys: String, CodingKey {
+		case movieDetail = "moviedetail"
+	}
+}
+
+struct MovieDetail: Codable {
+	var trailer: [Trailer]?
+}
+
+struct Trailer: Codable {
+	var fileURLString: String?
+	
+	enum CodingKeys: String, CodingKey {
+		case fileURLString = "file_link"
+	}
+}
+
+struct CarouselMovie {
+	let info: MovieCompact
+	var detail: MovieDetail? = nil
+}
+
+
+extension String {
+    func persianDigits() -> String {
+        var str = self
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "fa")
+        for i in 0..<10 {
+            let number = NSNumber(integerLiteral: i)
+            str = str.replacingOccurrences(of: number.stringValue, with: formatter.string(from: number)!)
+        }
+        return str
     }
 }

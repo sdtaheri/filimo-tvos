@@ -13,7 +13,7 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
 
     //MARK: - Properties
     
-    private let homepageURL = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/tvweb")!
+    private let homepageURL = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/site")!
     private var items = [TVContentItem]()
 
     override init() {
@@ -86,17 +86,4 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
         return items
     }
 
-}
-
-extension String {
-    func persianDigits() -> String {
-        var str = self
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "fa")
-        for i in 0..<10 {
-            let number = NSNumber(integerLiteral: i)
-            str = str.replacingOccurrences(of: number.stringValue, with: formatter.string(from: number)!)
-        }
-        return str
-    }
 }
