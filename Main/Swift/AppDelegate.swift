@@ -138,9 +138,5 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
     func appController(_ appController: TVApplicationController, didStop options: [String: Any]?) {
         print("\(#function) invoked with options: \(options ?? [:])")
     }
-	
-	func appController(_ appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext) {
-		jsContext.setObject(LocalPlaylist.self, forKeyedSubscript: "LocalPlaylist" as NSString)
-	}
 }
 

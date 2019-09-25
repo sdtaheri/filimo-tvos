@@ -381,17 +381,8 @@ class ProductDocumentController extends DocumentController {
             if (movieFullInfo.watch_permision) {
                 if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src != "") {
                     
-                    var localPlaylist = movieFullInfo.watch_action.movie_src
-                    if (Device.appVersion >= "1909232230") {
-                        localPlaylist = LocalPlaylist.urlWithUidMovieSrcSubtitles(
-                            movieFullInfo.uid, 
-                            movieFullInfo.watch_action.movie_src, 
-                            movieFullInfo.watch_action.subtitle
-                        )
-                    }
-                                        
                     var player = new Player()
-                    var video = new MediaItem('video', localPlaylist)
+                    var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
                     video.title = toPersianDigits(movieFullInfo.movie_title)
                     video.description = toPersianDigits(movieFullInfo.description)
                     video.resumeTime = movieFullInfo.watch_action.last_watch_position
