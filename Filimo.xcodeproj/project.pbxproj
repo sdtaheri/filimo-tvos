@@ -20,6 +20,8 @@
 		30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED530F233B55E60068FE95 /* ContentProvider.swift */; };
 		30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30ED530C233B55E60068FE95 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		30ED5318233B58E10068FE95 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
+		30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
+		30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,7 @@
 		30ED530C233B55E60068FE95 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED530F233B55E60068FE95 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
 		30ED5311233B55E60068FE95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30ED5319233B9EB60068FE95 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +271,7 @@
 			children = (
 				30ED530F233B55E60068FE95 /* ContentProvider.swift */,
 				30ED5311233B55E60068FE95 /* Info.plist */,
+				30ED5319233B9EB60068FE95 /* Extensions.swift */,
 			);
 			path = TopShelfNew;
 			sourceTree = "<group>";
@@ -406,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30B503FC20711F4E00D08682 /* Model.swift in Sources */,
+				30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */,
 				30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */,
+				30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */,
 				30ED5318233B58E10068FE95 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

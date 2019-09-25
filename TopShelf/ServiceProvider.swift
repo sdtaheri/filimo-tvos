@@ -13,7 +13,6 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
 
     //MARK: - Properties
     
-    private let homepageURL = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/site")!
     private var items = [TVContentItem]()
 
     override init() {
@@ -31,7 +30,7 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
         items = [TVContentItem]()
         let semaphore = DispatchSemaphore(value: 0)
         
-        var urlRequest = URLRequest(url: homepageURL)
+		var urlRequest = URLRequest(url: URL.homepage)
         urlRequest.httpMethod = "GET"
         
         URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
@@ -59,8 +58,8 @@ final class ServiceProvider: NSObject, TVTopShelfProvider {
                                 item.setImageURL(imageURL, forTraits: .screenScale1x)
                                 item.setImageURL(imageURL, forTraits: .screenScale2x)
                             }
-                            item.displayURL = URL(string: "Filimo://\(compactMovie.id!)/display")
-                            item.playURL = URL(string: "Filimo://\(compactMovie.id!)/play")
+                            item.displayURL = URL(string: "filimo://\(compactMovie.id!)/display")
+                            item.playURL = URL(string: "filimo://\(compactMovie.id!)/play")
                             return item
                         }
                         break

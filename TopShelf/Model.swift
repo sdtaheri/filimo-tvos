@@ -73,15 +73,24 @@ struct MovieCompact: Codable {
 	var description: String?
 	var duration: Int
 	var genre: String?
+	private var hd: String?
     var thumbnailURLString: String?
 	var thumbplay: Thumbplay?
 
+	var isHD: Bool {
+		guard let hd = hd, hd == "yes" else {
+			return false
+		}
+		return true
+	}
+	
     enum CodingKeys: String, CodingKey {
         case id = "uid"
         case title = "movie_title"
 		case description = "descr"
         case thumbnailURLString = "movie_img_b"
 		case thumbplay
+		case hd
 		case duration = "duration_sec"
 		case genre = "category_1"
     }
@@ -96,7 +105,13 @@ struct MovieDetailResponse: Codable {
 }
 
 struct MovieDetail: Codable {
-	var trailer: [Trailer]?
+	var trailers: [Trailer]?
+	var crew: [Crew]?
+	
+	enum CodingKeys: String, CodingKey {
+		case trailers = "trailer"
+		case crew
+	}
 }
 
 struct Trailer: Codable {
@@ -107,21 +122,36 @@ struct Trailer: Codable {
 	}
 }
 
+struct Crew: Codable {
+	struct PostInfo: Codable {
+		var title: String
+		
+		enum CodingKeys: String, CodingKey {
+			case title = "title_fa"
+		}
+	}
+	
+	struct Profile: Codable {
+		var nameFa: String?
+		var nameEn: String?
+
+		enum CodingKeys: String, CodingKey {
+			case nameFa = "name_fa"
+			case nameEn = "name_en"
+		}
+
+	}
+
+	var postInfo: PostInfo
+	var profiles: [Profile]
+	
+	enum CodingKeys: String, CodingKey {
+		case postInfo = "post_info"
+		case profiles = "profile"
+	}
+}
+
 struct CarouselMovie {
 	let info: MovieCompact
 	var detail: MovieDetail? = nil
-}
-
-
-extension String {
-    func persianDigits() -> String {
-        var str = self
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "fa")
-        for i in 0..<10 {
-            let number = NSNumber(integerLiteral: i)
-            str = str.replacingOccurrences(of: number.stringValue, with: formatter.string(from: number)!)
-        }
-        return str
-    }
 }

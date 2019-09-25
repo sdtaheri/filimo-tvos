@@ -8,12 +8,6 @@
 
 import TVServices
 
-fileprivate let homepageURL = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/site")!
-fileprivate func movieDetailURL(uuid: String) -> URL {
-	return URL(string: "https://www.filimo.com/etc/api/moviedetail/uid/\(uuid)")!
-}
-
-
 class ContentProvider: TVTopShelfContentProvider {
 	
 	override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
@@ -24,7 +18,7 @@ class ContentProvider: TVTopShelfContentProvider {
 				return
 			}
 			self.fetchNewestItems { movies in
-				let carouselItems = movies.compactMap { self.makeCarouselItem(from: $0) }
+				let carouselItems = movies.compactMap { $0.makeCarouselItem() }
 				let content = TVTopShelfCarouselContent(style: .details, items: carouselItems)
 				completionHandler(content)
 			}
@@ -36,7 +30,7 @@ class ContentProvider: TVTopShelfContentProvider {
 extension ContentProvider {
 	
 	private func fetchNewestItems(completion: @escaping ([CarouselMovie]) -> Void) {
-        var urlRequest = URLRequest(url: homepageURL)
+		var urlRequest = URLRequest(url: URL.homepage)
         urlRequest.httpMethod = "GET"
 
 		guard let data = URLSession.shared.synchronousDataTask(urlrequest: urlRequest).data else {
@@ -49,7 +43,7 @@ extension ContentProvider {
 		var items = compactMovies.map { CarouselMovie(info: $0) }
 
 		for (index, movie) in compactMovies.enumerated() {
-			var detailUrlRequest = URLRequest(url: movieDetailURL(uuid: movie.id!))
+			var detailUrlRequest = URLRequest(url: URL.movieDetailURL(uuid: movie.id!))
 			detailUrlRequest.httpMethod = "GET"
 			
 			let detailData = URLSession.shared.synchronousDataTask(urlrequest: detailUrlRequest).data
@@ -94,48 +88,4 @@ extension ContentProvider {
 			return nil
 		}
 	}
-	
-	private func makeCarouselItem(from movie: CarouselMovie) -> TVTopShelfCarouselItem {
-		let item = TVTopShelfCarouselItem(identifier: movie.info.id ?? UUID().uuidString)
-		
-		item.title = movie.info.title?.persianDigits()
-		item.summary = movie.info.description?.persianDigits()
-		item.genre = movie.info.genre
-		item.duration = TimeInterval(movie.info.duration)
-		if let trailerUrlString = movie.detail?.trailer?.first?.fileURLString {
-			item.previewVideoURL = URL(string: trailerUrlString)
-		}
-		if let thumbnail = movie.info.thumbplay?.imageURLString ?? movie.info.thumbnailURLString, let imageURL = URL(string: thumbnail) {
-			item.setImageURL(imageURL, for: .screenScale1x)
-			item.setImageURL(imageURL, for: .screenScale2x)
-		}
-		item.displayAction = URL(string: "Filimo://\(movie.info.id!)/display").map { TVTopShelfAction(url: $0) }
-		item.playAction = URL(string: "Filimo://\(movie.info.id!)/play").map { TVTopShelfAction(url: $0) }
-		
-		return item
-	}
-}
-
-
-extension URLSession {
-    func synchronousDataTask(urlrequest: URLRequest) -> (data: Data?, response: URLResponse?, error: Error?) {
-        var data: Data?
-        var response: URLResponse?
-        var error: Error?
-
-        let semaphore = DispatchSemaphore(value: 0)
-
-        let dataTask = self.dataTask(with: urlrequest) {
-            data = $0
-            response = $1
-            error = $2
-
-            semaphore.signal()
-        }
-        dataTask.resume()
-
-        _ = semaphore.wait(timeout: .distantFuture)
-
-        return (data, response, error)
-    }
 }
