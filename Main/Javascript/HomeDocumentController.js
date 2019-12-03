@@ -17,7 +17,7 @@ class HomeDocumentController extends DocumentController {
         }
 
         function setupLoginButtonAppearance(button) {
-            if (button === undefined || button === null) {
+            if (button == undefined || button == null) {
                 return
             }
 

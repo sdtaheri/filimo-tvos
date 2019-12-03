@@ -38,7 +38,7 @@ var pendingPlayURL = null;
  */
 App.onLaunch = function(options) {
     baseURL = options.baseURL;
-    
+
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
         "Utilities/Jalali",
@@ -53,24 +53,25 @@ App.onLaunch = function(options) {
         "MyMoviesDocumentController",
         "ProductsListDocumentController",
         "ProductDocumentController",
-        "SeasonsDocumentController",
-        "Index"
+        "SeasonsDocumentController"
     ].map(
         moduleName => `${baseURL}${moduleName}.js`
     );
     
     // Show a loading spinner while additional JavaScript files are being evaluated
     let loadingDocument = createLoadingDocument("فیلیمو");
-    if (typeof navigationDocument !== "undefined") {
-        if (getActiveDocument()) {
-            navigationDocument.clear();
-        }
-
-        navigationDocument.pushDocument(loadingDocument);
-    }
+	navigationDocument.pushDocument(loadingDocument);
 
     evaluateScripts(helperScriptURLs, function(scriptsAreLoaded) {
         if (scriptsAreLoaded) {
+			navigationDocument.removeDocument(loadingDocument);
+
+			let documentLoader = new DocumentLoader(baseURL)
+			let documentURL = documentLoader.prepareURL("/XMLs/Index.xml")
+			new MenuBarController({ documentLoader, documentURL })
+			menubarLoaded = true
+			playMovieFromURL(pendingPlayURL)
+
         } else {
             const alertDocument = createEvalErrorAlertDocument();
             navigationDocument.replaceDocument(alertDocument, loadingDocument);

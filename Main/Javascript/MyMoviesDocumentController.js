@@ -9,7 +9,7 @@ class MyMoviesDocumentController extends DocumentController {
         const segmentBar = document.getElementById("resultsMode")
 
         let dataSection = document.getElementsByTagName("section").item(0)
-        if (dataSection.dataItem === undefined) {
+        if (dataSection.dataItem == undefined) {
             dataSection.dataItem = new DataItem()
         }
 
@@ -84,7 +84,7 @@ class MyMoviesDocumentController extends DocumentController {
             }) || []
             
             let oldMoviesID = []
-            if (dataSection.dataItem.items !== undefined) {
+            if (dataSection.dataItem.items != undefined) {
                 oldMoviesID = dataSection.dataItem.items.map((item) => {
                     return item.identifier
                 })    

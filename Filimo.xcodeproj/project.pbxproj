@@ -63,7 +63,6 @@
 		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
 		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
-		302418072065246700B46686 /* Index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Index.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
 		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -209,7 +208,6 @@
 				3024180B2065567400B46686 /* Resources */,
 				3024180A2065335C00B46686 /* XMLs */,
 				30C5790B20448110007E728F /* Application.js */,
-				302418072065246700B46686 /* Index.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,
 				30D5167B206832A5007995AF /* LoginController.js */,
 				302418062065246700B46686 /* HomeDocumentController.js */,
