@@ -374,6 +374,30 @@ class ProductDocumentController extends DocumentController {
             }
         }
         
+        function createSkipIntroDocument() {        
+            const template = `<?xml version="1.0" encoding="UTF-8" ?>
+            <document>
+                <head>
+                    <style>
+                        .skipButton {
+                            tv-align: center;
+                            tv-position: bottom;
+                            tv-text-style: body;
+                            margin: 0 20 200 20;
+                            padding: 0 20 0 20;
+                        }
+                    </style>
+                </head>
+                <divTemplate>
+                    <button id="skipButton" class="skipButton">
+                        <text>رد کردن تیتراژ</text>
+                    </button>
+                </divTemplate>
+            </document>
+            `;
+            return new DOMParser().parseFromString(template, "application/xml");
+        }
+
         function playMovie(movieFullInfo) {
             if (movieFullInfo == null) {
                 return
@@ -388,6 +412,19 @@ class ProductDocumentController extends DocumentController {
                     video.resumeTime = movieFullInfo.watch_action.last_watch_position
                     video.artworkImageURL = movieFullInfo.movie_img_b
                     
+                    let castSkip = movieFullInfo.cast_skip_arr
+                    if (castSkip != null && castSkip != undefined 
+                        && castSkip.intro_e > 0 && video.resumeTime + 5 < castSkip.intro_e) {
+                        let skipIntroDocument = createSkipIntroDocument()
+                        skipIntroDocument.getElementById('skipButton').addEventListener('select', (event) => {
+                            player.seekToTime(castSkip.intro_e)
+                            player.interactiveOverlayDocument = null
+                        })
+                        player.resumeTime = 0
+                        player.interactiveOverlayDocument = skipIntroDocument
+                        player.interactiveOverlayDismissable = true
+                    }
+
                     player.playlist = new Playlist()
                     player.playlist.push(video)
                     
