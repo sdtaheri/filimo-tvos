@@ -10,7 +10,7 @@ import Foundation
 import TVServices
 
 extension URL {
-	static let homepage = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/ios")!
+	static let homepage = URL(string: "https://www.filimo.com/etc/api/homepage/devicetype/site")!
 	static func movieDetailURL(uuid: String) -> URL {
 		return URL(string: "https://www.filimo.com/etc/api/moviedetail/uid/\(uuid)")!
 	}
