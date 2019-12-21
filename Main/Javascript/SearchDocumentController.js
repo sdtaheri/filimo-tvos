@@ -71,7 +71,7 @@ class SearchDocumentController extends DocumentController {
                 searchURL += "/luser/" + localStorage.getItem("username")
                 searchURL += "/ltoken/" + localStorage.getItem("token")
             }
-            searchURL += '/devicetype/site/'
+            searchURL += '/devicetype/ios/'
 
             searchRequest = new XMLHttpRequest()
             searchRequest.open('GET', searchURL)
