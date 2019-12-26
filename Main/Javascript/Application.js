@@ -263,7 +263,9 @@ function toPersianDigits(str) {
 
 function removeHTMLEntities(str) {
     if (str == null) { return null }
-    return str.replace("&hellip;", "…").replace(/\&\w+;/g, '')
+    return str.replace("&hellip;", "…")
+            .replace("&#039;", "'")
+            .replace(/\&\w+;/g, '')
 }
 
 function isLoggedIn() {

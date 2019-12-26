@@ -8,6 +8,10 @@
             .marquee {
                 tv-text-highlight-style: marquee-on-highlight;
             }
+            .englishTitle {
+                text-align: center;
+                tv-text-style: caption2;
+            }
         </style>
     </head>
     <searchTemplate layoutDirection="rtl">
@@ -19,6 +23,7 @@
                     <lockup productDocumentURL="/XMLs/Product.xml" prototype="searchArtwork">
                         <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
                         <title class="marquee" binding="textContent:{movie_title};" />
+                        <text class="englishTitle" binding="textContent:{movie_title_en};" />
                     </lockup>
                 </prototypes>
                 <section id="resultsSection" binding="items:{items};" />

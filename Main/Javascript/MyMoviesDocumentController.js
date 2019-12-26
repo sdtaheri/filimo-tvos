@@ -125,6 +125,9 @@ class MyMoviesDocumentController extends DocumentController {
                     if (key === 'movie_title' || key === 'descr') {
                         value = toPersianDigits(value)
                     }
+                    if (key === 'movie_title_en') {
+                        value = removeHTMLEntities(value)
+                    }
                     dataItem.setPropertyPath(key, value)
                 })
                 return dataItem

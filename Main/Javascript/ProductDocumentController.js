@@ -48,7 +48,7 @@ class ProductDocumentController extends DocumentController {
         if (this._movieName && this._movieName.length > 0) {
             loadingTitle.textContent = this._movieName
         } else {
-            loadingTitle.textContent = 'در حال دریافت اطلاعات …'
+            loadingTitle.textContent = 'در حال دریافت اطلاعات…'
         }
         
         if (this._movieImgBig && this._movieImgBig.length > 0) {
@@ -69,7 +69,8 @@ class ProductDocumentController extends DocumentController {
             
             playButton.getElementsByTagName('title').item(0).textContent = movieInfo.price_txt || 'پخش فیلم'
             
-            document.getElementsByTagName("stack").item(0).getElementsByTagName("title").item(0).textContent = toPersianDigits(movieInfo.movie_title)
+            document.getElementById("title").textContent = toPersianDigits(movieInfo.movie_title)
+            document.getElementById("englishTitle").textContent = removeHTMLEntities(movieInfo.movie_title_en)
             document.getElementById("productDescription").textContent = toPersianDigits(removeHTMLEntities(movieInfo.description))
             document.getElementsByTagName("heroImg").item(0).setAttribute("src", movieInfo.movie_img_b)
             
@@ -530,6 +531,9 @@ class ProductDocumentController extends DocumentController {
                     let value = movie[key]
                     if (key === 'movie_title' || key === 'descr') {
                         value = toPersianDigits(value)
+                    }
+                    if (key === 'movie_title_en') {
+                        value = removeHTMLEntities(value)
                     }
                     dataItem.setPropertyPath(key, value)
                 })

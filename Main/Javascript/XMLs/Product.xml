@@ -3,15 +3,29 @@
     <head>
         <style>
             .badge {
-                tv-tint-color: rgb(0, 0, 0);
+                tv-tint-color: rgb(255, 255, 255);
             }
             .placeholder {
                 tv-placeholder: movie;
             }
-            @media tv-template and (tv-theme:dark) {
-                .badge {
-                    tv-tint-color: rgb(255, 255, 255);
-                }
+            .title {
+                text-align: right;
+                tv-text-max-lines: 2;
+                font-size: 65;
+                font-weight: bold;
+                tv-minimum-scale-factor: 0.7;
+            }
+            .englishTitle {
+                text-align: right;
+                tv-text-max-lines: 1;
+                tv-text-style: headline;
+                tv-minimum-scale-factor: 0.7;
+            }
+            .englishTitleInLockup {
+                text-align: center;
+                tv-text-style: caption2;
+                color: rgb(255,255,255,0.5);
+                tv-highlight-color: rgb(255,255,255);
             }
         </style>
     </head>
@@ -40,7 +54,8 @@
                 </info>
             </infoList>
             <stack>
-                <title></title>
+                <text id="title" class="title"></text>
+                <text id="englishTitle" class="englishTitle"></text>
                 <row id="infoRow"></row>
                 <description id="productDescription" handlesOverflow="true"></description>
                 <row>
@@ -62,12 +77,13 @@
                     </buttonLockup>
                 </row>
             </stack>
-            <heroImg src="" width="400" height="600" />
+            <heroImg src=""/>
         </banner>
         <prototypes>
             <lockup productDocumentURL="/XMLs/Product.xml" prototype="similarArtwork">
                 <img class="placeholder" binding="@src:{movie_img_b};" width="225" height="300" />
                 <title binding="textContent:{movie_title};" />
+                <text class="englishTitleInLockup" binding="textContent:{movie_title_en};" />
             </lockup>
         </prototypes>
         <shelf id="allEpisodes"></shelf>

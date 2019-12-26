@@ -14,6 +14,10 @@
                 tv-placeholder: movie;
                 tv-tint-color: rgba(1,1,1,0.6)
             }
+            .englishTitle {
+                text-align: center;
+                tv-text-style: caption2;
+            }
             .overlayTitle {
 				tv-text-style: body;
 				padding: 24;

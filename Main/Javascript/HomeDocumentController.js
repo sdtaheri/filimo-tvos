@@ -75,7 +75,8 @@ class HomeDocumentController extends DocumentController {
                    
                    let lockup = `<lockup productDocumentURL="/XMLs/Product.xml">
                     <img class="${hasOverlay ? 'imageDisabled' : 'image'}" src="${item.movie_img_b}" width="275" height="366" />
-                    <title>${toPersianDigits(item.movie_title)}</title>`
+                    <title>${toPersianDigits(item.movie_title)}</title>
+                    <text class="englishTitle"></text>`
                    if (hasOverlay) {
                        lockup += `<overlay>
                        <title class="overlayTitle">${item.movie_status_txt}</title>
@@ -94,6 +95,7 @@ class HomeDocumentController extends DocumentController {
 
                    section.insertAdjacentHTML('beforeend', lockup)
                    let lockupNode = section.getElementsByTagName('lockup').item(j)
+                   lockupNode.getElementsByTagName('text').item(0).textContent = (item.movie_title_en && item.movie_title_en !== '') ? removeHTMLEntities(item.movie_title_en) : ' '
                    lockupNode.dataItem = dataItem
                }
             }
