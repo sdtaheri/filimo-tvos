@@ -49,7 +49,7 @@
     </head>
     <loadingTemplate>
         <activityIndicator>
-            <title>در حال دریافت اطلاعات …</title>
+            <title>در حال دریافت اطلاعات…</title>
         </activityIndicator>
     </loadingTemplate>
     <stackTemplate>

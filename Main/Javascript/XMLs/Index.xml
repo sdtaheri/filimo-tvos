@@ -3,7 +3,7 @@
     <menuBarTemplate>
         <menuBar>
             <menuItem homeDocumentURL="/XMLs/Home.xml" autoHighlight="true">
-                <title>پیشخان</title>
+                <title>ویترین</title>
             </menuItem>
             <menuItem categoriesDocumentURL="/XMLs/Categories.xml">
                 <title>دسته‌بندی‌ها</title>

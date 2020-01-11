@@ -111,6 +111,14 @@ class SearchDocumentController extends DocumentController {
                 let dataItem = new DataItem("searchArtwork", movie.uid)
                 Object.keys(movie).forEach((key) => {
                     let value = movie[key]
+                    if (value && key === 'user_watched_info') {
+                        let percent = value['percent']
+                        if (percent) {
+                            dataItem.setPropertyPath('watch_fraction', percent / 100.0)
+                        } else {
+                            dataItem.setPropertyPath('watch_fraction', 0.0)
+                        }
+                    }
                     if (key === 'movie_title' || key === 'descr') {
                         value = toPersianDigits(value)
                     }

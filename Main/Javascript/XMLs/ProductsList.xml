@@ -9,6 +9,9 @@
                 text-align: center;
                 tv-text-style: caption2;
             }
+            .watchedOverlayImg {
+                tv-position: bottom-trailing;
+            }
         </style>
     </head>
     <stackTemplate>
@@ -22,6 +25,19 @@
                         <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
                         <title binding="textContent:{movie_title};" />
                         <text class="englishTitle" binding="textContent:{movie_title_en};" />
+                        <placeholder tag="progress" />
+                        <rules>
+                            <specialize state="({watch_fraction}-greater-than-equal:0.9)">
+                                <overlay tag="progress">
+                                    <badge class="watchedOverlayImg" src="resource://overlay-checkmark"/>
+                                </overlay>
+                            </specialize>
+                            <specialize state="({watch_fraction}-greater-than:0)">
+                                <overlay tag="progress">
+                                    <progressBar binding="@value:{watch_fraction}" />
+                                </overlay>
+                            </specialize>                    
+                        </rules>
                     </lockup>
                 </prototypes>
                 <section binding="items:{items};" />
