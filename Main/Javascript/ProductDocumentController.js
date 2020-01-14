@@ -100,6 +100,12 @@ class ProductDocumentController extends DocumentController {
             if (rateValue) {
                 infoRowToAdd += `<ratingBadge value="${rateValue / 5.0}" />`
             }
+            
+            let imdb = movieInfo.imdb_rate
+            if (imdb != null && imdb > 0) {
+                infoRowToAdd += `<organizer><badge style="tv-position:center;" srcset="${baseURL}Resources/imdb.png 1x, ${baseURL}Resources/imdb@2x.png 2x" width="45" height="22"/>`
+                infoRowToAdd += `<text style="tv-position:trailing; margin-right: 6; tv-text-style:caption2; color: white;">${imdb}</text></organizer>`
+            }
             if (movieInfo.hd === 'yes') {
                 infoRowToAdd += `<badge src="resource://hd" class="badge" />`
             }
