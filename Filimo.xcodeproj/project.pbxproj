@@ -191,14 +191,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		30B503EE206FD52500D08682 /* TopShelf */ = {
+		30B503EE206FD52500D08682 /* TopShelf Legacy */ = {
 			isa = PBXGroup;
 			children = (
 				30B503EF206FD52500D08682 /* ServiceProvider.swift */,
 				30B503FB20711F4E00D08682 /* Model.swift */,
 				30B503F1206FD52500D08682 /* Info.plist */,
 			);
-			path = TopShelf;
+			path = "TopShelf Legacy";
 			sourceTree = "<group>";
 		};
 		30BF891D20631288009FAB4D /* Javascript */ = {
@@ -234,10 +234,10 @@
 			isa = PBXGroup;
 			children = (
 				30C5790820448110007E728F /* Main */,
-				30B503EE206FD52500D08682 /* TopShelf */,
-				30ED530E233B55E60068FE95 /* TopShelfNew */,
-				30B503EB206FD52500D08682 /* Frameworks */,
+				30ED530E233B55E60068FE95 /* TopShelf */,
+				30B503EE206FD52500D08682 /* TopShelf Legacy */,
 				30C5790720448110007E728F /* Products */,
+				30B503EB206FD52500D08682 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,14 +261,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		30ED530E233B55E60068FE95 /* TopShelfNew */ = {
+		30ED530E233B55E60068FE95 /* TopShelf */ = {
 			isa = PBXGroup;
 			children = (
 				30ED530F233B55E60068FE95 /* ContentProvider.swift */,
 				30ED5311233B55E60068FE95 /* Info.plist */,
 				30ED5319233B9EB60068FE95 /* Extensions.swift */,
 			);
-			path = TopShelfNew;
+			path = TopShelf;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,7 +335,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Filimo;
 				TargetAttributes = {
 					30B503E9206FD52500D08682 = {
@@ -464,7 +464,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelf/Info.plist;
+				INFOPLIST_FILE = "TopShelf Legacy/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,7 +477,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -489,7 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelf/Info.plist;
+				INFOPLIST_FILE = "TopShelf Legacy/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -502,7 +502,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -533,6 +533,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -563,7 +564,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 11.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VERSION = 1.2;
 			};
 			name = Debug;
@@ -595,6 +596,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -617,7 +619,7 @@
 				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 11.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSION = 1.2;
 			};
@@ -644,7 +646,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -669,7 +671,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -681,7 +683,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelfNew/Info.plist;
+				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,7 +709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelfNew/Info.plist;
+				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

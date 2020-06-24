@@ -15,7 +15,7 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>XPC!</string>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
@@ -27,17 +27,10 @@
 	</dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>TVExtensionProtocols</key>
-			<array>
-				<string>TVTopShelfProvider</string>
-			</array>
-		</dict>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.tv-services</string>
+		<string>com.apple.tv-top-shelf</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).ServiceProvider</string>
+		<string>$(PRODUCT_MODULE_NAME).ContentProvider</string>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
