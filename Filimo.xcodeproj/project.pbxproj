@@ -7,30 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
-		30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503EF206FD52500D08682 /* ServiceProvider.swift */; };
-		30B503F4206FD52500D08682 /* TopShelf Legacy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30B503EA206FD52500D08682 /* TopShelf Legacy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		30B503FC20711F4E00D08682 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
 		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
+		30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* Model.swift */; };
+		30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */; };
 		30ED5307233950DA0068FE95 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5306233950DA0068FE95 /* main.swift */; };
 		30ED530D233B55E60068FE95 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED530F233B55E60068FE95 /* ContentProvider.swift */; };
 		30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30ED530C233B55E60068FE95 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		30ED5318233B58E10068FE95 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
-		30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 		30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		30B503F2206FD52500D08682 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 30C578FE20448110007E728F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 30B503E9206FD52500D08682;
-			remoteInfo = TopShelf;
-		};
 		30ED5312233B55E60068FE95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 30C578FE20448110007E728F /* Project object */;
@@ -48,7 +37,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */,
-				30B503F4206FD52500D08682 /* TopShelf Legacy.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,12 +68,8 @@
 		30B503E3206E157C00D08682 /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
 		30B503E4206E158A00D08682 /* MyMovies.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyMovies.xml; sourceTree = "<group>"; };
 		30B503E5206E159500D08682 /* MyMoviesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MyMoviesDocumentController.js; sourceTree = "<group>"; };
-		30B503EA206FD52500D08682 /* TopShelf Legacy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TopShelf Legacy.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
-		30B503EF206FD52500D08682 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
-		30B503F1206FD52500D08682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
-		30B503FB20711F4E00D08682 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +81,8 @@
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
 		30D5167C20683595007995AF /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
+		30D5A40B24ABE7FD00F5CF08 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30ED5306233950DA0068FE95 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30ED530C233B55E60068FE95 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED530F233B55E60068FE95 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -105,14 +91,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		30B503E7206FD52500D08682 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790320448110007E728F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,16 +169,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		30B503EE206FD52500D08682 /* TopShelf Legacy */ = {
-			isa = PBXGroup;
-			children = (
-				30B503EF206FD52500D08682 /* ServiceProvider.swift */,
-				30B503FB20711F4E00D08682 /* Model.swift */,
-				30B503F1206FD52500D08682 /* Info.plist */,
-			);
-			path = "TopShelf Legacy";
-			sourceTree = "<group>";
-		};
 		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +194,7 @@
 				30C5790C20448110007E728F /* Assets.xcassets */,
 				30BF89182062F2B7009FAB4D /* InfoPlist.strings */,
 				30C5790E20448110007E728F /* Info.plist */,
+				30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -235,7 +204,6 @@
 			children = (
 				30C5790820448110007E728F /* Main */,
 				30ED530E233B55E60068FE95 /* TopShelf */,
-				30B503EE206FD52500D08682 /* TopShelf Legacy */,
 				30C5790720448110007E728F /* Products */,
 				30B503EB206FD52500D08682 /* Frameworks */,
 			);
@@ -245,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				30C5790620448110007E728F /* Filimo.app */,
-				30B503EA206FD52500D08682 /* TopShelf Legacy.appex */,
 				30ED530C233B55E60068FE95 /* TopShelf.appex */,
 			);
 			name = Products;
@@ -267,6 +234,7 @@
 				30ED530F233B55E60068FE95 /* ContentProvider.swift */,
 				30ED5311233B55E60068FE95 /* Info.plist */,
 				30ED5319233B9EB60068FE95 /* Extensions.swift */,
+				30D5A40B24ABE7FD00F5CF08 /* Model.swift */,
 			);
 			path = TopShelf;
 			sourceTree = "<group>";
@@ -274,23 +242,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30B503E9206FD52500D08682 /* TopShelf-Legacy */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf-Legacy" */;
-			buildPhases = (
-				30B503E6206FD52500D08682 /* Sources */,
-				30B503E7206FD52500D08682 /* Frameworks */,
-				30B503E8206FD52500D08682 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "TopShelf-Legacy";
-			productName = TopShelf;
-			productReference = 30B503EA206FD52500D08682 /* TopShelf Legacy.appex */;
-			productType = "com.apple.product-type.tv-app-extension";
-		};
 		30C5790520448110007E728F /* Filimo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30C5791120448110007E728F /* Build configuration list for PBXNativeTarget "Filimo" */;
@@ -303,7 +254,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				30B503F3206FD52500D08682 /* PBXTargetDependency */,
 				30ED5313233B55E60068FE95 /* PBXTargetDependency */,
 			);
 			name = Filimo;
@@ -338,11 +288,6 @@
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Filimo;
 				TargetAttributes = {
-					30B503E9206FD52500D08682 = {
-						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
 					30C5790520448110007E728F = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
@@ -367,24 +312,17 @@
 			projectRoot = "";
 			targets = (
 				30C5790520448110007E728F /* Filimo */,
-				30B503E9206FD52500D08682 /* TopShelf-Legacy */,
 				30ED530B233B55E60068FE95 /* TopShelf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		30B503E8206FD52500D08682 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790420448110007E728F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */,
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
 				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
 			);
@@ -400,16 +338,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		30B503E6206FD52500D08682 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30B503FC20711F4E00D08682 /* Model.swift in Sources */,
-				30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */,
-				30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790220448110007E728F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,20 +351,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */,
 				30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */,
 				30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */,
-				30ED5318233B58E10068FE95 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		30B503F3206FD52500D08682 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 30B503E9206FD52500D08682 /* TopShelf-Legacy */;
-			targetProxy = 30B503F2206FD52500D08682 /* PBXContainerItemProxy */;
-		};
 		30ED5313233B55E60068FE95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 30ED530B233B55E60068FE95 /* TopShelf */;
@@ -456,56 +379,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		30B503F5206FD52500D08682 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD)";
-				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = "TopShelf Legacy/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.saeedtaheri.filimo.appletv.topshelf-legacy";
-				PRODUCT_NAME = "TopShelf Legacy";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-			};
-			name = Debug;
-		};
-		30B503F6206FD52500D08682 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD)";
-				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = "TopShelf Legacy/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.saeedtaheri.filimo.appletv.topshelf-legacy";
-				PRODUCT_NAME = "TopShelf Legacy";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-			};
-			name = Release;
-		};
 		30C5790F20448110007E728F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -646,7 +519,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -671,7 +544,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Release;
 		};
@@ -729,15 +602,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf-Legacy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				30B503F5206FD52500D08682 /* Debug */,
-				30B503F6206FD52500D08682 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		30C5790120448110007E728F /* Build configuration list for PBXProject "Filimo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
