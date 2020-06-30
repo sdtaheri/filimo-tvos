@@ -13,8 +13,8 @@ class MyMoviesDocumentController extends DocumentController {
             dataSection.dataItem = new DataItem()
         }
 
-        const dataLoader = this._dataLoader
-        const documentLoader = this._documentLoader
+        const dataLoader = this.dataLoader
+        const documentLoader = this.documentLoader
 
         let dataLoadingURL = null
 
@@ -60,7 +60,7 @@ class MyMoviesDocumentController extends DocumentController {
         })
 
         function loadData(segmentBarId, shouldClear) {            
-            dataLoadingURL = filimoAPIBaseURL + '/movielistby' + segmentBarId + '/perpage/20/'
+            dataLoadingURL = legacyBaseURL + '/movielistby' + segmentBarId + '/perpage/20/'
 
             dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
                 if (shouldClear) {

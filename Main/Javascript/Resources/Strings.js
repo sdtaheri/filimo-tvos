@@ -1,0 +1,1 @@
+const string_loading = 'در حال دریافت اطلاعات…';

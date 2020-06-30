@@ -10,8 +10,8 @@ class CategoriesDocumentController extends DocumentController {
 			titleNode.innerHTML = " "
 		}
 
-        let url = filimoAPIBaseURL + '/category'
-        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
+        let url = legacyBaseURL + '/category'
+        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(url), (dataObj) => {
             let categories = dataObj.category
             section.dataItem.setPropertyPath("items", dataItemsFromJSONItems(categories))
         })

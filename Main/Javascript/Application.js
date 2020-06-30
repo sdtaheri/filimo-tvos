@@ -19,34 +19,43 @@
  * application lifecycle events.
  */
 
+const appName = "فیلیمو";
+
 const attributeToController = {};
 const attributeKeys = [];
-var baseURL;
-var menubarLoaded = false;
-var pendingPlayURL = null;
+
+let jsBaseURL;
+let baseURL;
+
+let menubarLoaded = false;
+let pendingPlayURL = null;
 
 /**
- * @description The onLaunch callback is invoked after the application JavaScript 
- * has been parsed into a JavaScript context. The handler is passed an object 
+ * @description The onLaunch callback is invoked after the application JavaScript
+ * has been parsed into a JavaScript context. The handler is passed an object
  * that contains options passed in for launch. These options are defined in the
  * swift or objective-c client code. Options can be used to communicate to
- * your JavaScript code that data and as well as state information, like if the 
+ * your JavaScript code that data and as well as state information, like if the
  * the app is being launched in the background.
  *
- * The location attribute is automatically added to the object and represents 
+ * The location attribute is automatically added to the object and represents
  * the URL that was used to retrieve the application JavaScript.
  */
-App.onLaunch = function(options) {
-    baseURL = options.baseURL;
+App.onLaunch = function (options) {
+    jsBaseURL = options["jsBaseURL"];
+    baseURL = options["baseURL"];
 
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
+        "Resources/Strings",
         "Utilities/Jalali",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
         "Utilities/DataLoader",
+        "Utilities/DataParser",
         "MenuBarController",
         "HomeDocumentController",
+        "VitrineDocumentController",
         "LoginController",
         "CategoriesDocumentController",
         "SearchDocumentController",
@@ -55,22 +64,22 @@ App.onLaunch = function(options) {
         "ProductDocumentController",
         "SeasonsDocumentController"
     ].map(
-        moduleName => `${baseURL}${moduleName}.js`
+        moduleName => `${jsBaseURL}${moduleName}.js`
     );
-    
+
     // Show a loading spinner while additional JavaScript files are being evaluated
-    let loadingDocument = createLoadingDocument("فیلیمو");
-	navigationDocument.pushDocument(loadingDocument);
+    let loadingDocument = createLoadingDocument(appName);
+    navigationDocument.pushDocument(loadingDocument);
 
-    evaluateScripts(helperScriptURLs, function(scriptsAreLoaded) {
+    evaluateScripts(helperScriptURLs, function (scriptsAreLoaded) {
         if (scriptsAreLoaded) {
-			navigationDocument.removeDocument(loadingDocument);
+            navigationDocument.removeDocument(loadingDocument);
 
-			let documentLoader = new DocumentLoader(baseURL)
-			let documentURL = documentLoader.prepareURL("/XMLs/Index.xml")
-			new MenuBarController({ documentLoader, documentURL })
-			menubarLoaded = true
-			playMovieFromURL(pendingPlayURL)
+            let documentLoader = new DocumentLoader(jsBaseURL)
+            let documentURL = documentLoader.prepareURL("/XMLs/Index.xml")
+            new MenuBarController({documentLoader, documentURL})
+            menubarLoaded = true
+            playMovieFromURL(pendingPlayURL)
 
         } else {
             const alertDocument = createEvalErrorAlertDocument();
@@ -80,31 +89,31 @@ App.onLaunch = function(options) {
     });
 }
 
-App.onOpenURL = function(url) {
+App.onOpenURL = function (url) {
     pendingPlayURL = url
     if (menubarLoaded) {
         playMovieFromURL(pendingPlayURL)
     }
 }
 
-App.onWillResignActive = function() {
+App.onWillResignActive = function () {
 
 }
 
-App.onDidEnterBackground = function() {
+App.onDidEnterBackground = function () {
 
 }
 
-App.onWillEnterForeground = function() {
-    
+App.onWillEnterForeground = function () {
+
 }
 
-App.onDidBecomeActive = function() {
-    
+App.onDidBecomeActive = function () {
+
 }
 
-App.onWillTerminate = function() {
-    
+App.onWillTerminate = function () {
+
 }
 
 function playMovieFromURL(url) {
@@ -113,12 +122,23 @@ function playMovieFromURL(url) {
     }
     const [protocol, path] = url.split("://");
     const [movieUID, type] = path.split("/")
-    
-    let documentLoader = new DocumentLoader(baseURL)
+
+    let documentLoader = new DocumentLoader(jsBaseURL)
     let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
     let shouldPlayMovie = type === 'play'
-    new ProductDocumentController({ documentLoader, documentURL, movieUID, shouldPlayMovie })
+    new ProductDocumentController({documentLoader, documentURL, movieUID, shouldPlayMovie})
     pendingPlayURL = null
+}
+
+function loadingTemplate(title) {
+    title = title || string_loading;
+
+    return `<loadingTemplate>
+            <activityIndicator>
+                <title>${title}</title>
+            </activityIndicator>
+        </loadingTemplate>
+    `;
 }
 
 /**
@@ -142,7 +162,7 @@ function createLoadingDocument(title) {
 /**
  * This convenience function returns an alert template, which can be used to present errors to the user.
  */
-var createAlertDocument = function(title, description) {
+var createAlertDocument = function (title, description) {
 
     var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
@@ -199,11 +219,11 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
 
     var alertDoc = parser.parseFromString(alertString, "application/xml");
 
-    alertDoc.getElementById("alertDefaultButton").addEventListener("select", function(element, event) {
+    alertDoc.getElementById("alertDefaultButton").addEventListener("select", function (element, event) {
         defaultHandler()
         navigationDocument.dismissModal()
     })
-    alertDoc.getElementById("alertCancelButton").addEventListener("select", function(element, event) {
+    alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
         navigationDocument.dismissModal()
     })
 
@@ -240,37 +260,41 @@ function resolveControllerFromElement(elem) {
     for (let key of attributeKeys) {
         if (elem.hasAttribute(key)) {
             return {
-            type: attributeToController[key],
-            documentURL: elem.getAttribute(key)
+                type: attributeToController[key],
+                documentURL: elem.getAttribute(key)
             };
         }
     }
 }
 
 function toPersianDigits(str) {
-    if (str == null) { return null }
+    if (str == null) {
+        return null
+    }
     return str.replace(/0/g, "۰")
-                .replace(/1/g, "۱")
-                .replace(/2/g, "۲")
-                .replace(/3/g, "۳")
-                .replace(/4/g, "۴")
-                .replace(/5/g, "۵")
-                .replace(/6/g, "۶")
-                .replace(/7/g, "۷")
-                .replace(/8/g, "۸")
-                .replace(/9/g, "۹")
+        .replace(/1/g, "۱")
+        .replace(/2/g, "۲")
+        .replace(/3/g, "۳")
+        .replace(/4/g, "۴")
+        .replace(/5/g, "۵")
+        .replace(/6/g, "۶")
+        .replace(/7/g, "۷")
+        .replace(/8/g, "۸")
+        .replace(/9/g, "۹")
 }
 
 function removeHTMLEntities(str) {
-    if (str == null) { return null }
+    if (str == null) {
+        return null
+    }
     return str.replace("&hellip;", "…")
-            .replace("&#039;", "'")
-            .replace(/\&\w+;/g, '')
+        .replace("&#039;", "'")
+        .replace(/\&\w+;/g, '')
 }
 
 function isLoggedIn() {
-    if (localStorage.getItem("token") != null 
-    && localStorage.getItem("username") != null) {
+    if (localStorage.getItem("token") != null
+        && localStorage.getItem("username") != null) {
         return true
     }
     return false

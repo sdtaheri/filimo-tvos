@@ -65,7 +65,7 @@ class SearchDocumentController extends DocumentController {
                 return
             }
 
-            let searchURL = filimoAPIBaseURL 
+            let searchURL = legacyBaseURL
                 + '/search/text/' + encodeURIComponent(searchText) + '/perpage/20' 
             if (isLoggedIn()) {
                 searchURL += "/luser/" + localStorage.getItem("username")

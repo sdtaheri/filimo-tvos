@@ -5,12 +5,13 @@ Abstract:
 This class handles loading of data for prototypes in templates.
 */
 
-var filimoAPIBaseURL = 'https://www.filimo.com/etc/api'
+const legacyBaseURL = 'https://www.filimo.com/etc/api';
 
 class DataLoader {
 
-    constructor(documentLoader) {
+    constructor(documentLoader, dataParser) {
         this._documentLoader = documentLoader;
+        this._dataParser = dataParser;
     }
 
     _fetchJSONData(dataURL, itemCallback) {
@@ -26,10 +27,15 @@ class DataLoader {
                 url += "/ltoken/" + localStorage.getItem("token") + "/"
             }
 
-            url += "devicetype/site/"
+            if (dataURL.includes(legacyBaseURL)) {
+                url += "devicetype/site/"
+            } else {
+                url += "devicetype/appletv/"
+            }
 
             xhr.open("GET", url);
             xhr.responseType = "json";
+            xhr.setRequestHeader("JsonType", "simple");
             xhr.onload = () => {
                 itemCallback(xhr.response);
                 resolve();
@@ -38,6 +44,22 @@ class DataLoader {
                 reject(xhr);
             };
             xhr.send();
+        });
+    }
+
+    fetchVitrine(itemCallback) {
+        let url = baseURL + '/movie/movie/list/tagid/1';
+        this._fetchJSONData(this._documentLoader.prepareURL(url), (response) => {
+            this._dataParser.parseVitrineResponse(response, itemCallback);
+        });
+    }
+
+    fetchVitrineNextPage(url, itemCallback) {
+        if (url == null) {
+            return;
+        }
+        this._fetchJSONData(this._documentLoader.prepareURL(url), (response) => {
+            this._dataParser.parseVitrineResponse(response, itemCallback);
         });
     }
 }

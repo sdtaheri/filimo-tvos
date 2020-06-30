@@ -23,7 +23,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
             return "https://filimo.saeedtaheri.com/"
         #endif
     }()
-    
+
+	static let baseURL = "https://www.filimo.com/api/fa/v1"
+
     static let tvBootURL = "\(AppDelegate.tvBaseURL)/Application.js"
     
     // MARK: Javascript Execution Helper
@@ -58,7 +60,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
             appControllerContext.javaScriptApplicationURL = javaScriptURL
         }
         
-        appControllerContext.launchOptions["baseURL"] = AppDelegate.tvBaseURL
+        appControllerContext.launchOptions["jsBaseURL"] = AppDelegate.tvBaseURL
+        appControllerContext.launchOptions["baseURL"] = AppDelegate.baseURL
         
         if let launchOptions = launchOptions {
             for (kind, value) in launchOptions {

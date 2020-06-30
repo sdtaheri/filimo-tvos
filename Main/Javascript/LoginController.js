@@ -8,10 +8,10 @@ class LoginController extends DocumentController {
     verificationCodeReceived(code, document) {
         document.getElementById("verificationCode").textContent = code.toUpperCase()
 
-        let dataLoader = this._dataLoader
-        let documentLoader = this._documentLoader
+        let dataLoader = this.dataLoader
+        let documentLoader = this.documentLoader
         let refreshIntervalId = setInterval(function() {
-            let verifyURL = filimoAPIBaseURL + '/verifycodecheck/ref_type/tv/code/' 
+            let verifyURL = legacyBaseURL + '/verifycodecheck/ref_type/tv/code/'
             + code
             dataLoader._fetchJSONData(documentLoader.prepareURL(verifyURL), (dataObj) => {
             let token = dataObj.verifycodecheck.ltoken
@@ -29,8 +29,8 @@ class LoginController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document)
 
-        let verifyCodeGetURL = filimoAPIBaseURL + '/verifycodeget'
-        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(verifyCodeGetURL), (dataObj) => {
+        let verifyCodeGetURL = legacyBaseURL + '/verifycodeget'
+        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(verifyCodeGetURL), (dataObj) => {
             this.verificationCodeReceived(dataObj.verifycodeget.code, document)
         })
     }

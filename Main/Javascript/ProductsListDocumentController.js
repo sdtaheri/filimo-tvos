@@ -17,14 +17,14 @@ class ProductsListDocumentController extends DocumentController {
         const requestType = this._sourceDataItem.requestType
         let dataLoadingURL = null
 
-        const dataLoader = this._dataLoader
-        const documentLoader = this._documentLoader
+        const dataLoader = this.dataLoader
+        const documentLoader = this.documentLoader
 
         switch (requestType) {
             case 'search':
                 banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.queryString
                 
-                dataLoadingURL = filimoAPIBaseURL + '/search/text/' + encodeURIComponent(this._sourceDataItem.queryString) + '/perpage/20' 
+                dataLoadingURL = legacyBaseURL + '/search/text/' + encodeURIComponent(this._sourceDataItem.queryString) + '/perpage/20'
                 dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
                     fillGrid(dataObj)
                 })
@@ -33,7 +33,7 @@ class ProductsListDocumentController extends DocumentController {
             case 'category':
                 banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.title
 
-                dataLoadingURL = filimoAPIBaseURL + '/movielistbycat/catid/' + this._sourceDataItem.id + '/perpage/20/'
+                dataLoadingURL = legacyBaseURL + '/movielistbycat/catid/' + this._sourceDataItem.id + '/perpage/20/'
                 dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
                     fillGrid(dataObj)
                 })

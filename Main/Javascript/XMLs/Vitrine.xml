@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .headerLogo {
+            tv-position: top-right;
+            }
+
+            .subtitle {
+            text-align: center;
+            tv-text-style: caption2;
+            }
+
+            .channelLogo {
+            tv-tint-color: rgba(0, 0, 0, 0.60);
+            tv-highlight-color: rgb(255,255,255);
+            margin: 8;
+            }
+
+            @media tv-template and (tv-theme:dark) {
+            .channelLogo {
+            tv-tint-color: rgba(255, 255, 255, 0.50);
+            }
+            }
+        </style>
+    </head>
+    <stackTemplate>
+        <prototypes>
+            <lockup prototype="livetv-thumbplay">
+                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+                <row>
+                    <badge class="channelLogo" binding="@src:{logo};" height="60" width="60"/>
+                    <title binding="textContent:{title};"/>"
+                </row>
+            </lockup>
+            <lockup prototype="movie-thumbplay" productDocumentURL="/XMLs/Product.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+            <lockup prototype="movie-thumbnail" productDocumentURL="/XMLs/Product.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+            <lockup prototype="poster-brick">
+                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+            </lockup>
+            <lockup prototype="poster-theater" productDocumentURL="/XMLs/Product.xml">
+                <img binding="@src:{image};" width="900" height="300"/>
+            </lockup>
+        </prototypes>
+
+        <banner>
+            <organizer>
+                <img width="295" height="90" class="headerLogo"
+                     srcset="/Resources/logo.png (theme:light), /Resources/logo_dark.png (theme:dark)"
+                     alt="Filimo Logo"/>
+            </organizer>
+        </banner>
+
+        <collectionList>
+        </collectionList>
+
+    </stackTemplate>
+</document>

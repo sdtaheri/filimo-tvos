@@ -4,8 +4,8 @@ class ProductDocumentController extends DocumentController {
         super(controllerOptions)  
         if (controllerOptions.event) {
             this._movieUID = controllerOptions.event.target.dataItem.uid
-            this._movieName = toPersianDigits(controllerOptions.event.target.dataItem.movie_title)
-            this._movieImgBig = controllerOptions.event.target.dataItem.movie_img_b
+            this._movieName = toPersianDigits(controllerOptions.event.target.dataItem.movie_title || controllerOptions.event.target.dataItem.title)
+            this._movieImgBig = controllerOptions.event.target.dataItem.movie_img_b || controllerOptions.event.target.dataItem.image
             this._shouldPlayMovie = (controllerOptions.event.type === "play")
         } else if (controllerOptions.movieUID) {
             this._movieUID = controllerOptions.movieUID
@@ -25,13 +25,13 @@ class ProductDocumentController extends DocumentController {
         const productTemplate = document.getElementsByTagName('productTemplate').item(0)
         const mainNode = loadingTemplate.parentNode
         
-        if (this._movieUID == null || this._movieUID == undefined) {
+        if (this._movieUID == null) {
             return
         }
         
         var isLoggedInAtLaunch = this._isLoggedInAtLaunch
-        const dataLoader = this._dataLoader
-        const documentLoader = this._documentLoader
+        const dataLoader = this.dataLoader
+        const documentLoader = this.documentLoader
         
         const playButton = document.getElementById("playButton")
         const bookmarkButton = document.getElementById('bookmarkButton')
@@ -60,7 +60,7 @@ class ProductDocumentController extends DocumentController {
         mainNode.removeChild(productTemplate)
         
         let shouldPlay = this._shouldPlayMovie || false
-        let moreInfoURL = filimoAPIBaseURL + '/movie/uid/' + this._movieUID
+        let moreInfoURL = legacyBaseURL + '/movie/uid/' + this._movieUID
         dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
             mainNode.removeChild(loadingTemplate)
             mainNode.appendChild(productTemplate)
@@ -103,7 +103,7 @@ class ProductDocumentController extends DocumentController {
             
             let imdb = movieInfo.imdb_rate
             if (imdb != null && imdb > 0) {
-                infoRowToAdd += `<organizer><badge style="tv-position:center;" srcset="${baseURL}Resources/imdb.png 1x, ${baseURL}Resources/imdb@2x.png 2x" width="45" height="22"/>`
+                infoRowToAdd += `<organizer><badge style="tv-position:center;" srcset="${jsBaseURL}Resources/imdb.png 1x, ${jsBaseURL}Resources/imdb@2x.png 2x" width="45" height="22"/>`
                 infoRowToAdd += `<text style="tv-position:trailing; margin-right: 6; tv-text-style:caption2; color: white;">${imdb}</text></organizer>`
             }
             if (movieInfo.hd === 'yes') {
@@ -112,7 +112,7 @@ class ProductDocumentController extends DocumentController {
             document.getElementById("infoRow").insertAdjacentHTML('beforeend', infoRowToAdd)
             
             if (movieInfo.is_serial) {
-                let seriesURL = filimoAPIBaseURL + '/movieserial/uid/' + movieInfo.uid
+                let seriesURL = legacyBaseURL + '/movieserial/uid/' + movieInfo.uid
                 dataLoader._fetchJSONData(documentLoader.prepareURL(seriesURL), (dataObj) => {
                     let seriesAllEpisodes = dataObj.movieserial
                     
@@ -161,7 +161,7 @@ class ProductDocumentController extends DocumentController {
                 seasonsButton.parentNode.removeChild(seasonsButton)
             }
             
-            let recommendationURL = filimoAPIBaseURL + '/recom/uid/' + this._movieUID
+            let recommendationURL = legacyBaseURL + '/recom/uid/' + this._movieUID
             dataLoader._fetchJSONData(documentLoader.prepareURL(recommendationURL), (dataObj) => {
                 let movies = dataObj.recom
                 recommendationSectionNode.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
@@ -169,9 +169,9 @@ class ProductDocumentController extends DocumentController {
                 document.getElementById("recommendationStaticTitle").textContent = "پیشنهادها"
             })
             
-            let detailInfoURL = filimoAPIBaseURL + '/moviedetail/uid/' + this._movieUID
+            let detailInfoURL = legacyBaseURL + '/moviedetail/uid/' + this._movieUID
             dataLoader._fetchJSONData(documentLoader.prepareURL(detailInfoURL), (dataObj) => {
-                if (dataObj.moviedetail == null || dataObj.moviedetail == undefined) {
+                if (dataObj.moviedetail == null) {
                     return
                 }
                 
@@ -255,7 +255,7 @@ class ProductDocumentController extends DocumentController {
                 }
             })
             
-            let reviewsURL = filimoAPIBaseURL + '/commentList/uid/' + this._movieUID + '/perpage/25/'
+            let reviewsURL = legacyBaseURL + '/commentList/uid/' + this._movieUID + '/perpage/25/'
             dataLoader._fetchJSONData(documentLoader.prepareURL(reviewsURL), (dataObj) => {
                 let commentList = dataObj.commentlist
                 if (commentList && commentList.length > 0) {
@@ -410,7 +410,7 @@ class ProductDocumentController extends DocumentController {
                 return
             }
             if (movieFullInfo.watch_permision) {
-                if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src != "") {
+                if (movieFullInfo.watch_action.movie_src && movieFullInfo.watch_action.movie_src !== "") {
                     
                     var player = new Player()
                     var video = new MediaItem('video', movieFullInfo.watch_action.movie_src)
@@ -420,8 +420,7 @@ class ProductDocumentController extends DocumentController {
                     video.artworkImageURL = movieFullInfo.movie_img_b
                     
                     let castSkip = movieFullInfo.cast_skip_arr
-                    if (castSkip != null && castSkip != undefined 
-                        && castSkip.intro_e > 0 && video.resumeTime + 5 < castSkip.intro_e) {
+                    if (castSkip != null && castSkip.intro_e > 0 && video.resumeTime + 5 < castSkip.intro_e) {
                         let skipIntroDocument = createSkipIntroDocument()
                         skipIntroDocument.getElementById('skipButton').addEventListener('select', (event) => {
                             player.seekToTime(castSkip.intro_e)
@@ -458,7 +457,7 @@ class ProductDocumentController extends DocumentController {
         }
         
         function setPlaybackEventListeners(currentPlayer, movie) {
-            if (movie.visit_url.formAction == null || movie.visit_url.formAction == undefined) {
+            if (movie.visit_url.formAction == null) {
                 return
             }
             
@@ -494,7 +493,7 @@ class ProductDocumentController extends DocumentController {
                 xhr.onerror = () => {
                 }
                 
-                if (frmID == undefined) {
+                if (frmID === undefined) {
                     return
                 }
                 let payload = `frm-id=${frmID}&movie_id=${movie.uid}&movie_type=${movie.is_serial ? 'serial' : 'film'}&`

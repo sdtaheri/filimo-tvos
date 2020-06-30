@@ -9,13 +9,13 @@ class DocumentController {
 
     constructor({ documentLoader, documentURL, loadingDocument }) {
         this.handleEvent = this.handleEvent.bind(this);
-        this._documentLoader = documentLoader;
-        this._dataLoader = new DataLoader(documentLoader);
+        this.documentLoader = documentLoader;
+        this.dataLoader = new DataLoader(documentLoader, new DataParser());
         this.fetchDocument(documentURL, loadingDocument);
     }
 
     fetchDocument(documentURL, loadingDocument) {
-        this._documentLoader.fetch({
+        this.documentLoader.fetch({
             url: documentURL,
             success: (document) => {
                // Add the event listener for document
@@ -59,7 +59,7 @@ class DocumentController {
                         controllerOptions.loadingDocument = loadingDocument;
                     }
                     controllerOptions.event = event;
-                    controllerOptions.documentLoader = this._documentLoader;
+                    controllerOptions.documentLoader = this.documentLoader;
                     // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.
                     new controllerClass(controllerOptions);
                 }

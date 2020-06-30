@@ -8,7 +8,7 @@ This class handles presenting the Menu Bar template example.
 class MenuBarController extends DocumentController {
 
     fetchDocument(documentURL, loadingDocument) {
-        this._documentLoader.fetch({
+        this.documentLoader.fetch({
             url: documentURL,
             success: (menuBarDocument) => {
                 const menuBarElem = menuBarDocument.getElementsByTagName("menuBar").item(0);
@@ -54,7 +54,7 @@ class MenuBarController extends DocumentController {
                 if (!isInitialItem) {
                     menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
                 }
-                controllerOptions.documentLoader = this._documentLoader;
+                controllerOptions.documentLoader = this.documentLoader;
                 const controllerClass = controllerOptions.type;
                 const controller = new controllerClass(controllerOptions);
                 controller.handleDocument = (document) => {

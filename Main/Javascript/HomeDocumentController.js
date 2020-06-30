@@ -25,13 +25,13 @@ class HomeDocumentController extends DocumentController {
             if (isLoggedIn()) {
                 if (attribute !== "") {
                     button.getElementsByTagName("title").item(0).textContent = "خروج"
-                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/logout.png 1x, " + baseURL + "Resources/logout@2x.png 2x")
+                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", jsBaseURL + "Resources/logout.png 1x, " + jsBaseURL + "Resources/logout@2x.png 2x")
                     button.removeAttribute("loginDocumentURL")
                 }
             } else {
                 if (attribute === "") {
                     button.getElementsByTagName("title").item(0).textContent = "ورود"
-                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", baseURL + "Resources/login.png 1x, " + baseURL + "Resources/login@2x.png 2x")
+                    button.getElementsByTagName("badge").item(0).setAttribute("srcset", jsBaseURL + "Resources/login.png 1x, " + jsBaseURL + "Resources/login@2x.png 2x")
                     button.setAttribute("loginDocumentURL", "/XMLs/Login.xml")    
                 }
             }
@@ -53,8 +53,8 @@ class HomeDocumentController extends DocumentController {
 
         mainNode.removeChild(stackTemplate)
 
-        let url = filimoAPIBaseURL + '/homepage'
-        this._dataLoader._fetchJSONData(this._documentLoader.prepareURL(url), (dataObj) => {
+        let url = legacyBaseURL + '/homepage'
+        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(url), (dataObj) => {
             let sections = dataObj.homepage.filter((item) => {
                 return item.data != undefined
             })
