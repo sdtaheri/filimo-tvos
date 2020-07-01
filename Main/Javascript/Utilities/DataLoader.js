@@ -62,4 +62,11 @@ class DataLoader {
             this._dataParser.parseVitrineResponse(response, itemCallback);
         });
     }
+
+    fetchCategoriesList(itemCallback) {
+        let url = baseURL + '/category/category/list';
+        this._fetchJSONData(this._documentLoader.prepareURL(url), (response) => {
+            this._dataParser.parseCategoriesResponse(response, itemCallback);
+        });
+    }
 }

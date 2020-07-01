@@ -110,4 +110,23 @@ class DataParser {
 
         itemCallback(result);
     }
+
+    parseCategoriesResponse(response, itemCallback) {
+        let result = {};
+
+        result.meta = response.meta || null;
+        result.nextPage = (response.links !== undefined) ? response.links.forward : null;
+
+        result.dataItems = response.data.map((item) => {
+            let objectItem = new DataItem("category", item['link_key']);
+            objectItem.title = toPersianDigits(item['title']);
+            objectItem.titleEn = item['title_en'];
+            objectItem.image = item['cover'];
+            objectItem.uid = item['tag_id'];
+            objectItem.linkType = item['link_type'];
+            return objectItem;
+        });
+
+        itemCallback(result);
+    }
 }
