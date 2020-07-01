@@ -43,6 +43,7 @@ let pendingPlayURL = null;
 App.onLaunch = function (options) {
     jsBaseURL = options["jsBaseURL"];
     baseURL = options["baseURL"];
+    appName = options["appName"];
 
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
@@ -264,31 +265,6 @@ function resolveControllerFromElement(elem) {
             };
         }
     }
-}
-
-function toPersianDigits(str) {
-    if (str == null) {
-        return null
-    }
-    return str.replace(/0/g, "۰")
-        .replace(/1/g, "۱")
-        .replace(/2/g, "۲")
-        .replace(/3/g, "۳")
-        .replace(/4/g, "۴")
-        .replace(/5/g, "۵")
-        .replace(/6/g, "۶")
-        .replace(/7/g, "۷")
-        .replace(/8/g, "۸")
-        .replace(/9/g, "۹")
-}
-
-function removeHTMLEntities(str) {
-    if (str == null) {
-        return null
-    }
-    return str.replace("&hellip;", "…")
-        .replace("&#039;", "'")
-        .replace(/\&\w+;/g, '')
 }
 
 function isLoggedIn() {

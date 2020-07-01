@@ -1,135 +1,96 @@
 class SearchDocumentController extends DocumentController {
 
     setupDocument(document) {
-        super.setupDocument(document)
 
-        const searchTemplateElem = document.getElementsByTagName('searchTemplate').item(0)
-        const searchFieldElem = document.getElementsByTagName('searchField').item(0)
-        const messageElem = document.getElementById("message");
-        const resultsListElem = document.getElementById("resultsList")
-        const resultsGridContainerElem = document.getElementById("resultsGridContainer")
-        
-        let resultsSectionElem = document.getElementById("resultsSection");
-        resultsSectionElem.dataItem = new DataItem()
+        super.setupDocument(document);
 
-        let resultsContainerElem = resultsGridContainerElem;
-        toggleDefaultResults(true)
+        const searchTemplate = document.getElementsByTagName('searchTemplate').item(0);
+        const messageElement = document.getElementById("message");
+        const resultsList = document.getElementById("resultsList");
+        const gridElement = document.getElementById("resultsGridContainer");
 
-        let searchRequest
-        let searchTextCache
-        const searchKeyboard = searchFieldElem.getFeature('Keyboard')
-        searchKeyboard.onTextChange = performSearchRequest
+        const sectionElement = document.getElementById("resultsSection");
+        sectionElement.dataItem = new DataItem();
 
-        function toggleSearchMessage(bool, message) {
+        const searchFieldElement = document.getElementsByTagName('searchField').item(0);
+        const searchKeyboard = searchFieldElement.getFeature('Keyboard');
+        searchFieldElement.innerHTML = string_search_placeholder();
+
+        searchKeyboard.onTextChange = performSearchRequest.bind(this);
+
+        showGrid(false);
+        showSearchMessage(false);
+
+        function showSearchMessage(bool, message) {
             if (bool) {
                 if (message) {
-                    messageElem.textContent = message;
+                    messageElement.textContent = message;
                 }
-                if (!messageElem.parentNode) {
-                    searchTemplateElem.appendChild(messageElem);
+                if (!messageElement.parentNode) {
+                    searchTemplate.appendChild(messageElement);
                 }
             } else {
-                if (messageElem.parentNode) {
-                    searchTemplateElem.removeChild(messageElem);
+                if (messageElement.parentNode) {
+                    searchTemplate.removeChild(messageElement);
                 }
             }
         }
 
-        function toggleDefaultResults(bool) {
+        function showGrid(bool) {
             if (bool) {
-                if (resultsContainerElem.parentNode) {
-                    resultsListElem.removeChild(resultsContainerElem)
+                if (!gridElement.parentNode) {
+                    resultsList.appendChild(gridElement);
                 }
-                toggleSearchMessage(false)
             } else {
-                if (!resultsContainerElem.parentNode) {
-                    resultsListElem.appendChild(resultsContainerElem)
+                if (gridElement.parentNode) {
+                    resultsList.removeChild(gridElement);
                 }
             }
         }
 
         function performSearchRequest() {
-            const searchText = searchKeyboard.text.trim().replace(/\s+/g, " ")
+            const query = searchKeyboard.text;
 
-            if (searchTextCache && searchText === searchTextCache) {
-                return
-            }
-            searchTextCache = searchText
-
-            if (searchRequest && searchRequest.readyState !== XMLHttpRequest.DONE) {
-                searchRequest.abort()
+            if (query === '') {
+                showGrid(false);
+                showSearchMessage(false);
+                return;
             }
 
-            if (searchText.length === 0) {
-                toggleDefaultResults(true)
-                return
-            }
+            this.dataLoader.fetchSearchResults(query, (result) => {
+                showSearchResponse(result);
+            }, showSearchError);
 
-            let searchURL = legacyBaseURL
-                + '/search/text/' + encodeURIComponent(searchText) + '/perpage/20' 
-            if (isLoggedIn()) {
-                searchURL += "/luser/" + localStorage.getItem("username")
-                searchURL += "/ltoken/" + localStorage.getItem("token")
-            }
-            searchURL += '/devicetype/site/'
-
-            searchRequest = new XMLHttpRequest()
-            searchRequest.open('GET', searchURL)
-            searchRequest.responseType = 'json'
-            searchRequest.onload = showSearchResponse
-            searchRequest.onerror = showSearchError
-            searchRequest.send()
-
-            searchFieldElem.setAttribute('showSpinner', true)
+            showSpinner(true);
         }
 
         function showSearchError() {
-            toggleSearchMessage(true, "خطا در دریافت نتایج جستجو")
-            searchFieldElem.setAttribute('showSpinner', false)
+            showGrid(false);
+            showSearchMessage(true, string_error_in_search);
+            showSpinner(false);
         }
 
-        function showSearchResponse() {
-            toggleDefaultResults(false)
-            searchFieldElem.setAttribute('showSpinner', false)
+        function showSearchResponse(result) {
+            showSpinner(false);
 
-            const searchResponse = searchRequest.response
-            const searchResults = searchResponse.search
-            if (searchResults !== null && searchResults.length > 0) {
-                appendSearchResults(searchResults)
-                toggleSearchMessage(false)
+            if (result.dataItems.length > 0) {
+                appendSearchResults(result.dataItems);
+                showSearchMessage(false);
+                showGrid(true);
             } else {
-                toggleSearchMessage(true, `نتیجه‌ای برای «${searchTextCache}» پیدا نشد.`)
+                showGrid(false);
+                showSearchMessage(true, string_nothing_found_for(searchKeyboard.text));
             }
         }
 
-        function appendSearchResults(results) {
-            resultsSectionElem.dataItem.setPropertyPath("items", dataItemsFromJSONItems(results))
+        function appendSearchResults(items) {
+            sectionElement.dataItem.setPropertyPath("movies", items);
         }
 
-        function dataItemsFromJSONItems(items) {
-            return items.map((movie) => {
-                let dataItem = new DataItem("searchArtwork", movie.uid)
-                Object.keys(movie).forEach((key) => {
-                    let value = movie[key]
-                    if (value && key === 'user_watched_info') {
-                        let percent = value['percent']
-                        if (percent) {
-                            dataItem.setPropertyPath('watch_fraction', percent / 100.0)
-                        } else {
-                            dataItem.setPropertyPath('watch_fraction', 0.0)
-                        }
-                    }
-                    if (key === 'movie_title' || key === 'descr') {
-                        value = toPersianDigits(value)
-                    }
-                    if (key === 'movie_title_en') {
-                        value = removeHTMLEntities(value)
-                    }
-                    dataItem.setPropertyPath(key, value)
-                })
-                return dataItem
-            })
-        }    
+        function showSpinner(bool) {
+            searchFieldElement.setAttribute('showSpinner', bool);
+        }
     }
 }
-registerAttributeName("searchDocumentURL", SearchDocumentController)
+
+registerAttributeName("searchDocumentURL", SearchDocumentController);
