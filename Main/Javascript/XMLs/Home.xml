@@ -55,7 +55,7 @@
     <stackTemplate>
         <banner>
             <organizer>
-                <img class="headerLogo" srcset="/Resources/logo.png (theme:light), /Resources/logo_dark.png (theme:dark)" alt="Filimo Logo" />
+                <img class="headerLogo" srcset="/Resources/logo_filimo.png (theme:light), /Resources/logo_filimo_dark.png (theme:dark)" alt="Filimo Logo" />
                 <row class="leftAlignedRow">
                     <buttonLockup id="reloadButton" class="reloadButton">
                         <badge srcset="/Resources/reload.png 1x, /Resources/reload@2x.png 2x" width="60" height="60"/>

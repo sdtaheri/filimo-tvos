@@ -33,8 +33,9 @@
         </style>
     </head>
     <divTemplate>
-        <img src="/Resources/logo_icon.png" class="top" width="150" height="150"/>
+        <img src="/Resources/logo_filimo_icon.png" class="top" width="150" height="150"/>
         <title class="middle">برای ورود به فیلیمو با استفاده از مرورگر موبایل یا رایانه شخصی خود به آدرس <b>filimo.com/activate</b> مراجعه نموده و کد زیر را وارد کنید. در ادامه با وارد کردن مشخصات حساب کاربری خود به فیلیمیو وارد شده و منتظر به روز  رسانی خودکار این صفحه باشید.</title>
-        <title class="bottom"><b id="verificationCode"></b></title>
+        <title class="bottom">
+            <b id="verificationCode"/></title>
     </divTemplate>
 </document>

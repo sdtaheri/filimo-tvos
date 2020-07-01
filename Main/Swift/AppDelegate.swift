@@ -14,20 +14,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
     
     var window: UIWindow?
     var appController: TVApplicationController?
-    
-    // tvBaseURL points to a server on your local machine. To create a local server for testing purposes, use the following command inside Javascript folder from the Terminal app: ruby -run -ehttpd . -p9001. See NSAppTransportSecurity for information on using a non-secure server.
-    static let tvBaseURL: String = {
-        #if DEBUG
-            return "http://localhost:9001/"
-        #else
-            return "https://filimo.saeedtaheri.com/"
-        #endif
-    }()
-
-	static let baseURL = "https://www.filimo.com/api/fa/v1"
-
-    static let tvBootURL = "\(AppDelegate.tvBaseURL)/Application.js"
-    
+        
     // MARK: Javascript Execution Helper
     
     func executeRemoteMethod(_ methodName: String, completion: @escaping (Bool) -> Void) {
@@ -56,12 +43,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
         let appControllerContext = TVApplicationControllerContext()
         
         // The JavaScript URL is used to create the JavaScript context for your TVMLKit application. Although it is possible to separate your JavaScript into separate files, to help reduce the launch time of your application we recommend creating minified and compressed version of this resource. This will allow for the resource to be retrieved and UI presented to the user quickly.
-        if let javaScriptURL = URL(string: AppDelegate.tvBootURL) {
+        if let javaScriptURL = URL(string: Config.tvBootURL) {
             appControllerContext.javaScriptApplicationURL = javaScriptURL
         }
         
-        appControllerContext.launchOptions["jsBaseURL"] = AppDelegate.tvBaseURL
-        appControllerContext.launchOptions["baseURL"] = AppDelegate.baseURL
+        appControllerContext.launchOptions["jsBaseURL"] = Config.tvBaseURL
+        appControllerContext.launchOptions["baseURL"] = Config.baseURL
+        appControllerContext.launchOptions["appName"] = Config.appNameFa
         
         if let launchOptions = launchOptions {
             for (kind, value) in launchOptions {

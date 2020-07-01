@@ -19,11 +19,10 @@
  * application lifecycle events.
  */
 
-const appName = "فیلیمو";
-
 const attributeToController = {};
 const attributeKeys = [];
 
+let appName;
 let jsBaseURL;
 let baseURL;
 
@@ -298,4 +297,8 @@ function isLoggedIn() {
         return true
     }
     return false
+}
+
+function isFilimo() {
+    return baseURL.includes("filimo.com");
 }

@@ -15,7 +15,7 @@ class LoginController extends DocumentController {
             + code
             dataLoader._fetchJSONData(documentLoader.prepareURL(verifyURL), (dataObj) => {
             let token = dataObj.verifycodecheck.ltoken
-            if (token != null && token != undefined) {
+            if (token != null) {
                 clearInterval(refreshIntervalId)
                 localStorage.setItem("token", token)
                 localStorage.setItem("username", dataObj.verifycodecheck.username)

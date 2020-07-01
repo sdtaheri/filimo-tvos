@@ -13,7 +13,7 @@ class DocumentLoader {
         if (typeof baseURL !== "string") {
             throw new TypeError("DocumentLoader: baseURL argument must be a string.");
         }
-        this.baseURL = baseURL;
+        this.jsBaseURL = baseURL;
     }
 
     /*
@@ -73,7 +73,7 @@ class DocumentLoader {
     prepareURL(url) {
         // Handle URLs relative to the "server root" (baseURL)
         if (url.indexOf("/") === 0) {
-            url = this.baseURL + url.substr(1);
+            url = this.jsBaseURL + url.substr(1);
         }
         return url;
     }

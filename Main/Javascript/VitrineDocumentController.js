@@ -3,6 +3,10 @@ class VitrineDocumentController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document);
 
+        let logoIdentifier = isFilimo() ? "filimo" : "televika";
+        let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
+        document.getElementById("headerLogo").setAttribute("srcset", logoResource);
+
         this._nextPageURL = null;
 
         const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);

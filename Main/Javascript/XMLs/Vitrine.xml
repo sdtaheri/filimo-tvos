@@ -53,9 +53,7 @@
 
         <banner>
             <organizer>
-                <img width="295" height="90" class="headerLogo"
-                     srcset="/Resources/logo.png (theme:light), /Resources/logo_dark.png (theme:dark)"
-                     alt="Filimo Logo"/>
+                <img id="headerLogo" width="295" height="90" class="headerLogo"/>
             </organizer>
         </banner>
 

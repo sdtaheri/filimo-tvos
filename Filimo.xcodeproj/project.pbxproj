@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
+		304769C724AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
+		304769C824AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
+		304769CB24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
+		304769CC24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
 		30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* Model.swift */; };
@@ -46,14 +49,31 @@
 /* Begin PBXFileReference section */
 		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
 		3015FFA52063A51A0029F8FF /* DataLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataLoader.js; sourceTree = "<group>"; };
-		301E4808206B8D9800D44269 /* logo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_dark.png; sourceTree = "<group>"; };
 		301E4809206B92CE00D44269 /* SearchDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SearchDocumentController.js; sourceTree = "<group>"; };
 		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
 		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
-		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		304769C024AC725B0002714B /* Televika.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Televika.xcconfig; sourceTree = "<group>"; };
+		304769C224AC728A0002714B /* Filimo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Filimo.xcconfig; sourceTree = "<group>"; };
+		304769C624AC7E420002714B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		304769CA24AC7F710002714B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		304769CD24AC96BF0002714B /* imdb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imdb.png; sourceTree = "<group>"; };
+		304769CE24AC96BF0002714B /* logo_televika_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika_icon.png; sourceTree = "<group>"; };
+		304769CF24AC96BF0002714B /* logo_televika_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika_dark.png; sourceTree = "<group>"; };
+		304769D024AC96BF0002714B /* logo_televika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika.png; sourceTree = "<group>"; };
+		304769D124AC96BF0002714B /* logo_filimo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo.png; sourceTree = "<group>"; };
+		304769D224AC96BF0002714B /* Strings.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Strings.js; sourceTree = "<group>"; };
+		304769D324AC96BF0002714B /* logo_filimo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo_icon.png; sourceTree = "<group>"; };
+		304769D424AC96BF0002714B /* imdb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imdb@2x.png"; sourceTree = "<group>"; };
+		304769D524AC96BF0002714B /* logo_filimo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo_dark.png; sourceTree = "<group>"; };
+		304769D624AC97A00002714B /* Search.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Search.xml; sourceTree = "<group>"; };
+		304769D724AC97A00002714B /* Seasons.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Seasons.xml; sourceTree = "<group>"; };
+		304769D824AC97A00002714B /* Vitrine.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Vitrine.xml; sourceTree = "<group>"; };
+		304769D924AC97AF0002714B /* SeasonsDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SeasonsDocumentController.js; sourceTree = "<group>"; };
+		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
+		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
 		309D289720663183001148BE /* Categories.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Categories.xml; sourceTree = "<group>"; };
 		309D289B20663390001148BE /* CategoriesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CategoriesDocumentController.js; sourceTree = "<group>"; };
 		309D289D206649DF001148BE /* Product.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Product.xml; sourceTree = "<group>"; };
@@ -70,7 +90,6 @@
 		30B503E5206E159500D08682 /* MyMoviesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MyMoviesDocumentController.js; sourceTree = "<group>"; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
-		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
@@ -80,7 +99,6 @@
 		30D5167920682EEF007995AF /* ProductsListDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductsListDocumentController.js; sourceTree = "<group>"; };
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
-		30D5167C20683595007995AF /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
 		30D5A40B24ABE7FD00F5CF08 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30ED5306233950DA0068FE95 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -112,10 +130,11 @@
 		3015FFA62063A55A0029F8FF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				30B503F9207034FC00D08682 /* Jalali.js */,
-				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
 				3015FFA52063A51A0029F8FF /* DataLoader.js */,
+				304769DB24AC97C50002714B /* DataParser.js */,
 				30241805206514C300B46686 /* DocumentController.js */,
+				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
+				30B503F9207034FC00D08682 /* Jalali.js */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -123,13 +142,16 @@
 		3024180A2065335C00B46686 /* XMLs */ = {
 			isa = PBXGroup;
 			children = (
-				302418082065246700B46686 /* Index.xml */,
-				30241804206501F500B46686 /* Home.xml */,
 				309D289720663183001148BE /* Categories.xml */,
-				30D5167720682D8C007995AF /* ProductsList.xml */,
-				309D289D206649DF001148BE /* Product.xml */,
+				30241804206501F500B46686 /* Home.xml */,
+				302418082065246700B46686 /* Index.xml */,
 				30D5167A20683283007995AF /* Login.xml */,
 				30B503E4206E158A00D08682 /* MyMovies.xml */,
+				309D289D206649DF001148BE /* Product.xml */,
+				30D5167720682D8C007995AF /* ProductsList.xml */,
+				304769D624AC97A00002714B /* Search.xml */,
+				304769D724AC97A00002714B /* Seasons.xml */,
+				304769D824AC97A00002714B /* Vitrine.xml */,
 			);
 			path = XMLs;
 			sourceTree = "<group>";
@@ -137,11 +159,17 @@
 		3024180B2065567400B46686 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				304769CD24AC96BF0002714B /* imdb.png */,
+				304769D424AC96BF0002714B /* imdb@2x.png */,
+				304769D524AC96BF0002714B /* logo_filimo_dark.png */,
+				304769D324AC96BF0002714B /* logo_filimo_icon.png */,
+				304769D124AC96BF0002714B /* logo_filimo.png */,
+				304769CF24AC96BF0002714B /* logo_televika_dark.png */,
+				304769CE24AC96BF0002714B /* logo_televika_icon.png */,
+				304769D024AC96BF0002714B /* logo_televika.png */,
+				304769D224AC96BF0002714B /* Strings.js */,
 				30A8B732208121E600B55E69 /* seasons.png */,
 				30A8B731208121E600B55E69 /* seasons@2x.png */,
-				30D5167C20683595007995AF /* logo_icon.png */,
-				3024180C2065568B00B46686 /* logo.png */,
-				301E4808206B8D9800D44269 /* logo_dark.png */,
 				30B503DE206E157C00D08682 /* login.png */,
 				30B503E1206E157C00D08682 /* login@2x.png */,
 				30B503E0206E157C00D08682 /* logout.png */,
@@ -152,11 +180,21 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		304769C524AC72A00002714B /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				304769C024AC725B0002714B /* Televika.xcconfig */,
+				304769C224AC728A0002714B /* Filimo.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		307D82772063157800848244 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				30ED5306233950DA0068FE95 /* main.swift */,
 				30C5790920448110007E728F /* AppDelegate.swift */,
+				304769C624AC7E420002714B /* Config.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -172,18 +210,20 @@
 		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
-				3015FFA62063A55A0029F8FF /* Utilities */,
-				3024180B2065567400B46686 /* Resources */,
-				3024180A2065335C00B46686 /* XMLs */,
 				30C5790B20448110007E728F /* Application.js */,
-				30241809206525F700B46686 /* MenuBarController.js */,
-				30D5167B206832A5007995AF /* LoginController.js */,
-				302418062065246700B46686 /* HomeDocumentController.js */,
 				309D289B20663390001148BE /* CategoriesDocumentController.js */,
-				30D5167920682EEF007995AF /* ProductsListDocumentController.js */,
-				309D289F20664A00001148BE /* ProductDocumentController.js */,
-				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
+				302418062065246700B46686 /* HomeDocumentController.js */,
+				30D5167B206832A5007995AF /* LoginController.js */,
+				30241809206525F700B46686 /* MenuBarController.js */,
 				30B503E5206E159500D08682 /* MyMoviesDocumentController.js */,
+				309D289F20664A00001148BE /* ProductDocumentController.js */,
+				30D5167920682EEF007995AF /* ProductsListDocumentController.js */,
+				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
+				304769D924AC97AF0002714B /* SeasonsDocumentController.js */,
+				304769DA24AC97AF0002714B /* VitrineDocumentController.js */,
+				3024180B2065567400B46686 /* Resources */,
+				3015FFA62063A55A0029F8FF /* Utilities */,
+				3024180A2065335C00B46686 /* XMLs */,
 			);
 			path = Javascript;
 			sourceTree = "<group>";
@@ -191,8 +231,8 @@
 		30BF891E20631298009FAB4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				304769C924AC7F710002714B /* InfoPlist.strings */,
 				30C5790C20448110007E728F /* Assets.xcassets */,
-				30BF89182062F2B7009FAB4D /* InfoPlist.strings */,
 				30C5790E20448110007E728F /* Info.plist */,
 				30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */,
 			);
@@ -202,6 +242,7 @@
 		30C578FD20448110007E728F = {
 			isa = PBXGroup;
 			children = (
+				304769C524AC72A00002714B /* Configuration */,
 				30C5790820448110007E728F /* Main */,
 				30ED530E233B55E60068FE95 /* TopShelf */,
 				30C5790720448110007E728F /* Products */,
@@ -323,8 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */,
+				304769CB24AC7F710002714B /* InfoPlist.strings in Resources */,
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
-				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				304769CC24AC7F710002714B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +386,7 @@
 			files = (
 				30C5790A20448110007E728F /* AppDelegate.swift in Sources */,
 				30ED5307233950DA0068FE95 /* main.swift in Sources */,
+				304769C724AC7E420002714B /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */,
+				304769C824AC7E420002714B /* Config.swift in Sources */,
 				30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */,
 				30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */,
 			);
@@ -368,10 +412,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		30BF89182062F2B7009FAB4D /* InfoPlist.strings */ = {
+		304769C924AC7F710002714B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				30BF89192062F2B7009FAB4D /* fa */,
+				304769CA24AC7F710002714B /* fa */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -379,11 +423,12 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		30C5790F20448110007E728F /* Debug */ = {
+		304769BA24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 1910261815;
+				BUILD = 2007011;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -438,15 +483,67 @@
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TVOS_DEPLOYMENT_TARGET = 12.0;
-				VERSION = 1.2;
+				VERSION = 2.0;
 			};
-			name = Debug;
+			name = "Televika Debug";
 		};
-		30C5791020448110007E728F /* Release */ = {
+		304769BB24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Debug";
+		};
+		304769BC24AC6E410002714B /* Televika Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
+				PRODUCT_NAME = TopShelf;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Debug";
+		};
+		304769BD24AC6E4B0002714B /* Televika Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
+			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 1910261815;
+				BUILD = 2007011;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -494,15 +591,15 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
-				VERSION = 1.2;
+				VERSION = 2.0;
 			};
-			name = Release;
+			name = "Televika Release";
 		};
-		30C5791220448110007E728F /* Debug */ = {
+		304769BE24AC6E4B0002714B /* Televika Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -514,7 +611,178 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Release";
+		};
+		304769BF24AC6E4B0002714B /* Televika Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
+				PRODUCT_NAME = TopShelf;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Release";
+		};
+		30C5790F20448110007E728F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD = 2007011;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VERSION = 2.0;
+			};
+			name = Debug;
+		};
+		30C5791020448110007E728F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD = 2007011;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VALIDATE_PRODUCT = YES;
+				VERSION = 2.0;
+			};
+			name = Release;
+		};
+		30C5791220448110007E728F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -527,7 +795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -539,7 +807,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -565,7 +833,7 @@
 				MARKETING_VERSION = "$(VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
 				PRODUCT_NAME = TopShelf;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -590,7 +858,7 @@
 				);
 				MARKETING_VERSION = "$(VERSION)";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
 				PRODUCT_NAME = TopShelf;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -606,7 +874,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30C5790F20448110007E728F /* Debug */,
+				304769BA24AC6E410002714B /* Televika Debug */,
 				30C5791020448110007E728F /* Release */,
+				304769BD24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -615,7 +885,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30C5791220448110007E728F /* Debug */,
+				304769BB24AC6E410002714B /* Televika Debug */,
 				30C5791320448110007E728F /* Release */,
+				304769BE24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -624,7 +896,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30ED5316233B55E60068FE95 /* Debug */,
+				304769BC24AC6E410002714B /* Televika Debug */,
 				30ED5317233B55E60068FE95 /* Release */,
+				304769BF24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
