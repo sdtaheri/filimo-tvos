@@ -11,6 +11,46 @@
             tv-text-style: caption2;
             }
 
+            .movieCard {
+            width: 666;
+            height: 308;
+            border-radius: 12;
+            background-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .movieCardImage {
+            width: 231;
+            height: 308;
+            tv-position: leading;
+            background-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .movieCardTitle {
+            text-align: natural;
+            tv-text-max-lines: 2;
+            tv-position:top;
+            tv-align: leading;
+            margin: 32 32 0;
+            tv-text-style:callout;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .movieCardSubtitle {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:top;
+            tv-align: leading;
+            margin: 16 32 0;
+            tv-text-style:subhead;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .imageGradient {
+            tv-tint-color: linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
+            }
+
             .channelLogo {
             tv-tint-color: rgba(0, 0, 0, 0.60);
             tv-highlight-color: rgb(255,255,255);
@@ -20,6 +60,10 @@
             @media tv-template and (tv-theme:dark) {
             .channelLogo {
             tv-tint-color: rgba(255, 255, 255, 0.50);
+            }
+
+            .movieCard {
+            background-color: rgba(0, 0, 0, 0.3);
             }
             }
         </style>
@@ -33,6 +77,14 @@
                     <title binding="textContent:{title};"/>"
                 </row>
             </lockup>
+            <card prototype="movie-theater" class="movieCard" productDocumentURL="/XMLs/Product.xml">
+                <background>
+                    <img class="imageGradient" aspectFill="true" width="666" height="308" binding="@src:{cover};" />
+                </background>
+                <img class="movieCardImage" binding="@src:{image};" />
+                <title class="movieCardTitle" binding="textContent:{title};" />
+                <subtitle class="movieCardSubtitle" binding="textContent:{desc};" />
+            </card>
             <lockup prototype="movie-thumbplay" productDocumentURL="/XMLs/Product.xml">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
                 <title binding="textContent:{title};"/>"

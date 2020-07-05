@@ -2,22 +2,32 @@
 <document>
     <head>
         <style>
-            .paddedOverlay {
-            padding: 0 16 16 0;
+            .categoryCard {
+            width: 830;
+            height: 180;
+            border-radius: 12;
             }
-            .shadowedTitle {
+
+            .categoryTitle {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:bottom;
+            tv-align: leading;
+            margin: 16;
+            tv-text-style: callout;
+            color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 8px #000000;
             }
         </style>
     </head>
     <stackTemplate>
         <prototypes>
-            <lockup productsListDocumentURL="/XMLs/ProductsList.xml" prototype="category">
-                <img binding="@src:{image};" width="830" height="180"/>
-                <overlay class="paddedOverlay">
-                    <title class="shadowedTitle" binding="textContent:{title};"/>
-                </overlay>
-            </lockup>
+            <card class="categoryCard" productsListDocumentURL="/XMLs/ProductsList.xml" prototype="category">
+                <background>
+                    <img aspectFill="true" binding="@src:{image};" width="830" height="180"/>
+                </background>
+                <title class="categoryTitle" binding="textContent:{title};"/>
+            </card>
         </prototypes>
 
         <collectionList>

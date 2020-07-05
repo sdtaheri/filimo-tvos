@@ -25,7 +25,9 @@ function toPersianDigits(str) {
         .replace(/6/g, "۶")
         .replace(/7/g, "۷")
         .replace(/8/g, "۸")
-        .replace(/9/g, "۹");
+        .replace(/9/g, "۹")
+        .replace(/(,(?=\S)|:)/g, '، ')
+        .replace(' ،', '،');
 }
 
 function removeHTMLEntities(str) {
@@ -36,7 +38,7 @@ function removeHTMLEntities(str) {
     return str.replace("&hellip;", "…")
         .replace("&zwnj;", "‌")
         .replace("&#039;", "'")
-        .replace(/\&\w+;/g, '');
+        .replace(/&\w+;/g, '');
 }
 
 function cleanup(str) {

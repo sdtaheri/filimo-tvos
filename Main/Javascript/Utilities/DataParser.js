@@ -18,18 +18,15 @@ class DataParser {
             row.type = item['output_type'] + '-' + item['theme'];
 
             switch (row.type) {
-                case 'movie-theater': {
-                    row.dataItems = null;
-                    break;
-                }
-
+                case 'movie-theater':
                 case 'movie-thumbnail': {
                     row.dataItems = item['movies'].data.map((movie) => {
                         let objectItem = new DataItem(row.type, movie['link_key']);
                         objectItem.title = cleanup(movie['movie_title']);
                         objectItem.titleEn = removeHTMLEntities(movie['movie_title_en']);
-                        objectItem.desc = null;
+                        objectItem.desc = cleanup(movie['cat_title_str']);
                         objectItem.image = movie['pic']['movie_img_m'];
+                        objectItem.cover = movie['movie_cover'] || null;
                         objectItem.logo = null;
                         objectItem.uid = movie['link_key'];
                         objectItem.linkType = movie['link_type'];
@@ -45,6 +42,7 @@ class DataParser {
                         objectItem.titleEn = removeHTMLEntities(movie['movie_title_en']);
                         objectItem.desc = null;
                         objectItem.image = movie['thumbplay']['thumbplay_img_b'];
+                        objectItem.cover = null;
                         objectItem.logo = null;
                         objectItem.uid = movie['link_key'];
                         objectItem.linkType = movie['link_type'];
@@ -60,6 +58,7 @@ class DataParser {
                         objectItem.titleEn = null;
                         objectItem.desc = null;
                         objectItem.image = poster['pic'];
+                        objectItem.cover = null;
                         objectItem.logo = null;
                         objectItem.uid = poster['link_key'];
                         objectItem.linkType = poster['link_type'];
@@ -75,6 +74,7 @@ class DataParser {
                         objectItem.titleEn = null;
                         objectItem.desc = null;
                         objectItem.image = poster['pic']['pic_brick']['url'];
+                        objectItem.cover = null;
                         objectItem.logo = null;
                         objectItem.uid = poster['link_key'];
                         objectItem.linkType = poster['link_type'];
@@ -90,6 +90,7 @@ class DataParser {
                         objectItem.titleEn = removeHTMLEntities(tv['title_en']);
                         objectItem.desc = cleanup(tv['desc']);
                         objectItem.image = tv['img'];
+                        objectItem.cover = null;
                         objectItem.logo = tv['logo'];
                         objectItem.uid = tv['link_key'];
                         objectItem.linkType = tv['link_type'];
