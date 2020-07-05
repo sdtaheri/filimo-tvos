@@ -8,8 +8,8 @@
             <menuItem categoriesDocumentURL="/XMLs/Categories.xml">
                 <title>دسته‌بندی‌ها</title>
             </menuItem>
-            <menuItem myMoviesDocumentURL="/XMLs/MyMovies.xml">
-                <title>فیلم‌های من</title>
+            <menuItem profileDocumentURL="/XMLs/Profile.xml">
+                <title>پروفایل</title>
             </menuItem>
             <menuItem searchDocumentURL="/XMLs/Search.xml">
                 <title>جستجو</title>

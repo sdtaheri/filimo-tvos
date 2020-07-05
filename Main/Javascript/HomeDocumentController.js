@@ -1,7 +1,7 @@
 class HomeDocumentController extends DocumentController {
         
     handleEvent(event) {
-        if (isLoggedIn() && event.target == this._loginButton) {
+        if (UserManager.isLoggedIn() && event.target == this._loginButton) {
             let button = this._loginButton
             presentAlertQuestion("خروج از فیلیمو", "آیا می‌خواهید از حساب کاربری خود خارج شوید؟", "بله", "خیر", function() {
                                  localStorage.removeItem("token")
@@ -22,7 +22,7 @@ class HomeDocumentController extends DocumentController {
             }
 
             let attribute = button.getAttribute("loginDocumentURL")
-            if (isLoggedIn()) {
+            if (UserManager.isLoggedIn()) {
                 if (attribute !== "") {
                     button.getElementsByTagName("title").item(0).textContent = "خروج"
                     button.getElementsByTagName("badge").item(0).setAttribute("srcset", jsBaseURL + "Resources/logout.png 1x, " + jsBaseURL + "Resources/logout@2x.png 2x")
@@ -54,7 +54,7 @@ class HomeDocumentController extends DocumentController {
         mainNode.removeChild(stackTemplate)
 
         let url = legacyBaseURL + '/homepage'
-        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(url), (dataObj) => {
+        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(url), null, (dataObj) => {
             let sections = dataObj.homepage.filter((item) => {
                 return item.data != undefined
             })

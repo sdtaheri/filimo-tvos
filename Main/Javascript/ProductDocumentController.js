@@ -61,7 +61,7 @@ class ProductDocumentController extends DocumentController {
         
         let shouldPlay = this._shouldPlayMovie || false
         let moreInfoURL = legacyBaseURL + '/movie/uid/' + this._movieUID
-        dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+        dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), null, (dataObj) => {
             mainNode.removeChild(loadingTemplate)
             mainNode.appendChild(productTemplate)
             
@@ -113,7 +113,7 @@ class ProductDocumentController extends DocumentController {
             
             if (movieInfo.is_serial) {
                 let seriesURL = legacyBaseURL + '/movieserial/uid/' + movieInfo.uid
-                dataLoader._fetchJSONData(documentLoader.prepareURL(seriesURL), (dataObj) => {
+                dataLoader._fetchJSONData(documentLoader.prepareURL(seriesURL), null, (dataObj) => {
                     let seriesAllEpisodes = dataObj.movieserial
                     
                     let partNumber = movieInfo.serial_part
@@ -162,7 +162,7 @@ class ProductDocumentController extends DocumentController {
             }
             
             let recommendationURL = legacyBaseURL + '/recom/uid/' + this._movieUID
-            dataLoader._fetchJSONData(documentLoader.prepareURL(recommendationURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(recommendationURL), null, (dataObj) => {
                 let movies = dataObj.recom
                 recommendationSectionNode.dataItem.setPropertyPath("items", dataItemsFromJSONItems(movies))
                 
@@ -170,7 +170,7 @@ class ProductDocumentController extends DocumentController {
             })
             
             let detailInfoURL = legacyBaseURL + '/moviedetail/uid/' + this._movieUID
-            dataLoader._fetchJSONData(documentLoader.prepareURL(detailInfoURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(detailInfoURL), null, (dataObj) => {
                 if (dataObj.moviedetail == null) {
                     return
                 }
@@ -256,7 +256,7 @@ class ProductDocumentController extends DocumentController {
             })
             
             let reviewsURL = legacyBaseURL + '/commentList/uid/' + this._movieUID + '/perpage/25/'
-            dataLoader._fetchJSONData(documentLoader.prepareURL(reviewsURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(reviewsURL), null, (dataObj) => {
                 let commentList = dataObj.commentlist
                 if (commentList && commentList.length > 0) {
                     const reviewsSection = document.getElementById("reviewsSection")
@@ -284,7 +284,7 @@ class ProductDocumentController extends DocumentController {
             })
             
             document.addEventListener('appear', (event) => {
-                if (isLoggedIn() && !isLoggedInAtLaunch) {
+                if (UserManager.isLoggedIn() && !isLoggedInAtLaunch) {
                     playButton.getElementsByTagName('title').item(0).textContent = 'پخش فیلم'
                 }
             })
@@ -315,7 +315,7 @@ class ProductDocumentController extends DocumentController {
         }
         
         function handleBookmarkScenario(movieMoreInfo) {
-            if (isLoggedIn()) {
+            if (UserManager.isLoggedIn()) {
                 if (movieMoreInfo.wish_link && movieMoreInfo.wish_link !== '') {
                     movieMoreInfo.has_wish = !movieMoreInfo.has_wish
                     setupBookmarkButton(movieMoreInfo)
@@ -349,7 +349,7 @@ class ProductDocumentController extends DocumentController {
                     xhr.send()
                 } else if (!isLoggedInAtLaunch) {
                     isLoggedInAtLaunch = true
-                    dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+                    dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), null, (dataObj) => {
                         updateOldInfoWithNew(newMovieInfo, dataObj.movie)
                         handleBookmarkScenario(movieMoreInfo)
                     })
@@ -366,13 +366,13 @@ class ProductDocumentController extends DocumentController {
         }
         
         function handlePlayScenario(movieInfo) {
-            if (isLoggedIn()) {
+            if (UserManager.isLoggedIn()) {
                 if (movieInfo.watch_permision) {
                     playMovie(movieInfo)
                 } else {
                     if (!isLoggedInAtLaunch) {
                         isLoggedInAtLaunch = true
-                        dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), (dataObj) => {
+                        dataLoader._fetchJSONData(documentLoader.prepareURL(moreInfoURL), null, (dataObj) => {
                             updateOldInfoWithNew(movieInfo, dataObj.movie)
                             handlePlayScenario(movieInfo)
                         })
@@ -556,7 +556,7 @@ class ProductDocumentController extends DocumentController {
     }
     
     handleEvent(event) {
-        if (isLoggedIn() && 
+        if (UserManager.isLoggedIn() &&
         (event.target.getAttribute("id") === "playButton" || 
         event.target.getAttribute("id") === "bookmarkButton" ||
         event.target.getAttribute("id") === "previewButton")) {

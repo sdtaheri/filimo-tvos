@@ -25,7 +25,7 @@ class ProductsListDocumentController extends DocumentController {
                 banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.queryString
                 
                 dataLoadingURL = legacyBaseURL + '/search/text/' + encodeURIComponent(this._sourceDataItem.queryString) + '/perpage/20'
-                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                     fillGrid(dataObj)
                 })
 
@@ -34,7 +34,7 @@ class ProductsListDocumentController extends DocumentController {
                 banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.title
 
                 dataLoadingURL = legacyBaseURL + '/movielistbycat/catid/' + this._sourceDataItem.id + '/perpage/20/'
-                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                     fillGrid(dataObj)
                 })
             
@@ -43,7 +43,7 @@ class ProductsListDocumentController extends DocumentController {
                 banner.getElementsByTagName("title").item(0).textContent = this._sourceDataItem.queryString
             
                 dataLoadingURL = this._sourceDataItem.searchURL + '/perpage/20' 
-                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+                dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                     fillGrid(dataObj)
                 })
 
@@ -56,7 +56,7 @@ class ProductsListDocumentController extends DocumentController {
             if (dataLoadingURL == null) {
                 return
             }
-            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                 fillGrid(dataObj)
             })
         })

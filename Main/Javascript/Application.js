@@ -49,6 +49,7 @@ App.onLaunch = function (options) {
     const helperScriptURLs = [
         "Resources/Strings",
         "Utilities/Jalali",
+        "Utilities/UserManager",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
         "Utilities/DataLoader",
@@ -62,7 +63,8 @@ App.onLaunch = function (options) {
         "MyMoviesDocumentController",
         "ProductsListDocumentController",
         "ProductDocumentController",
-        "SeasonsDocumentController"
+        "SeasonsDocumentController",
+        "ProfileDocumentController"
     ].map(
         moduleName => `${jsBaseURL}${moduleName}.js`
     );
@@ -130,7 +132,7 @@ function playMovieFromURL(url) {
     pendingPlayURL = null
 }
 
-function loadingTemplate(title) {
+function loadingTemplateString(title) {
     title = title || string_loading;
 
     return `<loadingTemplate>

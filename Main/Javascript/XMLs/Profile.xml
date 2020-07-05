@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .subtitle {
+            text-align: center;
+            tv-text-style: caption2;
+            }
+
+            .centeredInPage {
+            tv-align: center;
+            tv-position: center;
+            margin: 40;
+            tv-tint-color: rgba(0, 0, 0, 0.8);
+            }
+
+            .buttonTitle {
+            tv-align: center;
+            tv-position: center;
+            margin: 40;
+            tv-text-style: body;
+            padding: 0 20 0 20;
+            }
+
+            @media tv-template and (tv-theme:dark) {
+            .centeredInPage {
+            tv-tint-color: rgba(255, 255, 255, 0.8);
+            }
+
+        </style>
+    </head>
+
+    <stackTemplate>
+        <prototypes>
+            <lockup prototype="movie-thumbnail" productDocumentURL="/XMLs/Product.xml" binding="@itemID:{uid}">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+        </prototypes>
+
+        <identityBanner style="margin: 60 0 0 0;">
+            <title />
+            <subtitle />
+            <row>
+                <buttonLockup>
+                    <badge src="resource://button-add"/>
+                    <title>Title 1</title>
+                </buttonLockup>
+                <buttonLockup>
+                    <badge src="resource://button-rate"/>
+                    <title>Title 2</title>
+                </buttonLockup>
+            </row>
+        </identityBanner>
+
+        <collectionList style="margin: 60 0 60 0;">
+        </collectionList>
+    </stackTemplate>
+</document>

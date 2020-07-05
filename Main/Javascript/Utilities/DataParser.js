@@ -17,6 +17,16 @@ class DataParser {
             row.title = item['link_text'];
             row.type = item['output_type'] + '-' + item['theme'];
 
+            if (item['links'] !== undefined) {
+                if (item['links']['more_records'] === true) {
+                    row.nextPage = item['links']['next'] || null;
+                } else {
+                    row.nextPage = null;
+                }
+            } else {
+                row.nextPage = null;
+            }
+
             switch (row.type) {
                 case 'movie-theater':
                 case 'movie-thumbnail': {
@@ -104,6 +114,10 @@ class DataParser {
                     break;
             }
 
+            if (row.dataItems != null && row.dataItems.length === 0) {
+                row.dataItems = null;
+            }
+
             return row;
         }).filter((item) => {
             return item.dataItems != null;
@@ -152,5 +166,85 @@ class DataParser {
         });
 
         itemsCallback(result);
+    }
+
+    parseProfileResponse(response, callback) {
+        function getSafe(fn, defaultVal) {
+            try {
+                return fn();
+            } catch (e) {
+                return defaultVal;
+            }
+        }
+
+        let menu = response.menu;
+
+        let profileFirstRow = getSafe(() => { return menu.data.menu['main_menu'] }, [])
+            .filter((item) => {
+                return item['link_type'] === 'profile';
+        });
+        let username = profileFirstRow['link_text'] || UserManager.username();
+        let mobileNumber = profileFirstRow['subtitle'] || "";
+
+        let logoutRow = getSafe(() => { return menu.data.menu['profile_menu'] }, [])
+            .filter((item) => {
+                return item['link_type'] === 'exit';
+        });
+        let logoutLink = logoutRow['link_key'] || baseURL + 'user/Authenticate/signout';
+
+
+        let account = response.account;
+        let subscriptionText = getSafe(() => { return account.data['profile_state_info']['descr'].text }, null);
+
+        let result = {};
+
+        result.username = username;
+        result.mobileNumber = mobileNumber;
+        result.logoutLink = logoutLink;
+        result.subscriptionText = subscriptionText;
+
+        callback(result);
+    }
+
+    parseUserMoviesResponse(bookmarks, history, itemsCallback) {
+        this.parseVitrineResponse(bookmarks, (parsedBookmarks) => {
+            this.parseVitrineResponse(history, (parsedHistory) => {
+                let result = {};
+                result.meta = null;
+                result.nextPage = null;
+                result.rows = parsedBookmarks.rows.concat(parsedHistory.rows);
+                itemsCallback(result);
+            });
+        });
+    }
+
+    parseLoginCode(response, callback) {
+        let result = {};
+
+        if (response.data !== undefined) {
+            result.code = response.data['code'];
+            result.qrImage = response.data['qrURL'];
+        } else {
+            result.code = string_error_getting_login_code;
+            result.qrImage = null;
+        }
+
+        callback(result);
+    }
+
+    parseVerifyCode(response, callback) {
+        let result = {};
+
+        if (response['data'] != null && response['data']['attributes'] !== undefined) {
+            result.jwtToken = response.data.attributes['jwt'];
+            result.username = response.data.attributes['username'];
+            result.lToken = response.data.attributes['ltoken'];
+        } else {
+            result.jwtToken = null;
+            result.username = null;
+            result.lToken = null;
+        }
+
+        callback(result);
     }
 }

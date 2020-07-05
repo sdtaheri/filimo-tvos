@@ -1,38 +1,33 @@
 class LoginController extends DocumentController {
 
-    constructor(controllerOptions) {
-        super(controllerOptions)        
-        this._presenter = controllerOptions.event.target.parentClass
-    }
-
-    verificationCodeReceived(code, document) {
-        document.getElementById("verificationCode").textContent = code.toUpperCase()
-
-        let dataLoader = this.dataLoader
-        let documentLoader = this.documentLoader
-        let refreshIntervalId = setInterval(function() {
-            let verifyURL = legacyBaseURL + '/verifycodecheck/ref_type/tv/code/'
-            + code
-            dataLoader._fetchJSONData(documentLoader.prepareURL(verifyURL), (dataObj) => {
-            let token = dataObj.verifycodecheck.ltoken
-            if (token != null) {
-                clearInterval(refreshIntervalId)
-                localStorage.setItem("token", token)
-                localStorage.setItem("username", dataObj.verifycodecheck.username)
-                navigationDocument.popDocument()
-            }
-        })
-        }, 5000)
-        this._refreshIntervalId = refreshIntervalId
-    }
 
     setupDocument(document) {
         super.setupDocument(document)
 
-        let verifyCodeGetURL = legacyBaseURL + '/verifycodeget'
-        this.dataLoader._fetchJSONData(this.documentLoader.prepareURL(verifyCodeGetURL), (dataObj) => {
-            this.verificationCodeReceived(dataObj.verifycodeget.code, document)
-        })
+        const description = document.getElementById("descTitle");
+        description.textContent = string_login_description();
+
+        this.dataLoader.fetchLoginCode((result) => {
+            const image = document.getElementById("codeImage");
+            const codeText = document.getElementById("verificationCode");
+
+            codeText.textContent = result.code;
+            image.setAttribute("src", result.qrImage);
+
+            let refreshIntervalId = setInterval(() => {
+                this.dataLoader.verifyLogin(result.code, (verificationResult) => {
+                    if (verificationResult.jwtToken != null) {
+                        clearInterval(refreshIntervalId);
+                        UserManager.setJwtToken(verificationResult.jwtToken);
+                        UserManager.setUsername(verificationResult.username);
+                        UserManager.setLToken(verificationResult.lToken);
+
+                        navigationDocument.popDocument();
+                    }
+                });
+            }, 5000);
+            this._refreshIntervalId = refreshIntervalId
+        });
     }
 
     handleEvent(event) {

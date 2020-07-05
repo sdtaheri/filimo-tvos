@@ -54,7 +54,7 @@ class MyMoviesDocumentController extends DocumentController {
             if (dataLoadingURL == null) {
                 return
             }
-            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                 fillGrid(dataObj, selectedSegmentBarId)
             })
         })
@@ -62,7 +62,7 @@ class MyMoviesDocumentController extends DocumentController {
         function loadData(segmentBarId, shouldClear) {            
             dataLoadingURL = legacyBaseURL + '/movielistby' + segmentBarId + '/perpage/20/'
 
-            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), (dataObj) => {
+            dataLoader._fetchJSONData(documentLoader.prepareURL(dataLoadingURL), null, (dataObj) => {
                 if (shouldClear) {
                     dataSection.dataItem = new DataItem()
                 }
@@ -109,7 +109,7 @@ class MyMoviesDocumentController extends DocumentController {
             if (messageAlertTemplate.parentNode) {
                 messageAlertTemplate.parentNode.removeChild(messageAlertTemplate)
             }
-            if (isLoggedIn()) {
+            if (UserManager.isLoggedIn()) {
                 mainDocument.appendChild(stackTemplate)
                 loadData(selectedSegmentBarId, true)
             } else {

@@ -14,16 +14,16 @@ class VitrineDocumentController extends DocumentController {
         const rootNode = stackTemplate.parentNode;
 
         // Add a loading indicator until we make stackTemplate ready
-        rootNode.insertAdjacentHTML('beforeend', loadingTemplate());
+        rootNode.insertAdjacentHTML('beforeend', loadingTemplateString());
         rootNode.removeChild(stackTemplate);
-        let loadingDocument = document.getElementsByTagName('loadingTemplate').item(0);
+        let loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0);
 
         this.dataLoader.fetchVitrine((dataObject) => {
 
             this._fillGridInCollectionList(dataObject, collectionList);
 
             rootNode.appendChild(stackTemplate);
-            rootNode.removeChild(loadingDocument);
+            rootNode.removeChild(loadingTemplate);
 
             stackTemplate.addEventListener('needsmore', (event) => {
                 if (this._nextPageURL != null) {

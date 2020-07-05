@@ -2,40 +2,41 @@
 <document>
     <head>
         <style>
-            .top {
-                tv-align: center;
-                tv-position: center;
-                margin: -200 0 0 0;
+            .qrCode {
+            tv-align: center;
+            tv-position: center;
+            margin: 40;
             }
-            .middle {
-                tv-align: center;
-                tv-position: center;
-                text-align: center;
-                margin: 32 200 16 200;
-                tv-text-style: subtitle1;
-                color: rgb(0,0,0);
-                tv-text-max-lines: 6;
+
+            .description {
+            tv-align: center;
+            tv-position: center;
+            text-align: center;
+            tv-text-style: subtitle1;
+            color: rgb(0,0,0);
+            tv-text-max-lines: 20;
             }
-            .bottom {
-                tv-align: center;
-                tv-position: center;
-                tv-text-style: title1;
-                color: rgb(253,112,46);
+
+            .code {
+            tv-align: center;
+            tv-position: center;
+            tv-text-style: title1;
+            color: rgb(253,112,46);
             }
+
             @media tv-template and (tv-theme:dark) {
-                .middle {
-                    color: rgb(255,255,255);
-                }
-                .bottom {
-                    color: rgb(245,141,49);
-                }
+            .description {
+            color: rgb(255,255,255);
+            }
+            .qrCode {
+            color: rgb(245,141,49);
+            }
             }
         </style>
     </head>
     <divTemplate>
-        <img src="/Resources/logo_filimo_icon.png" class="top" width="150" height="150"/>
-        <title class="middle">برای ورود به فیلیمو با استفاده از مرورگر موبایل یا رایانه شخصی خود به آدرس <b>filimo.com/activate</b> مراجعه نموده و کد زیر را وارد کنید. در ادامه با وارد کردن مشخصات حساب کاربری خود به فیلیمیو وارد شده و منتظر به روز  رسانی خودکار این صفحه باشید.</title>
-        <title class="bottom">
-            <b id="verificationCode"/></title>
+        <img id="codeImage" class="qrCode" width="320" height="320"/>
+        <title id="descTitle" class="description"/>
+        <title class="code"><b id="verificationCode"/></title>
     </divTemplate>
 </document>
