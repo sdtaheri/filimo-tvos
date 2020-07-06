@@ -41,9 +41,16 @@ let pendingPlayURL = null;
  * the URL that was used to retrieve the application JavaScript.
  */
 App.onLaunch = function (options) {
-    jsBaseURL = options["jsBaseURL"];
-    baseURL = options["baseURL"];
-    appName = options["appName"];
+    if (options['jsBaseURL'] === undefined) {
+        // For backward compatibility
+        jsBaseURL = options['baseURL'];
+        baseURL = 'https://www.filimo.com/api/fa/v1';
+        appName = 'فیلیمو';
+    } else {
+        jsBaseURL = options['jsBaseURL'];
+        baseURL = options['baseURL'];
+        appName = options['appName'];
+    }
 
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
