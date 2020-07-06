@@ -185,11 +185,15 @@ var createAlertDocument = function (title, description) {
  * Convenience function to create a TVML alert document with a title and description.
  */
 function createDescriptiveAlertDocument(title, description) {
+    let logoIdentifier = isFilimo() ? "filimo" : "televika";
+    let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
+
     const template = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
-            <descriptiveAlertTemplate>
+            <descriptiveAlertTemplate layoutDirection="rtl">
+                <img srcset="${logoResource}" width="295" height="90" />
                 <title>${title}</title>
-                <description></description>
+                <description />
             </descriptiveAlertTemplate>
         </document>
     `;
@@ -203,7 +207,7 @@ function createDescriptiveAlertDocument(title, description) {
  * Convenience function to create a TVML alert for asking user with two options as answers.
  */
 function presentAlertQuestion(title, description, defaultTitle, cancelTitle, defaultHandler) {
-    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
+    let alertString = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
           <alertTemplate>
             <title>${title}</title>
@@ -215,21 +219,22 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
                 <text>${cancelTitle}</text>
             </button>
           </alertTemplate>
-        </document>`
+        </document>`;
 
-    var parser = new DOMParser();
+    let parser = new DOMParser();
 
-    var alertDoc = parser.parseFromString(alertString, "application/xml");
+    let alertDoc = parser.parseFromString(alertString, "application/xml");
 
     alertDoc.getElementById("alertDefaultButton").addEventListener("select", function (element, event) {
-        defaultHandler()
-        navigationDocument.dismissModal()
-    })
-    alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
-        navigationDocument.dismissModal()
-    })
+        defaultHandler();
+        navigationDocument.dismissModal();
+    });
 
-    navigationDocument.presentModal(alertDoc)
+    alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
+        navigationDocument.dismissModal();
+    });
+
+    navigationDocument.presentModal(alertDoc);
 }
 
 /**

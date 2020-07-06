@@ -34,6 +34,21 @@ function string_login_description() {
     `;
 }
 
+const string_pay = 'پرداخت';
+const string_logout = 'خروج';
+const string_account_exit = 'خروج از حساب کاربری';
+const string_account_exit_alert_desc = 'آیا می‌خواهید از حساب کاربری خود خارج شوید؟';
+const string_cancel = 'انصراف';
+const string_buy_or_extend = 'خرید یا تمدید اشتراک';
+
+function string_go_to_payment_website() {
+    let site = isFilimo() ? 'https://www.filimo.com/purchase' : 'https://www.televika.com/purchase';
+    return `با استفاده از مرورگر موبایل یا رایانه شخصی خود،
+به آدرس ${site}
+مراجعه بفرمایید.
+    `;
+}
+
 function toPersianDigits(str) {
     if (str == null) {
         return null;

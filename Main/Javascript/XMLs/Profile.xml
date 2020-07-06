@@ -44,17 +44,24 @@
             <subtitle />
             <row>
                 <buttonLockup>
-                    <badge src="resource://button-add"/>
-                    <title>Title 1</title>
+                    <badge srcset="/Resources/pay.png 1x, /Resources/pay@2x.png 2x" width="80" height="80"/>
+                    <title />
                 </buttonLockup>
                 <buttonLockup>
-                    <badge src="resource://button-rate"/>
-                    <title>Title 2</title>
+                    <badge srcset="/Resources/signout.png 1x, /Resources/signout@2x.png 2x" width="80" height="80"/>
+                    <title />
                 </buttonLockup>
             </row>
         </identityBanner>
 
         <collectionList style="margin: 60 0 60 0;">
+            <shelf id="dummyShelf">
+                <section>
+                    <lockup>
+                        <title>Dummy Shelf needed for users with no history or bookmarks</title>
+                    </lockup>
+                </section>
+            </shelf>
         </collectionList>
     </stackTemplate>
 </document>

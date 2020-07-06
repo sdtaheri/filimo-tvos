@@ -190,8 +190,13 @@ class DataParser {
             .filter((item) => {
                 return item['link_type'] === 'exit';
         });
-        let logoutLink = logoutRow['link_key'] || baseURL + 'user/Authenticate/signout';
 
+        let logoutLink = baseURL + '/user/Authenticate/signout';
+        if (logoutRow.length > 0) {
+            if (logoutRow[0]['link_key']) {
+                logoutLink = logoutRow[0]['link_key'];
+            }
+        }
 
         let account = response.account;
         let subscriptionText = getSafe(() => { return account.data['profile_state_info']['descr'].text }, null);

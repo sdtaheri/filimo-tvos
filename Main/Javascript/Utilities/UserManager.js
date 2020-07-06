@@ -33,4 +33,10 @@ class UserManager {
     static setLToken(token) {
         localStorage.setItem(L_TOKEN_KEY, token);
     }
+
+    static logout() {
+        localStorage.removeItem(L_TOKEN_KEY);
+        localStorage.removeItem(JWT_TOKEN_KEY);
+        localStorage.removeItem(USERNAME_KEY);
+    }
 }

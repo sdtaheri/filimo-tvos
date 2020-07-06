@@ -2,13 +2,13 @@
 <document>
     <menuBarTemplate>
         <menuBar>
-            <menuItem vitrineDocumentURL="/XMLs/Vitrine.xml" autoHighlight="true">
+            <menuItem vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <title>ویترین</title>
             </menuItem>
             <menuItem categoriesDocumentURL="/XMLs/Categories.xml">
                 <title>دسته‌بندی‌ها</title>
             </menuItem>
-            <menuItem profileDocumentURL="/XMLs/Profile.xml">
+            <menuItem profileDocumentURL="/XMLs/Profile.xml" autoHighlight="true">
                 <title>پروفایل</title>
             </menuItem>
             <menuItem searchDocumentURL="/XMLs/Search.xml">

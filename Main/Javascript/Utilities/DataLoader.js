@@ -17,7 +17,7 @@ class DataLoader {
         this._searchTextCache = null;
     }
 
-    _fetchJSONData(dataURL, params, itemCallback, errorCallback, httpRequest) {
+    _fetchJSONData(dataURL, params, responseCallback, errorCallback, httpRequest) {
         return new Promise((resolve, reject) => {
             let xhr = httpRequest || new XMLHttpRequest();
 
@@ -54,7 +54,7 @@ class DataLoader {
 
             xhr.responseType = "json";
             xhr.onload = () => {
-                itemCallback(xhr.response);
+                responseCallback(xhr.response);
                 resolve();
             };
             xhr.onerror = () => {
@@ -154,17 +154,9 @@ class DataLoader {
 
     }
 
-    fetchBookmarks(itemsCallback) {
-        let url = baseURL + '/movie/movie/list/tagid/bookmark';
-        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
-            this._dataParser.parseVitrineResponse(response, itemsCallback);
-        });
-    }
-
-    fetchHistory(itemsCallback) {
-        let url = baseURL + '/movie/movie/list/tagid/history';
-        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
-            this._dataParser.parseVitrineResponse(response, itemsCallback);
+    logout(url) {
+        this._fetchJSONData(url, null, (result) => {
+            console.log(result);
         });
     }
 
