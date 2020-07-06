@@ -24,6 +24,8 @@ class ProfileDocumentController extends DocumentController {
 
     fetchContent(document) {
 
+        this._isFetchingMore = false;
+
         const collectionList = this._stackTemplate.getElementsByTagName('collectionList').item(0);
         const rootNode = document.getElementsByTagName('head').item(0).parentNode;
 
@@ -78,9 +80,6 @@ class ProfileDocumentController extends DocumentController {
                                 string_logout,
                                 string_cancel,
                                 () => {
-                                    this._needMoreMap = {};
-                                    this._addedSectionNames = [];
-
                                     this.dataLoader.logout(profile.logoutLink);
                                     UserManager.logout();
 
@@ -164,14 +163,24 @@ class ProfileDocumentController extends DocumentController {
                     lastAddedShelf.addEventListener('needsmore', (event) => {
                         const targetElement = event.target;
                         targetElement.setAttribute('added-needs-more-listener', 'true');
-                        this.dataLoader.fetchVitrineNextPage(this._needMoreMap[row.title], (items) => {
-                            let currentSection = lastAddedShelf.getElementsByTagName('section').item(0);
-                            Array.prototype.push.apply(currentSection.dataItem['movies'], flattenDataItems(items));
-                            currentSection.dataItem.touchPropertyPath("movies");
 
-                            items.rows.forEach((newRow) => {
-                                this._needMoreMap[row.title] = newRow.nextPage;
-                            });
+                        if (this._isFetchingMore) {
+                            return;
+                        }
+
+                        this._isFetchingMore = true;
+                        this.dataLoader.fetchVitrineNextPage(this._needMoreMap[row.title], (items) => {
+                            const flattenedItems = flattenDataItems(items);
+                            if (flattenedItems.length > 0) {
+                                let currentSection = lastAddedShelf.getElementsByTagName('section').item(0);
+                                Array.prototype.push.apply(currentSection.dataItem['movies'], flattenedItems);
+                                currentSection.dataItem.touchPropertyPath("movies");
+
+                                items.rows.forEach((newRow) => {
+                                    this._needMoreMap[row.title] = newRow.nextPage;
+                                });
+                            }
+                            this._isFetchingMore = false;
                         });
                     });
                 }

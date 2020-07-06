@@ -64,6 +64,8 @@ class DataLoader {
                 }
             };
             xhr.send();
+
+            console.log(url);
         });
     }
 
