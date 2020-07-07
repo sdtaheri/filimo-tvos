@@ -18,9 +18,8 @@ class MenuBarController extends DocumentController {
 
                 // Pre-load the document for the initial focused menu item or first item,
                 // before presenting the menuBarTemplate on navigation stack.
-                // NOTE: Pre-loading is optional
                 const initialMenuItemElem = this.findInitialMenuItem(menuBarElem);
-                const initialMenuItemController = this.selectMenuItem(initialMenuItemElem, true, () => {
+                this.selectMenuItem(initialMenuItemElem, true, () => {
                     this.handleDocument(menuBarDocument, loadingDocument);
                 });
             },
@@ -55,6 +54,7 @@ class MenuBarController extends DocumentController {
                     menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
                 }
                 controllerOptions.documentLoader = this.documentLoader;
+                controllerOptions.linkKey = menuItemElem.getAttribute('linkKey') || null;
                 const controllerClass = controllerOptions.type;
                 const controller = new controllerClass(controllerOptions);
                 controller.handleDocument = (document) => {
@@ -63,7 +63,7 @@ class MenuBarController extends DocumentController {
                     } else {
                         setTimeout(function() {
                             menuBarFeature.setDocument(document, menuItemElem);
-                        }, 1000);
+                        }, 500);
                     }
                     doneCallback && doneCallback();
                 };

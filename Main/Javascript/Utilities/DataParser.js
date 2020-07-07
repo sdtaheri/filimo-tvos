@@ -17,6 +17,13 @@ class DataParser {
             row.title = item['link_text'];
             row.type = item['output_type'] + '-' + item['theme'];
 
+            const moreType = item['more_type'];
+            if (moreType && moreType === 'infinity') {
+                row.header = 'grid';
+            } else {
+                row.header = (row.type === 'poster-theater') ? 'carousel' : 'shelf';
+            }
+
             if (item['links'] !== undefined) {
                 if (item['links']['more_records'] === true) {
                     row.nextPage = item['links']['next'] || null;
@@ -132,14 +139,23 @@ class DataParser {
         result.meta = response.meta || null;
         result.nextPage = (response.links !== undefined) ? response.links.forward : null;
 
-        result.dataItems = response.data.map((item) => {
+        const dataItems = response.data.map((item) => {
             let objectItem = new DataItem("category", item['link_key']);
             objectItem.title = cleanup(item['title']);
             objectItem.titleEn = removeHTMLEntities(item['title_en']);
             objectItem.image = item['cover'];
+            objectItem.uid = item['link_key'];
             objectItem.linkType = item['link_type'];
             return objectItem;
         });
+
+        const rows = {};
+        rows.title = '';
+        rows.type = 'category';
+        rows.header = 'grid';
+        rows.dataItems = dataItems;
+
+        result.rows = [rows];
 
         itemsCallback(result);
     }

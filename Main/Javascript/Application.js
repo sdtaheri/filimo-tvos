@@ -65,9 +65,7 @@ App.onLaunch = function (options) {
         "HomeDocumentController",
         "VitrineDocumentController",
         "LoginController",
-        "CategoriesDocumentController",
         "SearchDocumentController",
-        "ProductsListDocumentController",
         "ProductDocumentController",
         "SeasonsDocumentController",
         "ProfileDocumentController"
@@ -170,14 +168,14 @@ function createLoadingDocument(title) {
 /**
  * Convenience function to create a TVML alert document with a title and description.
  */
-function createAlertDocument(title, description) {
+function createAlertDocument(title, description, withImage) {
     let logoIdentifier = isFilimo() ? "filimo" : "televika";
     let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
 
     const template = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
             <alertTemplate>
-                <img srcset="${logoResource}" width="295" height="90" style="margin: 48;" />
+                ${(withImage || false) ? `<img srcset="${logoResource}" width="295" height="90" style="margin: 48;" />` : ''}
                 <title style="tv-text-style: title2; margin: 20;">${title}</title>
                 <description />
             </alertTemplate>
@@ -258,14 +256,6 @@ function resolveControllerFromElement(elem) {
             };
         }
     }
-}
-
-function isLoggedIn() {
-    if (localStorage.getItem("token") != null
-        && localStorage.getItem("username") != null) {
-        return true
-    }
-    return false
 }
 
 function isFilimo() {

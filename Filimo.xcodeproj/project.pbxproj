@@ -75,7 +75,7 @@
 		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
 		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
 		309D289720663183001148BE /* Categories.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Categories.xml; sourceTree = "<group>"; };
-		309D289B20663390001148BE /* CategoriesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CategoriesDocumentController.js; sourceTree = "<group>"; };
+		309D289B20663390001148BE /* GridDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = GridDocumentController.js; sourceTree = "<group>"; };
 		309D289D206649DF001148BE /* Product.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Product.xml; sourceTree = "<group>"; };
 		309D289F20664A00001148BE /* ProductDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductDocumentController.js; sourceTree = "<group>"; };
 		30A8B731208121E600B55E69 /* seasons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seasons@2x.png"; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				30C5790B20448110007E728F /* Application.js */,
-				309D289B20663390001148BE /* CategoriesDocumentController.js */,
+				309D289B20663390001148BE /* GridDocumentController.js */,
 				302418062065246700B46686 /* HomeDocumentController.js */,
 				30D5167B206832A5007995AF /* LoginController.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,

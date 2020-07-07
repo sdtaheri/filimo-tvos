@@ -85,7 +85,7 @@ class ProfileDocumentController extends DocumentController {
                                 eventTarget.setAttribute('added-select-listener', 'true');
 
                                 let alertDoc = createAlertDocument(string_buy_or_extend,
-                                    string_go_to_payment_website());
+                                    string_go_to_payment_website(), true);
                                 navigationDocument.pushDocument(alertDoc);
                             });
                         }

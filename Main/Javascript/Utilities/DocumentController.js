@@ -63,20 +63,7 @@ class DocumentController {
                     // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.
                     new controllerClass(controllerOptions);
                 }
-                else if (targetElem.tagName === "description") {
-                    // Handle description tag, if no URL was specified
-                    const body = targetElem.textContent;
-                    const alertDocument = createAlertDocument('', body);
-                    navigationDocument.presentModal(alertDocument);
-                } else if (targetElem.tagName === 'reviewCard') {
-                    // Handle reviewCard tag, if no URL was specified
-                    const title = targetElem.getElementsByTagName('title').item(0).textContent
-                    const body = targetElem.getElementsByTagName('description').item(0).textContent
-
-                    const alertDocument = createAlertDocument(title, body);
-                    navigationDocument.presentModal(alertDocument);
-                }
-                return createLoadingDocument();
+                break;
             default:
                 break;
         }

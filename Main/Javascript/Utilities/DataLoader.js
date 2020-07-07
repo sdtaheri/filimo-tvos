@@ -70,10 +70,7 @@ class DataLoader {
     }
 
     fetchVitrine(itemsCallback) {
-        let url = baseURL + '/movie/movie/list/tagid/1';
-        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
-            this._dataParser.parseVitrineResponse(response, itemsCallback);
-        });
+        this.fetchList(1, itemsCallback);
     }
 
     fetchVitrineNextPage(url, itemsCallback, errorCallback) {
@@ -93,6 +90,21 @@ class DataLoader {
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseCategoriesResponse(response, itemsCallback);
         });
+    }
+
+    fetchList(linkKey, itemsCallback) {
+        if (linkKey === undefined || linkKey === null) {
+            return;
+        }
+
+        if (linkKey === 'categories') {
+            this.fetchCategoriesList(itemsCallback);
+        } else {
+            let url = baseURL + '/movie/movie/list/tagid/' + linkKey;
+            this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
+                this._dataParser.parseVitrineResponse(response, itemsCallback);
+            });
+        }
     }
 
     fetchSearchResults(query, itemsCallback, errorCallback) {

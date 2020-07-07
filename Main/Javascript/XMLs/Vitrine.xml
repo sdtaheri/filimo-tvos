@@ -52,6 +52,24 @@
             text-shadow: 2px 2px 8px #000000;
             }
 
+            .categoryCard {
+            width: 830;
+            height: 180;
+            border-radius: 12;
+            background-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .categoryTitle {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:bottom;
+            tv-align: leading;
+            margin: 16;
+            tv-text-style: callout;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
             .imageGradient {
             tv-tint-color: linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
             }
@@ -68,6 +86,10 @@
             }
 
             .movieCard {
+            background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            .categoryCard {
             background-color: rgba(0, 0, 0, 0.3);
             }
             }
@@ -100,18 +122,27 @@
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>
-            <lockup prototype="poster-brick">
+            <lockup prototype="poster-brick" vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
             </lockup>
             <lockup prototype="poster-theater" productDocumentURL="/XMLs/Product.xml">
                 <img binding="@src:{image};" width="900" height="300"/>
             </lockup>
+
+            <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml" >
+                <background>
+                    <img aspectFill="true" binding="@src:{image};" width="830" height="180"/>
+                </background>
+                <title class="categoryTitle" binding="textContent:{title};"/>
+            </card>
         </prototypes>
 
         <banner>
             <organizer>
                 <img id="headerLogo" width="295" height="90" class="headerLogo"/>
             </organizer>
+
+            <title id="pageTitle" />
         </banner>
 
         <collectionList>

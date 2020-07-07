@@ -13,7 +13,7 @@ class ProductDocumentController extends DocumentController {
             this._movieImgBig = null
             this._shouldPlayMovie = controllerOptions.shouldPlayMovie
         }   
-        this._isLoggedInAtLaunch = isLoggedIn()
+        this._isLoggedInAtLaunch = UserManager.isLoggedIn();
     }
     
     setupDocument(document) {

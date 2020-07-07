@@ -54,7 +54,7 @@ const string_history = 'مشاهده‌ها‌';
 const string_no_items_available = 'ویدئویی در این فهرست وجود ندارد';
 
 function toPersianDigits(str) {
-    if (str == null) {
+    if (str === null || str === undefined) {
         return null;
     }
 
@@ -73,7 +73,7 @@ function toPersianDigits(str) {
 }
 
 function removeHTMLEntities(str) {
-    if (str == null) {
+    if (str === null || str === undefined) {
         return null;
     }
 
