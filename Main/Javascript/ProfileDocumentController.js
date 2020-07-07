@@ -3,7 +3,6 @@ class ProfileDocumentController extends DocumentController {
     constructor(controllerOptions) {
         super(controllerOptions);
 
-        this.fetchContent = this.fetchContent.bind(this);
         this._needMoreMap = {};
         this._addedSectionNames = [];
     }
@@ -12,183 +11,278 @@ class ProfileDocumentController extends DocumentController {
     setupDocument(document) {
         super.setupDocument(document);
 
-        this._stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
-        this._identityBanner = this._stackTemplate.getElementsByTagName('identityBanner').item(0);
-        this._dummyShelf = document.getElementById('dummyShelf');
-        this._stackTemplate.removeChild(this._identityBanner);
+        document.getElementById('bookmarksSegmentBarTitle').textContent = string_bookmarks;
+        document.getElementById('historySegmentBarTitle').textContent = string_history;
 
-        document.addEventListener('appear', () => {
-            this.fetchContent(document);
-        });
-    }
-
-    fetchContent(document) {
-
-        this._isFetchingMore = false;
-
-        const collectionList = this._stackTemplate.getElementsByTagName('collectionList').item(0);
         const rootNode = document.getElementsByTagName('head').item(0).parentNode;
+        const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
+        const identityBanner = stackTemplate.getElementsByTagName('identityBanner').item(0);
+        const separator = stackTemplate.getElementsByTagName('separator').item(0);
+        const segmentBar = document.getElementById('resultsMode');
+        const collectionList = document.getElementsByTagName('collectionList').item(0);
+        const errorMessage = document.getElementById('errorMessage');
 
-        let loginTemplate = document.getElementsByTagName('divTemplate').item(0);
-        if (loginTemplate !== undefined && loginTemplate.parentNode) {
-            rootNode.removeChild(loginTemplate);
-        }
+        let selectedSegment = null;
+        let needMoreMap = {};
+        let isLoadingMore = false;
+        let didAddNeedsMoreListener = false;
 
-        if (UserManager.isLoggedIn()) {
+        errorMessage.textContent = string_no_items_available;
 
-            if (this._identityBanner.parentNode === undefined) {
-                // Add a loading indicator until we make stackTemplate ready
-                rootNode.insertAdjacentHTML('beforeend', loadingTemplateString());
-                if (this._stackTemplate.parentNode) {
-                    rootNode.removeChild(this._stackTemplate);
-                }
+        segmentBar.addEventListener('highlight', (event) => {
+            const selectedElement = event.target;
+            const selectedMode = selectedElement.getAttribute('value');
+
+            if (selectedMode !== selectedSegment) {
+                setResultsMode.bind(this)(selectedMode);
             }
+        });
 
-            this.dataLoader.fetchProfile((profile) => {
+        stackTemplate.removeChild(identityBanner);
+        stackTemplate.removeChild(separator);
+        collectionList.removeChild(errorMessage);
 
-                if (this._identityBanner.parentNode === undefined) {
-                    this._stackTemplate.insertBefore(this._identityBanner, this._stackTemplate.firstChild);
+        document.addEventListener('appear', loadPage.bind(this));
 
-                    let payButton = this._identityBanner.getElementsByTagName('buttonLockup').item(0);
-                    payButton.getElementsByTagName('title')
-                        .item(0)
-                        .textContent = string_pay;
+        function loadPage() {
 
-                    if (payButton.getAttribute('added-select-listener') !== 'true') {
-                        payButton.addEventListener('select', (event) => {
-                            const eventTarget = event.target;
-                            eventTarget.setAttribute('added-select-listener', 'true');
+            if (UserManager.isLoggedIn()) {
 
-                            let alertDoc = createDescriptiveAlertDocument(string_buy_or_extend,
-                                string_go_to_payment_website());
-                            navigationDocument.pushDocument(alertDoc);
-                        });
+                if (identityBanner.parentNode === undefined) {
+                    //We have never loaded profile. Let's add a loading indicator.
+                    rootNode.insertAdjacentHTML('beforeend', loadingTemplateString());
+                    if (stackTemplate.parentNode) {
+                        rootNode.removeChild(stackTemplate);
+                    }
+                }
+
+                this.dataLoader.fetchProfile((profile) => {
+
+                    if (profile.subscriptionText === null) {
+                        this.dataLoader.logout(profile.logoutLink);
+                        UserManager.logout();
+                        resetLayout();
+                        loadPage();
+                        return;
                     }
 
-                    let logoutButton = this._identityBanner.getElementsByTagName('buttonLockup').item(1);
-                    logoutButton.getElementsByTagName('title')
-                        .item(0)
-                        .textContent = string_logout;
+                    identityBanner.getElementsByTagName('title')
+                        .item(0).textContent = string_username(profile.username);
+                    identityBanner.getElementsByTagName('subtitle')
+                        .item(0).textContent = toPersianDigits(profile.subscriptionText);
 
-                    if (logoutButton.getAttribute('added-select-listener') !== 'true') {
-                        logoutButton.addEventListener('select', (event) => {
-                            const eventTarget = event.target;
-                            eventTarget.setAttribute('added-select-listener', 'true');
+                    if (identityBanner.parentNode === undefined) {
+                        stackTemplate.insertBefore(identityBanner, stackTemplate.firstChild);
 
-                            presentAlertQuestion(string_account_exit,
-                                string_account_exit_alert_desc,
-                                string_logout,
-                                string_cancel,
-                                () => {
-                                    this.dataLoader.logout(profile.logoutLink);
-                                    UserManager.logout();
+                        let payButton = identityBanner.getElementsByTagName('buttonLockup').item(0);
+                        payButton.getElementsByTagName('title')
+                            .item(0)
+                            .textContent = string_pay;
 
-                                    this.fetchContent(document);
-                                });
-                        });
-                    }
+                        if (payButton.getAttribute('added-select-listener') !== 'true') {
+                            payButton.addEventListener('select', (event) => {
+                                const eventTarget = event.target;
+                                eventTarget.setAttribute('added-select-listener', 'true');
 
-                }
-
-                this._identityBanner.getElementsByTagName('title').item(0).textContent = string_username(profile.username);
-                this._identityBanner.getElementsByTagName('subtitle').item(0).textContent = toPersianDigits(profile.subscriptionText);
-            });
-
-            let loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0);
-
-            this.dataLoader.fetchUserMovies((dataObject) => {
-                this._needMoreMap = {};
-                this._fillGridInCollectionList(dataObject, collectionList);
-
-                if (loadingTemplate !== undefined) {
-                    rootNode.appendChild(this._stackTemplate);
-                    rootNode.removeChild(loadingTemplate);
-                }
-            });
-
-        } else {
-            if (this._stackTemplate.parentNode) {
-                rootNode.removeChild(this._stackTemplate);
-            }
-
-            let template = `<divTemplate>
-                <img class="centeredInPage" width="150" height="150"
-                    srcset="${jsBaseURL}Resources/profile.png 1x, ${jsBaseURL}Resources/profile@2x.png 2x" />         
-                <button class="centeredInPage" loginDocumentURL="/XMLs/Login.xml">
-                    <text class="buttonTitle">${string_login_to_account}</text>
-                </button>
-            </divTemplate>`;
-
-            rootNode.insertAdjacentHTML('beforeend', template);
-        }
-    }
-
-    _fillGridInCollectionList(dataObject, collectionList) {
-        function flattenDataItems(dataObject) {
-            return dataObject.rows.flatMap((item) => {
-                return item.dataItems;
-            });
-        }
-
-        if (dataObject.rows.length > 0 && this._dummyShelf.parentNode !== undefined) {
-            collectionList.removeChild(this._dummyShelf);
-        }
-
-        for (let i = 0; i < dataObject.rows.length; i++) {
-            let row = dataObject.rows[i];
-
-            this._needMoreMap[row.title] = row.nextPage;
-
-            let indexOfAddedSection = this._addedSectionNames.findIndex((item) => {
-                return row.title === item;
-            });
-            if (indexOfAddedSection !== -1) {
-                let section = (collectionList.getElementsByTagName("section")).item(indexOfAddedSection);
-                section.dataItem['movies'] = row.dataItems;
-                section.dataItem.touchPropertyPath("movies");
-            } else {
-                this._addedSectionNames.push(row.title);
-
-                let sectionToAdd = `<shelf>
-               <header>
-               <title>${toPersianDigits(row.title)}</title>
-               </header>
-               <section binding="items:{movies};" />
-               </shelf>`;
-                collectionList.insertAdjacentHTML('beforeend', sectionToAdd);
-
-                let lastAddedShelf = collectionList.lastChild;
-
-                if (lastAddedShelf.getAttribute('added-needs-more-listener') !== 'true') {
-                    lastAddedShelf.addEventListener('needsmore', (event) => {
-                        const targetElement = event.target;
-                        targetElement.setAttribute('added-needs-more-listener', 'true');
-
-                        if (this._isFetchingMore) {
-                            return;
+                                let alertDoc = createAlertDocument(string_buy_or_extend,
+                                    string_go_to_payment_website());
+                                navigationDocument.pushDocument(alertDoc);
+                            });
                         }
 
-                        this._isFetchingMore = true;
-                        this.dataLoader.fetchVitrineNextPage(this._needMoreMap[row.title], (items) => {
-                            const flattenedItems = flattenDataItems(items);
-                            if (flattenedItems.length > 0) {
-                                let currentSection = lastAddedShelf.getElementsByTagName('section').item(0);
-                                Array.prototype.push.apply(currentSection.dataItem['movies'], flattenedItems);
-                                currentSection.dataItem.touchPropertyPath("movies");
+                        let logoutButton = identityBanner.getElementsByTagName('buttonLockup').item(1);
+                        logoutButton.getElementsByTagName('title')
+                            .item(0)
+                            .textContent = string_logout;
 
-                                items.rows.forEach((newRow) => {
-                                    this._needMoreMap[row.title] = newRow.nextPage;
-                                });
-                            }
-                            this._isFetchingMore = false;
-                        });
-                    });
+                        if (logoutButton.getAttribute('added-select-listener') !== 'true') {
+                            logoutButton.addEventListener('select', (event) => {
+                                const eventTarget = event.target;
+                                eventTarget.setAttribute('added-select-listener', 'true');
+
+                                presentAlertQuestion(string_account_exit,
+                                    string_account_exit_alert_desc,
+                                    string_logout,
+                                    string_cancel,
+                                    () => {
+                                        this.dataLoader.logout(profile.logoutLink);
+                                        UserManager.logout();
+                                        resetLayout();
+                                        loadPage();
+                                    });
+                            });
+                        }
+                    }
+
+                    setResultsMode.bind(this)(selectedSegment || 'bookmarks');
+                });
+
+            } else {
+                if (stackTemplate.parentNode) {
+                    rootNode.removeChild(stackTemplate);
                 }
 
-                let section = (collectionList.getElementsByTagName("section")).item(collectionList.children.length - 1);
-                section.dataItem = new DataItem();
-                section.dataItem.setPropertyPath("movies", row.dataItems);
+                if (rootNode.getElementsByTagName('divTemplate').item(0) === undefined) {
+                    let template = `<divTemplate>
+                    <img class="centeredInPage" width="150" height="150"
+                        srcset="${jsBaseURL}Resources/profile.png 1x, ${jsBaseURL}Resources/profile@2x.png 2x" />         
+                    <button class="centeredInPage" loginDocumentURL="/XMLs/Login.xml">
+                        <text class="buttonTitle">${string_login_to_account}</text>
+                    </button>
+                </divTemplate>`;
+
+                    rootNode.insertAdjacentHTML('beforeend', template);
+                }
             }
+        }
+
+        function setResultsMode(selectedMode) {
+            selectedSegment = selectedMode;
+            isLoadingMore = false;
+
+            if (selectedMode === 'bookmarks') {
+                this.dataLoader.fetchBookmarks((dataObject) => {
+                    fillGridWithDataObject.bind(this)(dataObject);
+                    showStackView();
+                });
+            }
+
+            if (selectedMode === 'history') {
+                this.dataLoader.fetchHistory((dataObject) => {
+                    fillGridWithDataObject.bind(this)(dataObject);
+                    showStackView();
+                });
+            }
+        }
+
+        function showStackView() {
+            let loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0);
+            if (loadingTemplate) {
+                rootNode.removeChild(loadingTemplate);
+            }
+
+            let loginTemplate = document.getElementsByTagName('divTemplate').item(0);
+            if (loginTemplate) {
+                rootNode.removeChild(loginTemplate);
+            }
+
+            if (stackTemplate.parentNode === undefined) {
+                rootNode.appendChild(stackTemplate);
+            }
+
+            if (separator.parentNode === undefined) {
+                stackTemplate.insertBefore(separator, collectionList);
+            }
+        }
+
+        function resetLayout() {
+            while (collectionList.firstChild) {
+                collectionList.removeChild(collectionList.firstChild);
+            }
+            collectionList.appendChild(errorMessage);
+
+            if (identityBanner.parentNode) {
+                stackTemplate.removeChild(identityBanner);
+            }
+            if (separator.parentNode) {
+                stackTemplate.removeChild(separator);
+            }
+            if (collectionList.parentNode) {
+                stackTemplate.removeChild(collectionList);
+            }
+
+            stackTemplate.appendChild(identityBanner);
+            stackTemplate.appendChild(separator);
+            stackTemplate.appendChild(collectionList);
+
+            while (rootNode.childNodes.length > 1) {
+                rootNode.removeChild(rootNode.lastChild);
+            }
+            rootNode.appendChild(stackTemplate);
+        }
+
+        function fillGridWithDataObject(dataObject) {
+
+            function reloadSectionDataItems(items) {
+                const section = collectionList.getElementsByTagName('section').item(0);
+
+                if (section) {
+                    section.dataItem['movies'] = items;
+                    section.dataItem.touchPropertyPath('movies');
+                } else {
+                    let gridToAdd = `<grid>
+                        <section binding="items:{movies};" />
+                    </grid>`;
+                    collectionList.insertAdjacentHTML('beforeend', gridToAdd);
+
+                    const lastAddedGrid = collectionList.lastChild;
+
+                    if (!didAddNeedsMoreListener) {
+                        didAddNeedsMoreListener = true;
+
+                        stackTemplate.addEventListener('needsmore', () => {
+                            if (isLoadingMore) {
+                                return;
+                            }
+                            loadMoreForGrid.bind(this)(lastAddedGrid);
+                        });
+                    }
+
+                    let addedSection = lastAddedGrid.getElementsByTagName('section').item(0);
+                    addedSection.dataItem = new DataItem();
+                    addedSection.dataItem.setPropertyPath("movies", items);
+                }
+            }
+
+            if (dataObject.rows.length === 0) {
+                if (errorMessage.parentNode === undefined) {
+                    collectionList.appendChild(errorMessage);
+                }
+
+                reloadSectionDataItems.bind(this)([]);
+                return;
+            }
+
+            if (dataObject.rows.length > 0 && errorMessage.parentNode) {
+                collectionList.removeChild(errorMessage);
+            }
+
+            for (let i = 0; i < dataObject.rows.length; i++) {
+                let row = dataObject.rows[i];
+                needMoreMap[selectedSegment] = row.nextPage;
+                reloadSectionDataItems.bind(this)(row.dataItems);
+            }
+        }
+
+        function loadMoreForGrid(grid) {
+            function flattenDataItems(dataObject) {
+                return dataObject.rows.flatMap((item) => {
+                    return item.dataItems;
+                });
+            }
+
+            isLoadingMore = true;
+
+            this.dataLoader.fetchVitrineNextPage(needMoreMap[selectedSegment], (dataObject) => {
+                const flattenedItems = flattenDataItems(dataObject);
+                if (flattenedItems.length > 0) {
+                    const currentSection = collectionList.getElementsByTagName('section').item(0);
+                    Array.prototype.push.apply(currentSection.dataItem['movies'], flattenedItems);
+                    currentSection.dataItem.touchPropertyPath('movies');
+                    console.log("Next Page");
+
+                    dataObject.rows.forEach((newRow) => {
+                        if (needMoreMap[selectedSegment] === newRow.nextPage) {
+                            needMoreMap[selectedSegment] = null;
+                        } else {
+                            needMoreMap[selectedSegment] = newRow.nextPage;
+                        }
+                    });
+                }
+                isLoadingMore = false;
+            }, () => {
+                isLoadingMore = false;
+            });
         }
     }
 }

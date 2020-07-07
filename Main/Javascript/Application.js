@@ -67,7 +67,6 @@ App.onLaunch = function (options) {
         "LoginController",
         "CategoriesDocumentController",
         "SearchDocumentController",
-        "MyMoviesDocumentController",
         "ProductsListDocumentController",
         "ProductDocumentController",
         "SeasonsDocumentController",
@@ -169,39 +168,19 @@ function createLoadingDocument(title) {
 }
 
 /**
- * This convenience function returns an alert template, which can be used to present errors to the user.
- */
-var createAlertDocument = function (title, description) {
-
-    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
-        <document>
-          <alertTemplate>
-            <title>${title}</title>
-            <description>${description}</description>
-          </alertTemplate>
-        </document>`
-
-    var parser = new DOMParser();
-
-    var alertDoc = parser.parseFromString(alertString, "application/xml");
-
-    return alertDoc
-}
-
-/**
  * Convenience function to create a TVML alert document with a title and description.
  */
-function createDescriptiveAlertDocument(title, description) {
+function createAlertDocument(title, description) {
     let logoIdentifier = isFilimo() ? "filimo" : "televika";
     let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
 
     const template = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
-            <descriptiveAlertTemplate layoutDirection="rtl">
-                <img srcset="${logoResource}" width="295" height="90" />
-                <title>${title}</title>
+            <alertTemplate>
+                <img srcset="${logoResource}" width="295" height="90" style="margin: 48;" />
+                <title style="tv-text-style: title2; margin: 20;">${title}</title>
                 <description />
-            </descriptiveAlertTemplate>
+            </alertTemplate>
         </document>
     `;
     let doc = (new DOMParser()).parseFromString(template, "application/xml");

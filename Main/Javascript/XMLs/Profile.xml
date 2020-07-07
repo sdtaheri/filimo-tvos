@@ -22,7 +22,18 @@
             padding: 0 20 0 20;
             }
 
+            .message {
+            text-align: center;
+            tv-align: center;
+            tv-position: center;
+            tv-text-style: title3;
+            color: rgba(0, 0, 0, 0.8);
+            }
+
             @media tv-template and (tv-theme:dark) {
+            .message {
+            color: rgba(255, 255, 255, 0.8);
+            }
             .centeredInPage {
             tv-tint-color: rgba(255, 255, 255, 0.8);
             }
@@ -54,14 +65,21 @@
             </row>
         </identityBanner>
 
+        <separator>
+            <segmentBar id="resultsMode">
+                <segmentBarItem value="bookmarks">
+                    <title id="bookmarksSegmentBarTitle" />
+                </segmentBarItem>
+                <segmentBarItem value="history">
+                    <title id="historySegmentBarTitle" />
+                </segmentBarItem>
+            </segmentBar>
+        </separator>
+
         <collectionList style="margin: 60 0 60 0;">
-            <shelf id="dummyShelf">
-                <section>
-                    <lockup>
-                        <title>Dummy Shelf needed for users with no history or bookmarks</title>
-                    </lockup>
-                </section>
-            </shelf>
+
+            <title id="errorMessage" class="message" />
+
         </collectionList>
     </stackTemplate>
 </document>

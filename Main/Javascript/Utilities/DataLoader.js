@@ -39,7 +39,7 @@ class DataLoader {
             if (params != null) {
                 url += "?" + Object
                     .keys(params)
-                    .map( (key) => {
+                    .map((key) => {
                         return key + "=" + encodeURIComponent(params[key])
                     })
                     .join("&")
@@ -76,13 +76,16 @@ class DataLoader {
         });
     }
 
-    fetchVitrineNextPage(url, itemsCallback) {
+    fetchVitrineNextPage(url, itemsCallback, errorCallback) {
         if (url == null) {
+            if (errorCallback) {
+                errorCallback();
+            }
             return;
         }
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseVitrineResponse(response, itemsCallback);
-        });
+        }, errorCallback);
     }
 
     fetchCategoriesList(itemsCallback) {
@@ -144,16 +147,18 @@ class DataLoader {
         });
     }
 
-    fetchUserMovies(itemsCallback) {
-        let bookmarksUrl = baseURL + '/movie/movie/list/tagid/bookmark';
-        let historyUrl = baseURL + '/movie/movie/list/tagid/history';
-
-        this._fetchJSONData(this._documentLoader.prepareURL(bookmarksUrl), null, (bookmarksResponse) => {
-            this._fetchJSONData(this._documentLoader.prepareURL(historyUrl), null, (historyResponse) => {
-                this._dataParser.parseUserMoviesResponse(bookmarksResponse, historyResponse, itemsCallback);
-            });
+    fetchBookmarks(itemsCallback) {
+        let url = baseURL + '/movie/movie/list/tagid/bookmark';
+        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
+            this._dataParser.parseVitrineResponse(response, itemsCallback);
         });
+    }
 
+    fetchHistory(itemsCallback) {
+        let url = baseURL + '/movie/movie/list/tagid/history';
+        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
+            this._dataParser.parseVitrineResponse(response, itemsCallback);
+        });
     }
 
     logout(url) {

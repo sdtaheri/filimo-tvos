@@ -265,9 +265,9 @@ class ProductDocumentController extends DocumentController {
                         let hourSection = comment.sdate.split(' ')[1].substr(0,5)
                         
                         let nodeToAdd = `<reviewCard>
-                        <title style="tv-position: top;">${comment.name || comment.username || 'بی نام'}</title>
-                        <description style="tv-position: top;">${toPersianDigits(comment.body)}</description>
-                        <text style="tv-position: bottom;">${toPersianDigits(jalaliDate + ' ' + hourSection)}</text>
+                        <title style="tv-position: top;">${cleanup(comment.name || comment.username || 'بی نام')}</title>
+                        <description style="tv-position: top;">${cleanup(comment.body)}</description>
+                        <text style="tv-position: bottom;">${cleanup(jalaliDate + ' ' + hourSection)}</text>
                         </reviewCard>
                         `
                         reviewsSection.insertAdjacentHTML('beforeend', nodeToAdd)

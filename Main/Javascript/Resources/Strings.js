@@ -49,6 +49,10 @@ function string_go_to_payment_website() {
     `;
 }
 
+const string_bookmarks = 'نشان‌ها';
+const string_history = 'مشاهده‌ها‌';
+const string_no_items_available = 'ویدئویی در این فهرست وجود ندارد';
+
 function toPersianDigits(str) {
     if (str == null) {
         return null;
@@ -76,7 +80,9 @@ function removeHTMLEntities(str) {
     return str.replace("&hellip;", "…")
         .replace("&zwnj;", "‌")
         .replace("&#039;", "'")
-        .replace(/&\w+;/g, '');
+        .replace(/&\w+;/g, '')
+        .replace("&raquo;", '»')
+        .replace("&laquo;", '«');
 }
 
 function cleanup(str) {

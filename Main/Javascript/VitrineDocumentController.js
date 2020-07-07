@@ -8,6 +8,7 @@ class VitrineDocumentController extends DocumentController {
         document.getElementById("headerLogo").setAttribute("srcset", logoResource);
 
         this._nextPageURL = null;
+        this._isLoadingMore = false;
 
         const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
         const collectionList = document.getElementsByTagName("collectionList").item(0);
@@ -27,8 +28,17 @@ class VitrineDocumentController extends DocumentController {
 
             stackTemplate.addEventListener('needsmore', (event) => {
                 if (this._nextPageURL != null) {
+
+                    if (this._isLoadingMore) {
+                        return;
+                    }
+
+                    this._isLoadingMore = true;
                     this.dataLoader.fetchVitrineNextPage(this._nextPageURL, (dataObject) => {
                         this._fillGridInCollectionList(dataObject, collectionList);
+                        this._isLoadingMore = false;
+                    }, () => {
+                        this._isLoadingMore = false;
                     });
                 }
             });

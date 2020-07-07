@@ -206,21 +206,9 @@ class DataParser {
         result.username = username;
         result.mobileNumber = mobileNumber;
         result.logoutLink = logoutLink;
-        result.subscriptionText = subscriptionText;
+        result.subscriptionText = subscriptionText || null;
 
         callback(result);
-    }
-
-    parseUserMoviesResponse(bookmarks, history, itemsCallback) {
-        this.parseVitrineResponse(bookmarks, (parsedBookmarks) => {
-            this.parseVitrineResponse(history, (parsedHistory) => {
-                let result = {};
-                result.meta = null;
-                result.nextPage = null;
-                result.rows = parsedBookmarks.rows.concat(parsedHistory.rows);
-                itemsCallback(result);
-            });
-        });
     }
 
     parseLoginCode(response, callback) {
