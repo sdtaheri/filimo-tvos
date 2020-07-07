@@ -6,9 +6,14 @@
             tv-position: top-right;
             }
 
+            .showTextOnHighlight {
+            tv-text-highlight-style: show-on-highlight;
+            }
+
             .subtitle {
             text-align: center;
             tv-text-style: caption2;
+            tv-text-highlight-style: show-on-highlight;
             }
 
             .movieCard {
@@ -87,7 +92,7 @@
             </card>
             <lockup prototype="movie-thumbplay" productDocumentURL="/XMLs/Product.xml">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
-                <title binding="textContent:{title};"/>"
+                <title class="showTextOnHighlight" binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>
             <lockup prototype="movie-thumbnail" productDocumentURL="/XMLs/Product.xml">
