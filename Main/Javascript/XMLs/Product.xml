@@ -39,7 +39,7 @@
             <heroImg src="" />
         </background>
         <activityIndicator>
-            <title></title>
+            <title/>
         </activityIndicator>
     </loadingTemplate>
     <productTemplate>
@@ -49,20 +49,20 @@
                     <header>
                         <title>ژانر</title>
                     </header>
-                    <text id="genre1"></text>
+                    <text id="genre1"/>
                 </info>
                 <info>
                     <header>
-                        <title></title>
+                        <title/>
                     </header>
-                    <text id="directorInfo"></text>
+                    <text id="directorInfo"/>
                 </info>
             </infoList>
             <stack>
-                <text id="title" class="title"></text>
-                <text id="englishTitle" class="englishTitle"></text>
-                <row id="infoRow"></row>
-                <description id="productDescription" handlesOverflow="true"></description>
+                <text id="title" class="title"/>
+                <text id="englishTitle" class="englishTitle"/>
+                <row id="infoRow"/>
+                <description id="productDescription" handlesOverflow="true"/>
                 <row>
                     <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton" autoHightlight="true">
                         <badge src="resource://button-play"/>
@@ -104,10 +104,10 @@
                 </rules>
             </lockup>
         </prototypes>
-        <shelf id="allEpisodes"></shelf>
+        <shelf id="allEpisodes"/>
         <shelf>
             <header>
-                <title id="recommendationStaticTitle"></title>
+                <title id="recommendationStaticTitle"/>
             </header>
             <section id="recommendation" binding="items:{items};">
             </section>
@@ -118,15 +118,15 @@
             </header>
             <section id="reviewsSection">
                 <ratingCard>
-                    <title style="tv-minimum-scale-factor: 0.5"></title>
-                    <ratingBadge></ratingBadge>
-                    <description></description>
+                    <title style="tv-minimum-scale-factor: 0.5"/>
+                    <ratingBadge/>
+                    <description/>
                 </ratingCard>
             </section>
         </shelf>
         <shelf id="castsShelf">
             <header>
-                <title></title>
+                <title/>
             </header>
             <section>
             </section>
