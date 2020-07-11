@@ -86,7 +86,7 @@ class DataLoader {
     }
 
     fetchCategoriesList(itemsCallback) {
-        let url = baseURL + '/category/category/list';
+        const url = baseURL + '/category/category/list';
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseCategoriesResponse(response, itemsCallback);
         });
@@ -100,7 +100,7 @@ class DataLoader {
         if (linkKey === 'categories') {
             this.fetchCategoriesList(itemsCallback);
         } else {
-            let url = baseURL + '/movie/movie/list/tagid/' + linkKey;
+            const url = baseURL + '/movie/movie/list/tagid/' + linkKey;
             this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
                 this._dataParser.parseVitrineResponse(response, itemsCallback);
             });
@@ -108,7 +108,7 @@ class DataLoader {
     }
 
     fetchSearchResults(query, itemsCallback, errorCallback) {
-        let searchText = query.trim().replace(/\s+/g, ' ');
+        const searchText = query.trim().replace(/\s+/g, ' ');
 
         if (this._searchTextCache && searchText === this._searchTextCache) {
             return;
@@ -120,7 +120,7 @@ class DataLoader {
             this._searchRequest.abort();
         }
 
-        let url = baseURL + `/movie/movie/list/tagid/1000300/text/${encodeURIComponent(searchText)}/sug/on`;
+        const url = baseURL + `/movie/movie/list/tagid/1000300/text/${encodeURIComponent(searchText)}/sug/on`;
 
         this._searchRequest = new XMLHttpRequest();
         this._fetchJSONData(url, null, (response) => {
@@ -131,7 +131,7 @@ class DataLoader {
     }
 
     fetchLoginCode(callback) {
-        let url = baseURL + '/user/Authenticate/get_verify_code';
+        const url = baseURL + '/user/Authenticate/get_verify_code';
         this._fetchJSONData(url, {'ref_type': 'tv'}, (response) => {
             this._dataParser.parseLoginCode(response, callback);
         });
@@ -142,15 +142,15 @@ class DataLoader {
             return;
         }
 
-        let url = baseURL + '/user/Authenticate/sync_account_verify';
+        const url = baseURL + '/user/Authenticate/sync_account_verify';
         this._fetchJSONData(url, {'ref_type': 'tv', 'code': code}, (response) => {
             this._dataParser.parseVerifyCode(response, callback);
         });
     }
 
     fetchProfile(callback) {
-        let profileAccountUrl = baseURL + '/user/user/profile_account';
-        let profileMenuUrl = baseURL + '/user/user/menu';
+        const profileAccountUrl = baseURL + '/user/user/profile_account';
+        const profileMenuUrl = baseURL + '/user/user/menu';
 
         this._fetchJSONData(profileAccountUrl, null, (accountResponse) => {
             this._fetchJSONData(profileMenuUrl, null, (menuResponse) => {
@@ -160,16 +160,79 @@ class DataLoader {
     }
 
     fetchBookmarks(itemsCallback) {
-        let url = baseURL + '/movie/movie/list/tagid/bookmark';
+        const url = baseURL + '/movie/movie/list/tagid/bookmark';
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseVitrineResponse(response, itemsCallback);
         });
     }
 
     fetchHistory(itemsCallback) {
-        let url = baseURL + '/movie/movie/list/tagid/history';
+        const url = baseURL + '/movie/movie/list/tagid/history';
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseVitrineResponse(response, itemsCallback);
+        });
+    }
+
+    fetchMovie(uid, callback) {
+        if (uid == null || uid === '') {
+            return;
+        }
+
+        const oneUrl = baseURL + '/movie/movie/one/uid/' + uid;
+        const detailUrl = baseURL + '/review/review/moviedetail/uid/' + uid;
+        const commentUrl = baseURL + '/comment/comment/list/uid/' + uid;
+        const recommendationUrl = baseURL + '/movie/movie/recom/uid/' + uid;
+        const seasonsUrl = baseURL + '/movie/serial/allepisodes/uid/' + uid;
+
+        this._fetchJSONData(this._documentLoader.prepareURL(oneUrl), null, (oneResponse) => {
+
+            checkIfAllRequestsAreDone = checkIfAllRequestsAreDone.bind(this);
+
+            const isSerial = oneResponse['data']['General']['serial']['enable'];
+            const requestsCount = isSerial === true ? 5 : 4;
+
+            const responses = {};
+            responses.one = oneResponse;
+
+            this._fetchJSONData(this._documentLoader.prepareURL(detailUrl), null, (detailResponse) => {
+                responses.detail = detailResponse;
+                checkIfAllRequestsAreDone();
+            }, () => {
+                responses.detail = null;
+                checkIfAllRequestsAreDone();
+            });
+
+            this._fetchJSONData(this._documentLoader.prepareURL(commentUrl), null, (commentsResponse) => {
+                responses.comments = commentsResponse;
+                checkIfAllRequestsAreDone();
+            }, () => {
+                responses.comments = null;
+                checkIfAllRequestsAreDone();
+            });
+
+            this._fetchJSONData(this._documentLoader.prepareURL(recommendationUrl), null, (recommendationResponse) => {
+                responses.recommendations = recommendationResponse;
+                checkIfAllRequestsAreDone();
+            }, () => {
+                responses.recommendations = null;
+                checkIfAllRequestsAreDone();
+            });
+
+            if (isSerial) {
+                this._fetchJSONData(this._documentLoader.prepareURL(seasonsUrl), null, (seasonsResponse) => {
+                    responses.seasons = seasonsResponse;
+                    checkIfAllRequestsAreDone();
+                }, () => {
+                    responses.seasons = null;
+                    checkIfAllRequestsAreDone();
+                });
+            }
+
+            function checkIfAllRequestsAreDone() {
+                if (Object.keys(responses).length === requestsCount) {
+                    this._dataParser.parseMovieDetailResponse(responses, callback);
+                }
+            }
         });
     }
 

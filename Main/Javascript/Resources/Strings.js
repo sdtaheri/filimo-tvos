@@ -53,6 +53,14 @@ const string_bookmarks = 'نشان‌ها';
 const string_history = 'مشاهده‌ها‌';
 const string_no_items_available = 'ویدئویی در این فهرست وجود ندارد';
 
+const string_and = 'و';
+const string_comma = '،';
+const string_hour = 'ساعت';
+const string_minute = 'دقیقه';
+
+const string_product_of = 'محصول';
+const string_actor = 'بازیگر';
+
 function toPersianDigits(str) {
     if (str === null || str === undefined) {
         return null;
@@ -69,7 +77,7 @@ function toPersianDigits(str) {
         .replace(/8/g, "۸")
         .replace(/9/g, "۹")
         .replace(/(,(?=\S)|:)/g, '، ')
-        .replace(' ،', '،');
+        .replace(' ،', string_comma);
 }
 
 function removeHTMLEntities(str) {
@@ -86,5 +94,31 @@ function removeHTMLEntities(str) {
 }
 
 function cleanup(str) {
-    return removeHTMLEntities(toPersianDigits(str));
+    return str |> toPersianDigits |> removeHTMLEntities;
+}
+
+function formatList(list) {
+    switch (list.length) {
+        case 0: return '';
+        case 1: return list[0];
+        case 2: return list[0].trim() + ` ${string_and} ` + list[1].trim();
+        default: return list[0].trim() + `${string_comma} ` + formatList(list.slice(1));
+    }
+}
+
+function productDuration(durationInDouble) {
+    const durationHour = parseInt(durationInDouble.duration / 60 + '', 10);
+    const durationMinute = parseInt(durationInDouble.duration % 60 + '', 10);
+
+    let duration = '';
+    if (durationHour > 0) {
+        duration += durationHour + ' ' + string_hour;
+    }
+    if (durationMinute > 0) {
+        if (duration !== '') {
+            duration += ` ${string_and} `;
+        }
+        duration += durationMinute + ' ' + string_minute;
+    }
+    return toPersianDigits(duration)
 }
