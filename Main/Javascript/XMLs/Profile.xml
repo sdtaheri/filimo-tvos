@@ -43,7 +43,7 @@
 
     <stackTemplate>
         <prototypes>
-            <lockup prototype="movie-thumbnail" productDocumentURL="/XMLs/Product.xml" binding="@itemID:{uid}">
+            <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml" binding="@itemID:{uid}">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>

@@ -22,7 +22,7 @@
         <text id="message" />
         <collectionList id="resultsList">
             <prototypes>
-                <lockup productDocumentURL="/XMLs/Product.xml" prototype="movie-search">
+                <lockup movieDocumentURL="/XMLs/Movie.xml" prototype="movie-search">
                     <img class="placeholder" binding="@src:{image};" width="300" height="400"/>
                     <title class="marquee" binding="textContent:{title};"/>
                     <text class="englishTitle" binding="textContent:{titleEn};"/>

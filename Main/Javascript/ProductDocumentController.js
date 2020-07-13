@@ -566,5 +566,4 @@ class ProductDocumentController extends DocumentController {
     }
 }
 
-ProductDocumentController.preventLoadingDocument = true
 registerAttributeName("productDocumentURL", ProductDocumentController)

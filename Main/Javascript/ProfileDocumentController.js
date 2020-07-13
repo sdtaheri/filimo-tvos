@@ -7,7 +7,6 @@ class ProfileDocumentController extends DocumentController {
         this._addedSectionNames = [];
     }
 
-
     setupDocument(document) {
         super.setupDocument(document);
 
@@ -123,7 +122,7 @@ class ProfileDocumentController extends DocumentController {
                 }
 
                 if (rootNode.getElementsByTagName('divTemplate').item(0) === undefined) {
-                    let template = `<divTemplate>
+                    const template = `<divTemplate>
                     <img class="centeredInPage" width="150" height="150"
                         srcset="${jsBaseURL}Resources/profile.png 1x, ${jsBaseURL}Resources/profile@2x.png 2x" />         
                     <button class="centeredInPage" loginDocumentURL="/XMLs/Login.xml">
@@ -210,7 +209,7 @@ class ProfileDocumentController extends DocumentController {
                     section.dataItem['movies'] = items;
                     section.dataItem.touchPropertyPath('movies');
                 } else {
-                    let gridToAdd = `<grid>
+                    const gridToAdd = `<grid>
                         <section binding="items:{movies};" />
                     </grid>`;
                     collectionList.insertAdjacentHTML('beforeend', gridToAdd);

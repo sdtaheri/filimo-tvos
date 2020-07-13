@@ -34,7 +34,6 @@ class DocumentController {
         document.addEventListener("select", this.handleEvent);
         document.addEventListener("play", this.handleEvent);
         document.addEventListener("unload", this.handleEvent);
-        document.addEventListener("appear", this.handleEvent);
     }
 
     handleDocument(document, loadingDocument) {
@@ -53,11 +52,6 @@ class DocumentController {
                 let controllerOptions = resolveControllerFromElement(targetElem);
                 if (controllerOptions) {
                     const controllerClass = controllerOptions.type;
-                    if (!controllerClass.preventLoadingDocument) {
-                        let loadingDocument = createLoadingDocument();
-                        navigationDocument.pushDocument(loadingDocument);
-                        controllerOptions.loadingDocument = loadingDocument;
-                    }
                     controllerOptions.event = event;
                     controllerOptions.documentLoader = this.documentLoader;
                     // Create the subsequent controller based on the attribute and its value. Controller would handle its presentation.

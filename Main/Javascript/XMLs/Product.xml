@@ -3,40 +3,40 @@
     <head>
         <style>
             .badge {
-                tv-tint-color: rgb(255, 255, 255);
+            tv-tint-color: rgb(255, 255, 255);
             }
             .placeholder {
-                tv-placeholder: movie;
+            tv-placeholder: movie;
             }
             .title {
-                text-align: right;
-                tv-text-max-lines: 2;
-                font-size: 65;
-                font-weight: bold;
-                tv-minimum-scale-factor: 0.7;
-                margin-bottom: 20;
+            text-align: right;
+            tv-text-max-lines: 2;
+            font-size: 65;
+            font-weight: bold;
+            tv-minimum-scale-factor: 0.7;
+            margin-bottom: 20;
             }
             .englishTitle {
-                text-align: right;
-                tv-text-max-lines: 1;
-                tv-text-style: headline;
-                tv-minimum-scale-factor: 0.7;
-                padding-top: -8;
+            text-align: right;
+            tv-text-max-lines: 1;
+            tv-text-style: headline;
+            tv-minimum-scale-factor: 0.7;
+            padding-top: -8;
             }
             .englishTitleInLockup {
-                text-align: center;
-                tv-text-style: caption2;
-                color: rgb(255,255,255,0.5);
-                tv-highlight-color: rgb(255,255,255);
+            text-align: center;
+            tv-text-style: caption2;
+            color: rgb(255,255,255,0.5);
+            tv-highlight-color: rgb(255,255,255);
             }
             .watchedOverlayImg {
-                tv-position: bottom-trailing;
+            tv-position: bottom-trailing;
             }
         </style>
     </head>
     <loadingTemplate>
         <background>
-            <heroImg src="" />
+            <heroImg src=''/>
         </background>
         <activityIndicator>
             <title/>
@@ -85,11 +85,11 @@
             <heroImg src=""/>
         </banner>
         <prototypes>
-            <lockup productDocumentURL="/XMLs/Product.xml" prototype="similarArtwork">
-                <img class="placeholder" binding="@src:{movie_img_b};" width="225" height="300" />
-                <title binding="textContent:{movie_title};" />
-                <text class="englishTitleInLockup" binding="textContent:{movie_title_en};" />
-                <placeholder tag="progress" />
+            <lockup movieDocumentURL="/XMLs/Movie.xml" prototype="similarArtwork">
+                <img class="placeholder" binding="@src:{movie_img_b};" width="225" height="300"/>
+                <title binding="textContent:{movie_title};"/>
+                <text class="englishTitleInLockup" binding="textContent:{movie_title_en};"/>
+                <placeholder tag="progress"/>
                 <rules>
                     <specialize state="({watch_fraction}-greater-than-equal:0.9)">
                         <overlay tag="progress">
@@ -98,9 +98,9 @@
                     </specialize>
                     <specialize state="({watch_fraction}-greater-than:0)">
                         <overlay tag="progress">
-                            <progressBar binding="@value:{watch_fraction}" />
+                            <progressBar binding="@value:{watch_fraction}"/>
                         </overlay>
-                    </specialize>                    
+                    </specialize>
                 </rules>
             </lockup>
         </prototypes>

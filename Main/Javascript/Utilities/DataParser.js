@@ -268,7 +268,7 @@ class DataParser {
     parseMovieDetailResponse(responses, callback) {
         function getSafe(fn, defaultVal) {
             try {
-                return fn();
+                return fn() || defaultVal;
             } catch (e) {
                 return defaultVal;
             }
@@ -276,13 +276,16 @@ class DataParser {
 
         const result = {};
 
-        result.title = getSafe(() => { return responses.one.data['General'].title}, "") |> cleanup;
-        result.titleEn = getSafe(() => { return responses.one.data['General']['title_en']}, "");
-        result.desc = getSafe(() => { return responses.one.data['General'].desc}, null) |> cleanup;
+        result.title = cleanup(getSafe(() => { return responses.one.data['General'].title}, ''));
+        result.titleEn = removeHTMLEntities(getSafe(() => { return responses.one.data['General']['title_en']}, ''));
+        result.desc = cleanup(getSafe(() => { return responses.one.data['General']['descr']}, ''));
 
-        const countries = getSafe(() => { return responses.one.data['General']['countries']}, []).map((country) => {
+        result.image = getSafe(() => { return responses.one.data['General']['thumbnails']['movie_img_b'] }, '');
+        result.cover = getSafe(() => { return responses.one.data['General']['cover'] }, '');
+
+        const countries = formatList(getSafe(() => { return responses.one.data['General']['countries']}, []).map((country) => {
             return country.title;
-        }) |> formatList;
+        }));
         if (countries !== '') {
             result.country = string_product_of + ' ' + countries;
         } else {
@@ -291,48 +294,64 @@ class DataParser {
 
         result.productionYear = toPersianDigits(getSafe(() => { return responses.one.data['General']['pro_year']}, null));
         result.duration = getSafe(() => { return responses.one.data['General']['duration']['value'] }, 0);
-        result.durationText = result.duration |> productDuration;
+        result.durationText = productDuration(result.duration);
         result.isHD = getSafe(() => { return responses.one.data['General']['HD']['enable'] }, false);
         result.isSerial = getSafe(() => { return responses.one.data['General']['serial']['enable'] }, false);
-        result.imdbRate = getSafe(() => { return responses.one.data['General']['imdb_rate'] }, null);
 
         result.rate = {};
         result.rate.average = getSafe(() => { return responses.one.data['action_data']['rate']['movie']['percent'] }, null);
         result.rate.count = getSafe(() => { return responses.one.data['action_data']['rate']['movie']['count'] }, null);
+        result.rate.imdb = getSafe(() => { return responses.one.data['General']['imdb_rate'] }, null);
 
         const categories = getSafe(() => { return responses.one.data['General']['categories']}, []).map((category) => {
-            return category.title;
+            return cleanup(category.title);
         });
         if (categories.length > 0) {
-            result.categories = countries;
+            result.categories = categories;
         } else {
             result.categories = null;
         }
 
         const actors = getSafe(() => { return responses.detail.data['ActorCrewData']['profile'] }, []).map((actor) => {
             const uid = encodeURI(actor['link_key']);
-            const item = new DataItem(actor['link_type'], uid);
+            const item = new DataItem('cast', uid);
             item.name = cleanup(actor.name);
-            item.nameEn = actor.nameEn || null;
+            item.nameEn = removeHTMLEntities(actor['name_en'] || null);
             item.position = string_actor;
             item.positionEn = 'Actor';
-            item.image = actor['profile_image'] || null;
             item.linkKey = uid;
+            item.image = actor['profile_image'] || null;
+            const initials = (item.nameEn || item.name).split(' ');
+            if (initials.length < 2) {
+                item.firstName = '';
+                item.lastName = '';
+            } else {
+                item.firstName = initials[0];
+                item.lastName = initials[initials.length - 1];
+            }
             return item;
         });
 
         const otherCrewResponse = getSafe(() => { return responses.detail.data['OtherCrewData'] }, []);
         const crew = [];
         for (let data of otherCrewResponse) {
-            for (let profile of otherCrewResponse['profile']) {
+            for (let profile of data['profile']) {
                 const uid = encodeURI(profile['link_key']);
-                const item = new DataItem(profile['link_type'], uid);
+                const item = new DataItem('cast', uid);
                 item.name = cleanup(profile.name);
-                item.nameEn = cleanup(profile.nameEn || null);
+                item.nameEn = removeHTMLEntities(profile['name_en'] || null);
                 item.position = getSafe(() => { return data['post_info']['title_fa'] }, null);
                 item.positionEn = getSafe(() => { return data['post_info']['title_en'] }, null);
                 item.image = profile['profile_image'] || null;
                 item.linkKey = uid;
+                const initials = (item.nameEn || item.name).split(' ');
+                if (initials.length < 2) {
+                    item.firstName = '';
+                    item.lastName = '';
+                } else {
+                    item.firstName = initials[0];
+                    item.lastName = initials[initials.length - 1];
+                }
                 crew.push(item);
             }
         }
@@ -347,13 +366,13 @@ class DataParser {
             "nextPageURL": getSafe(() => responses.comments['links']['more'], null)
         }
         result.comments.items = getSafe(() => responses.comments['data'], []).map((item) => {
-            const attributes = getSafe(() => responses.comments['data']['attributes'], null);
+            const attributes = getSafe(() => item['attributes'], null);
             const uid = attributes['commentid'];
             const dataItem = new DataItem('comment', uid);
             dataItem.uid = uid;
-            dataItem.name = attributes['name'] || '';
-            dataItem.jalaliDate = attributes['sdate'] || '';
-            dataItem.body = attributes['body'] || '';
+            dataItem.name = removeHTMLEntities(attributes['name']) || '';
+            dataItem.jalaliDate = cleanup(attributes['sdate']) || '';
+            dataItem.body = removeHTMLEntities(attributes['body']) || '';
             return dataItem;
         });
 
@@ -364,10 +383,14 @@ class DataParser {
 
         if (result.isSerial) {
             result.seasonId = result.isSerial ? getSafe(() => { return responses.one.data['General']['serial']['season_id'] }, null) : null;
-            result.seasons = [];
-            this.parseVitrineResponse(responses.seasons, (parsedSeasons) => {
-                result.seasons = parsedSeasons;
-            });
+            if (responses.seasons !== null) {
+                result.seasons = [];
+                this.parseVitrineResponse(responses.seasons, (parsedSeasons) => {
+                    result.seasons = parsedSeasons;
+                });
+            } else {
+                result.seasons = null;
+            }
         } else {
             result.seasonId = null;
             result.seasons = null;
@@ -398,7 +421,16 @@ class DataParser {
             'link': getSafe(() => { return responses.one.data['action_data']['wish']['link']}, null)
         }
 
-        result.trailer = getSafe(() => { return responses.detail.data['aparatTrailer']['file_link'] }, null);
+        const trailerLink = getSafe(() => { return responses.detail.data['aparatTrailer']['file_link'] }, null);
+        if (trailerLink !== null) {
+            result.trailer = {
+                'title': getSafe(() => { return responses.detail.data['aparatTrailer']['title'] }, null),
+                'url': trailerLink,
+                'thumbnail': getSafe(() => { return responses.detail.data['aparatTrailer']['thumb'] }, null)
+            };
+        } else {
+            result.trailer = null;
+        }
 
         callback(result);
     }

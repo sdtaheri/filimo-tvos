@@ -67,6 +67,7 @@ App.onLaunch = function (options) {
         "LoginController",
         "SearchDocumentController",
         "ProductDocumentController",
+        "MovieDocumentController",
         "SeasonsDocumentController",
         "ProfileDocumentController"
     ].map(
@@ -74,18 +75,18 @@ App.onLaunch = function (options) {
     );
 
     // Show a loading spinner while additional JavaScript files are being evaluated
-    let loadingDocument = createLoadingDocument(appName);
+    const loadingDocument = createLoadingDocument(appName);
     navigationDocument.pushDocument(loadingDocument);
 
     evaluateScripts(helperScriptURLs, function (scriptsAreLoaded) {
         if (scriptsAreLoaded) {
             navigationDocument.removeDocument(loadingDocument);
 
-            let documentLoader = new DocumentLoader(jsBaseURL)
-            let documentURL = documentLoader.prepareURL("/XMLs/Index.xml")
-            new MenuBarController({documentLoader, documentURL})
-            menubarLoaded = true
-            playMovieFromURL(pendingPlayURL)
+            const documentLoader = new DocumentLoader(jsBaseURL);
+            const documentURL = documentLoader.prepareURL("/XMLs/Index.xml");
+            new MenuBarController({documentLoader, documentURL});
+            menubarLoaded = true;
+            playMovieFromURL(pendingPlayURL);
 
         } else {
             const alertDocument = createEvalErrorAlertDocument();
@@ -96,9 +97,9 @@ App.onLaunch = function (options) {
 }
 
 App.onOpenURL = function (url) {
-    pendingPlayURL = url
+    pendingPlayURL = url;
     if (menubarLoaded) {
-        playMovieFromURL(pendingPlayURL)
+        playMovieFromURL(pendingPlayURL);
     }
 }
 
@@ -123,17 +124,18 @@ App.onWillTerminate = function () {
 }
 
 function playMovieFromURL(url) {
-    if (url == null || url === "") {
-        return
+    if (url == null || url === '') {
+        return;
     }
-    const [protocol, path] = url.split("://");
-    const [movieUID, type] = path.split("/")
 
-    let documentLoader = new DocumentLoader(jsBaseURL)
-    let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
-    let shouldPlayMovie = type === 'play'
-    new ProductDocumentController({documentLoader, documentURL, movieUID, shouldPlayMovie})
-    pendingPlayURL = null
+    const [, path] = url.split("://");
+    const [movieUid, type] = path.split("/");
+
+    const documentLoader = new DocumentLoader(jsBaseURL);
+    const documentURL = documentLoader.prepareURL("/XMLs/Product.xml");
+    const shouldPlayAtLoad = type === 'play';
+    new ProductDocumentController({documentLoader, documentURL, movieUid, shouldPlayAtLoad});
+    pendingPlayURL = null;
 }
 
 function loadingTemplateString(title) {
@@ -191,7 +193,7 @@ function createAlertDocument(title, description, withImage) {
  * Convenience function to create a TVML alert for asking user with two options as answers.
  */
 function presentAlertQuestion(title, description, defaultTitle, cancelTitle, defaultHandler) {
-    let alertString = `<?xml version="1.0" encoding="UTF-8" ?>
+    const alertString = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
           <alertTemplate>
             <title>${title}</title>
@@ -199,9 +201,9 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
             <button id="alertDefaultButton">
                 <text>${defaultTitle}</text>
             </button>
-            <button id="alertCancelButton">
+            ${cancelTitle === null ? '' : `<button id="alertCancelButton">
                 <text>${cancelTitle}</text>
-            </button>
+            </button>`}
           </alertTemplate>
         </document>`;
 
@@ -214,9 +216,11 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
         navigationDocument.dismissModal();
     });
 
-    alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
-        navigationDocument.dismissModal();
-    });
+    if (cancelTitle !== null) {
+        alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
+            navigationDocument.dismissModal();
+        });
+    }
 
     navigationDocument.presentModal(alertDoc);
 }
@@ -225,10 +229,10 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
  * Convenience function to create a TVML alert for failed evaluateScripts.
  */
 function createEvalErrorAlertDocument() {
-    const title = "Evaluate Scripts Error";
+    const title = string_scripts_evaluation_error_title;
     const description = [
-        "There was an error attempting to evaluate the external JavaScript files.",
-        "Please check your network connection and try again later."
+        string_scripts_evaluation_error_desc,
+        string_check_connection_try_again
     ].join("\n\n");
     return createAlertDocument(title, description);
 }

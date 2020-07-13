@@ -73,7 +73,7 @@ class HomeDocumentController extends DocumentController {
                    let item = ((sections[i]).data)[j]
                    let hasOverlay = item.movie_status_txt && item.movie_status_txt !== ''
                    
-                   let lockup = `<lockup productDocumentURL="/XMLs/Product.xml">
+                   let lockup = `<lockup movieDocumentURL="/XMLs/Movie.xml">
                     <img class="${hasOverlay ? 'imageDisabled' : 'image'}" src="${item.movie_img_b}" width="275" height="366" />
                     <title>${toPersianDigits(item.movie_title)}</title>
                     <text class="englishTitle"></text>`

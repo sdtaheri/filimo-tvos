@@ -104,7 +104,7 @@
                     <title binding="textContent:{title};"/>"
                 </row>
             </lockup>
-            <card prototype="movie-theater" class="movieCard" productDocumentURL="/XMLs/Product.xml">
+            <card prototype="movie-theater" class="movieCard" movieDocumentURL="/XMLs/Movie.xml">
                 <background>
                     <img class="imageGradient" aspectFill="true" width="666" height="308" binding="@src:{cover};" />
                 </background>
@@ -112,12 +112,12 @@
                 <title class="movieCardTitle" binding="textContent:{title};" />
                 <subtitle class="movieCardSubtitle" binding="textContent:{desc};" />
             </card>
-            <lockup prototype="movie-thumbplay" productDocumentURL="/XMLs/Product.xml">
+            <lockup prototype="movie-thumbplay" movieDocumentURL="/XMLs/Movie.xml">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
                 <title class="showTextOnHighlight" binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>
-            <lockup prototype="movie-thumbnail" productDocumentURL="/XMLs/Product.xml">
+            <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
@@ -125,7 +125,7 @@
             <lockup prototype="poster-brick" vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
             </lockup>
-            <lockup prototype="poster-theater" productDocumentURL="/XMLs/Product.xml">
+            <lockup prototype="poster-theater" movieDocumentURL="/XMLs/Movie.xml">
                 <img binding="@src:{image};" width="900" height="300"/>
             </lockup>
 

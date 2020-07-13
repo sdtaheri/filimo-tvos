@@ -25,7 +25,7 @@
         <list>
             <section>
                 <prototypes>
-                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsList">
+                    <lockup movieDocumentURL="/XMLs/Movie.xml" prototype="productsList">
                         <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
                         <title class="marquee" binding="textContent:{movie_title};" />
                         <text class="englishTitle" binding="textContent:{movie_title_en};" />

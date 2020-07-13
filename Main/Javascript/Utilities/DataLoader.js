@@ -182,7 +182,7 @@ class DataLoader {
         const detailUrl = baseURL + '/review/review/moviedetail/uid/' + uid;
         const commentUrl = baseURL + '/comment/comment/list/uid/' + uid;
         const recommendationUrl = baseURL + '/movie/movie/recom/uid/' + uid;
-        const seasonsUrl = baseURL + '/movie/serial/allepisodes/uid/' + uid;
+        const seasonsUrl = baseURL + '/movie/serial/allepisode/uid/' + uid;
 
         this._fetchJSONData(this._documentLoader.prepareURL(oneUrl), null, (oneResponse) => {
 
@@ -210,14 +210,6 @@ class DataLoader {
                 checkIfAllRequestsAreDone();
             });
 
-            this._fetchJSONData(this._documentLoader.prepareURL(recommendationUrl), null, (recommendationResponse) => {
-                responses.recommendations = recommendationResponse;
-                checkIfAllRequestsAreDone();
-            }, () => {
-                responses.recommendations = null;
-                checkIfAllRequestsAreDone();
-            });
-
             if (isSerial) {
                 this._fetchJSONData(this._documentLoader.prepareURL(seasonsUrl), null, (seasonsResponse) => {
                     responses.seasons = seasonsResponse;
@@ -227,6 +219,14 @@ class DataLoader {
                     checkIfAllRequestsAreDone();
                 });
             }
+
+            this._fetchJSONData(this._documentLoader.prepareURL(recommendationUrl), null, (recommendationResponse) => {
+                responses.recommendations = recommendationResponse;
+                checkIfAllRequestsAreDone();
+            }, () => {
+                responses.recommendations = null;
+                checkIfAllRequestsAreDone();
+            });
 
             function checkIfAllRequestsAreDone() {
                 if (Object.keys(responses).length === requestsCount) {
