@@ -80,17 +80,28 @@
             margin: 8;
             }
 
-            @media tv-template and (tv-theme:dark) {
-            .channelLogo {
-            tv-tint-color: rgba(255, 255, 255, 0.50);
-            }
-
             .movieCard {
             background-color: rgba(0, 0, 0, 0.3);
             }
 
             .categoryCard {
             background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            .message {
+            text-align: center;
+            tv-align: center;
+            tv-position: center;
+            tv-text-style: title3;
+            color: rgba(0, 0, 0, 0.8);
+            }
+
+            @media tv-template and (tv-theme:dark) {
+            .message {
+            color: rgba(255, 255, 255, 0.8);
+            }
+            .channelLogo {
+            tv-tint-color: rgba(255, 255, 255, 0.50);
             }
             }
         </style>
@@ -121,6 +132,20 @@
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
+                <placeholder tag="progress"/>
+
+                <rules>
+                    <specialize state="({watchFraction}-greater-than-equal:0.9)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <badge style="tv-position: bottom-trailing;" src="resource://overlay-checkmark"/>
+                        </overlay>
+                    </specialize>
+                    <specialize state="({watchFraction}-greater-than:0)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <progressBar binding="@value:{watchFraction}"/>
+                        </overlay>
+                    </specialize>
+                </rules>
             </lockup>
             <lockup prototype="poster-brick" vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>

@@ -22,6 +22,7 @@ class VitrineDocumentController extends DocumentController {
 
         const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
         this.collectionList = document.getElementsByTagName("collectionList").item(0);
+        this.pageTitleElement = document.getElementById('pageTitle');
         const rootNode = stackTemplate.parentNode;
 
         if (this.isHomePage) {
@@ -40,7 +41,7 @@ class VitrineDocumentController extends DocumentController {
         }
 
         if (this.pageTitle) {
-            document.getElementById('pageTitle').textContent = this.pageTitle;
+            this.pageTitleElement.textContent = this.pageTitle;
         }
 
         this._nextPageURL = null;
@@ -101,6 +102,11 @@ class VitrineDocumentController extends DocumentController {
         for (let i = 0; i < dataObject.rows.length; i++) {
             const row = dataObject.rows[i];
 
+            if (dataObject.rows.length === 1 && row.title && row.title !== '') {
+                this.pageTitle = row.title;
+                this.pageTitleElement.textContent = this.pageTitle;
+            }
+
             const shouldAddHeader = row.title && (row.title !== '') && row.title !== this.pageTitle;
 
             const sectionToAdd = `<${row.header}>
@@ -118,6 +124,11 @@ class VitrineDocumentController extends DocumentController {
             const section = (this.collectionList.getElementsByTagName("section")).item(this.collectionList.children.length - 1);
             section.dataItem = new DataItem();
             section.dataItem.setPropertyPath("movies", row.dataItems);
+        }
+
+        if (dataObject.rows.length === 0) {
+            this.collectionList.insertAdjacentHTML('beforeend',
+                `<title class="message">${string_no_items_available}</title>`);
         }
     }
 

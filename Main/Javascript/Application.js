@@ -134,9 +134,9 @@ function playMovieFromURL(url) {
     const [movieUid, type] = path.split("/");
 
     const documentLoader = new DocumentLoader(jsBaseURL);
-    const documentURL = documentLoader.prepareURL("/XMLs/Product.xml");
+    const documentURL = documentLoader.prepareURL("/XMLs/Movie.xml");
     const shouldPlayAtLoad = type === 'play';
-    new ProductDocumentController({documentLoader, documentURL, movieUid, shouldPlayAtLoad});
+    new MovieDocumentController({documentLoader, documentURL, movieUid, shouldPlayAtLoad});
     pendingPlayURL = null;
 }
 
@@ -266,4 +266,12 @@ function resolveControllerFromElement(elem) {
 
 function isFilimo() {
     return baseURL.includes("filimo.com");
+}
+
+function getSafe(fn, defaultVal) {
+    try {
+        return fn() || defaultVal;
+    } catch (e) {
+        return defaultVal;
+    }
 }

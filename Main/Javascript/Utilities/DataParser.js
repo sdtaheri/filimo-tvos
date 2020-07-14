@@ -47,6 +47,10 @@ class DataParser {
                         objectItem.image = movie['pic']['movie_img_m'];
                         objectItem.cover = movie['movie_cover'] || null;
                         objectItem.logo = null;
+                        objectItem.watchFraction = getSafe(() => { return movie['last_watch']['percent'] / 100.0 }, null);
+                        if (objectItem.watchFraction === null) {
+                            objectItem.watchFraction = getSafe(() => { return movie['user_watched_info']['percent'] / 100.0 }, 0.0);
+                        }
                         objectItem.uid = linkKey;
                         objectItem.linkType = movie['link_type'];
                         return objectItem;
@@ -193,14 +197,6 @@ class DataParser {
     }
 
     parseProfileResponse(response, callback) {
-        function getSafe(fn, defaultVal) {
-            try {
-                return fn();
-            } catch (e) {
-                return defaultVal;
-            }
-        }
-
         let menu = response.menu;
 
         let profileFirstRow = getSafe(() => { return menu.data.menu['main_menu'] }, [])
@@ -266,14 +262,6 @@ class DataParser {
     }
 
     parseMovieDetailResponse(responses, callback) {
-        function getSafe(fn, defaultVal) {
-            try {
-                return fn() || defaultVal;
-            } catch (e) {
-                return defaultVal;
-            }
-        }
-
         const result = {};
 
         result.title = cleanup(getSafe(() => { return responses.one.data['General'].title}, ''));

@@ -60,6 +60,20 @@
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="225" height="300"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
+                <placeholder tag="progress"/>
+
+                <rules>
+                    <specialize state="({watchFraction}-greater-than-equal:0.9)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <badge style="tv-position: bottom-trailing;" src="resource://overlay-checkmark"/>
+                        </overlay>
+                    </specialize>
+                    <specialize state="({watchFraction}-greater-than:0)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <progressBar binding="@value:{watchFraction}"/>
+                        </overlay>
+                    </specialize>
+                </rules>
             </lockup>
 
             <lockup prototype="movie-serialList" movieDocumentURL="/XMLs/Movie.xml">
