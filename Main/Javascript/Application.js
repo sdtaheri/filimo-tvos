@@ -29,6 +29,9 @@ let baseURL;
 let menubarLoaded = false;
 let pendingPlayURL = null;
 
+let appBackgroundedDate = null;
+let appForegroundedDate = null;
+
 /**
  * @description The onLaunch callback is invoked after the application JavaScript
  * has been parsed into a JavaScript context. The handler is passed an object
@@ -55,14 +58,12 @@ App.onLaunch = function (options) {
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
         "Resources/Strings",
-        "Utilities/Jalali",
         "Utilities/UserManager",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
         "Utilities/DataLoader",
         "Utilities/DataParser",
         "MenuBarController",
-        "HomeDocumentController",
         "VitrineDocumentController",
         "LoginController",
         "SearchDocumentController",
@@ -108,7 +109,8 @@ App.onWillResignActive = function () {
 }
 
 App.onDidEnterBackground = function () {
-
+    appBackgroundedDate = new Date();
+    appForegroundedDate = null;
 }
 
 App.onWillEnterForeground = function () {
@@ -116,7 +118,7 @@ App.onWillEnterForeground = function () {
 }
 
 App.onDidBecomeActive = function () {
-
+    appForegroundedDate = new Date();
 }
 
 App.onWillTerminate = function () {

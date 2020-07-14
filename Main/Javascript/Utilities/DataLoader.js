@@ -18,16 +18,20 @@ class DataLoader {
     }
 
     _fetchJSONData(dataURL, params, responseCallback, errorCallback, httpRequest) {
+        function slashedUserAgent() {
+
+        }
+
+        function userAgent() {
+
+        }
+
         return new Promise((resolve, reject) => {
             let xhr = httpRequest || new XMLHttpRequest();
 
             let url = dataURL;
             if (dataURL.substr(-1) !== "/") {
                 url += "/";
-            }
-            if (UserManager.isLoggedIn()) {
-                url += "luser/" + UserManager.username();
-                url += "/ltoken/" + UserManager.lToken() + "/";
             }
 
             if (dataURL.includes(legacyBaseURL)) {
@@ -49,8 +53,13 @@ class DataLoader {
 
             if (UserManager.isLoggedIn()) {
                 xhr.setRequestHeader("Authorization", "Bearer " + UserManager.jwtToken());
+                xhr.setRequestHeader("luser", UserManager.username());
+                xhr.setRequestHeader("ltoken", UserManager.lToken());
             }
+            xhr.setRequestHeader("PlainJsonApi", "1");
             xhr.setRequestHeader("JsonType", "simple");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("cache-control", "no-cache");
 
             xhr.responseType = "json";
             xhr.onload = () => {

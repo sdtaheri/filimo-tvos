@@ -12,15 +12,31 @@ class VitrineDocumentController extends DocumentController {
             this.pageTitle = null;
         }
         this.isHomePage = this.linkKey === 'home';
+        this.isPendingUpdate = false;
+
+        this.refreshInterval = 1000 * 60 * 60;
     }
 
     setupDocument(document) {
         super.setupDocument(document);
 
+        const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
+        this.collectionList = document.getElementsByTagName("collectionList").item(0);
+        const rootNode = stackTemplate.parentNode;
+
         if (this.isHomePage) {
             let logoIdentifier = isFilimo() ? "filimo" : "televika";
             let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
             document.getElementById("headerLogo").setAttribute("srcset", logoResource);
+
+            this.refreshIntervalId = setInterval(() => {
+                this.isPendingUpdate = true;
+                this.refreshData();
+            }, this.refreshInterval);
+
+            document.addEventListener('appear', this.handleEvent);
+            document.addEventListener('disappear', this.handleEvent);
+            document.addEventListener('appDidBecomeActive', this.handleEvent);
         }
 
         if (this.pageTitle) {
@@ -30,23 +46,19 @@ class VitrineDocumentController extends DocumentController {
         this._nextPageURL = null;
         this._isLoadingMore = false;
 
-        const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
-        const collectionList = document.getElementsByTagName("collectionList").item(0);
-        const rootNode = stackTemplate.parentNode;
-
         // Add a loading indicator until we make stackTemplate ready
         rootNode.insertAdjacentHTML('beforeend', loadingTemplateString());
         rootNode.removeChild(stackTemplate);
         let loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0);
 
-        this.dataLoader.fetchList(this.linkKey,(dataObject) => {
+        this.dataLoader.fetchList(this.linkKey, (dataObject) => {
 
-            this.fillGridInCollectionList(dataObject, collectionList);
+            this.fillGridInCollectionList(dataObject, true);
 
             rootNode.appendChild(stackTemplate);
             rootNode.removeChild(loadingTemplate);
 
-            stackTemplate.addEventListener('needsmore', (event) => {
+            stackTemplate.addEventListener('needsmore', () => {
                 if (this._nextPageURL != null) {
 
                     if (this._isLoadingMore) {
@@ -54,8 +66,8 @@ class VitrineDocumentController extends DocumentController {
                     }
 
                     this._isLoadingMore = true;
-                    this.dataLoader.fetchVitrineNextPage(this._nextPageURL, (dataObject) => {
-                        this.fillGridInCollectionList(dataObject, collectionList);
+                    this.dataLoader.fetchVitrineNextPage(this._nextPageURL, (moreDataObject) => {
+                        this.fillGridInCollectionList(moreDataObject, false);
                         this._isLoadingMore = false;
                     }, () => {
                         this._isLoadingMore = false;
@@ -65,8 +77,26 @@ class VitrineDocumentController extends DocumentController {
         });
     }
 
-    fillGridInCollectionList(dataObject, collectionList) {
+    refreshData() {
+        if (this.isOnScreen && appForegroundedDate !== null) {
+            console.log("Refreshing home page: " + new Date());
+            this.dataLoader.fetchList(this.linkKey, (dataObject) => {
+                this.fillGridInCollectionList(dataObject, true);
+                this.isPendingUpdate = false;
+            });
+        }
+    }
+
+    fillGridInCollectionList(dataObject, isRefresh) {
         this._nextPageURL = dataObject.nextPage;
+
+        if (isRefresh && this.collectionList.childElementCount !== 0) {
+            const stackTemplate = this.collectionList.parentNode;
+            stackTemplate.removeChild(this.collectionList);
+
+            stackTemplate.insertAdjacentHTML('beforeend', '<collectionList />');
+            this.collectionList = stackTemplate.getElementsByTagName('collectionList').item(0);
+        }
 
         for (let i = 0; i < dataObject.rows.length; i++) {
             const row = dataObject.rows[i];
@@ -79,12 +109,41 @@ class VitrineDocumentController extends DocumentController {
                 </header>` : ''}
                <section binding="items:{movies};" />
                </${row.header}>`;
-            collectionList.insertAdjacentHTML('beforeend', sectionToAdd);
+            this.collectionList.insertAdjacentHTML('beforeend', sectionToAdd);
 
-            let section = (collectionList.getElementsByTagName("section")).item(collectionList.children.length - 1);
+            let section = (this.collectionList.getElementsByTagName("section")).item(this.collectionList.children.length - 1);
             section.dataItem = new DataItem();
             section.dataItem.setPropertyPath("movies", row.dataItems);
         }
+    }
+
+    handleEvent(event) {
+        console.log(event.type);
+
+        if (event.type === 'appear') {
+            this.isOnScreen = true;
+            if (this.isPendingUpdate) {
+                this.refreshData();
+            }
+
+            if (appForegroundedDate !== null
+                && appBackgroundedDate !== null
+                && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
+                this.refreshData();
+            }
+        }
+
+        if (event.type === 'disappear') {
+            this.isOnScreen = false;
+        }
+
+        if (event.type === 'unload') {
+            if (this.refreshIntervalId) {
+                clearInterval(this.refreshIntervalId);
+            }
+        }
+
+        super.handleEvent(event);
     }
 }
 

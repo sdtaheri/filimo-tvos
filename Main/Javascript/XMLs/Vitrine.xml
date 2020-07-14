@@ -106,11 +106,11 @@
             </lockup>
             <card prototype="movie-theater" class="movieCard" movieDocumentURL="/XMLs/Movie.xml">
                 <background>
-                    <img class="imageGradient" aspectFill="true" width="666" height="308" binding="@src:{cover};" />
+                    <img class="imageGradient" aspectFill="true" width="666" height="308" binding="@src:{cover};"/>
                 </background>
-                <img class="movieCardImage" binding="@src:{image};" />
-                <title class="movieCardTitle" binding="textContent:{title};" />
-                <subtitle class="movieCardSubtitle" binding="textContent:{desc};" />
+                <img class="movieCardImage" binding="@src:{image};"/>
+                <title class="movieCardTitle" binding="textContent:{title};"/>
+                <subtitle class="movieCardSubtitle" binding="textContent:{desc};"/>
             </card>
             <lockup prototype="movie-thumbplay" movieDocumentURL="/XMLs/Movie.xml">
                 <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
@@ -129,7 +129,7 @@
                 <img binding="@src:{image};" width="900" height="300"/>
             </lockup>
 
-            <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml" >
+            <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <background>
                     <img aspectFill="true" binding="@src:{image};" width="830" height="180"/>
                 </background>
@@ -142,11 +142,10 @@
                 <img id="headerLogo" width="295" height="90" class="headerLogo"/>
             </organizer>
 
-            <title id="pageTitle" />
+            <title id="pageTitle"/>
         </banner>
 
-        <collectionList>
-        </collectionList>
+        <collectionList/>
 
     </stackTemplate>
 </document>
