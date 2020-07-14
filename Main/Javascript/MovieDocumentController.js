@@ -37,30 +37,7 @@ class MovieDocumentController extends DocumentController {
             setupRecommendationsShelf(result);
             setupOtherEpisodesOfCurrentSeasonShelf(result);
             setupCastShelf(result);
-
-            document.getElementById('commentsShelfTitle').textContent = string_comments;
-            const ratingCardNode = document.getElementsByTagName('ratingCard').item(0);
-            const ratingShelf = document.getElementById('ratingShelf');
-            if (result.rate.average !== null) {
-                ratingCardNode.getElementsByTagName('title').item(0)
-                    .textContent = string_rating + ' ' + toPersianDigits(result.rate.average) + string_percent_sign;
-                ratingCardNode.getElementsByTagName('ratingBadge').item(0)
-                    .setAttribute("value", result.rate.average / 100.0 + '');
-                ratingCardNode.getElementsByTagName('description').item(0)
-                    .textContent = string_average_between_comments(result.rate.count);
-            }
-
-            const commentsSection = document.getElementById('commentsSection');
-            if (result.comments.items.length > 0) {
-                commentsSection.dataItem = new DataItem();
-                commentsSection.dataItem.setPropertyPath("comment", result.comments.items);
-            } else {
-                ratingShelf.removeChild(commentsSection);
-            }
-
-            if (result.rate.average === null && result.comments.items.length === 0) {
-                ratingShelf.parentNode.removeChild(ratingShelf);
-            }
+            setupCommentsShelf(result);
         });
 
         function setLoadingVisible(flag) {
@@ -108,7 +85,8 @@ class MovieDocumentController extends DocumentController {
             infoRowToAdd += `<text>${result.durationText}</text>`;
 
             if (result.rate.average !== null && result.rate.average > 0) {
-                infoRowToAdd += `<ratingBadge value="${result.rate.average / 100.0}" />`
+                infoRowToAdd += `<organizer><badge class="imdbBadge" srcset="${jsBaseURL}Resources/like.png 1x, ${jsBaseURL}Resources/like@2x.png 2x" width="22" height="22"/>`;
+                infoRowToAdd += `<text class="imdbRate">${' ' + string_percent_sign + toPersianDigits(result.rate.average)}</text></organizer>`;
             }
             if (result.rate.imdb !== null && result.rate.imdb > 0) {
                 infoRowToAdd += `<organizer><badge class="imdbBadge" srcset="${jsBaseURL}Resources/imdb.png 1x, ${jsBaseURL}Resources/imdb@2x.png 2x" width="45" height="22"/>`;
@@ -240,6 +218,30 @@ class MovieDocumentController extends DocumentController {
                 section.dataItem.setPropertyPath('cast', result.cast);
             } else {
                 castShelf.parentNode.removeChild(castShelf);
+            }
+        }
+
+        function setupCommentsShelf(result) {
+            document.getElementById('commentsShelfTitle').textContent = string_comments;
+            const ratingCardNode = document.getElementsByTagName('ratingCard').item(0);
+            const ratingShelf = document.getElementById('ratingShelf');
+            if (result.rate.average !== null) {
+                const title = `<title style="tv-minimum-scale-factor: 0.5;">${string_percent_sign + toPersianDigits(result.rate.average) + ' '}<badge srcset="${jsBaseURL}Resources/like.png 1x, ${jsBaseURL}Resources/like@2x.png 2x" width="50" height="50"/></title>`;
+                ratingCardNode.insertAdjacentHTML('afterbegin', title);
+                ratingCardNode.getElementsByTagName('description').item(0)
+                    .textContent = string_average_between_comments(result.rate.count);
+            }
+
+            const commentsSection = document.getElementById('commentsSection');
+            if (result.comments.items.length > 0) {
+                commentsSection.dataItem = new DataItem();
+                commentsSection.dataItem.setPropertyPath("comment", result.comments.items);
+            } else {
+                ratingShelf.removeChild(commentsSection);
+            }
+
+            if (result.rate.average === null && result.comments.items.length === 0) {
+                ratingShelf.parentNode.removeChild(ratingShelf);
             }
         }
 

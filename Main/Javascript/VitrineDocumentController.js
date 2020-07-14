@@ -5,7 +5,7 @@ class VitrineDocumentController extends DocumentController {
 
         if (options.event) {
             const dataItem = options.event.target['dataItem'];
-            this.linkKey = dataItem.uid || 'home';
+            this.linkKey = dataItem.uid || dataItem.linkKey || 'home';
             this.pageTitle = dataItem.title;
         } else {
             this.linkKey = options.linkKey || 'home';
@@ -118,8 +118,6 @@ class VitrineDocumentController extends DocumentController {
     }
 
     handleEvent(event) {
-        console.log(event.type);
-
         if (event.type === 'appear') {
             this.isOnScreen = true;
             if (this.isPendingUpdate) {

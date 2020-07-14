@@ -109,7 +109,8 @@ class DataLoader {
         if (linkKey === 'categories') {
             this.fetchCategoriesList(itemsCallback);
         } else {
-            const url = baseURL + '/movie/movie/list/tagid/' + linkKey;
+            const path = '/movie/movie/list/tagid/';
+            const url = linkKey.includes(path) ? linkKey : (baseURL + '/movie/movie/list/tagid/' + linkKey);
             this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
                 this._dataParser.parseVitrineResponse(response, itemsCallback);
             });

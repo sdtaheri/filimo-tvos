@@ -5,6 +5,7 @@
 
             .imdbBadge {
             tv-position:center;
+            tv-tint-color: rgb(255, 255, 255);
             }
 
             .imdbRate {
@@ -39,6 +40,8 @@
             text-align: center;
             tv-text-style: caption2;
             tv-text-highlight-style: show-on-highlight;
+            color: rgb(255,255,255,0.5);
+            tv-highlight-color: rgb(255,255,255);
             }
 
         </style>
@@ -122,9 +125,7 @@
                 <title id="commentsShelfTitle"/>
             </header>
             <section style="margin: 0 50 0 0;">
-                <ratingCard >
-                    <title style="tv-minimum-scale-factor: 0.5;"/>
-                    <ratingBadge/>
+                <ratingCard>
                     <description style="tv-text-max-lines: 3"/>
                 </ratingCard>
             </section>
