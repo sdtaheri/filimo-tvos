@@ -111,7 +111,11 @@ class VitrineDocumentController extends DocumentController {
                </${row.header}>`;
             this.collectionList.insertAdjacentHTML('beforeend', sectionToAdd);
 
-            let section = (this.collectionList.getElementsByTagName("section")).item(this.collectionList.children.length - 1);
+            if (row.header === 'grid' && this._nextPageURL === null) {
+                this._nextPageURL = row.nextPage;
+            }
+
+            const section = (this.collectionList.getElementsByTagName("section")).item(this.collectionList.children.length - 1);
             section.dataItem = new DataItem();
             section.dataItem.setPropertyPath("movies", row.dataItems);
         }
