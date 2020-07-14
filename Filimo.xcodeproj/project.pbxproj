@@ -54,9 +54,10 @@
 		3016E21F24B5B7ED00A62989 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3016E22124B5BA6100A62989 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
 		301E4809206B92CE00D44269 /* SearchDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SearchDocumentController.js; sourceTree = "<group>"; };
-		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
+		3022612124BE4E8C00246B1F /* MovieDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MovieDocumentController.js; sourceTree = "<group>"; };
+		3022612224BE4EA300246B1F /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
+		3022612324BE4EA300246B1F /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
-		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
 		304769C024AC725B0002714B /* Televika.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Televika.xcconfig; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		304769D924AC97AF0002714B /* SeasonsDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SeasonsDocumentController.js; sourceTree = "<group>"; };
 		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
 		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
-		309D289D206649DF001148BE /* Product.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Product.xml; sourceTree = "<group>"; };
 		309D289F20664A00001148BE /* ProductDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductDocumentController.js; sourceTree = "<group>"; };
 		30A8B731208121E600B55E69 /* seasons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seasons@2x.png"; sourceTree = "<group>"; };
 		30A8B732208121E600B55E69 /* seasons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seasons.png; sourceTree = "<group>"; };
@@ -90,7 +90,6 @@
 		30B1336C24B5D41400CC63EA /* UserManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UserManager.js; sourceTree = "<group>"; };
 		30B1336D24B5D42900CC63EA /* Profile.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Profile.xml; sourceTree = "<group>"; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
-		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
@@ -134,7 +133,6 @@
 				304769DB24AC97C50002714B /* DataParser.js */,
 				30241805206514C300B46686 /* DocumentController.js */,
 				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
-				30B503F9207034FC00D08682 /* Jalali.js */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -143,10 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				30B1336D24B5D42900CC63EA /* Profile.xml */,
-				30241804206501F500B46686 /* Home.xml */,
 				302418082065246700B46686 /* Index.xml */,
 				30D5167A20683283007995AF /* Login.xml */,
-				309D289D206649DF001148BE /* Product.xml */,
 				304769D624AC97A00002714B /* Search.xml */,
 				304769D724AC97A00002714B /* Seasons.xml */,
 				304769D824AC97A00002714B /* Vitrine.xml */,
@@ -157,6 +153,8 @@
 		3024180B2065567400B46686 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3022612324BE4EA300246B1F /* like.png */,
+				3022612224BE4EA300246B1F /* like@2x.png */,
 				30B1336A24B5D40800CC63EA /* pay.png */,
 				30B1336724B5D40800CC63EA /* pay@2x.png */,
 				30B1336624B5D40700CC63EA /* profile.png */,
@@ -207,9 +205,9 @@
 		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
+				3022612124BE4E8C00246B1F /* MovieDocumentController.js */,
 				30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */,
 				30C5790B20448110007E728F /* Application.js */,
-				302418062065246700B46686 /* HomeDocumentController.js */,
 				30D5167B206832A5007995AF /* LoginController.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,
 				309D289F20664A00001148BE /* ProductDocumentController.js */,

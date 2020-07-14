@@ -87,7 +87,7 @@ App.onLaunch = function (options) {
             const documentURL = documentLoader.prepareURL("/XMLs/Index.xml");
             new MenuBarController({documentLoader, documentURL});
             menubarLoaded = true;
-            playMovieFromURL(pendingPlayURL);
+            playMovieFromHomemadeUrl(pendingPlayURL);
 
         } else {
             const alertDocument = createEvalErrorAlertDocument();
@@ -100,7 +100,7 @@ App.onLaunch = function (options) {
 App.onOpenURL = function (url) {
     pendingPlayURL = url;
     if (menubarLoaded) {
-        playMovieFromURL(pendingPlayURL);
+        playMovieFromHomemadeUrl(pendingPlayURL);
     }
 }
 
@@ -125,7 +125,8 @@ App.onWillTerminate = function () {
 
 }
 
-function playMovieFromURL(url) {
+//This works for playing videos from Top shelf
+function playMovieFromHomemadeUrl(url) {
     if (url == null || url === '') {
         return;
     }
