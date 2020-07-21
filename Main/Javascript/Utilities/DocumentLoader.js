@@ -32,6 +32,7 @@ class DocumentLoader {
         const xhr = new XMLHttpRequest();
         xhr.open("GET", docURL);
         xhr.responseType = "document";
+        xhr.setRequestHeader("cache-control", "no-cache");
         xhr.onload = () => {
             const responseDoc = xhr.response;
             this.prepareDocument(responseDoc);

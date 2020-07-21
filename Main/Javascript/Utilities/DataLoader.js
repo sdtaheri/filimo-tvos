@@ -18,14 +18,6 @@ class DataLoader {
     }
 
     _fetchJSONData(dataURL, params, responseCallback, errorCallback, httpRequest) {
-        function slashedUserAgent() {
-
-        }
-
-        function userAgent() {
-
-        }
-
         return new Promise((resolve, reject) => {
             let xhr = httpRequest || new XMLHttpRequest();
 
@@ -184,7 +176,7 @@ class DataLoader {
     }
 
     fetchMovie(uid, callback) {
-        if (uid == null || uid === '') {
+        if (uid === null || uid === '') {
             return;
         }
 
@@ -246,10 +238,22 @@ class DataLoader {
         });
     }
 
+    toggleWish(url, successCallback, failureCallback) {
+        if (url === null || url === '') {
+            failureCallback();
+            return;
+        }
+
+        this._fetchJSONData(url, null, (successResult) => {
+            this._dataParser.parseWishToggleResponse(successResult, successCallback, failureCallback);
+        }, () => {
+            failureCallback();
+        });
+    }
+
     logout(url) {
         this._fetchJSONData(url, null, (result) => {
             console.log(result);
         });
     }
-
 }

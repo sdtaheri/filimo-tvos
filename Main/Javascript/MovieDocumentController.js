@@ -18,6 +18,11 @@ class MovieDocumentController extends DocumentController {
         if (this.movieUid === null) {
             navigationDocument.popDocument();
         }
+
+        this.wish = {
+            'enabled': false,
+            'link': null
+        }
     }
 
     setupDocument(document) {
@@ -33,7 +38,7 @@ class MovieDocumentController extends DocumentController {
             setLoadingVisible(false);
 
             fillHeaderInfo(result);
-            setupActionButtons(result);
+            setupActionButtons.bind(this)(result);
             setupRecommendationsShelf(result);
             setupOtherEpisodesOfCurrentSeasonShelf(result);
             setupCastShelf(result);
@@ -163,6 +168,8 @@ class MovieDocumentController extends DocumentController {
             const previewButton = document.getElementById('previewButton');
             const seasonsButton = document.getElementById('seasonsButton');
 
+            this.wish = result.wish;
+
             playButton.getElementsByTagName('title')
                 .item(0)
                 .textContent = result.watchAction.buttonText || result.watchAction.price || string_play_movie;
@@ -178,7 +185,7 @@ class MovieDocumentController extends DocumentController {
             setBookmarkButtonVisuals(bookmarkButton, result.wish.enabled);
 
             bookmarkButton.addEventListener('select', () => {
-                handleBookmarkScenario();
+                handleBookmarkScenario.bind(this)();
             });
 
             if (result.trailer) {
@@ -292,16 +299,37 @@ class MovieDocumentController extends DocumentController {
 
         }
 
-        function handleBookmarkScenario(link) {
-            if (link === null || link === undefined) {
-                return;
-            }
+        function handleBookmarkScenario() {
             if (UserManager.isLoggedIn()) {
+                if (this.wish.link === null || this.wish.link === undefined) {
+                    return;
+                }
+
+                const newValue = !this.wish.enabled;
+                setBookmarkButtonVisuals(null, newValue);
+
+                this.dataLoader.toggleWish(this.wish.link, (enabled) => {
+                    this.wish.enabled = enabled;
+                    if (enabled !== newValue) {
+                        setBookmarkButtonVisuals(null, enabled);
+                    }
+                }, () => {
+                    setBookmarkButtonVisuals(null, !newValue);
+                });
+
+            } else {
 
             }
         }
 
         function setBookmarkButtonVisuals(bookmarkButton, isBookmarked) {
+            if (bookmarkButton === null) {
+                bookmarkButton = document.getElementById('bookmarkButton');
+                if (bookmarkButton === undefined || bookmarkButton === null) {
+                    return;
+                }
+            }
+
             if (isBookmarked) {
                 bookmarkButton.getElementsByTagName('badge').item(0).setAttribute('src', 'resource://button-remove');
                 bookmarkButton.getElementsByTagName('title').item(0).textContent = string_remove_bookmark;
@@ -309,17 +337,18 @@ class MovieDocumentController extends DocumentController {
                 bookmarkButton.getElementsByTagName('badge').item(0).setAttribute('src', 'resource://button-add');
                 bookmarkButton.getElementsByTagName('title').item(0).textContent = string_add_bookmark;
             }
-        }
-    }
 
-    handleEvent(event) {
-        if (UserManager.isLoggedIn()) {
-            const targetId = event.target.getAttribute('id');
-            if (targetId === 'playButton' || targetId === 'bookmarkButton') {
-                return;
+            const loginAttribute = 'loginDocumentURL';
+            if (UserManager.isLoggedIn()) {
+                if (bookmarkButton.hasAttribute(loginAttribute)) {
+                    bookmarkButton.removeAttribute(loginAttribute);
+                }
+            } else {
+                if (!bookmarkButton.hasAttribute(loginAttribute)) {
+                    bookmarkButton.setAttribute(loginAttribute, "/XMLs/Login.xml");
+                }
             }
         }
-        super.handleEvent(event);
     }
 }
 

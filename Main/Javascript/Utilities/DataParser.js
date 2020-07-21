@@ -422,4 +422,16 @@ class DataParser {
 
         callback(result);
     }
+
+    parseWishToggleResponse(response, successCallback, failureCallback) {
+        const wishStatus = getSafe(() => { return response.data['status'] }, null);
+
+        if (wishStatus === 'wish') {
+            successCallback(true);
+        } else if (wishStatus === 'not wish') {
+            successCallback(false);
+        } else {
+            failureCallback();
+        }
+    }
 }
