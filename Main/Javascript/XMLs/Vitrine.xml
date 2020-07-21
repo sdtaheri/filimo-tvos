@@ -108,7 +108,7 @@
     </head>
     <stackTemplate>
         <prototypes>
-            <lockup prototype="livetv-thumbplay">
+            <lockup prototype="livetv-thumbplay" playDirectly="true">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
                 <row>
                     <badge class="channelLogo" binding="@src:{logo};" height="60" width="60"/>

@@ -190,10 +190,10 @@ class MovieDocumentController extends DocumentController {
 
             if (result.trailer) {
                 previewButton.addEventListener('select', () => {
-                    playTrailer(result.trailer.url, result.trailer.title, result.trailer.thumbnail);
+                    (new AppPlayer()).playVideo(result.trailer.url, result.trailer.title, result.trailer.thumbnail);
                 });
                 previewButton.addEventListener('play', () => {
-                    playTrailer(result.trailer.url, result.trailer.title, result.trailer.thumbnail);
+                    (new AppPlayer()).playVideo(result.trailer.url, result.trailer.title, result.trailer.thumbnail);
                 })
                 previewButton.getElementsByTagName('title').item(0).textContent = string_preview;
             } else {
@@ -278,21 +278,6 @@ class MovieDocumentController extends DocumentController {
             } else {
                 allEpisodesShelf.parentNode.removeChild(allEpisodesShelf);
             }
-        }
-
-        function playTrailer(url, title, thumbnail) {
-            if (url === null || url === undefined) {
-                return;
-            }
-            const player = new Player();
-            const video = new MediaItem('video', url);
-            video.title = title;
-            video.artworkImageURL = thumbnail;
-
-            player.playlist = new Playlist();
-            player.playlist.push(video);
-
-            player.play();
         }
 
         function handlePlayScenario() {

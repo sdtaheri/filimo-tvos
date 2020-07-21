@@ -58,6 +58,7 @@ App.onLaunch = function (options) {
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
         "Resources/Strings",
+        "Utilities/AppPlayer",
         "Utilities/UserManager",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
