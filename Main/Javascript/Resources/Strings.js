@@ -130,19 +130,21 @@ function formatList(list) {
     }
 }
 
-function productDuration(durationInDouble) {
-    const durationHour = parseInt(durationInDouble.duration / 60 + '', 10);
-    const durationMinute = parseInt(durationInDouble.duration % 60 + '', 10);
+function productDuration(durationInSeconds) {
+    const durationInMinute = durationInSeconds / 60;
+
+    const hour = parseInt(durationInMinute / 60 + '', 10);
+    const minute = parseInt(durationInMinute % 60 + '', 10);
 
     let duration = '';
-    if (durationHour > 0) {
-        duration += durationHour + ' ' + string_hour;
+    if (hour > 0) {
+        duration += hour + ' ' + string_hour;
     }
-    if (durationMinute > 0) {
+    if (minute > 0) {
         if (duration !== '') {
             duration += ` ${string_and} `;
         }
-        duration += durationMinute + ' ' + string_minute;
+        duration += minute + ' ' + string_minute;
     }
     return toPersianDigits(duration)
 }
