@@ -111,7 +111,7 @@
                 <description id="productDescription" handlesOverflow="true"/>
 
                 <row>
-                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton" autoHightlight="true">
+                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton">
                         <badge src="resource://button-play"/>
                         <title/>
                     </buttonLockup>

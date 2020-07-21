@@ -83,6 +83,7 @@ const string_recommendations = 'پیشنهادها';
 const string_episodes_of_season = 'قسمت‌های فصل';
 const string_other_episodes = 'سایر قسمت‌ها';
 const string_cast = 'عوامل';
+const string_skip_intro = 'رد کردن تیتراژ';
 
 function toPersianDigits(str) {
     if (str === null || str === undefined) {

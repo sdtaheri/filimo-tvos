@@ -19,6 +19,8 @@ class MovieDocumentController extends DocumentController {
             navigationDocument.popDocument();
         }
 
+        this.movieSource = null;
+
         this.wish = {
             'enabled': false,
             'link': null
@@ -169,17 +171,18 @@ class MovieDocumentController extends DocumentController {
             const seasonsButton = document.getElementById('seasonsButton');
 
             this.wish = result.wish;
+            this.movieSource = result.watchAction.movieSource;
 
             playButton.getElementsByTagName('title')
                 .item(0)
                 .textContent = result.watchAction.buttonText || result.watchAction.price || string_play_movie;
 
             playButton.addEventListener('select', () => {
-                handlePlayScenario();
+                handlePlayScenario(result);
             });
 
             playButton.addEventListener('play', () => {
-                handlePlayScenario();
+                handlePlayScenario(result);
             });
 
             setBookmarkButtonVisuals(bookmarkButton, result.wish.enabled);
@@ -280,8 +283,19 @@ class MovieDocumentController extends DocumentController {
             }
         }
 
-        function handlePlayScenario() {
+        function handlePlayScenario(result) {
+            if (result.watchAction.movieSource === null || result.watchAction.movieSource === '') {
+                return;
+            }
 
+            (new AppPlayer()).playVideo(result.watchAction.movieSource,
+                result.title,
+                result.image,
+                result.desc,
+                result.watchAction.lastWatchedPosition.seconds,
+                result.watchAction.visitStats,
+                result.watchAction.castSkip
+            );
         }
 
         function handleBookmarkScenario() {
@@ -334,6 +348,24 @@ class MovieDocumentController extends DocumentController {
                 }
             }
         }
+    }
+
+    handleEvent(event) {
+        switch (event.type) {
+            case 'select':
+            case 'play': {
+                if (event.target.getAttribute('id') === 'playButton'
+                    && this.movieSource !== null
+                    && this.movieSource !== '') {
+                    return;
+                }
+                break;
+            }
+
+            default: break;
+        }
+
+        super.handleEvent(event);
     }
 }
 

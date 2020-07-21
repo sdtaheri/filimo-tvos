@@ -398,10 +398,30 @@ class DataParser {
                 'callPeriod': getSafe(() => { return responses.one.data['watch_action']['visit_url']['visitCallPeriod']}, 60)
             },
             'castSkip': {
-                'introStart': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_s']}, null),
+                'introStart': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_s']}, 0),
                 'introEnd': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_e']}, null),
                 'castStart': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['cast_s']}, null)
             }
+        }
+
+        let resumeTime = result.watchAction.lastWatchedPosition.seconds;
+        let resumePercentage = result.watchAction.lastWatchedPosition.percentage;
+
+        if (result.watchAction.castSkip.introStart <= resumeTime) {
+            resumeTime = 0;
+            resumePercentage = 0;
+        } else if (result.watchAction.castSkip.introEnd
+            && resumeTime >= result.watchAction.castSkip.introEnd) {
+            resumeTime = 0;
+            resumePercentage = 0;
+        } else if (resumePercentage > 95) {
+            resumeTime = 0;
+            resumePercentage = 0;
+        }
+
+        result.watchAction.lastWatchedPosition = {
+            percentage: resumePercentage,
+            seconds: resumeTime
         }
 
         result.wish = {
