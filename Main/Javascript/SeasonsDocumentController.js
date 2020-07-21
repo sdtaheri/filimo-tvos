@@ -3,14 +3,15 @@ class SeasonsDocumentController extends DocumentController {
     constructor(controllerOptions) {
         super(controllerOptions);
         if (controllerOptions.event) {
-            this.seasons = controllerOptions.event.target['seasons'];
+            this.seasons = controllerOptions.event.target['serial']['seasons'];
+            this.title = controllerOptions.event.target['serial']['title'];
         }
     }
 
     setupDocument(document) {
         super.setupDocument(document);
 
-        document.getElementById('pageTitle').textContent = string_seasons;
+        document.getElementById('pageTitle').textContent = this.title || string_seasons;
 
         const listSection = document.getElementById('listSection');
 

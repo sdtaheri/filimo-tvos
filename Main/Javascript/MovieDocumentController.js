@@ -96,6 +96,14 @@ class MovieDocumentController extends DocumentController {
             }
             infoRowToAdd += `<text>${result.durationText}</text>`;
 
+            if (result.ageRange) {
+                infoRowToAdd += `<text>${result.ageRange}</text>`;
+            }
+
+            if (result.isDubbed) {
+                infoRowToAdd += `<text>${string_dubbed}</text>`;
+            }
+
             if (result.rate.average !== null && result.rate.average > 0) {
                 infoRowToAdd += `<organizer><badge class="imdbBadge" srcset="${jsBaseURL}Resources/like.png 1x, ${jsBaseURL}Resources/like@2x.png 2x" width="22" height="22"/>`;
                 infoRowToAdd += `<text class="imdbRate">${' ' + string_percent_sign + toPersianDigits(result.rate.average)}</text></organizer>`;
@@ -107,6 +115,10 @@ class MovieDocumentController extends DocumentController {
 
             if (result.isHD) {
                 infoRowToAdd += `<badge src="resource://hd" class="hdBadge" />`
+            }
+
+            if (result.hasCC) {
+                infoRowToAdd += `<badge src="resource://cc" class="hdBadge" />`
             }
 
             document.getElementById('infoRow').insertAdjacentHTML('beforeend', infoRowToAdd);
@@ -206,7 +218,10 @@ class MovieDocumentController extends DocumentController {
             if (result.seasons !== null && result.seasons.rows.length > 1) {
                 seasonsButton.getElementsByTagName('title')
                     .item(0).textContent = toPersianDigits(result.seasons.rows.length + ' ' + string_season);
-                seasonsButton.seasons = result.seasons;
+                seasonsButton.serial = {
+                    seasons: result.seasons,
+                    title: result.serialTitle
+                };
             } else {
                 seasonsButton.parentNode.removeChild(seasonsButton);
             }

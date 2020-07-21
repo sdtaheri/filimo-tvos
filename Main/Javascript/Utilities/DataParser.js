@@ -286,6 +286,19 @@ class DataParser {
         result.isHD = getSafe(() => { return responses.one.data['General']['HD']['enable'] }, false);
         result.isSerial = getSafe(() => { return responses.one.data['General']['serial']['enable'] }, false);
 
+        result.isDubbed = getSafe(() => { return responses.one.data['General']['dubbed']['enable'] }, false);
+        result.hasCC = getSafe(() => { return responses.one.data['General']['subtitle']['enable'] }, false);
+
+        const ageRange = getSafe(() => { return responses.one.data['General']['age_range'] }, null);
+        result.ageRange = null;
+        if (ageRange && ageRange !== '') {
+            const minAge = ageRange.split('-');
+            if (minAge.length > 0) {
+                result.ageRange = '+' + toPersianDigits(minAge[0]);
+            }
+        }
+
+
         result.rate = {};
         result.rate.average = getSafe(() => { return responses.one.data['action_data']['rate']['movie']['percent'] }, null);
         result.rate.count = getSafe(() => { return responses.one.data['action_data']['rate']['movie']['count'] }, null);
@@ -379,9 +392,11 @@ class DataParser {
             } else {
                 result.seasons = null;
             }
+            result.serialTitle = getSafe(() => { return responses.one.data['General']['serial']['title'] }, null);
         } else {
             result.seasonId = null;
             result.seasons = null;
+            result.serialTitle = null;
         }
 
         result.watchAction = {

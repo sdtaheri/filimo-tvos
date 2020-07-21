@@ -85,6 +85,7 @@ const string_episodes_of_season = 'قسمت‌های فصل';
 const string_other_episodes = 'سایر قسمت‌ها';
 const string_cast = 'عوامل';
 const string_skip_intro = 'رد کردن تیتراژ';
+const string_dubbed = 'دوبله';
 
 function toPersianDigits(str) {
     if (str === null || str === undefined) {
