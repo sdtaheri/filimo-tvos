@@ -173,23 +173,30 @@ function createLoadingDocument(title) {
 /**
  * Convenience function to create a TVML alert document with a title and description.
  */
-function createAlertDocument(title, description, withImage) {
-    let logoIdentifier = isFilimo() ? "filimo" : "televika";
-    let logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
+function createAlertDocument(title, description, withImage, descriptive) {
+    const logoIdentifier = isFilimo() ? "filimo" : "televika";
+    const logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
+
+    const mainTag = (descriptive !== undefined && descriptive === true) ? 'descriptiveAlertTemplate' : 'alertTemplate';
 
     const template = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
-            <alertTemplate>
+            <${mainTag}>
                 ${(withImage || false) ? `<img srcset="${logoResource}" width="295" height="90" style="margin: 48;" />` : ''}
                 <title style="tv-text-style: title2; margin: 20;">${title}</title>
                 <description />
-            </alertTemplate>
+            </${mainTag}>
         </document>
     `;
     let doc = (new DOMParser()).parseFromString(template, "application/xml");
     doc.getElementsByTagName("description").item(0).textContent = description;
 
     return doc
+}
+
+function presentAlertDocument(title, description, withImage, descriptive) {
+    const alert = createAlertDocument(title, description, withImage, descriptive);
+    navigationDocument.presentModal(alert);
 }
 
 /**

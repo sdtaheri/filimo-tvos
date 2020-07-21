@@ -72,8 +72,13 @@ class MovieDocumentController extends DocumentController {
         function fillHeaderInfo(result) {
             document.getElementById('title').textContent = result.title;
             document.getElementById('englishTitle').textContent = result.titleEn;
-            document.getElementById('productDescription').textContent = result.desc;
             document.getElementsByTagName('heroImg').item(0).setAttribute('src', result.image);
+
+            const descriptionElement = document.getElementById('productDescription');
+            descriptionElement.textContent = result.desc;
+            descriptionElement.addEventListener('select', () => {
+                presentAlertDocument('', result.desc, false, true);
+            });
 
             let infoRowToAdd = '';
             if (result.country !== null) {
@@ -235,7 +240,7 @@ class MovieDocumentController extends DocumentController {
             const commentsSection = document.getElementById('commentsSection');
             if (result.comments.items.length > 0) {
                 commentsSection.dataItem = new DataItem();
-                commentsSection.dataItem.setPropertyPath("comment", result.comments.items);
+                commentsSection.dataItem.setPropertyPath('comment', result.comments.items);
             } else {
                 ratingShelf.removeChild(commentsSection);
             }

@@ -88,7 +88,11 @@
                 <subtitle binding="textContent:{position};"/>
             </monogramLockup>
 
-            <reviewCard prototype="comment">
+            <reviewCard prototype="comment"
+                        binding="@onselect:presentAlertDocument(this.getElementsByTagName('title').item(0).textContent,
+                        this.getElementsByTagName('description').item(0).textContent,
+                        false,
+                        true)">
                 <title binding="textContent:{name};" style="tv-position: top; margin-bottom: 8;"/>
                 <description binding="textContent:{body};" style="tv-position: center; padding-bottom: 8;"/>
                 <text binding="textContent:{jalaliDate};" style="tv-position: bottom; margin: 10 0"/>
