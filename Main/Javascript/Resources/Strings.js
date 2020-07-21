@@ -62,6 +62,7 @@ const string_comma = '،';
 const string_hour = 'ساعت';
 const string_minute = 'دقیقه';
 const string_season = 'فصل';
+const string_seasons = 'فصل‌ها';
 
 const string_comments = 'نظرات';
 const string_rating = 'امتیاز';

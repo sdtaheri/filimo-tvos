@@ -206,6 +206,7 @@ class MovieDocumentController extends DocumentController {
             if (result.seasons !== null && result.seasons.rows.length > 1) {
                 seasonsButton.getElementsByTagName('title')
                     .item(0).textContent = toPersianDigits(result.seasons.rows.length + ' ' + string_season);
+                seasonsButton.seasons = result.seasons;
             } else {
                 seasonsButton.parentNode.removeChild(seasonsButton);
             }
@@ -274,7 +275,7 @@ class MovieDocumentController extends DocumentController {
                     allEpisodesShelf.insertAdjacentHTML('beforeend', nodesToAdd);
                     const section = allEpisodesShelf.getElementsByTagName('section').item(0);
                     section.dataItem = new DataItem();
-                    section.dataItem.setPropertyPath('movies', episodesOfCurrentSeason.reverse());
+                    section.dataItem.setPropertyPath('movies', [...episodesOfCurrentSeason].reverse());
                 } else {
                     allEpisodesShelf.parentNode.removeChild(allEpisodesShelf);
                 }
