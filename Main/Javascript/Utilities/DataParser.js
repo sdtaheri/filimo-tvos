@@ -14,7 +14,7 @@ class DataParser {
 
         result.rows = filteredItems.map((item) => {
             let row = {};
-            row.title = (item['link_text'] || item['title'] || '').replace('  ', ' ');
+            row.title = cleanup((item['link_text'] || item['title'] || '').replace('  ', ' '));
             row.type = item['output_type'] + '-' + item['theme'];
 
             const moreType = item['more_type'];
@@ -427,7 +427,10 @@ class DataParser {
 
         result.watchAction = {
             'buttonText': getSafe(() => { return responses.one.data['watch_action']['link_text']}, null),
-            'price': getSafe(() => { return responses.one.data['watch_action']['price']}, null),
+            'price': getSafe(() => { return responses.one.data['watch_action']['price']}, 0),
+            'currency': getSafe(() => { return responses.one.data['watch_action']['currency']}, string_toman),
+            'actionType': getSafe(() => { return responses.one.data['watch_action']['type']}, 'login'),
+            'sessionDuration': getSafe(() => { return responses.one.data['watch_action']['sans_duration']}, null),
             'movieSource': getSafe(() => { return responses.one.data['watch_action']['movie_src']}, null),
             'lastWatchedPosition': {
                 'percentage': getSafe(() => { return responses.one.data['watch_action']['last_watch_position']['percent']}, 0),

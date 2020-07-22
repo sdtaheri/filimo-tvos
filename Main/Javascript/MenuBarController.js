@@ -18,10 +18,11 @@ class MenuBarController extends DocumentController {
 
                 // Pre-load the document for the initial focused menu item or first item,
                 // before presenting the menuBarTemplate on navigation stack.
-                const initialMenuItemElem = this.findInitialMenuItem(menuBarElem);
-                this.selectMenuItem(initialMenuItemElem, true, () => {
-                    this.handleDocument(menuBarDocument, loadingDocument);
-                });
+                // const initialMenuItemElem = this.findInitialMenuItem(menuBarElem);
+                // this.selectMenuItem(initialMenuItemElem, true, () => {
+                this.handleDocument(menuBarDocument, loadingDocument);
+                // });
+
             },
             error: (xhr) => {
                 const alertDocument = createLoadErrorAlertDocument(documentURL, xhr, false);

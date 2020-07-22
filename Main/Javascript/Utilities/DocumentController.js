@@ -10,8 +10,11 @@ class DocumentController {
     constructor({ documentLoader, documentURL, loadingDocument }) {
         this.handleEvent = this.handleEvent.bind(this);
         this.documentLoader = documentLoader;
+        this.documentURL = documentURL;
         this.dataLoader = new DataLoader(documentLoader, new DataParser());
         this.fetchDocument(documentURL, loadingDocument);
+
+        this.isLoggedInAtLaunch = UserManager.isLoggedIn();
     }
 
     fetchDocument(documentURL, loadingDocument) {

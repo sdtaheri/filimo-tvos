@@ -2,7 +2,7 @@
 <document>
     <menuBarTemplate>
         <menuBar>
-            <menuItem vitrineDocumentURL="/XMLs/Vitrine.xml" autoHighlight="true" linkKey="home">
+            <menuItem vitrineDocumentURL="/XMLs/Vitrine.xml" autoHighlight="true" linkKey="1">
                 <title>ویترین</title>
             </menuItem>
             <menuItem vitrineDocumentURL="/XMLs/Vitrine.xml" linkKey="categories">

@@ -3,15 +3,17 @@ class VitrineDocumentController extends DocumentController {
     constructor(options) {
         super(options);
 
+        const HOME = '1';
+
         if (options.event) {
             const dataItem = options.event.target['dataItem'];
-            this.linkKey = dataItem.uid || dataItem.linkKey || 'home';
+            this.linkKey = dataItem.uid || dataItem.linkKey || HOME;
             this.pageTitle = dataItem.title;
         } else {
-            this.linkKey = options.linkKey || 'home';
+            this.linkKey = options.linkKey || HOME;
             this.pageTitle = null;
         }
-        this.isHomePage = this.linkKey === 'home';
+        this.isHomePage = this.linkKey === HOME;
         this.isPendingUpdate = false;
 
         this.refreshInterval = 1000 * 60 * 60;
@@ -179,6 +181,11 @@ class VitrineDocumentController extends DocumentController {
                 && appBackgroundedDate !== null
                 && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
                 this.refreshData();
+            }
+
+            if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
+                this.refreshData();
+                this.isLoggedInAtLaunch = UserManager.isLoggedIn();
             }
         }
 

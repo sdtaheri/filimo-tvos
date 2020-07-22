@@ -63,9 +63,8 @@ const string_hour = 'ساعت';
 const string_minute = 'دقیقه';
 const string_season = 'فصل';
 const string_seasons = 'فصل‌ها';
-
+const string_toman = 'تومان';
 const string_comments = 'نظرات';
-const string_rating = 'امتیاز';
 const string_percent_sign = '٪';
 function string_average_between_comments(count) {
     return 'میانگین از بین ' + toPersianDigits(count) + ' نظر';
@@ -86,6 +85,13 @@ const string_other_episodes = 'سایر قسمت‌ها';
 const string_cast = 'عوامل';
 const string_skip_intro = 'رد کردن تیتراژ';
 const string_dubbed = 'دوبله';
+
+function string_buy_ticket(price, currency, sessionDuration) {
+    return `با مراجعه به صفحه این فیلم در سایت ${appName} می‌توانید بلیط تماشای این فیلم را با قیمت ${toPersianDigits(price) + ' ' + currency} خریداری نمایید. `
+        + '\n'
+        + `پس از خرید شما فرصت دارید این فیلم را ظرف مدت ${toPersianDigits(sessionDuration) + ' ساعت'} ببینید.`
+        ;
+}
 
 function toPersianDigits(str) {
     if (str === null || str === undefined) {

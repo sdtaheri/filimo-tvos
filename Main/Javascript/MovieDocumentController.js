@@ -18,13 +18,6 @@ class MovieDocumentController extends DocumentController {
         if (this.movieUid === null) {
             navigationDocument.popDocument();
         }
-
-        this.movieSource = null;
-
-        this.wish = {
-            'enabled': false,
-            'link': null
-        }
     }
 
     setupDocument(document) {
@@ -37,7 +30,7 @@ class MovieDocumentController extends DocumentController {
         setLoadingVisible.bind(this)(true);
 
         this.dataLoader.fetchMovie(this.movieUid, (result) => {
-            setLoadingVisible(false);
+            setLoadingVisible.bind(this)(false);
 
             fillHeaderInfo(result);
             setupActionButtons.bind(this)(result);
@@ -45,6 +38,14 @@ class MovieDocumentController extends DocumentController {
             setupOtherEpisodesOfCurrentSeasonShelf(result);
             setupCastShelf(result);
             setupCommentsShelf(result);
+
+            document.addEventListener('appear', () => {
+                if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
+                    setLoadingVisible.bind(this)(true);
+                    refreshMovieActions.bind(this)();
+                    this.isLoggedInAtLaunch = UserManager.isLoggedIn();
+                }
+            });
         });
 
         function setLoadingVisible(flag) {
@@ -183,18 +184,18 @@ class MovieDocumentController extends DocumentController {
             const seasonsButton = document.getElementById('seasonsButton');
 
             this.wish = result.wish;
-            this.movieSource = result.watchAction.movieSource;
+            this.watchAction = result.watchAction;
 
             playButton.getElementsByTagName('title')
                 .item(0)
                 .textContent = result.watchAction.buttonText || result.watchAction.price || string_play_movie;
 
             playButton.addEventListener('select', () => {
-                handlePlayScenario(result);
+                handlePlayScenario.bind(this)();
             });
 
             playButton.addEventListener('play', () => {
-                handlePlayScenario(result);
+                handlePlayScenario.bind(this)();
             });
 
             setBookmarkButtonVisuals(bookmarkButton, result.wish.enabled);
@@ -299,18 +300,18 @@ class MovieDocumentController extends DocumentController {
             }
         }
 
-        function handlePlayScenario(result) {
-            if (result.watchAction.movieSource === null || result.watchAction.movieSource === '') {
+        function handlePlayScenario() {
+            if (this.watchAction.movieSource === null || this.watchAction.movieSource === '') {
                 return;
             }
 
-            (new AppPlayer()).playVideo(result.watchAction.movieSource,
-                result.title,
-                result.image,
-                result.desc,
-                result.watchAction.lastWatchedPosition.seconds,
-                result.watchAction.visitStats,
-                result.watchAction.castSkip
+            (new AppPlayer()).playVideo(this.watchAction.movieSource,
+                document.getElementById('title').textContent,
+                productTemplate.getElementsByTagName('heroImg').item(0).getAttribute('src'),
+                document.getElementById('productDescription').textContent,
+                this.watchAction.lastWatchedPosition.seconds,
+                this.watchAction.visitStats,
+                this.watchAction.castSkip
             );
         }
 
@@ -364,16 +365,48 @@ class MovieDocumentController extends DocumentController {
                 }
             }
         }
+
+        function refreshMovieActions() {
+            this.dataLoader.fetchMovie(this.movieUid, (result) => {
+                setLoadingVisible.bind(this)(false);
+
+                const playButton = document.getElementById('playButton');
+                const bookmarkButton = document.getElementById('bookmarkButton');
+
+                this.wish = result.wish;
+                this.watchAction = result.watchAction;
+
+                playButton.getElementsByTagName('title')
+                    .item(0)
+                    .textContent = result.watchAction.buttonText || result.watchAction.price || string_play_movie;
+
+                setBookmarkButtonVisuals(bookmarkButton, result.wish.enabled);
+            });
+        }
     }
 
     handleEvent(event) {
         switch (event.type) {
             case 'select':
             case 'play': {
-                if (event.target.getAttribute('id') === 'playButton'
-                    && this.movieSource !== null
-                    && this.movieSource !== '') {
-                    return;
+                if (event.target.getAttribute('id') === 'playButton') {
+                    if (this.watchAction.actionType === 'watch') {
+                        return;
+                    }
+
+                    if (this.watchAction.actionType === 'pay') {
+                        presentAlertDocument(
+                            event.target.textContent,
+                            string_buy_ticket(this.watchAction.price, this.watchAction.currency, this.watchAction.sessionDuration),
+                            true,
+                            false
+                        )
+                        return;
+                    }
+
+                    if (this.watchAction.actionType !== 'login') {
+                        return;
+                    }
                 }
                 break;
             }

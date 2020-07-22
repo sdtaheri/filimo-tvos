@@ -26,11 +26,7 @@ class DataLoader {
                 url += "/";
             }
 
-            if (dataURL.includes(legacyBaseURL)) {
-                url += "devicetype/site/";
-            } else {
-                url += "devicetype/appletv/";
-            }
+            url += "devicetype/appletv/";
 
             if (params != null) {
                 url += "?" + Object
