@@ -107,8 +107,7 @@ class VitrineDocumentController extends DocumentController {
                 this.pageTitleElement.textContent = this.pageTitle;
             }
 
-            const shouldAddHeader = row.title && row.title !== ''
-                && !(this.pageTitle || '').includes(row.title) && !row.title.includes(this.pageTitle);
+            const shouldAddHeader = row.title && (row.title !== '') && row.title !== this.pageTitle;
 
             if (row.type === 'crew-single') {
                 const item = row.dataItems[0] || null;
@@ -118,6 +117,10 @@ class VitrineDocumentController extends DocumentController {
 
                 this.pageTitle = item.title || item.titleEn || null;
                 this.pageTitleElement.textContent = this.pageTitle;
+
+                if (item.desc === null || item.desc === '') {
+                    continue;
+                }
 
                 const rowToAdd = `<${row.header}>
                 <section>

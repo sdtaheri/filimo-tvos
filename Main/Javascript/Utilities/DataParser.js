@@ -14,7 +14,7 @@ class DataParser {
 
         result.rows = filteredItems.map((item) => {
             let row = {};
-            row.title = item['link_text'] || item['title'];
+            row.title = (item['link_text'] || item['title'] || '').replace('  ', ' ');
             row.type = item['output_type'] + '-' + item['theme'];
 
             const moreType = item['more_type'];
