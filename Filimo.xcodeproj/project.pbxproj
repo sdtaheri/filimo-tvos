@@ -15,8 +15,11 @@
 		304769CC24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
-		30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* Model.swift */; };
+		30D5A40C24ABE7FD00F5CF08 /* CarouselMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */; };
 		30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */; };
+		30EC84BA24C8A9FF000F6C91 /* Vitrine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84B924C8A9FF000F6C91 /* Vitrine.swift */; };
+		30EC84BC24C8AA1C000F6C91 /* OneDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */; };
+		30EC84BE24C8AA34000F6C91 /* ReviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */; };
 		30ED5307233950DA0068FE95 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5306233950DA0068FE95 /* main.swift */; };
 		30ED530D233B55E60068FE95 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED530F233B55E60068FE95 /* ContentProvider.swift */; };
@@ -96,10 +99,13 @@
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
-		30D5A40B24ABE7FD00F5CF08 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselMovie.swift; sourceTree = "<group>"; };
 		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30EC84B524C884E4000F6C91 /* AppPlayer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppPlayer.js; sourceTree = "<group>"; };
 		30EC84B724C884F8000F6C91 /* Movie.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Movie.xml; sourceTree = "<group>"; };
+		30EC84B924C8A9FF000F6C91 /* Vitrine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vitrine.swift; sourceTree = "<group>"; };
+		30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDetail.swift; sourceTree = "<group>"; };
+		30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetail.swift; sourceTree = "<group>"; };
 		30ED5306233950DA0068FE95 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30ED530C233B55E60068FE95 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED530F233B55E60068FE95 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -265,13 +271,24 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		30EC84B824C8A9EE000F6C91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */,
+				30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */,
+				30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */,
+				30EC84B924C8A9FF000F6C91 /* Vitrine.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		30ED530E233B55E60068FE95 /* TopShelf */ = {
 			isa = PBXGroup;
 			children = (
+				30EC84B824C8A9EE000F6C91 /* Models */,
 				30ED530F233B55E60068FE95 /* ContentProvider.swift */,
 				30ED5311233B55E60068FE95 /* Info.plist */,
 				30ED5319233B9EB60068FE95 /* Extensions.swift */,
-				30D5A40B24ABE7FD00F5CF08 /* Model.swift */,
 			);
 			path = TopShelf;
 			sourceTree = "<group>";
@@ -392,8 +409,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30D5A40C24ABE7FD00F5CF08 /* Model.swift in Sources */,
+				30D5A40C24ABE7FD00F5CF08 /* CarouselMovie.swift in Sources */,
+				30EC84BC24C8AA1C000F6C91 /* OneDetail.swift in Sources */,
+				30EC84BA24C8A9FF000F6C91 /* Vitrine.swift in Sources */,
 				304769C824AC7E420002714B /* Config.swift in Sources */,
+				30EC84BE24C8AA34000F6C91 /* ReviewDetail.swift in Sources */,
 				30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */,
 				30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */,
 			);
@@ -434,7 +454,7 @@
 			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 2007011;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -549,7 +569,7 @@
 			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 2007011;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -656,7 +676,7 @@
 			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 2007011;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -720,7 +740,7 @@
 			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 2007011;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

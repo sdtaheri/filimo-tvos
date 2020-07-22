@@ -18,9 +18,11 @@ class ContentProvider: TVTopShelfContentProvider {
 				return
 			}
 			self.fetchNewestItems { movies in
-				let carouselItems = movies.compactMap { $0.makeCarouselItem() }
-				let content = TVTopShelfCarouselContent(style: .details, items: carouselItems)
-				completionHandler(content)
+				DispatchQueue.main.async {
+					let carouselItems = movies.compactMap { $0.makeCarouselItem() }
+					let content = TVTopShelfCarouselContent(style: .details, items: carouselItems)
+					completionHandler(content)
+				}
 			}
 		}
 	}
@@ -30,62 +32,97 @@ class ContentProvider: TVTopShelfContentProvider {
 extension ContentProvider {
 	
 	private func fetchNewestItems(completion: @escaping ([CarouselMovie]) -> Void) {
-		var urlRequest = URLRequest(url: URL.homepage)
+
+		var urlRequest = URLRequest(url: URL.specials)
         urlRequest.httpMethod = "GET"
+		urlRequest.addAppHeaders()
 
-		guard let data = URLSession.shared.synchronousDataTask(urlrequest: urlRequest).data else {
-			completion([])
-			return
-		}
-		
-		let compactMovies = extractMovieInfo(from: data)
-		
-		var items = compactMovies.map { CarouselMovie(info: $0) }
+		URLSession.shared.dataTask(with: urlRequest) { [weak self] data, _, _ in
 
-		for (index, movie) in compactMovies.enumerated() {
-			var detailUrlRequest = URLRequest(url: URL.movieDetailURL(uuid: movie.id!))
-			detailUrlRequest.httpMethod = "GET"
-			
-			let detailData = URLSession.shared.synchronousDataTask(urlrequest: detailUrlRequest).data
-			if let detailData = detailData {
-				let movieDetail = extractMovieDetail(from: detailData)
-				items[index].detail = movieDetail
+			guard let data = data else {
+				completion([])
+				return
 			}
-		}
-		
-		completion(items)
-	}
-	
-	private func extractMovieInfo(from data: Data) -> [MovieCompact] {
-		do {
-			
-			let decoder = JSONDecoder()
-			let shelfData = try decoder.decode(ShelfResponse.self, from: data)
 
-			for homepage in shelfData.homepage {
-				if let firstValuableItem = homepage.data {
-					return Array(firstValuableItem.filter({ $0.id != nil }).prefix(10))
-				} else {
-					continue
+			let vitrineMovies = (self?.extractVitrineMovies(from: data) ?? []).prefix(8)
+
+			var items = vitrineMovies.map { CarouselMovie(vitrineInfo: $0) }
+
+			var remainingRequests = vitrineMovies.count * 2 {
+				didSet {
+					if remainingRequests <= 0 {
+						completion(items)
+					}
 				}
 			}
-			
-		} catch {
-			return []
-		}
-		
-		return []
+
+			for (index, movie) in vitrineMovies.enumerated() {
+
+				var oneDetailUrlRequest = URLRequest(url: URL.movieOneDetailURL(uuid: movie.uid))
+				oneDetailUrlRequest.httpMethod = "GET"
+				oneDetailUrlRequest.addAppHeaders()
+
+				URLSession.shared.dataTask(with: oneDetailUrlRequest) { oneDetailData, _, _ in
+
+					if let oneDetailData = oneDetailData {
+						let oneDetail = self?.extractMovieOneDetail(from: oneDetailData)
+						items[index].oneDetail = oneDetail
+					}
+
+					remainingRequests -= 1
+				}.resume()
+
+				var reviewDetailUrlRequest = URLRequest(url: URL.movieReviewDetailURL(uuid: movie.uid))
+				reviewDetailUrlRequest.httpMethod = "GET"
+				reviewDetailUrlRequest.addAppHeaders()
+
+				URLSession.shared.dataTask(with: reviewDetailUrlRequest) { reviewDetailData, _, _ in
+
+					if let reviewDetailData = reviewDetailData {
+						let reviewDetail = self?.extractMovieReviewDetail(from: reviewDetailData)
+						items[index].reviewDetail = reviewDetail
+					}
+
+					remainingRequests -= 1
+				}.resume()
+			}
+
+		}.resume()
 	}
 	
-	private func extractMovieDetail(from data: Data) -> MovieDetail? {
+	private func extractVitrineMovies(from data: Data) -> [VitrineMovie] {
 		do {
 			let decoder = JSONDecoder()
-			let detailResponse = try decoder.decode(MovieDetailResponse.self, from: data)
-			
-			return detailResponse.movieDetail
-			
+			let vitrineResponse = try decoder.decode(VitrineResponse.self, from: data)
+
+			return vitrineResponse.data.flatMap {
+				$0.movies.data
+			}
 		} catch {
+			print(error.localizedDescription)
+			return []
+		}
+	}
+	
+	private func extractMovieOneDetail(from data: Data) -> MovieDetailGeneral? {
+		do {
+			let decoder = JSONDecoder()
+			let detailResponse = try decoder.decode(MovieOneDetailResponse.self, from: data)
+			return detailResponse.data.general
+		} catch {
+			print(error.localizedDescription)
 			return nil
 		}
 	}
+
+	private func extractMovieReviewDetail(from data: Data) -> MovieDetailReview? {
+		do {
+			let decoder = JSONDecoder()
+			return try decoder.decode(MovieDetailReview.self, from: data)
+		} catch {
+			print(error.localizedDescription)
+			return nil
+		}
+	}
+
 }

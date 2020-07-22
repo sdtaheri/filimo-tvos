@@ -24,9 +24,11 @@ struct Config {
 		#endif
 	}()
 
-	static let baseURL = infoForKey("Base URL")! + "fa/v1"
+	static let baseURL = infoForKey("ST Base URL")! + "fa/v1"
 
 	static let tvBootURL = "\(tvBaseURL)/Application.js"
 
-	static let appNameFa = infoForKey("App Name Localized")!
+	static let appNameFa = infoForKey("ST App Name Localized")!
+
+	static let scheme = infoForKey("ST Scheme")!
 }

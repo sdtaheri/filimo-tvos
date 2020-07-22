@@ -36,9 +36,11 @@
 	<array>
 		<string>arm64</string>
 	</array>
-	<key>Base URL</key>
+	<key>ST Base URL</key>
 	<string>$(ST_BASE_URL)</string>
-	<key>App Name Localized</key>
+	<key>ST App Name Localized</key>
 	<string>$(ST_APP_NAME_FA)</string>
+	<key>ST Scheme</key>
+	<string>$(ST_URL_SCHEME)</string>
 </dict>
 </plist>
