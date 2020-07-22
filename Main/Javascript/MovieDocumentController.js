@@ -46,6 +46,10 @@ class MovieDocumentController extends DocumentController {
                     this.isLoggedInAtLaunch = UserManager.isLoggedIn();
                 }
             });
+
+            if (this.shouldPlayAtLoad) {
+                handlePlayScenario.bind(this)();
+            }
         });
 
         function setLoadingVisible(flag) {

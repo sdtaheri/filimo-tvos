@@ -5,8 +5,6 @@ Abstract:
 This class handles loading of data for prototypes in templates.
 */
 
-const legacyBaseURL = 'https://www.filimo.com/etc/api';
-
 class DataLoader {
 
     constructor(documentLoader, dataParser) {

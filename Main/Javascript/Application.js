@@ -68,7 +68,6 @@ App.onLaunch = function (options) {
         "VitrineDocumentController",
         "LoginController",
         "SearchDocumentController",
-        "ProductDocumentController",
         "MovieDocumentController",
         "SeasonsDocumentController",
         "ProfileDocumentController"

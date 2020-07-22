@@ -77,7 +77,6 @@
 		304769D924AC97AF0002714B /* SeasonsDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SeasonsDocumentController.js; sourceTree = "<group>"; };
 		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
 		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
-		309D289F20664A00001148BE /* ProductDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductDocumentController.js; sourceTree = "<group>"; };
 		30A8B731208121E600B55E69 /* seasons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seasons@2x.png"; sourceTree = "<group>"; };
 		30A8B732208121E600B55E69 /* seasons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seasons.png; sourceTree = "<group>"; };
 		30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ProfileDocumentController.js; sourceTree = "<group>"; };
@@ -99,6 +98,8 @@
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
 		30D5A40B24ABE7FD00F5CF08 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		30EC84B524C884E4000F6C91 /* AppPlayer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppPlayer.js; sourceTree = "<group>"; };
+		30EC84B724C884F8000F6C91 /* Movie.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Movie.xml; sourceTree = "<group>"; };
 		30ED5306233950DA0068FE95 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30ED530C233B55E60068FE95 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED530F233B55E60068FE95 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 		3015FFA62063A55A0029F8FF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				30EC84B524C884E4000F6C91 /* AppPlayer.js */,
 				30B1336C24B5D41400CC63EA /* UserManager.js */,
 				3015FFA52063A51A0029F8FF /* DataLoader.js */,
 				304769DB24AC97C50002714B /* DataParser.js */,
@@ -140,6 +142,7 @@
 		3024180A2065335C00B46686 /* XMLs */ = {
 			isa = PBXGroup;
 			children = (
+				30EC84B724C884F8000F6C91 /* Movie.xml */,
 				30B1336D24B5D42900CC63EA /* Profile.xml */,
 				302418082065246700B46686 /* Index.xml */,
 				30D5167A20683283007995AF /* Login.xml */,
@@ -210,7 +213,6 @@
 				30C5790B20448110007E728F /* Application.js */,
 				30D5167B206832A5007995AF /* LoginController.js */,
 				30241809206525F700B46686 /* MenuBarController.js */,
-				309D289F20664A00001148BE /* ProductDocumentController.js */,
 				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
 				304769D924AC97AF0002714B /* SeasonsDocumentController.js */,
 				304769DA24AC97AF0002714B /* VitrineDocumentController.js */,
