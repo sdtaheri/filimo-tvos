@@ -20,7 +20,14 @@
             width: 666;
             height: 308;
             border-radius: 12;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .crewCard {
+            width: 1025;
+            height: 400;
+            border-radius: 12;
+            background-color: rgba(0, 0, 0, 0.2);
             }
 
             .movieCardImage {
@@ -30,13 +37,28 @@
             background-color: rgba(255, 255, 255, 0.7);
             }
 
+            .crewCardImage {
+            tv-position: leading;
+            margin: 20 60 20 60;
+            }
+
             .movieCardTitle {
             text-align: natural;
             tv-text-max-lines: 2;
             tv-position:top;
-            tv-align: leading;
             margin: 32 32 0;
             tv-text-style:callout;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .crewCardTitle {
+            text-align: natural;
+            tv-text-max-lines: 7;
+            tv-position:center;
+            tv-align: leading;
+            margin: 20 0 20 60;
+            tv-text-style:body;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 2px 2px 8px #000000;
             }

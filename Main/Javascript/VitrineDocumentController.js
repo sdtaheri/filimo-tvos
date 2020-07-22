@@ -107,23 +107,56 @@ class VitrineDocumentController extends DocumentController {
                 this.pageTitleElement.textContent = this.pageTitle;
             }
 
-            const shouldAddHeader = row.title && (row.title !== '') && row.title !== this.pageTitle;
+            const shouldAddHeader = row.title && row.title !== ''
+                && !(this.pageTitle || '').includes(row.title) && !row.title.includes(this.pageTitle);
 
-            const sectionToAdd = `<${row.header}>
+            if (row.type === 'crew-single') {
+                const item = row.dataItems[0] || null;
+                if (item === null) {
+                    continue;
+                }
+
+                this.pageTitle = item.title || item.titleEn || null;
+                this.pageTitleElement.textContent = this.pageTitle;
+
+                const rowToAdd = `<${row.header}>
+                <section>
+                    <card class="crewCard">
+                        <monogramLockup class="crewCardImage" disabled="true">
+                            <monogram firstName="${item.firstName}" lastName="${item.lastName}" src="${item.image}" />
+                        </monogramLockup>
+                        <text class="crewCardTitle">${item.desc}</text>
+                    </card>
+                </section>
+                </${row.header}>`;
+
+                this.collectionList.insertAdjacentHTML('beforeend', rowToAdd);
+
+                const allSections = this.collectionList.getElementsByTagName('section');
+                const section = allSections.item(allSections.length - 1);
+
+                section.getElementsByTagName('card').item(0).addEventListener('select', () => {
+                    presentAlertDocument(item.title, item.desc, false, true);
+                });
+            } else {
+                const rowToAdd = `<${row.header}>
                ${shouldAddHeader ? `<header>
                 <title>${toPersianDigits(row.title)}</title>
                 </header>` : ''}
                <section binding="items:{movies};" />
                </${row.header}>`;
-            this.collectionList.insertAdjacentHTML('beforeend', sectionToAdd);
 
-            if (row.header === 'grid' && this._nextPageURL === null) {
-                this._nextPageURL = row.nextPage;
+                this.collectionList.insertAdjacentHTML('beforeend', rowToAdd);
+
+                if (row.header === 'grid' && this._nextPageURL === null) {
+                    this._nextPageURL = row.nextPage;
+                }
+
+                const allSections = this.collectionList.getElementsByTagName('section');
+                const section = allSections.item(allSections.length - 1);
+                section.dataItem = new DataItem();
+                section.dataItem.setPropertyPath('movies', row.dataItems);
             }
-
-            const section = (this.collectionList.getElementsByTagName("section")).item(this.collectionList.children.length - 1);
-            section.dataItem = new DataItem();
-            section.dataItem.setPropertyPath("movies", row.dataItems);
         }
 
         if (dataObject.rows.length === 0) {

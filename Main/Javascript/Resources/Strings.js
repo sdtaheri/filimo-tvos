@@ -111,7 +111,7 @@ function removeHTMLEntities(str) {
         return null;
     }
 
-    return str.replace("&hellip;", "…")
+    return (str + '').replace("&hellip;", "…")
         .replace("&zwnj;", "‌")
         .replace("&#039;", "'")
         .replace(/&\w+;/g, '')

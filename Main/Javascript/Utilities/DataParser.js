@@ -2,7 +2,7 @@ class DataParser {
 
     parseVitrineResponse(response, itemsCallback) {
 
-        let availableTypes = ['poster', 'movie', 'livetv'];
+        let availableTypes = ['poster', 'movie', 'livetv', 'crew'];
 
         let result = {};
         result.meta = response.meta;
@@ -121,6 +121,32 @@ class DataParser {
                         objectItem.logo = tv['logo'];
                         objectItem.uid = linkKey;
                         objectItem.linkType = tv['link_type'];
+                        return objectItem;
+                    });
+                    break;
+                }
+
+                case 'crew-single': {
+                    row.dataItems = item['crews'].data.map((crew) => {
+                        const objectItem = new DataItem(row.type, crew.id);
+                        const names = crew['name'];
+                        objectItem.title = cleanup(names.split('*')[0]);
+                        objectItem.titleEn = removeHTMLEntities(names.split('*')[1] || null);
+                        const initials = (objectItem.titleEn || objectItem.title).split(' ');
+                        if (initials.length < 2) {
+                            objectItem.firstName = '';
+                            objectItem.lastName = '';
+                        } else {
+                            objectItem.firstName = initials[0];
+                            objectItem.lastName = initials[initials.length - 1];
+                        }
+                        objectItem.desc = cleanup(crew['bio']);
+                        objectItem.image = crew['profile_image'];
+                        objectItem.cover = null;
+                        objectItem.logo = null;
+                        objectItem.uid = crew.id;
+                        objectItem.birthYear = cleanup(crew['birth_year']);
+                        objectItem.linkType = null;
                         return objectItem;
                     });
                     break;
