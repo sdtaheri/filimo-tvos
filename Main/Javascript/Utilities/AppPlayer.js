@@ -20,13 +20,13 @@ class AppPlayer {
 
         const video = new MediaItem('video', url);
         video.title = title;
-        video.description = description;
-        video.artworkImageURL = thumbnail;
+        video.description = description || null;
+        video.artworkImageURL = thumbnail || null;
         if (resumeTime) {
             video.resumeTime = resumeTime;
         }
 
-        const player = new Player()
+        const player = new Player();
         player.playlist = new Playlist();
         player.playlist.push(video);
 
