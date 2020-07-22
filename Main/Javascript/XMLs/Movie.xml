@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+
+            .imdbBadge {
+            tv-position:center;
+            tv-tint-color: rgb(255, 255, 255);
+            }
+
+            .imdbRate {
+            tv-position:trailing;
+            margin-right: 6;
+            tv-text-style:caption2;
+            color: white;
+            }
+
+            .hdBadge {
+            tv-tint-color: rgb(255, 255, 255);
+            }
+
+            .title {
+            text-align: right;
+            tv-text-max-lines: 2;
+            font-size: 65;
+            font-weight: bold;
+            tv-minimum-scale-factor: 0.7;
+            margin-bottom: 20;
+            }
+
+            .englishTitle {
+            text-align: right;
+            tv-text-max-lines: 1;
+            tv-text-style: headline;
+            tv-minimum-scale-factor: 0.7;
+            padding-top: -8;
+            }
+
+            .subtitle {
+            text-align: center;
+            tv-text-style: caption2;
+            tv-text-highlight-style: show-on-highlight;
+            color: rgb(255,255,255,0.5);
+            tv-highlight-color: rgb(255,255,255);
+            }
+
+        </style>
+    </head>
+    <loadingTemplate>
+        <background>
+            <heroImg src=""/>
+        </background>
+        <activityIndicator>
+            <title/>
+        </activityIndicator>
+    </loadingTemplate>
+    <productTemplate>
+        <prototypes>
+            <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="225" height="300"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+                <placeholder tag="progress"/>
+
+                <rules>
+                    <specialize state="({watchFraction}-greater-than-equal:0.9)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <badge style="tv-position: bottom-trailing;" src="resource://overlay-checkmark"/>
+                        </overlay>
+                    </specialize>
+                    <specialize state="({watchFraction}-greater-than:0)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <progressBar binding="@value:{watchFraction}"/>
+                        </overlay>
+                    </specialize>
+                </rules>
+            </lockup>
+
+            <lockup prototype="movie-serialList" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="225" height="300"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+
+            <monogramLockup prototype="cast" vitrineDocumentURL="/XMLs/Vitrine.xml">
+                <monogram binding="@firstName:{firstName}; @lastName:{lastName}; @src:{image};"/>
+                <title binding="textContent:{name};"/>
+                <subtitle binding="textContent:{position};"/>
+            </monogramLockup>
+
+            <reviewCard prototype="comment"
+                        binding="@onselect:presentAlertDocument(this.getElementsByTagName('title').item(0).textContent,
+                        this.getElementsByTagName('description').item(0).textContent,
+                        false,
+                        true)">
+                <title binding="textContent:{name};" style="tv-position: top; margin-bottom: 8;"/>
+                <description binding="textContent:{body};" style="tv-position: center; padding-bottom: 8;"/>
+                <text binding="textContent:{jalaliDate};" style="tv-position: bottom; margin: 10 0"/>
+            </reviewCard>
+        </prototypes>
+        <banner>
+            <infoList>
+                <info id="genreInfo"/>
+                <info id="directorInfo"/>
+                <info id="actorsInfo"/>
+            </infoList>
+            <stack>
+                <text id="title" class="title"/>
+                <text id="englishTitle" class="englishTitle"/>
+                <row id="infoRow"/>
+                <description id="productDescription" handlesOverflow="true"/>
+
+                <row>
+                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="playButton">
+                        <badge src="resource://button-play"/>
+                        <title/>
+                    </buttonLockup>
+                    <buttonLockup id="previewButton">
+                        <badge src="resource://button-preview"/>
+                        <title/>
+                    </buttonLockup>
+                    <buttonLockup loginDocumentURL="/XMLs/Login.xml" id="bookmarkButton">
+                        <badge src="resource://button-add" class="badge"/>
+                        <title/>
+                    </buttonLockup>
+                    <buttonLockup seasonsDocumentURL="/XMLs/Seasons.xml" id="seasonsButton">
+                        <badge srcset="/Resources/seasons.png 1x, /Resources/seasons@2x.png 2x" width="54" height="36"/>
+                        <title/>
+                    </buttonLockup>
+                </row>
+            </stack>
+            <heroImg src=""/>
+        </banner>
+        <shelf id="allEpisodesShelf"/>
+        <shelf id="recommendationShelf">
+            <header>
+                <title id="recommendationShelfTitle"/>
+            </header>
+            <section binding="items:{movies};"/>
+        </shelf>
+        <shelf id="ratingShelf">
+            <header>
+                <title id="commentsShelfTitle"/>
+            </header>
+            <section style="margin: 0 50 0 0;">
+                <ratingCard>
+                    <description style="tv-text-max-lines: 3"/>
+                </ratingCard>
+            </section>
+            <section id="commentsSection" binding="items:{comment};"/>
+        </shelf>
+        <shelf id="castShelf">
+            <header>
+                <title/>
+            </header>
+            <section binding="items:{cast};"/>
+        </shelf>
+    </productTemplate>
+</document>

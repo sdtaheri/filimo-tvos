@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .headerLogo {
+            tv-position: top-right;
+            }
+
+            .showTextOnHighlight {
+            tv-text-highlight-style: show-on-highlight;
+            }
+
+            .subtitle {
+            text-align: center;
+            tv-text-style: caption2;
+            tv-text-highlight-style: show-on-highlight;
+            }
+
+            .movieCard {
+            width: 666;
+            height: 308;
+            border-radius: 12;
+            background-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .crewCard {
+            width: 1025;
+            height: 400;
+            border-radius: 12;
+            background-color: rgba(0, 0, 0, 0.2);
+            }
+
+            .movieCardImage {
+            width: 231;
+            height: 308;
+            tv-position: leading;
+            background-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .crewCardImage {
+            tv-position: leading;
+            margin: 20 60 20 60;
+            }
+
+            .movieCardTitle {
+            text-align: natural;
+            tv-text-max-lines: 2;
+            tv-position:top;
+            margin: 32 32 0;
+            tv-text-style:callout;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .crewCardTitle {
+            text-align: natural;
+            tv-text-max-lines: 7;
+            tv-position:center;
+            tv-align: leading;
+            margin: 20 0 20 60;
+            tv-text-style:body;
+            color: rgba(0, 0, 0, 0.6);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .movieCardSubtitle {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:top;
+            tv-align: leading;
+            margin: 16 32 0;
+            tv-text-style:subhead;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .categoryCard {
+            width: 830;
+            height: 180;
+            border-radius: 12;
+            background-color: rgba(255, 255, 255, 0.7);
+            }
+
+            .categoryTitle {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:bottom;
+            tv-align: leading;
+            margin: 16;
+            tv-text-style: callout;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+
+            .imageGradient {
+            tv-tint-color: linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
+            }
+
+            .channelLogo {
+            tv-tint-color: rgba(0, 0, 0, 0.60);
+            tv-highlight-color: rgb(255,255,255);
+            margin: 8;
+            }
+
+            .movieCard {
+            background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            .categoryCard {
+            background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            .message {
+            text-align: center;
+            tv-align: center;
+            tv-position: center;
+            tv-text-style: title3;
+            color: rgba(0, 0, 0, 0.8);
+            }
+
+            @media tv-template and (tv-theme:dark) {
+            .message {
+            color: rgba(255, 255, 255, 0.8);
+            }
+            .crewCardTitle {
+            color: rgba(255, 255, 255, 0.6);
+            }
+            .channelLogo {
+            tv-tint-color: rgba(255, 255, 255, 0.50);
+            }
+            }
+        </style>
+    </head>
+    <stackTemplate>
+        <prototypes>
+            <lockup prototype="livetv-thumbplay" playDirectly="true">
+                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+                <row>
+                    <badge class="channelLogo" binding="@src:{logo};" height="60" width="60"/>
+                    <title binding="textContent:{title};"/>"
+                </row>
+            </lockup>
+            <card prototype="movie-theater" class="movieCard" movieDocumentURL="/XMLs/Movie.xml">
+                <background>
+                    <img class="imageGradient" aspectFill="true" width="666" height="308" binding="@src:{cover};"/>
+                </background>
+                <img class="movieCardImage" binding="@src:{image};"/>
+                <title class="movieCardTitle" binding="textContent:{title};"/>
+                <subtitle class="movieCardSubtitle" binding="textContent:{desc};"/>
+            </card>
+            <lockup prototype="movie-thumbplay" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
+                <title class="showTextOnHighlight" binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+            <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+                <placeholder tag="progress"/>
+
+                <rules>
+                    <specialize state="({watchFraction}-greater-than-equal:0.9)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <badge style="tv-position: bottom-trailing;" src="resource://overlay-checkmark"/>
+                        </overlay>
+                    </specialize>
+                    <specialize state="({watchFraction}-greater-than:0)">
+                        <overlay tag="progress" style="padding: 0;">
+                            <progressBar binding="@value:{watchFraction}"/>
+                        </overlay>
+                    </specialize>
+                </rules>
+            </lockup>
+            <lockup prototype="poster-brick" vitrineDocumentURL="/XMLs/Vitrine.xml">
+                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+            </lockup>
+            <lockup prototype="poster-theater" movieDocumentURL="/XMLs/Movie.xml">
+                <img binding="@src:{image};" width="900" height="300"/>
+            </lockup>
+
+            <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml">
+                <background>
+                    <img aspectFill="true" binding="@src:{image};" width="830" height="180"/>
+                </background>
+                <title class="categoryTitle" binding="textContent:{title};"/>
+            </card>
+        </prototypes>
+
+        <banner>
+            <organizer>
+                <img id="headerLogo" width="295" height="90" class="headerLogo"/>
+            </organizer>
+
+            <title id="pageTitle"/>
+        </banner>
+
+        <collectionList/>
+
+    </stackTemplate>
+</document>

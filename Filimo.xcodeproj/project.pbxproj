@@ -7,30 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
-		30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503EF206FD52500D08682 /* ServiceProvider.swift */; };
-		30B503F4206FD52500D08682 /* TopShelf Legacy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30B503EA206FD52500D08682 /* TopShelf Legacy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		30B503FC20711F4E00D08682 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
-		30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30BF89182062F2B7009FAB4D /* InfoPlist.strings */; };
+		3016E21E24B5B7ED00A62989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3016E22024B5B7ED00A62989 /* Localizable.strings */; };
+		3016E22224B5BA6100A62989 /* LocalizableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3016E22124B5BA6100A62989 /* LocalizableError.swift */; };
+		304769C724AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
+		304769C824AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
+		304769CB24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
+		304769CC24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
+		30D5A40C24ABE7FD00F5CF08 /* CarouselMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */; };
+		30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */; };
+		30EC84BA24C8A9FF000F6C91 /* Vitrine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84B924C8A9FF000F6C91 /* Vitrine.swift */; };
+		30EC84BC24C8AA1C000F6C91 /* OneDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */; };
+		30EC84BE24C8AA34000F6C91 /* ReviewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */; };
 		30ED5307233950DA0068FE95 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5306233950DA0068FE95 /* main.swift */; };
 		30ED530D233B55E60068FE95 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED530F233B55E60068FE95 /* ContentProvider.swift */; };
 		30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30ED530C233B55E60068FE95 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		30ED5318233B58E10068FE95 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B503FB20711F4E00D08682 /* Model.swift */; };
-		30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 		30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		30B503F2206FD52500D08682 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 30C578FE20448110007E728F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 30B503E9206FD52500D08682;
-			remoteInfo = TopShelf;
-		};
 		30ED5312233B55E60068FE95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 30C578FE20448110007E728F /* Project object */;
@@ -48,7 +45,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */,
-				30B503F4206FD52500D08682 /* TopShelf Legacy.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,45 +54,58 @@
 /* Begin PBXFileReference section */
 		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
 		3015FFA52063A51A0029F8FF /* DataLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataLoader.js; sourceTree = "<group>"; };
-		301E4808206B8D9800D44269 /* logo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_dark.png; sourceTree = "<group>"; };
+		3016E21F24B5B7ED00A62989 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3016E22124B5BA6100A62989 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
 		301E4809206B92CE00D44269 /* SearchDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SearchDocumentController.js; sourceTree = "<group>"; };
-		30241804206501F500B46686 /* Home.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Home.xml; sourceTree = "<group>"; };
+		3022612124BE4E8C00246B1F /* MovieDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MovieDocumentController.js; sourceTree = "<group>"; };
+		3022612224BE4EA300246B1F /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
+		3022612324BE4EA300246B1F /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
-		302418062065246700B46686 /* HomeDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = HomeDocumentController.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
-		3024180C2065568B00B46686 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		309D289720663183001148BE /* Categories.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Categories.xml; sourceTree = "<group>"; };
-		309D289B20663390001148BE /* CategoriesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CategoriesDocumentController.js; sourceTree = "<group>"; };
-		309D289D206649DF001148BE /* Product.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Product.xml; sourceTree = "<group>"; };
-		309D289F20664A00001148BE /* ProductDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductDocumentController.js; sourceTree = "<group>"; };
+		304769C024AC725B0002714B /* Televika.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Televika.xcconfig; sourceTree = "<group>"; };
+		304769C224AC728A0002714B /* Filimo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Filimo.xcconfig; sourceTree = "<group>"; };
+		304769C624AC7E420002714B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		304769CA24AC7F710002714B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		304769CD24AC96BF0002714B /* imdb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imdb.png; sourceTree = "<group>"; };
+		304769CF24AC96BF0002714B /* logo_televika_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika_dark.png; sourceTree = "<group>"; };
+		304769D024AC96BF0002714B /* logo_televika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika.png; sourceTree = "<group>"; };
+		304769D124AC96BF0002714B /* logo_filimo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo.png; sourceTree = "<group>"; };
+		304769D224AC96BF0002714B /* Strings.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Strings.js; sourceTree = "<group>"; };
+		304769D424AC96BF0002714B /* imdb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imdb@2x.png"; sourceTree = "<group>"; };
+		304769D524AC96BF0002714B /* logo_filimo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo_dark.png; sourceTree = "<group>"; };
+		304769D624AC97A00002714B /* Search.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Search.xml; sourceTree = "<group>"; };
+		304769D724AC97A00002714B /* Seasons.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Seasons.xml; sourceTree = "<group>"; };
+		304769D824AC97A00002714B /* Vitrine.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Vitrine.xml; sourceTree = "<group>"; };
+		304769D924AC97AF0002714B /* SeasonsDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SeasonsDocumentController.js; sourceTree = "<group>"; };
+		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
+		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
 		30A8B731208121E600B55E69 /* seasons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seasons@2x.png"; sourceTree = "<group>"; };
 		30A8B732208121E600B55E69 /* seasons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seasons.png; sourceTree = "<group>"; };
-		30B503DE206E157C00D08682 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
-		30B503DF206E157C00D08682 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
-		30B503E0206E157C00D08682 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
-		30B503E1206E157C00D08682 /* login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login@2x.png"; sourceTree = "<group>"; };
-		30B503E2206E157C00D08682 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
-		30B503E3206E157C00D08682 /* reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reload@2x.png"; sourceTree = "<group>"; };
-		30B503E4206E158A00D08682 /* MyMovies.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MyMovies.xml; sourceTree = "<group>"; };
-		30B503E5206E159500D08682 /* MyMoviesDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MyMoviesDocumentController.js; sourceTree = "<group>"; };
-		30B503EA206FD52500D08682 /* TopShelf Legacy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TopShelf Legacy.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ProfileDocumentController.js; sourceTree = "<group>"; };
+		30B1336624B5D40700CC63EA /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		30B1336724B5D40800CC63EA /* pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay@2x.png"; sourceTree = "<group>"; };
+		30B1336824B5D40800CC63EA /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
+		30B1336924B5D40800CC63EA /* signout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signout.png; sourceTree = "<group>"; };
+		30B1336A24B5D40800CC63EA /* pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay.png; sourceTree = "<group>"; };
+		30B1336B24B5D40800CC63EA /* signout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signout@2x.png"; sourceTree = "<group>"; };
+		30B1336C24B5D41400CC63EA /* UserManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UserManager.js; sourceTree = "<group>"; };
+		30B1336D24B5D42900CC63EA /* Profile.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Profile.xml; sourceTree = "<group>"; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
-		30B503EF206FD52500D08682 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
-		30B503F1206FD52500D08682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30B503F9207034FC00D08682 /* Jalali.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Jalali.js; sourceTree = "<group>"; };
-		30B503FB20711F4E00D08682 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		30BF89192062F2B7009FAB4D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30D5167720682D8C007995AF /* ProductsList.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ProductsList.xml; sourceTree = "<group>"; };
-		30D5167920682EEF007995AF /* ProductsListDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ProductsListDocumentController.js; sourceTree = "<group>"; };
 		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
 		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
-		30D5167C20683595007995AF /* logo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_icon.png; sourceTree = "<group>"; };
+		30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselMovie.swift; sourceTree = "<group>"; };
+		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		30EC84B524C884E4000F6C91 /* AppPlayer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppPlayer.js; sourceTree = "<group>"; };
+		30EC84B724C884F8000F6C91 /* Movie.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Movie.xml; sourceTree = "<group>"; };
+		30EC84B924C8A9FF000F6C91 /* Vitrine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vitrine.swift; sourceTree = "<group>"; };
+		30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDetail.swift; sourceTree = "<group>"; };
+		30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetail.swift; sourceTree = "<group>"; };
 		30ED5306233950DA0068FE95 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		30ED530C233B55E60068FE95 /* TopShelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TopShelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		30ED530F233B55E60068FE95 /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
@@ -105,14 +114,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		30B503E7206FD52500D08682 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30B503ED206FD52500D08682 /* TVServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790320448110007E728F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,10 +135,12 @@
 		3015FFA62063A55A0029F8FF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				30B503F9207034FC00D08682 /* Jalali.js */,
-				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
+				30EC84B524C884E4000F6C91 /* AppPlayer.js */,
+				30B1336C24B5D41400CC63EA /* UserManager.js */,
 				3015FFA52063A51A0029F8FF /* DataLoader.js */,
+				304769DB24AC97C50002714B /* DataParser.js */,
 				30241805206514C300B46686 /* DocumentController.js */,
+				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -145,13 +148,13 @@
 		3024180A2065335C00B46686 /* XMLs */ = {
 			isa = PBXGroup;
 			children = (
+				30EC84B724C884F8000F6C91 /* Movie.xml */,
+				30B1336D24B5D42900CC63EA /* Profile.xml */,
 				302418082065246700B46686 /* Index.xml */,
-				30241804206501F500B46686 /* Home.xml */,
-				309D289720663183001148BE /* Categories.xml */,
-				30D5167720682D8C007995AF /* ProductsList.xml */,
-				309D289D206649DF001148BE /* Product.xml */,
 				30D5167A20683283007995AF /* Login.xml */,
-				30B503E4206E158A00D08682 /* MyMovies.xml */,
+				304769D624AC97A00002714B /* Search.xml */,
+				304769D724AC97A00002714B /* Seasons.xml */,
+				304769D824AC97A00002714B /* Vitrine.xml */,
 			);
 			path = XMLs;
 			sourceTree = "<group>";
@@ -159,19 +162,34 @@
 		3024180B2065567400B46686 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3022612324BE4EA300246B1F /* like.png */,
+				3022612224BE4EA300246B1F /* like@2x.png */,
+				30B1336A24B5D40800CC63EA /* pay.png */,
+				30B1336724B5D40800CC63EA /* pay@2x.png */,
+				30B1336624B5D40700CC63EA /* profile.png */,
+				30B1336824B5D40800CC63EA /* profile@2x.png */,
+				30B1336924B5D40800CC63EA /* signout.png */,
+				30B1336B24B5D40800CC63EA /* signout@2x.png */,
+				304769CD24AC96BF0002714B /* imdb.png */,
+				304769D424AC96BF0002714B /* imdb@2x.png */,
+				304769D524AC96BF0002714B /* logo_filimo_dark.png */,
+				304769D124AC96BF0002714B /* logo_filimo.png */,
+				304769CF24AC96BF0002714B /* logo_televika_dark.png */,
+				304769D024AC96BF0002714B /* logo_televika.png */,
+				304769D224AC96BF0002714B /* Strings.js */,
 				30A8B732208121E600B55E69 /* seasons.png */,
 				30A8B731208121E600B55E69 /* seasons@2x.png */,
-				30D5167C20683595007995AF /* logo_icon.png */,
-				3024180C2065568B00B46686 /* logo.png */,
-				301E4808206B8D9800D44269 /* logo_dark.png */,
-				30B503DE206E157C00D08682 /* login.png */,
-				30B503E1206E157C00D08682 /* login@2x.png */,
-				30B503E0206E157C00D08682 /* logout.png */,
-				30B503E2206E157C00D08682 /* logout@2x.png */,
-				30B503DF206E157C00D08682 /* reload.png */,
-				30B503E3206E157C00D08682 /* reload@2x.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		304769C524AC72A00002714B /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				304769C024AC725B0002714B /* Televika.xcconfig */,
+				304769C224AC728A0002714B /* Filimo.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		307D82772063157800848244 /* Swift */ = {
@@ -179,6 +197,8 @@
 			children = (
 				30ED5306233950DA0068FE95 /* main.swift */,
 				30C5790920448110007E728F /* AppDelegate.swift */,
+				304769C624AC7E420002714B /* Config.swift */,
+				3016E22124B5BA6100A62989 /* LocalizableError.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -191,31 +211,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		30B503EE206FD52500D08682 /* TopShelf */ = {
-			isa = PBXGroup;
-			children = (
-				30B503EF206FD52500D08682 /* ServiceProvider.swift */,
-				30B503FB20711F4E00D08682 /* Model.swift */,
-				30B503F1206FD52500D08682 /* Info.plist */,
-			);
-			path = TopShelf;
-			sourceTree = "<group>";
-		};
 		30BF891D20631288009FAB4D /* Javascript */ = {
 			isa = PBXGroup;
 			children = (
-				3015FFA62063A55A0029F8FF /* Utilities */,
-				3024180B2065567400B46686 /* Resources */,
-				3024180A2065335C00B46686 /* XMLs */,
+				3022612124BE4E8C00246B1F /* MovieDocumentController.js */,
+				30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */,
 				30C5790B20448110007E728F /* Application.js */,
-				30241809206525F700B46686 /* MenuBarController.js */,
 				30D5167B206832A5007995AF /* LoginController.js */,
-				302418062065246700B46686 /* HomeDocumentController.js */,
-				309D289B20663390001148BE /* CategoriesDocumentController.js */,
-				30D5167920682EEF007995AF /* ProductsListDocumentController.js */,
-				309D289F20664A00001148BE /* ProductDocumentController.js */,
+				30241809206525F700B46686 /* MenuBarController.js */,
 				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
-				30B503E5206E159500D08682 /* MyMoviesDocumentController.js */,
+				304769D924AC97AF0002714B /* SeasonsDocumentController.js */,
+				304769DA24AC97AF0002714B /* VitrineDocumentController.js */,
+				3024180B2065567400B46686 /* Resources */,
+				3015FFA62063A55A0029F8FF /* Utilities */,
+				3024180A2065335C00B46686 /* XMLs */,
 			);
 			path = Javascript;
 			sourceTree = "<group>";
@@ -223,9 +232,11 @@
 		30BF891E20631298009FAB4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				304769C924AC7F710002714B /* InfoPlist.strings */,
 				30C5790C20448110007E728F /* Assets.xcassets */,
-				30BF89182062F2B7009FAB4D /* InfoPlist.strings */,
 				30C5790E20448110007E728F /* Info.plist */,
+				30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */,
+				3016E22024B5B7ED00A62989 /* Localizable.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -233,11 +244,11 @@
 		30C578FD20448110007E728F = {
 			isa = PBXGroup;
 			children = (
+				304769C524AC72A00002714B /* Configuration */,
 				30C5790820448110007E728F /* Main */,
-				30B503EE206FD52500D08682 /* TopShelf */,
-				30ED530E233B55E60068FE95 /* TopShelfNew */,
-				30B503EB206FD52500D08682 /* Frameworks */,
+				30ED530E233B55E60068FE95 /* TopShelf */,
 				30C5790720448110007E728F /* Products */,
+				30B503EB206FD52500D08682 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,7 +256,6 @@
 			isa = PBXGroup;
 			children = (
 				30C5790620448110007E728F /* Filimo.app */,
-				30B503EA206FD52500D08682 /* TopShelf Legacy.appex */,
 				30ED530C233B55E60068FE95 /* TopShelf.appex */,
 			);
 			name = Products;
@@ -261,36 +271,31 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		30ED530E233B55E60068FE95 /* TopShelfNew */ = {
+		30EC84B824C8A9EE000F6C91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */,
+				30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */,
+				30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */,
+				30EC84B924C8A9FF000F6C91 /* Vitrine.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30ED530E233B55E60068FE95 /* TopShelf */ = {
+			isa = PBXGroup;
+			children = (
+				30EC84B824C8A9EE000F6C91 /* Models */,
 				30ED530F233B55E60068FE95 /* ContentProvider.swift */,
 				30ED5311233B55E60068FE95 /* Info.plist */,
 				30ED5319233B9EB60068FE95 /* Extensions.swift */,
 			);
-			path = TopShelfNew;
+			path = TopShelf;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30B503E9206FD52500D08682 /* TopShelf-Legacy */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf-Legacy" */;
-			buildPhases = (
-				30B503E6206FD52500D08682 /* Sources */,
-				30B503E7206FD52500D08682 /* Frameworks */,
-				30B503E8206FD52500D08682 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "TopShelf-Legacy";
-			productName = TopShelf;
-			productReference = 30B503EA206FD52500D08682 /* TopShelf Legacy.appex */;
-			productType = "com.apple.product-type.tv-app-extension";
-		};
 		30C5790520448110007E728F /* Filimo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30C5791120448110007E728F /* Build configuration list for PBXNativeTarget "Filimo" */;
@@ -303,7 +308,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				30B503F3206FD52500D08682 /* PBXTargetDependency */,
 				30ED5313233B55E60068FE95 /* PBXTargetDependency */,
 			);
 			name = Filimo;
@@ -335,14 +339,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Filimo;
 				TargetAttributes = {
-					30B503E9206FD52500D08682 = {
-						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
 					30C5790520448110007E728F = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
@@ -367,26 +366,20 @@
 			projectRoot = "";
 			targets = (
 				30C5790520448110007E728F /* Filimo */,
-				30B503E9206FD52500D08682 /* TopShelf-Legacy */,
 				30ED530B233B55E60068FE95 /* TopShelf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		30B503E8206FD52500D08682 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790420448110007E728F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D5A41024ABE90400F5CF08 /* LaunchScreen.storyboard in Resources */,
+				3016E21E24B5B7ED00A62989 /* Localizable.strings in Resources */,
+				304769CB24AC7F710002714B /* InfoPlist.strings in Resources */,
 				30C5790D20448110007E728F /* Assets.xcassets in Resources */,
-				30BF891A2062F2B7009FAB4D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,28 +387,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				304769CC24AC7F710002714B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		30B503E6206FD52500D08682 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30B503FC20711F4E00D08682 /* Model.swift in Sources */,
-				30ED531B233B9EC50068FE95 /* Extensions.swift in Sources */,
-				30B503F0206FD52500D08682 /* ServiceProvider.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		30C5790220448110007E728F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				30C5790A20448110007E728F /* AppDelegate.swift in Sources */,
+				3016E22224B5BA6100A62989 /* LocalizableError.swift in Sources */,
 				30ED5307233950DA0068FE95 /* main.swift in Sources */,
+				304769C724AC7E420002714B /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,20 +409,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D5A40C24ABE7FD00F5CF08 /* CarouselMovie.swift in Sources */,
+				30EC84BC24C8AA1C000F6C91 /* OneDetail.swift in Sources */,
+				30EC84BA24C8A9FF000F6C91 /* Vitrine.swift in Sources */,
+				304769C824AC7E420002714B /* Config.swift in Sources */,
+				30EC84BE24C8AA34000F6C91 /* ReviewDetail.swift in Sources */,
 				30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */,
 				30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */,
-				30ED5318233B58E10068FE95 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		30B503F3206FD52500D08682 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 30B503E9206FD52500D08682 /* TopShelf-Legacy */;
-			targetProxy = 30B503F2206FD52500D08682 /* PBXContainerItemProxy */;
-		};
 		30ED5313233B55E60068FE95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 30ED530B233B55E60068FE95 /* TopShelf */;
@@ -445,10 +430,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		30BF89182062F2B7009FAB4D /* InfoPlist.strings */ = {
+		3016E22024B5B7ED00A62989 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				30BF89192062F2B7009FAB4D /* fa */,
+				3016E21F24B5B7ED00A62989 /* fa */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		304769C924AC7F710002714B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				304769CA24AC7F710002714B /* fa */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -456,61 +449,12 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		30B503F5206FD52500D08682 /* Debug */ = {
+		304769BA24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD)";
-				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelf/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.saeedtaheri.filimo.appletv.topshelf-legacy";
-				PRODUCT_NAME = "TopShelf Legacy";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Debug;
-		};
-		30B503F6206FD52500D08682 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD)";
-				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelf/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.saeedtaheri.filimo.appletv.topshelf-legacy";
-				PRODUCT_NAME = "TopShelf Legacy";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Release;
-		};
-		30C5790F20448110007E728F /* Debug */ = {
-			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 1910261815;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -533,6 +477,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -563,16 +508,68 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 11.2;
-				VERSION = 1.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VERSION = 2.0;
 			};
-			name = Debug;
+			name = "Televika Debug";
 		};
-		30C5791020448110007E728F /* Release */ = {
+		304769BB24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Debug";
+		};
+		304769BC24AC6E410002714B /* Televika Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
+				PRODUCT_NAME = TopShelf;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Debug";
+		};
+		304769BD24AC6E4B0002714B /* Televika Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
+			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD = 1910261815;
+				BUILD = 2007231;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -595,6 +592,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -617,9 +615,180 @@
 				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 11.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
-				VERSION = 1.2;
+				VERSION = 2.0;
+			};
+			name = "Televika Release";
+		};
+		304769BE24AC6E4B0002714B /* Televika Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Release";
+		};
+		304769BF24AC6E4B0002714B /* Televika Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(BUILD)";
+				DEVELOPMENT_TEAM = CS7Q92U9AY;
+				INFOPLIST_FILE = TopShelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = "$(VERSION)";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
+				PRODUCT_NAME = TopShelf;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = "Televika Release";
+		};
+		30C5790F20448110007E728F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD = 2007231;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VERSION = 2.0;
+			};
+			name = Debug;
+		};
+		30C5791020448110007E728F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD = 2007231;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VALIDATE_PRODUCT = YES;
+				VERSION = 2.0;
 			};
 			name = Release;
 		};
@@ -627,7 +796,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -639,12 +808,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Debug;
 		};
@@ -652,7 +821,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -664,12 +833,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = "$(VERSION)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 13.0;
 			};
 			name = Release;
 		};
@@ -681,7 +850,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelfNew/Info.plist;
+				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -690,7 +859,7 @@
 				MARKETING_VERSION = "$(VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
 				PRODUCT_NAME = TopShelf;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -707,7 +876,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
 				DEVELOPMENT_TEAM = CS7Q92U9AY;
-				INFOPLIST_FILE = TopShelfNew/Info.plist;
+				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -715,7 +884,7 @@
 				);
 				MARKETING_VERSION = "$(VERSION)";
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.saeedtaheri.filimo.appletv.topshelf;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ST_APP_BUNDLE_ID).topshelf";
 				PRODUCT_NAME = TopShelf;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -727,20 +896,13 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		30B503F7206FD52500D08682 /* Build configuration list for PBXNativeTarget "TopShelf-Legacy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				30B503F5206FD52500D08682 /* Debug */,
-				30B503F6206FD52500D08682 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		30C5790120448110007E728F /* Build configuration list for PBXProject "Filimo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30C5790F20448110007E728F /* Debug */,
+				304769BA24AC6E410002714B /* Televika Debug */,
 				30C5791020448110007E728F /* Release */,
+				304769BD24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -749,7 +911,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30C5791220448110007E728F /* Debug */,
+				304769BB24AC6E410002714B /* Televika Debug */,
 				30C5791320448110007E728F /* Release */,
+				304769BE24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -758,7 +922,9 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30ED5316233B55E60068FE95 /* Debug */,
+				304769BC24AC6E410002714B /* Televika Debug */,
 				30ED5317233B55E60068FE95 /* Release */,
+				304769BF24AC6E4B0002714B /* Televika Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Filimo</string>
+	<string>$(ST_APP_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,10 +22,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.filimo.tvos</string>
+			<string>$(ST_APP_BUNDLE_ID)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>filimo</string>
+				<string>$(ST_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
@@ -42,11 +42,19 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Automatic</string>
+	<key>ST Base URL</key>
+	<string>$(ST_BASE_URL)</string>
+	<key>ST App Name Localized</key>
+	<string>$(ST_APP_NAME_FA)</string>
+	<key>ST Scheme</key>
+	<string>$(ST_URL_SCHEME)</string>
 </dict>
 </plist>

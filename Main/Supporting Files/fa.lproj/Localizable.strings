@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Filimo
+
+  Created by Saeed Taheri on 7/8/20.
+  Copyright © 2020 Filimo. All rights reserved.
+*/
+
+"error_launching_app" = "خطا در اجرای نرم‌افزار";
+"error_tvml_domain_code_3" = "مشکلی در دسترسی به فایل‌های جاوااسکریپت پیش آمد.";
+"error_tvml_domain_code_unknown" = "خطای نامشخص در TVML";
+"error_unknown" = "خطای نامشخص";
+"retry" = "تلاش دوباره";

@@ -1,61 +1,39 @@
 class SeasonsDocumentController extends DocumentController {
     
     constructor(controllerOptions) {
-        super(controllerOptions)  
+        super(controllerOptions);
         if (controllerOptions.event) {
-            this._allSeasons = controllerOptions.event.target.dataItem.allSeasons
+            this.seasons = controllerOptions.event.target['serial']['seasons'];
+            this.title = controllerOptions.event.target['serial']['title'];
         }
     }
 
     setupDocument(document) {
-        super.setupDocument(document)
+        super.setupDocument(document);
 
-        const allSeasons = this._allSeasons
-        
-        let listSection = document.getElementsByTagName('list').item(0).lastChild
+        document.getElementById('pageTitle').textContent = this.title || string_seasons;
 
-        const numberOfSeasons = Object.keys(allSeasons).length
+        const listSection = document.getElementById('listSection');
 
-        let nodesCounter = 0
-        Object.keys(allSeasons).forEach( (key) => {
-            let nodeToAdd = `<listItemLockup>
-                <title>${toPersianDigits('فصل ' + key)}</title>
-                <decorationLabel>${toPersianDigits('' + allSeasons[key].length)}</decorationLabel>
+        for (let season of this.seasons.rows) {
+            const listItemToAdd = `<listItemLockup>
+                <title>${season.title}</title>
+                <decorationLabel>${toPersianDigits(season.dataItems.length)}</decorationLabel>
                 <relatedContent>
                     <grid>
-                        <section binding="items:{items};">
-                        </section>
+                        <section binding="items:{movies};" />
                     </grid>
                 </relatedContent>
-            </listItemLockup>`
-            
-            listSection.insertAdjacentHTML('beforeend', nodeToAdd)
+            </listItemLockup>`;
 
-            let itemsSection = listSection.getElementsByTagName('section').item(nodesCounter)
-            itemsSection.dataItem = new DataItem()
-            itemsSection.dataItem.setPropertyPath("items", dataItemsFromJSONItems(allSeasons[key]))
+            listSection.insertAdjacentHTML('beforeend', listItemToAdd);
 
-            nodesCounter += 1
-        })
-
-        function dataItemsFromJSONItems(items) {
-            return items.map((movie) => {
-                let dataItem = new DataItem("productsList", movie.uid)
-                Object.keys(movie).forEach((key) => {
-                    let value = movie[key]
-                    if (key === 'movie_title' || key === 'descr') {
-                        value = toPersianDigits(value)
-                    }
-                    if (key === 'movie_title_en') {
-                        value = removeHTMLEntities(value)
-                    }
-                    dataItem.setPropertyPath(key, value)
-                })
-                return dataItem
-            })
-        }    
+            const allSections = document.getElementsByTagName('section');
+            const lastSection = allSections.item(allSections.length - 1);
+            lastSection.dataItem = new DataItem();
+            lastSection.dataItem.setPropertyPath('movies', season.dataItems);
+        }
     }
-
-
 }
-registerAttributeName("seasonsDocumentURL", SeasonsDocumentController)
+
+registerAttributeName("seasonsDocumentURL", SeasonsDocumentController);

@@ -8,7 +8,7 @@ This class handles presenting the Menu Bar template example.
 class MenuBarController extends DocumentController {
 
     fetchDocument(documentURL, loadingDocument) {
-        this._documentLoader.fetch({
+        this.documentLoader.fetch({
             url: documentURL,
             success: (menuBarDocument) => {
                 const menuBarElem = menuBarDocument.getElementsByTagName("menuBar").item(0);
@@ -18,11 +18,11 @@ class MenuBarController extends DocumentController {
 
                 // Pre-load the document for the initial focused menu item or first item,
                 // before presenting the menuBarTemplate on navigation stack.
-                // NOTE: Pre-loading is optional
-                const initialMenuItemElem = this.findInitialMenuItem(menuBarElem);
-                const initialMenuItemController = this.selectMenuItem(initialMenuItemElem, true, () => {
-                    this.handleDocument(menuBarDocument, loadingDocument);
-                });
+                // const initialMenuItemElem = this.findInitialMenuItem(menuBarElem);
+                // this.selectMenuItem(initialMenuItemElem, true, () => {
+                this.handleDocument(menuBarDocument, loadingDocument);
+                // });
+
             },
             error: (xhr) => {
                 const alertDocument = createLoadErrorAlertDocument(documentURL, xhr, false);
@@ -54,7 +54,8 @@ class MenuBarController extends DocumentController {
                 if (!isInitialItem) {
                     menuBarFeature.setDocument(createLoadingDocument(), menuItemElem);
                 }
-                controllerOptions.documentLoader = this._documentLoader;
+                controllerOptions.documentLoader = this.documentLoader;
+                controllerOptions.linkKey = menuItemElem.getAttribute('linkKey') || null;
                 const controllerClass = controllerOptions.type;
                 const controller = new controllerClass(controllerOptions);
                 controller.handleDocument = (document) => {
@@ -63,7 +64,7 @@ class MenuBarController extends DocumentController {
                     } else {
                         setTimeout(function() {
                             menuBarFeature.setDocument(document, menuItemElem);
-                        }, 1000);
+                        }, 500);
                     }
                     doneCallback && doneCallback();
                 };

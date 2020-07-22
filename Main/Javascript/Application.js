@@ -21,56 +21,73 @@
 
 const attributeToController = {};
 const attributeKeys = [];
-var baseURL;
-var menubarLoaded = false;
-var pendingPlayURL = null;
+
+let appName;
+let jsBaseURL;
+let baseURL;
+
+let menubarLoaded = false;
+let pendingPlayURL = null;
+
+let appBackgroundedDate = null;
+let appForegroundedDate = null;
 
 /**
- * @description The onLaunch callback is invoked after the application JavaScript 
- * has been parsed into a JavaScript context. The handler is passed an object 
+ * @description The onLaunch callback is invoked after the application JavaScript
+ * has been parsed into a JavaScript context. The handler is passed an object
  * that contains options passed in for launch. These options are defined in the
  * swift or objective-c client code. Options can be used to communicate to
- * your JavaScript code that data and as well as state information, like if the 
+ * your JavaScript code that data and as well as state information, like if the
  * the app is being launched in the background.
  *
- * The location attribute is automatically added to the object and represents 
+ * The location attribute is automatically added to the object and represents
  * the URL that was used to retrieve the application JavaScript.
  */
-App.onLaunch = function(options) {
-    baseURL = options.baseURL;
+App.onLaunch = function (options) {
+    if (options['jsBaseURL'] === undefined) {
+        // For backward compatibility
+        jsBaseURL = options['baseURL'];
+        baseURL = 'https://www.filimo.com/api/fa/v1';
+        appName = 'فیلیمو';
+    } else {
+        jsBaseURL = options['jsBaseURL'];
+        baseURL = options['baseURL'];
+        appName = options['appName'];
+    }
 
     // Specify all the URLs for helper JavaScript files
     const helperScriptURLs = [
-        "Utilities/Jalali",
+        "Resources/Strings",
+        "Utilities/AppPlayer",
+        "Utilities/UserManager",
         "Utilities/DocumentLoader",
         "Utilities/DocumentController",
         "Utilities/DataLoader",
+        "Utilities/DataParser",
         "MenuBarController",
-        "HomeDocumentController",
+        "VitrineDocumentController",
         "LoginController",
-        "CategoriesDocumentController",
         "SearchDocumentController",
-        "MyMoviesDocumentController",
-        "ProductsListDocumentController",
-        "ProductDocumentController",
-        "SeasonsDocumentController"
+        "MovieDocumentController",
+        "SeasonsDocumentController",
+        "ProfileDocumentController"
     ].map(
-        moduleName => `${baseURL}${moduleName}.js`
+        moduleName => `${jsBaseURL}${moduleName}.js`
     );
-    
+
     // Show a loading spinner while additional JavaScript files are being evaluated
-    let loadingDocument = createLoadingDocument("فیلیمو");
-	navigationDocument.pushDocument(loadingDocument);
+    const loadingDocument = createLoadingDocument(appName);
+    navigationDocument.pushDocument(loadingDocument);
 
-    evaluateScripts(helperScriptURLs, function(scriptsAreLoaded) {
+    evaluateScripts(helperScriptURLs, function (scriptsAreLoaded) {
         if (scriptsAreLoaded) {
-			navigationDocument.removeDocument(loadingDocument);
+            navigationDocument.removeDocument(loadingDocument);
 
-			let documentLoader = new DocumentLoader(baseURL)
-			let documentURL = documentLoader.prepareURL("/XMLs/Index.xml")
-			new MenuBarController({ documentLoader, documentURL })
-			menubarLoaded = true
-			playMovieFromURL(pendingPlayURL)
+            const documentLoader = new DocumentLoader(jsBaseURL);
+            const documentURL = documentLoader.prepareURL("/XMLs/Index.xml");
+            new MenuBarController({documentLoader, documentURL});
+            menubarLoaded = true;
+            playMovieFromHomemadeUrl(pendingPlayURL);
 
         } else {
             const alertDocument = createEvalErrorAlertDocument();
@@ -80,45 +97,59 @@ App.onLaunch = function(options) {
     });
 }
 
-App.onOpenURL = function(url) {
-    pendingPlayURL = url
+App.onOpenURL = function (url) {
+    pendingPlayURL = url;
     if (menubarLoaded) {
-        playMovieFromURL(pendingPlayURL)
+        playMovieFromHomemadeUrl(pendingPlayURL);
     }
 }
 
-App.onWillResignActive = function() {
+App.onWillResignActive = function () {
 
 }
 
-App.onDidEnterBackground = function() {
+App.onDidEnterBackground = function () {
+    appBackgroundedDate = new Date();
+    appForegroundedDate = null;
+}
+
+App.onWillEnterForeground = function () {
 
 }
 
-App.onWillEnterForeground = function() {
-    
+App.onDidBecomeActive = function () {
+    appForegroundedDate = new Date();
 }
 
-App.onDidBecomeActive = function() {
-    
+App.onWillTerminate = function () {
+
 }
 
-App.onWillTerminate = function() {
-    
-}
-
-function playMovieFromURL(url) {
-    if (url == null || url === "") {
-        return
+//This works for playing videos from Top shelf
+function playMovieFromHomemadeUrl(url) {
+    if (url == null || url === '') {
+        return;
     }
-    const [protocol, path] = url.split("://");
-    const [movieUID, type] = path.split("/")
-    
-    let documentLoader = new DocumentLoader(baseURL)
-    let documentURL = documentLoader.prepareURL("/XMLs/Product.xml")
-    let shouldPlayMovie = type === 'play'
-    new ProductDocumentController({ documentLoader, documentURL, movieUID, shouldPlayMovie })
-    pendingPlayURL = null
+
+    const [, path] = url.split("://");
+    const [movieUid, type] = path.split("/");
+
+    const documentLoader = new DocumentLoader(jsBaseURL);
+    const documentURL = documentLoader.prepareURL("/XMLs/Movie.xml");
+    const shouldPlayAtLoad = type === 'play';
+    new MovieDocumentController({documentLoader, documentURL, movieUid, shouldPlayAtLoad});
+    pendingPlayURL = null;
+}
+
+function loadingTemplateString(title) {
+    title = title || string_loading;
+
+    return `<loadingTemplate>
+            <activityIndicator>
+                <title>${title}</title>
+            </activityIndicator>
+        </loadingTemplate>
+    `;
 }
 
 /**
@@ -140,35 +171,21 @@ function createLoadingDocument(title) {
 }
 
 /**
- * This convenience function returns an alert template, which can be used to present errors to the user.
- */
-var createAlertDocument = function(title, description) {
-
-    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
-        <document>
-          <alertTemplate>
-            <title>${title}</title>
-            <description>${description}</description>
-          </alertTemplate>
-        </document>`
-
-    var parser = new DOMParser();
-
-    var alertDoc = parser.parseFromString(alertString, "application/xml");
-
-    return alertDoc
-}
-
-/**
  * Convenience function to create a TVML alert document with a title and description.
  */
-function createDescriptiveAlertDocument(title, description) {
+function createAlertDocument(title, description, withImage, descriptive) {
+    const logoIdentifier = isFilimo() ? "filimo" : "televika";
+    const logoResource = jsBaseURL + `Resources/logo_${logoIdentifier}.png (theme:light), ` + jsBaseURL + `Resources/logo_${logoIdentifier}_dark.png (theme:dark)`;
+
+    const mainTag = (descriptive !== undefined && descriptive === true) ? 'descriptiveAlertTemplate' : 'alertTemplate';
+
     const template = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
-            <descriptiveAlertTemplate>
-                <title>${title}</title>
-                <description></description>
-            </descriptiveAlertTemplate>
+            <${mainTag}>
+                ${(withImage || false) ? `<img srcset="${logoResource}" width="295" height="90" style="margin: 48;" />` : ''}
+                <title style="tv-text-style: title2; margin: 20;">${title}</title>
+                <description />
+            </${mainTag}>
         </document>
     `;
     let doc = (new DOMParser()).parseFromString(template, "application/xml");
@@ -177,11 +194,16 @@ function createDescriptiveAlertDocument(title, description) {
     return doc
 }
 
+function presentAlertDocument(title, description, withImage, descriptive) {
+    const alert = createAlertDocument(title, description, withImage, descriptive);
+    navigationDocument.presentModal(alert);
+}
+
 /**
  * Convenience function to create a TVML alert for asking user with two options as answers.
  */
 function presentAlertQuestion(title, description, defaultTitle, cancelTitle, defaultHandler) {
-    var alertString = `<?xml version="1.0" encoding="UTF-8" ?>
+    const alertString = `<?xml version="1.0" encoding="UTF-8" ?>
         <document>
           <alertTemplate>
             <title>${title}</title>
@@ -189,35 +211,38 @@ function presentAlertQuestion(title, description, defaultTitle, cancelTitle, def
             <button id="alertDefaultButton">
                 <text>${defaultTitle}</text>
             </button>
-            <button id="alertCancelButton">
+            ${cancelTitle === null ? '' : `<button id="alertCancelButton">
                 <text>${cancelTitle}</text>
-            </button>
+            </button>`}
           </alertTemplate>
-        </document>`
+        </document>`;
 
-    var parser = new DOMParser();
+    let parser = new DOMParser();
 
-    var alertDoc = parser.parseFromString(alertString, "application/xml");
+    let alertDoc = parser.parseFromString(alertString, "application/xml");
 
-    alertDoc.getElementById("alertDefaultButton").addEventListener("select", function(element, event) {
-        defaultHandler()
-        navigationDocument.dismissModal()
-    })
-    alertDoc.getElementById("alertCancelButton").addEventListener("select", function(element, event) {
-        navigationDocument.dismissModal()
-    })
+    alertDoc.getElementById("alertDefaultButton").addEventListener("select", function (element, event) {
+        defaultHandler();
+        navigationDocument.dismissModal();
+    });
 
-    navigationDocument.presentModal(alertDoc)
+    if (cancelTitle !== null) {
+        alertDoc.getElementById("alertCancelButton").addEventListener("select", function (element, event) {
+            navigationDocument.dismissModal();
+        });
+    }
+
+    navigationDocument.presentModal(alertDoc);
 }
 
 /**
  * Convenience function to create a TVML alert for failed evaluateScripts.
  */
 function createEvalErrorAlertDocument() {
-    const title = "Evaluate Scripts Error";
+    const title = string_scripts_evaluation_error_title;
     const description = [
-        "There was an error attempting to evaluate the external JavaScript files.",
-        "Please check your network connection and try again later."
+        string_scripts_evaluation_error_desc,
+        string_check_connection_try_again
     ].join("\n\n");
     return createAlertDocument(title, description);
 }
@@ -240,38 +265,21 @@ function resolveControllerFromElement(elem) {
     for (let key of attributeKeys) {
         if (elem.hasAttribute(key)) {
             return {
-            type: attributeToController[key],
-            documentURL: elem.getAttribute(key)
+                type: attributeToController[key],
+                documentURL: elem.getAttribute(key)
             };
         }
     }
 }
 
-function toPersianDigits(str) {
-    if (str == null) { return null }
-    return str.replace(/0/g, "۰")
-                .replace(/1/g, "۱")
-                .replace(/2/g, "۲")
-                .replace(/3/g, "۳")
-                .replace(/4/g, "۴")
-                .replace(/5/g, "۵")
-                .replace(/6/g, "۶")
-                .replace(/7/g, "۷")
-                .replace(/8/g, "۸")
-                .replace(/9/g, "۹")
+function isFilimo() {
+    return baseURL.includes("filimo.com");
 }
 
-function removeHTMLEntities(str) {
-    if (str == null) { return null }
-    return str.replace("&hellip;", "…")
-            .replace("&#039;", "'")
-            .replace(/\&\w+;/g, '')
-}
-
-function isLoggedIn() {
-    if (localStorage.getItem("token") != null 
-    && localStorage.getItem("username") != null) {
-        return true
+function getSafe(fn, defaultVal) {
+    try {
+        return fn() || defaultVal;
+    } catch (e) {
+        return defaultVal;
     }
-    return false
 }

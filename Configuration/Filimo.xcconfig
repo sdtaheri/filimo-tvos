@@ -1,0 +1,17 @@
+//
+//  TelevikaRelease.xcconfig
+//  Filimo
+//
+//  Created by Saeed Taheri on 7/1/20.
+//  Copyright © 2020 Filimo. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+ST_APP_NAME = Filimo
+ST_APP_NAME_FA = فیلیمو
+ST_APP_BUNDLE_ID = com.saeedtaheri.filimo.appletv
+ST_URL_SCHEME = filimo
+ST_BASE_URL = https:\/\/www.filimo.com/api/
+ST_APP_ICON = AppIconFilimo

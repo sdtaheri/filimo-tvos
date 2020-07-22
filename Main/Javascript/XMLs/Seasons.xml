@@ -2,49 +2,33 @@
 <document>
     <head>
         <style>
-            .placeholder {
-                tv-placeholder: movie;
+            .title {
+            tv-text-highlight-style: marquee-on-highlight;
             }
-            .marquee {
-                tv-text-highlight-style: marquee-on-highlight;
-            }
-            .englishTitle {
-                text-align: center;
-                tv-text-style: caption2;
-            }
-            .watchedOverlayImg {
-                tv-position: bottom-trailing;
+            .subtitle {
+            text-align: center;
+            tv-text-style: caption2;
+            tv-text-highlight-style: show-on-highlight;
+            color: rgb(255,255,255,0.5);
+            tv-highlight-color: rgb(255,255,255);
             }
         </style>
     </head>
 
     <catalogTemplate>
+        <prototypes>
+            <lockup prototype="movie-serialList" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <title class="title" binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{titleEn};"/>
+            </lockup>
+        </prototypes>
+
         <banner>
-            <title>فصل‌ها</title>
+            <title id="pageTitle"/>
         </banner>
         <list>
-            <section>
-                <prototypes>
-                    <lockup productDocumentURL="/XMLs/Product.xml" prototype="productsList">
-                        <img class="placeholder" binding="@src:{movie_img_b};" width="275" height="366" />
-                        <title class="marquee" binding="textContent:{movie_title};" />
-                        <text class="englishTitle" binding="textContent:{movie_title_en};" />
-                        <placeholder tag="progress" />
-                        <rules>
-                            <specialize state="({watch_fraction}-greater-than-equal:0.9)">
-                                <overlay tag="progress">
-                                    <badge class="watchedOverlayImg" src="resource://overlay-checkmark"/>
-                                </overlay>
-                            </specialize>
-                            <specialize state="({watch_fraction}-greater-than:0)">
-                                <overlay tag="progress">
-                                    <progressBar binding="@value:{watch_fraction}" />
-                                </overlay>
-                            </specialize>                    
-                        </rules>
-                    </lockup>
-                </prototypes>    
-            </section>
+            <section id="listSection" />
         </list>
     </catalogTemplate>
 </document>
