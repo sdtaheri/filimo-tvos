@@ -68,8 +68,8 @@ class DataLoader {
             xhr.setRequestHeader("JsonType", "simple");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("cache-control", "no-cache");
-            xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
-            xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
+            // xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
+            // xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
 
             xhr.responseType = "json";
             xhr.onload = () => {
