@@ -18,10 +18,6 @@ const string_login_to_account = 'ورود به حساب کاربری';
 
 const string_error_getting_login_code = 'خطا در دریافت کد لاگین';
 
-function string_remaining_subscription_time(query) {
-    return toPersianDigits(`${query} روز از اشتراک شما باقی مانده است.`);
-}
-
 function string_login_description() {
     let url = isFilimo() ? 'https://filimo.com/activate' : 'https://televika.com/activate';
     return `برای وصل کردن تلویزیون خود به ${appName} مراحل زیر را انجام دهید:
@@ -55,8 +51,6 @@ function string_go_to_payment_website() {
 const string_bookmarks = 'نشان‌ها';
 const string_history = 'مشاهده‌ها‌';
 const string_no_items_available = 'ویدئویی در این فهرست وجود ندارد';
-
-const string_from = 'از';
 const string_and = 'و';
 const string_comma = '،';
 const string_hour = 'ساعت';

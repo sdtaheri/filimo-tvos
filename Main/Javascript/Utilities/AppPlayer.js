@@ -41,22 +41,18 @@ class AppPlayer {
             const skipIntroDoc = this.createSkipIntroDocument();
             let didAddOverlay = false;
 
-            skipIntroDoc.getElementById('skipButton').addEventListener('select', () => {
-                player.seekToTime(skipIntro.introEnd);
-            });
-
-            skipIntroDoc.addEventListener('disappear', () => {
-                didAddOverlay = false;
-            });
-
             const introStart = skipIntro.introStart === 0 ? 2 : skipIntro.introStart;
 
-            player.addEventListener('timeBoundaryDidCross', (event) => {
+            const overlayTimeDidChangeListener = (event) => {
                 if (event.target['playbackState'] !== 'playing') {
                     return;
                 }
 
-                const elapsedTime = Math.floor(event['boundary']);
+                const elapsedTime = Math.floor(event['time']);
+
+                if (elapsedTime !== introStart && elapsedTime !== skipIntro.introEnd) {
+                    return;
+                }
 
                 if (!didAddOverlay && (elapsedTime >= introStart && elapsedTime < skipIntro.introEnd)) {
                     didAddOverlay = true;
@@ -69,8 +65,17 @@ class AppPlayer {
                     didAddOverlay = false;
                     player.interactiveOverlayDocument = null;
                 }
+            }
 
-            }, [introStart, skipIntro.introEnd]);
+            skipIntroDoc.getElementById('skipButton').addEventListener('select', () => {
+                player.seekToTime(skipIntro.introEnd);
+            });
+
+            skipIntroDoc.addEventListener('disappear', () => {
+                player.removeEventListener('timeDidChange', overlayTimeDidChangeListener);
+            });
+
+            player.addEventListener('timeDidChange', overlayTimeDidChangeListener, { interval: 1 } );
         }
     }
 
@@ -140,7 +145,7 @@ class AppPlayer {
                             tv-align: right;
                             tv-position: bottom;
                             tv-text-style: body;
-                            margin: 0 40 40 0;
+                            margin: 0 60 30 0;
                             padding: 0 20 0 20;
                         }
                     </style>
