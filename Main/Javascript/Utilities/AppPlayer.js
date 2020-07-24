@@ -145,7 +145,7 @@ class AppPlayer {
                             tv-align: right;
                             tv-position: bottom;
                             tv-text-style: body;
-                            margin: 0 60 30 0;
+                            margin: 0 60 40 0;
                             padding: 0 20 0 20;
                         }
                     </style>

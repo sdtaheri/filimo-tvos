@@ -64,10 +64,6 @@ class DataLoader {
         });
     }
 
-    fetchVitrine(itemsCallback) {
-        this.fetchList(1, itemsCallback);
-    }
-
     fetchVitrineNextPage(url, itemsCallback, errorCallback) {
         if (url == null) {
             if (errorCallback) {

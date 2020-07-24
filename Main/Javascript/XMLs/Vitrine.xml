@@ -172,7 +172,10 @@
                     </specialize>
                 </rules>
             </lockup>
-            <lockup prototype="poster-brick" vitrineDocumentURL="/XMLs/Vitrine.xml">
+            <lockup prototype="poster-brick" movieDocumentURL="/XMLs/Movie.xml">
+                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+            </lockup>
+            <lockup prototype="poster-brick-list" vitrineDocumentURL="/XMLs/Vitrine.xml">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
             </lockup>
             <lockup prototype="poster-theater" movieDocumentURL="/XMLs/Movie.xml">

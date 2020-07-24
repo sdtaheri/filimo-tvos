@@ -95,7 +95,14 @@ class DataParser {
                 case 'poster-brick': {
                     row.dataItems = item['posters'].data.map((poster) => {
                         const linkKey = encodeURI(poster['link_key']);
-                        const objectItem = new DataItem(row.type, linkKey);
+
+                        let type = row.type;
+                        if (poster["link_type"] === "list") {
+                            type = "poster-brick-list";
+                            row.type = type;
+                        }
+
+                        const objectItem = new DataItem(type, linkKey);
                         objectItem.title = null;
                         objectItem.titleEn = null;
                         objectItem.desc = null;
@@ -319,7 +326,7 @@ class DataParser {
         result.ageRange = null;
         if (ageRange && ageRange !== '') {
             const minAge = ageRange.split('-');
-            if (minAge.length > 0) {
+            if (minAge.length > 0 && !isNaN(minAge[0])) {
                 result.ageRange = '+' + toPersianDigits(minAge[0]);
             }
         }
