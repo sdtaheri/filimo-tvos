@@ -62,7 +62,7 @@ class VitrineDocumentController extends DocumentController {
             rootNode.removeChild(loadingTemplate);
 
             stackTemplate.addEventListener('needsmore', () => {
-                if (this._nextPageURL != null) {
+                if (this._nextPageURL !== null) {
 
                     if (this._isLoadingMore) {
                         return;

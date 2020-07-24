@@ -164,13 +164,13 @@ class DataParser {
                     break;
             }
 
-            if (row.dataItems != null && row.dataItems.length === 0) {
+            if (row.dataItems !== null && row.dataItems.length === 0) {
                 row.dataItems = null;
             }
 
             return row;
         }).filter((item) => {
-            return item.dataItems != null;
+            return item.dataItems !== null;
         });
 
         itemsCallback(result);
@@ -279,17 +279,11 @@ class DataParser {
     }
 
     parseVerifyCode(response, callback) {
-        const result = {};
-
-        if (response['data'] != null && response['data']['attributes'] !== undefined) {
-            result.jwtToken = response.data.attributes['jwt'];
-            result.username = response.data.attributes['username'];
-            result.lToken = response.data.attributes['ltoken'];
-        } else {
-            result.jwtToken = null;
-            result.username = null;
-            result.lToken = null;
-        }
+        const result = {
+            jwtToken: getSafe(() => { return response.data.attributes["jwt"] }, null),
+            username: getSafe(() => { return response.data.attributes["username"] }, null),
+            lToken: getSafe(() => { return response.data.attributes["ltoken"] }, null)
+        };
 
         callback(result);
     }

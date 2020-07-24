@@ -127,7 +127,7 @@ App.onWillTerminate = function () {
 
 //This works for playing videos from Top shelf
 function playMovieFromHomemadeUrl(url) {
-    if (url == null || url === '') {
+    if (url === null || url === undefined || url === '') {
         return;
     }
 
@@ -142,13 +142,11 @@ function playMovieFromHomemadeUrl(url) {
 }
 
 function loadingTemplateString(title) {
-    title = title || string_loading;
-
     return `<loadingTemplate>
-            <activityIndicator>
-                <title>${title}</title>
-            </activityIndicator>
-        </loadingTemplate>
+                <activityIndicator>
+                    ${title ? `<title>${title}</title>` : ""}
+                </activityIndicator>
+            </loadingTemplate>
     `;
 }
 
@@ -156,17 +154,7 @@ function loadingTemplateString(title) {
  * Convenience function to create a TVML loading document with a specified title.
  */
 function createLoadingDocument(title) {
-    title = title || "در حال دریافت اطلاعات…";
-
-    const template = `<?xml version="1.0" encoding="UTF-8" ?>
-        <document>
-            <loadingTemplate>
-                <activityIndicator>
-                    <title>${title}</title>
-                </activityIndicator>
-            </loadingTemplate>
-        </document>
-    `;
+    const template = `<?xml version="1.0" encoding="UTF-8" ?><document>` + loadingTemplateString(title) + `</document>`;
     return new DOMParser().parseFromString(template, "application/xml");
 }
 

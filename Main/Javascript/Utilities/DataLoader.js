@@ -13,6 +13,28 @@ class DataLoader {
 
         this._searchRequest = null;
         this._searchTextCache = null;
+
+        this.userAgent = {
+            an: appNameEn(),
+            os: "AppleTV",
+            vc: Device.appVersion,
+            vn: Device.appVersion,
+            sdk: Device.systemVersion,
+            ds: App.traitCollection.displayScale,
+            sz: App.traitCollection.screenWidth + "X" + App.traitCollection.screenHeight,
+            loc: "fa",
+            dt: "TV*x",
+            di: `Apple*${Device.model}*${Device.productType}*${Device.productType}*${Device.productType}`,
+            s: "adhoc",
+            oui: "",
+            pkg: Device.appIdentifier.replace("com.saeedtaheri", "com.sabaidea"),
+            afcn: Device.vendorIdentifier
+        }
+
+        this.slashedUserAgent = "";
+        Object.keys(this.userAgent).forEach((key) => {
+            this.slashedUserAgent += this.userAgent[key] + "/";
+        });
     }
 
     _fetchJSONData(dataURL, params, responseCallback, errorCallback, httpRequest) {
@@ -26,7 +48,7 @@ class DataLoader {
 
             url += "devicetype/appletv/";
 
-            if (params != null) {
+            if (params !== null) {
                 url += "?" + Object
                     .keys(params)
                     .map((key) => {
@@ -46,26 +68,28 @@ class DataLoader {
             xhr.setRequestHeader("JsonType", "simple");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
+            xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
 
             xhr.responseType = "json";
             xhr.onload = () => {
+                console.log(xhr.status + ": " + url);
                 responseCallback(xhr.response);
                 resolve();
             };
             xhr.onerror = () => {
+                console.log(xhr.status + ": " + url);
                 reject(xhr);
                 if (errorCallback !== undefined) {
                     errorCallback();
                 }
             };
             xhr.send();
-
-            console.log(url);
         });
     }
 
     fetchVitrineNextPage(url, itemsCallback, errorCallback) {
-        if (url == null) {
+        if (url === null) {
             if (errorCallback) {
                 errorCallback();
             }
@@ -130,12 +154,12 @@ class DataLoader {
     }
 
     verifyLogin(code, callback) {
-        if (code == null || code === '') {
+        if (code === null || code === undefined || code === '') {
             return;
         }
 
-        const url = baseURL + '/user/Authenticate/sync_account_verify';
-        this._fetchJSONData(url, {'ref_type': 'tv', 'code': code}, (response) => {
+        const url = baseURL + "/user/Authenticate/sync_account_verify";
+        this._fetchJSONData(url, { ref_type: "tv", code: code }, (response) => {
             this._dataParser.parseVerifyCode(response, callback);
         });
     }

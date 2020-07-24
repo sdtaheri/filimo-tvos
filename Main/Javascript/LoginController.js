@@ -16,7 +16,7 @@ class LoginController extends DocumentController {
 
             let refreshIntervalId = setInterval(() => {
                 this.dataLoader.verifyLogin(result.code, (verificationResult) => {
-                    if (verificationResult.jwtToken != null) {
+                    if (verificationResult.jwtToken !== null) {
                         clearInterval(refreshIntervalId);
                         UserManager.setJwtToken(verificationResult.jwtToken);
                         UserManager.setUsername(verificationResult.username);

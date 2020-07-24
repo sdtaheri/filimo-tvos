@@ -5,21 +5,21 @@ const USERNAME_KEY = "username_key";
 class UserManager {
 
     static isLoggedIn() {
-        return this.lToken() != null
-            && this.jwtToken() != null
-            && this.username() != null;
+        return this.lToken() !== null
+            && this.jwtToken() !== null
+            && this.username() !== null;
     }
 
     static username() {
-        return localStorage.getItem(USERNAME_KEY);
+        return localStorage.getItem(USERNAME_KEY) || null;
     }
 
     static jwtToken() {
-        return localStorage.getItem(JWT_TOKEN_KEY);
+        return localStorage.getItem(JWT_TOKEN_KEY) || null;
     }
 
     static lToken() {
-        return localStorage.getItem(L_TOKEN_KEY);
+        return localStorage.getItem(L_TOKEN_KEY) || null;
     }
 
     static setUsername(username) {
