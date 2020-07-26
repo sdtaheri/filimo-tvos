@@ -448,9 +448,14 @@ class DataParser {
                 castStart: getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['cast_s']}, null)
             },
             publishDate: getSafe(() => {
-                let date = new Date(responses.one.data["General"]["publish_date"].replace(' ', 'T'));
-                date.setTime(date.getTime() + date.getTimezoneOffset() * 1000 * 60);
-                return date;
+                const value = responses.one.data["General"]["publish_date"].replace(' ', 'T');
+                const DateTime = luxon.DateTime;
+                const dateStr = DateTime.fromISO(value, { zone: "Asia/Tehran" }).toString() || null;
+                if (dateStr !== null) {
+                    return new Date(dateStr);
+                } else {
+                    return null;
+                }
             }, null)
         }
 

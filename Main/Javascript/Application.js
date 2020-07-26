@@ -64,6 +64,7 @@ App.onLaunch = function (options) {
         "Utilities/DocumentController",
         "Utilities/DataLoader",
         "Utilities/DataParser",
+        "Utilities/Luxon",
         "MenuBarController",
         "VitrineDocumentController",
         "LoginController",
