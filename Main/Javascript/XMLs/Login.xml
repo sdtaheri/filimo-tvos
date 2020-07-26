@@ -19,8 +19,8 @@
 
             .code {
             tv-align: center;
-            tv-position: center;
-            tv-text-style: title1;
+            font-family: "Menlo", system-ui;
+            font-size: 90;
             color: rgb(253,112,46);
             }
 
