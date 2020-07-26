@@ -81,12 +81,11 @@ class VitrineDocumentController extends DocumentController {
     }
 
     refreshData() {
-        if (this.isOnScreen && appForegroundedDate !== null) {
-            console.log("Refreshing home page: " + new Date());
+        if (this.isOnScreen && appForegroundedDate !== null && this.isPendingUpdate === true) {
             this.dataLoader.fetchList(this.linkKey, (dataObject) => {
                 this.fillGridInCollectionList(dataObject, true);
-                this.isPendingUpdate = false;
             });
+            this.isPendingUpdate = false;
         }
     }
 
@@ -175,17 +174,23 @@ class VitrineDocumentController extends DocumentController {
             this.isOnScreen = true;
             if (this.isPendingUpdate) {
                 this.refreshData();
+                return;
             }
 
             if (appForegroundedDate !== null
                 && appBackgroundedDate !== null
                 && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
+                this.isPendingUpdate = true;
+                appBackgroundedDate = null;
                 this.refreshData();
+                return;
             }
 
             if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
-                this.refreshData();
                 this.isLoggedInAtLaunch = UserManager.isLoggedIn();
+                this.isPendingUpdate = true;
+                this.refreshData();
+                return;
             }
         }
 
