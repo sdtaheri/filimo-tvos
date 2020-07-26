@@ -44,6 +44,10 @@ const string_scripts_evaluation_error_title = "خطای ارزیابی";
 const string_scripts_evaluation_error_desc = "در ارزیابی فایل‌های جاوااسکریپت مشکل پیش آمد.";
 const string_check_connection_try_again = "اتصال به اینترنت را بررسی کرده و دوباره تلاش کنید.";
 
+function string_movie_available_in(remainingInSeconds) {
+    return `این فیلم <b>${productDuration(remainingInSeconds)}</b> دیگر منتشر می‌شود.`;
+}
+
 function string_go_to_payment_website() {
     let site = isFilimo() ? "https://www.filimo.com/purchase" : "https://www.televika.com/purchase";
     return `با استفاده از مرورگر موبایل یا رایانه شخصی خود،
@@ -57,6 +61,7 @@ const string_history = "مشاهده‌ها‌";
 const string_no_items_available = "ویدئویی در این فهرست وجود ندارد";
 const string_and = "و";
 const string_comma = "،";
+const string_day = "روز";
 const string_hour = "ساعت";
 const string_minute = "دقیقه";
 const string_season = "فصل";
@@ -85,9 +90,9 @@ const string_skip_intro = "رد کردن تیتراژ";
 const string_dubbed = "دوبله";
 
 function string_buy_ticket(price, currency, sessionDuration) {
-    return `با مراجعه به صفحه این فیلم در سایت ${appName} می‌توانید بلیط تماشای این فیلم را با قیمت ${toPersianDigits(price) + ' ' + currency} خریداری نمایید. `
+    return `با مراجعه به صفحه این فیلم در سایت ${appName} می‌توانید بلیط تماشای این فیلم را با قیمت <b>${toPersianDigits(price) + ' ' + currency}</b> خریداری نمایید. `
         + '\n'
-        + `پس از خرید شما فرصت دارید این فیلم را ظرف مدت ${toPersianDigits(sessionDuration) + ' ساعت'} ببینید.`
+        + `پس از خرید شما فرصت دارید این فیلم را ظرف مدت <b>${toPersianDigits(sessionDuration) + " ساعت"}</b> ببینید.`
         ;
 }
 
@@ -139,11 +144,18 @@ function formatList(list) {
 function productDuration(durationInSeconds) {
     const durationInMinute = durationInSeconds / 60;
 
-    const hour = parseInt(durationInMinute / 60 + '', 10);
+    const day = parseInt(durationInMinute / 60 / 24 + '', 10);
+    const hour = parseInt(durationInMinute / ((day + 1) * 60) + '', 10);
     const minute = parseInt(durationInMinute % 60 + '', 10);
 
     let duration = '';
+    if (day > 0) {
+        duration += day + " " + string_day;
+    }
     if (hour > 0) {
+        if (duration !== '') {
+            duration += ` ${string_and} `;
+        }
         duration += hour + " " + string_hour;
     }
     if (minute > 0) {

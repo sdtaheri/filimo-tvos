@@ -310,6 +310,7 @@ class DataParser {
         result.productionYear = toPersianDigits(getSafe(() => { return responses.one.data['General']['pro_year']}, null));
         result.duration = getSafe(() => { return responses.one.data['General']['duration']['value'] }, 0);
         result.durationText = productDuration(result.duration);
+
         result.isHD = getSafe(() => { return responses.one.data['General']['HD']['enable'] }, false);
         result.isSerial = getSafe(() => { return responses.one.data['General']['serial']['enable'] }, false);
 
@@ -324,7 +325,6 @@ class DataParser {
                 result.ageRange = '+' + toPersianDigits(minAge[0]);
             }
         }
-
 
         result.rate = {};
         result.rate.average = getSafe(() => { return responses.one.data['action_data']['rate']['movie']['percent'] }, null);
@@ -427,26 +427,31 @@ class DataParser {
         }
 
         result.watchAction = {
-            'buttonText': getSafe(() => { return responses.one.data['watch_action']['link_text']}, null),
-            'price': getSafe(() => { return responses.one.data['watch_action']['price']}, 0),
-            'currency': getSafe(() => { return responses.one.data['watch_action']['currency']}, string_toman),
-            'actionType': getSafe(() => { return responses.one.data['watch_action']['type']}, 'login'),
-            'sessionDuration': getSafe(() => { return responses.one.data['watch_action']['sans_duration']}, null),
-            'movieSource': getSafe(() => { return responses.one.data['watch_action']['movie_src']}, null),
-            'lastWatchedPosition': {
-                'percentage': getSafe(() => { return responses.one.data['watch_action']['last_watch_position']['percent']}, 0),
-                'seconds': getSafe(() => { return responses.one.data['watch_action']['last_watch_position']['last_second']}, 0)
+            buttonText: getSafe(() => { return responses.one.data['watch_action']['link_text']}, null),
+            price: getSafe(() => { return responses.one.data['watch_action']['price']}, 0),
+            currency: getSafe(() => { return responses.one.data['watch_action']['currency']}, string_toman),
+            actionType: getSafe(() => { return responses.one.data['watch_action']['type']}, 'login'),
+            sessionDuration: getSafe(() => { return responses.one.data['watch_action']['sans_duration']}, null),
+            movieSource: getSafe(() => { return responses.one.data['watch_action']['movie_src']}, null),
+            lastWatchedPosition: {
+                percentage: getSafe(() => { return responses.one.data['watch_action']['last_watch_position']['percent']}, 0),
+                seconds: getSafe(() => { return responses.one.data['watch_action']['last_watch_position']['last_second']}, 0)
             },
-            'visitStats': {
-                'action': getSafe(() => { return responses.one.data['watch_action']['visit_url']['formAction']}, null),
-                'id': getSafe(() => { return responses.one.data['watch_action']['visit_url']['frm_id']}, 0),
-                'callPeriod': getSafe(() => { return responses.one.data['watch_action']['visit_url']['visitCallPeriod']}, 60)
+            visitStats: {
+                action: getSafe(() => { return responses.one.data['watch_action']['visit_url']['formAction']}, null),
+                id: getSafe(() => { return responses.one.data['watch_action']['visit_url']['frm_id']}, 0),
+                callPeriod: getSafe(() => { return responses.one.data['watch_action']['visit_url']['visitCallPeriod']}, 60)
             },
-            'castSkip': {
-                'introStart': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_s']}, 0),
-                'introEnd': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_e']}, null),
-                'castStart': getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['cast_s']}, null)
-            }
+            castSkip: {
+                introStart: getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_s']}, 0),
+                introEnd: getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['intro_e']}, null),
+                castStart: getSafe(() => { return responses.one.data['watch_action']['cast_skip_arr']['cast_s']}, null)
+            },
+            publishDate: getSafe(() => {
+                let date = new Date(responses.one.data["General"]["publish_date"].replace(' ', 'T'));
+                date.setTime(date.getTime() + date.getTimezoneOffset() * 1000 * 60);
+                return date;
+            }, null)
         }
 
         let resumeTime = result.watchAction.lastWatchedPosition.seconds;

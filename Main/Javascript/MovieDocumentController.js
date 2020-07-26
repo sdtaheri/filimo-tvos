@@ -99,7 +99,9 @@ class MovieDocumentController extends DocumentController {
             if (result.productionYear !== null) {
                 infoRowToAdd += `<text>${result.productionYear}</text>`;
             }
-            infoRowToAdd += `<text>${result.durationText}</text>`;
+            if (result.duration > 0) {
+                infoRowToAdd += `<text>${result.durationText}</text>`;
+            }
 
             if (result.ageRange) {
                 infoRowToAdd += `<text>${result.ageRange}</text>`;
@@ -396,6 +398,13 @@ class MovieDocumentController extends DocumentController {
                 if (event.target.getAttribute('id') === 'playButton') {
                     if (this.watchAction.actionType === 'watch') {
                         return;
+                    }
+
+                    if (this.watchAction.actionType === "commingsoon") {
+                        const remainingSeconds = (this.watchAction.publishDate.getTime() - new Date().getTime()) / 1000;
+                        if (remainingSeconds > 0) {
+                            presentAlertDocument(string_movie_available_in(remainingSeconds), "", true, false);
+                        }
                     }
 
                     if (this.watchAction.actionType === 'pay') {
