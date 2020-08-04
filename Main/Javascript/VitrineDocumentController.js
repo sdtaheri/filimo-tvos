@@ -170,37 +170,54 @@ class VitrineDocumentController extends DocumentController {
     }
 
     handleEvent(event) {
-        if (event.type === 'appear') {
-            this.isOnScreen = true;
-            if (this.isPendingUpdate) {
-                this.refreshData();
-                return;
+
+        switch (event.type) {
+            case "appear": {
+                this.isOnScreen = true;
+                if (this.isPendingUpdate) {
+                    this.refreshData();
+                    return;
+                }
+
+                if (appForegroundedDate !== null
+                    && appBackgroundedDate !== null
+                    && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
+                    this.isPendingUpdate = true;
+                    appBackgroundedDate = null;
+                    this.refreshData();
+                    return;
+                }
+
+                if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
+                    this.isLoggedInAtLaunch = UserManager.isLoggedIn();
+                    this.isPendingUpdate = true;
+                    this.refreshData();
+                    return;
+                }
+
+                break;
             }
 
-            if (appForegroundedDate !== null
-                && appBackgroundedDate !== null
-                && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
-                this.isPendingUpdate = true;
-                appBackgroundedDate = null;
-                this.refreshData();
-                return;
+            case "disappear": {
+                this.isOnScreen = false;
+                break;
             }
 
-            if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
-                this.isLoggedInAtLaunch = UserManager.isLoggedIn();
-                this.isPendingUpdate = true;
-                this.refreshData();
-                return;
+            case "unload": {
+                if (this.refreshIntervalId) {
+                    clearInterval(this.refreshIntervalId);
+                }
+                break;
             }
-        }
 
-        if (event.type === 'disappear') {
-            this.isOnScreen = false;
-        }
+            case "select":
+            case "play": {
+                const linkType = getSafe(() => { return event.target.dataItem.linkType }, null);
+                if (linkType !== null && linkType === "web") {
+                    return;
+                }
 
-        if (event.type === 'unload') {
-            if (this.refreshIntervalId) {
-                clearInterval(this.refreshIntervalId);
+                break;
             }
         }
 

@@ -39,6 +39,9 @@ class DataParser {
                 case 'movie-serialList':
                 case 'movie-thumbnail': {
                     row.dataItems = item['movies'].data.map((movie) => {
+                        if (!movie['link_key']) {
+                            return null;
+                        }
                         const linkKey = encodeURI(movie['link_key']);
                         const objectItem = new DataItem(row.type, linkKey);
                         objectItem.title = cleanup(movie['movie_title']);
@@ -54,12 +57,15 @@ class DataParser {
                         objectItem.uid = linkKey;
                         objectItem.linkType = movie['link_type'];
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 case 'movie-thumbplay': {
                     row.dataItems = item['movies'].data.map((movie) => {
+                        if (!movie['link_key']) {
+                            return null;
+                        }
                         const linkKey = encodeURI(movie['link_key']);
                         const objectItem = new DataItem(row.type, linkKey);
                         objectItem.title = cleanup(movie['movie_title']);
@@ -71,12 +77,15 @@ class DataParser {
                         objectItem.uid = linkKey;
                         objectItem.linkType = movie['link_type'];
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 case 'poster-theater': {
                     row.dataItems = item['posters'].data.map((poster) => {
+                        if (!poster['link_key']) {
+                            return null;
+                        }
                         const linkKey = encodeURI(poster['link_key']);
                         const objectItem = new DataItem(row.type, linkKey);
                         objectItem.title = null;
@@ -88,12 +97,15 @@ class DataParser {
                         objectItem.uid = linkKey;
                         objectItem.linkType = poster['link_type'];
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 case 'poster-brick': {
                     row.dataItems = item['posters'].data.map((poster) => {
+                        if (!poster['link_key']) {
+                            return null;
+                        }
                         const linkKey = encodeURI(poster['link_key']);
 
                         let type = row.type;
@@ -112,12 +124,15 @@ class DataParser {
                         objectItem.uid = linkKey;
                         objectItem.linkType = poster['link_type'];
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 case 'livetv-thumbplay': {
                     row.dataItems = item['livetvs'].data.map((tv) => {
+                        if (!tv['link_key']) {
+                            return null;
+                        }
                         const linkKey = encodeURI(tv['link_key']);
                         const objectItem = new DataItem(row.type, linkKey);
                         objectItem.title = cleanup(tv['title']);
@@ -129,12 +144,15 @@ class DataParser {
                         objectItem.uid = linkKey;
                         objectItem.linkType = tv['link_type'];
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 case 'crew-single': {
                     row.dataItems = item['crews'].data.map((crew) => {
+                        if (!crew.id) {
+                            return null;
+                        }
                         const objectItem = new DataItem(row.type, crew.id);
                         const names = crew['name'];
                         objectItem.title = cleanup(names.split('*')[0]);
@@ -155,13 +173,17 @@ class DataParser {
                         objectItem.birthYear = cleanup(crew['birth_year']);
                         objectItem.linkType = null;
                         return objectItem;
-                    });
+                    }).filter(Boolean);
                     break;
                 }
 
                 default:
                     row.dataItems = null;
                     break;
+            }
+
+            if (row.header === "carousel" && row.dataItems !== null && row.dataItems.length < 3) {
+                row.dataItems = null;
             }
 
             if (row.dataItems !== null && row.dataItems.length === 0) {
