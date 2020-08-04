@@ -45,7 +45,7 @@ const string_scripts_evaluation_error_desc = "در ارزیابی فایل‌ه�
 const string_check_connection_try_again = "اتصال به اینترنت را بررسی کرده و دوباره تلاش کنید.";
 
 function string_movie_available_in(remainingInSeconds) {
-    return `این فیلم <b>${productDuration(remainingInSeconds)}</b> دیگر منتشر می‌شود.`;
+    return `این فیلم ${productDuration(remainingInSeconds)} دیگر منتشر می‌شود.`;
 }
 
 function string_go_to_payment_website() {
@@ -90,9 +90,9 @@ const string_skip_intro = "رد کردن تیتراژ";
 const string_dubbed = "دوبله";
 
 function string_buy_ticket(price, currency, sessionDuration) {
-    return `با مراجعه به صفحه این فیلم در سایت ${appName} می‌توانید بلیط تماشای این فیلم را با قیمت <b>${toPersianDigits(price) + ' ' + currency}</b> خریداری نمایید. `
+    return `با مراجعه به صفحه این فیلم در سایت ${appName} می‌توانید بلیط تماشای این فیلم را با قیمت ${toPersianDigits(price) + ' ' + currency} خریداری نمایید.`
         + '\n'
-        + `پس از خرید شما فرصت دارید این فیلم را ظرف مدت <b>${toPersianDigits(sessionDuration) + " ساعت"}</b> ببینید.`
+        + `پس از خرید شما فرصت دارید این فیلم را ظرف مدت ${toPersianDigits(sessionDuration) + " ساعت"} ببینید.`
         ;
 }
 
