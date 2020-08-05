@@ -9,13 +9,13 @@
 //
 
 /*
- * This file provides an example skeletal stub for the server-side implementation 
+ * This file provides an example skeletal stub for the server-side implementation
  * of a TVML application.
  *
- * A javascript file such as this should be provided at the tvBootURL that is 
- * configured in the AppDelegate of the TVML application. Note that  the various 
- * javascript functions here are referenced by name in the AppDelegate. This skeletal 
- * implementation shows the basic entry points that you will want to handle 
+ * A javascript file such as this should be provided at the tvBootURL that is
+ * configured in the AppDelegate of the TVML application. Note that  the various
+ * javascript functions here are referenced by name in the AppDelegate. This skeletal
+ * implementation shows the basic entry points that you will want to handle
  * application lifecycle events.
  */
 
@@ -80,13 +80,12 @@ App.onLaunch = function (options) {
     const loadingDocument = createLoadingDocument(appName);
     navigationDocument.pushDocument(loadingDocument);
 
-    evaluateScripts(helperScriptURLs, function (scriptsAreLoaded) {
+    evaluateScripts(helperScriptURLs, (scriptsAreLoaded) => {
         if (scriptsAreLoaded) {
-            navigationDocument.removeDocument(loadingDocument);
 
             const documentLoader = new DocumentLoader(jsBaseURL);
             const documentURL = documentLoader.prepareURL("/XMLs/Index.xml");
-            new MenuBarController({documentLoader, documentURL});
+            new MenuBarController({documentLoader, documentURL, loadingDocument});
             menubarLoaded = true;
             playMovieFromHomemadeUrl(pendingPlayURL);
 
