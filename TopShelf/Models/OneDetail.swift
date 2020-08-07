@@ -38,9 +38,11 @@ struct MovieDetailGeneral: Codable {
 	let directors: [Director]?
 	let duration: Duration
 	let categories: [Category]
+	let description: String?
 
 	enum CodingKeys: String, CodingKey {
 		case directors = "director"
+		case description = "descr"
 		case duration, categories
 	}
 }

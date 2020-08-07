@@ -22,7 +22,7 @@ extension CarouselMovie {
 		let item = TVTopShelfCarouselItem(identifier: vitrineInfo.uid)
 
 		item.title = vitrineInfo.title.persianDigits()
-		item.summary = String(htmlEncodedString: vitrineInfo.description)?.persianDigits()
+		item.summary = String(htmlEncodedString: oneDetail?.description)?.persianDigits()
 
 		if let categories = oneDetail?.categories {
 			item.genre = ListFormatter.persian.string(from: categories.compactMap { $0.title })

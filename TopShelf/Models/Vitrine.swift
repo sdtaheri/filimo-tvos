@@ -49,7 +49,6 @@ struct VitrineMovie: Codable {
 
 	let uid: String
 	let title: String
-	let description: String?
 	let picture: Picture?
 	let poster: Poster?
 	let isHD: Bool
@@ -57,7 +56,6 @@ struct VitrineMovie: Codable {
 	enum CodingKeys: String, CodingKey {
 		case uid
 		case title = "movie_title"
-		case description = "descr"
 		case picture = "pic"
 		case poster = "thumbplay"
 		case isHD = "HD"
