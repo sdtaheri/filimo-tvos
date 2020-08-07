@@ -3,10 +3,10 @@ class VitrineDocumentController extends DocumentController {
     constructor(options) {
         super(options);
 
-        const HOME = '1';
+        const HOME = "1";
 
         if (options.event) {
-            const dataItem = options.event.target['dataItem'];
+            const dataItem = options.event.target["dataItem"];
             this.linkKey = dataItem.uid || dataItem.linkKey || HOME;
             this.pageTitle = dataItem.title;
         } else {
@@ -17,14 +17,15 @@ class VitrineDocumentController extends DocumentController {
         this.isPendingUpdate = false;
 
         this.refreshInterval = 1000 * 60 * 60;
+        this.lastRefreshDate = new Date();
     }
 
     setupDocument(document) {
         super.setupDocument(document);
 
-        const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
+        const stackTemplate = document.getElementsByTagName("stackTemplate").item(0);
         this.collectionList = document.getElementsByTagName("collectionList").item(0);
-        this.pageTitleElement = document.getElementById('pageTitle');
+        this.pageTitleElement = document.getElementById("pageTitle");
         const rootNode = stackTemplate.parentNode;
 
         if (this.isHomePage) {
@@ -37,9 +38,8 @@ class VitrineDocumentController extends DocumentController {
                 this.refreshData();
             }, this.refreshInterval);
 
-            document.addEventListener('appear', this.handleEvent);
-            document.addEventListener('disappear', this.handleEvent);
-            document.addEventListener('appDidBecomeActive', this.handleEvent);
+            document.addEventListener("appear", this.handleEvent);
+            document.addEventListener("disappear", this.handleEvent);
         }
 
         if (this.pageTitle) {
@@ -50,9 +50,9 @@ class VitrineDocumentController extends DocumentController {
         this._isLoadingMore = false;
 
         // Add a loading indicator until we make stackTemplate ready
-        rootNode.insertAdjacentHTML('beforeend', loadingTemplateString());
+        rootNode.insertAdjacentHTML("beforeend", loadingTemplateString());
         rootNode.removeChild(stackTemplate);
-        let loadingTemplate = document.getElementsByTagName('loadingTemplate').item(0);
+        let loadingTemplate = document.getElementsByTagName("loadingTemplate").item(0);
 
         this.dataLoader.fetchList(this.linkKey, (dataObject) => {
 
@@ -61,7 +61,7 @@ class VitrineDocumentController extends DocumentController {
             rootNode.appendChild(stackTemplate);
             rootNode.removeChild(loadingTemplate);
 
-            stackTemplate.addEventListener('needsmore', () => {
+            stackTemplate.addEventListener("needsmore", () => {
                 if (this._nextPageURL !== null) {
 
                     if (this._isLoadingMore) {
@@ -81,10 +81,12 @@ class VitrineDocumentController extends DocumentController {
     }
 
     refreshData() {
-        if (this.isOnScreen && appForegroundedDate !== null && this.isPendingUpdate === true) {
+        if (this.isOnScreen && appForegroundedDate !== null &&
+            this.isPendingUpdate === true && new Date() - this.lastRefreshDate > this.refreshInterval) {
             this.dataLoader.fetchList(this.linkKey, (dataObject) => {
                 this.fillGridInCollectionList(dataObject, true);
             });
+            this.lastRefreshDate = new Date();
             this.isPendingUpdate = false;
         }
     }
@@ -96,8 +98,8 @@ class VitrineDocumentController extends DocumentController {
             const stackTemplate = this.collectionList.parentNode;
             stackTemplate.removeChild(this.collectionList);
 
-            stackTemplate.insertAdjacentHTML('beforeend', '<collectionList />');
-            this.collectionList = stackTemplate.getElementsByTagName('collectionList').item(0);
+            stackTemplate.insertAdjacentHTML("beforeend", "<collectionList />");
+            this.collectionList = stackTemplate.getElementsByTagName("collectionList").item(0);
         }
 
         for (let i = 0; i < dataObject.rows.length; i++) {
@@ -110,7 +112,7 @@ class VitrineDocumentController extends DocumentController {
 
             const shouldAddHeader = row.title && (row.title !== '') && row.title !== this.pageTitle;
 
-            if (row.type === 'crew-single') {
+            if (row.type === "crew-single") {
                 const item = row.dataItems[0] || null;
                 if (item === null) {
                     continue;
@@ -134,12 +136,12 @@ class VitrineDocumentController extends DocumentController {
                 </section>
                 </${row.header}>`;
 
-                this.collectionList.insertAdjacentHTML('beforeend', rowToAdd);
+                this.collectionList.insertAdjacentHTML("beforeend", rowToAdd);
 
-                const allSections = this.collectionList.getElementsByTagName('section');
+                const allSections = this.collectionList.getElementsByTagName("section");
                 const section = allSections.item(allSections.length - 1);
 
-                section.getElementsByTagName('card').item(0).addEventListener('select', () => {
+                section.getElementsByTagName("card").item(0).addEventListener("select", () => {
                     presentAlertDocument(item.title, item.desc, false, true);
                 });
             } else {
@@ -150,21 +152,21 @@ class VitrineDocumentController extends DocumentController {
                <section binding="items:{movies};" />
                </${row.header}>`;
 
-                this.collectionList.insertAdjacentHTML('beforeend', rowToAdd);
+                this.collectionList.insertAdjacentHTML("beforeend", rowToAdd);
 
-                if (row.header === 'grid' && this._nextPageURL === null) {
+                if (row.header === "grid" && this._nextPageURL === null) {
                     this._nextPageURL = row.nextPage;
                 }
 
-                const allSections = this.collectionList.getElementsByTagName('section');
+                const allSections = this.collectionList.getElementsByTagName("section");
                 const section = allSections.item(allSections.length - 1);
                 section.dataItem = new DataItem();
-                section.dataItem.setPropertyPath('movies', row.dataItems);
+                section.dataItem.setPropertyPath("movies", row.dataItems);
             }
         }
 
         if (dataObject.rows.length === 0) {
-            this.collectionList.insertAdjacentHTML('beforeend',
+            this.collectionList.insertAdjacentHTML("beforeend",
                 `<title class="message">${string_no_items_available}</title>`);
         }
     }
