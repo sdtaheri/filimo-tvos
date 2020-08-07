@@ -2,7 +2,7 @@ class DataParser {
 
     parseVitrineResponse(response, itemsCallback) {
 
-        let availableTypes = ['poster', 'movie', 'livetv', 'crew'];
+        let availableTypes = ['poster', 'movie', 'livetv', 'crew', 'headerslider'];
 
         let result = {};
         result.meta = response.meta;
@@ -15,13 +15,17 @@ class DataParser {
         result.rows = filteredItems.map((item) => {
             let row = {};
             row.title = cleanup((item['link_text'] || item['title'] || '').replace('  ', ' '));
-            row.type = item['output_type'] + '-' + item['theme'];
+            if (item["theme"] && item["theme"].length > 0) {
+                row.type = item['output_type'] + '-' + item['theme'];
+            } else {
+                row.type = item['output_type'];
+            }
 
             const moreType = item['more_type'];
             if (moreType && moreType === 'infinity') {
                 row.header = 'grid';
             } else {
-                row.header = (row.type === 'poster-theater') ? 'carousel' : 'shelf';
+                row.header = (row.type === 'poster-theater' || row.type === "headerslider") ? 'carousel' : 'shelf';
             }
 
             if (item['links'] !== undefined) {
@@ -35,6 +39,25 @@ class DataParser {
             }
 
             switch (row.type) {
+                case 'headerslider':
+                    row.dataItems = item['headersliders'].data.map((movie) => {
+                        if (!movie['link_key']) {
+                            return null;
+                        }
+                        const linkKey = encodeURI(movie['link_key']);
+                        const objectItem = new DataItem(row.type, linkKey);
+                        objectItem.title = cleanup(movie['title']);
+                        objectItem.titleEn = null;
+                        objectItem.desc = cleanup(movie['desc']);
+                        objectItem.image = getSafe(() => { return movie["cover_mobile"][0]; }, null);
+                        objectItem.cover = getSafe(() => { return movie["cover_desktop"][0]; }, null);
+                        objectItem.logo = movie["logo"] || "";
+                        objectItem.watchFraction = null;
+                        objectItem.uid = linkKey;
+                        objectItem.linkType = movie['link_type'];
+                        return objectItem;
+                    }).filter(Boolean);
+                    break;
                 case 'movie-theater':
                 case 'movie-serialList':
                 case 'movie-thumbnail': {

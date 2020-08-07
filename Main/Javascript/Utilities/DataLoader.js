@@ -16,16 +16,16 @@ class DataLoader {
 
         this.userAgent = {
             an: appNameEn(),
-            os: "AppleTV",
+            os: "appletv",
             vc: Device.appVersion,
             vn: Device.appVersion,
             sdk: Device.systemVersion,
             ds: App.traitCollection.displayScale,
             sz: App.traitCollection.screenWidth + "X" + App.traitCollection.screenHeight,
             loc: "fa",
-            dt: "TV*x",
+            dt: "TV*l",
             di: `Apple*${Device.model}*${Device.productType}*${Device.productType}*${Device.productType}`,
-            s: "adhoc",
+            s: "ab",
             oui: "",
             pkg: Device.appIdentifier.replace("com.saeedtaheri", "com.sabaidea"),
             afcn: Device.vendorIdentifier
@@ -68,8 +68,8 @@ class DataLoader {
             xhr.setRequestHeader("JsonType", "simple");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("cache-control", "no-cache");
-            // xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
-            // xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
+            xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
+            xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
 
             xhr.responseType = "json";
             xhr.onload = () => {

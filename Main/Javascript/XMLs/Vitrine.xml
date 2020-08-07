@@ -92,6 +92,13 @@
             text-shadow: 2px 2px 8px #000000;
             }
 
+            .headerSliderLogo {
+            tv-position: footer;
+            tv-align: right;
+            margin: 0 24 16 0;
+            padding: 0;
+            }
+
             .imageGradient {
             tv-tint-color: linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
             }
@@ -180,6 +187,14 @@
             </lockup>
             <lockup prototype="poster-theater" movieDocumentURL="/XMLs/Movie.xml">
                 <img binding="@src:{image};" width="900" height="300"/>
+            </lockup>
+
+            <lockup prototype="headerslider" movieDocumentURL="/XMLs/Movie.xml">
+                <img binding="@src:{cover};" width="1000" height="300"/>
+                <overlay style="padding: 0;">
+                    <img class="headerSliderLogo" binding="@src:{logo}" width = "200" height="200" />
+                </overlay>
+                <title class="showTextOnHighlight" binding="textContent:{desc};"/>"
             </lockup>
 
             <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml">
