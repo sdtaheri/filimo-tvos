@@ -11,21 +11,23 @@ import Foundation
 struct VitrineResponse: Codable {
 
 	struct Datum: Codable {
+		let linkKey: String?
 		let movies: MovieData
+
+		enum CodingKeys: String, CodingKey {
+			case movies
+			case linkKey = "link_key"
+		}
 	}
 
 	struct MovieData: Codable {
 		let data: [VitrineMovie]
 	}
 
-    let data: [Datum]
+	let data: [Datum]
 }
 
 struct VitrineMovie: Codable {
-
-	struct Category: Codable {
-		let title: String
-	}
 
 	struct Picture: Codable {
 		let big: String?
@@ -35,18 +37,29 @@ struct VitrineMovie: Codable {
 		}
 	}
 
+	struct Poster: Codable {
+		let big: String?
+		let medium: String?
+
+		enum CodingKeys: String, CodingKey {
+			case big = "thumbplay_img_b"
+			case medium = "thumbplay_img_m"
+		}
+	}
+
 	let uid: String
 	let title: String
 	let description: String?
-	let categories: [Category]
 	let picture: Picture?
+	let poster: Poster?
 	let isHD: Bool
 
-    enum CodingKeys: String, CodingKey {
-		case uid, categories
+	enum CodingKeys: String, CodingKey {
+		case uid
 		case title = "movie_title"
 		case description = "descr"
 		case picture = "pic"
+		case poster = "thumbplay"
 		case isHD = "HD"
-    }
+	}
 }

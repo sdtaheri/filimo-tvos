@@ -9,10 +9,12 @@
 import UIKit
 
 extension URL {
-	static let specials = URL(string: Config.baseURL + "/movie/movie/list/tagid/thumbnailspecial/devicetype/appletv/")!
+	static let vitrine = URL(string: Config.baseURL + "/movie/movie/list/tagid/1/")!
+
+	static let specials = URL(string: Config.baseURL + "/movie/movie/list/tagid/thumbnailspecial/")!
 
 	static func movieOneDetailURL(uuid: String) -> URL {
-		return URL(string: Config.baseURL + "/movie/movie/one/uid/\(uuid)/devicetype/appletv/")!
+		return URL(string: Config.baseURL + "/movie/movie/one/uid/\(uuid)/")!
 	}
 
 	static func movieReviewDetailURL(uuid: String) -> URL {

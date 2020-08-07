@@ -59,9 +59,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
 		} catch {
 			print("Setting category to AVAudioSessionCategoryPlayback failed.")
 		}
-		if #available(tvOS 14.0, *) {
-			appControllerContext?.supportsPictureInPicturePlayback = true
-		}
+//		if #available(tvOS 14.0, *) {
+//			appControllerContext?.supportsPictureInPicturePlayback = true
+//		}
 
 		setupTVApplicationController()
 

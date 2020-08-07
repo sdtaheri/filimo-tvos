@@ -24,7 +24,9 @@ extension CarouselMovie {
 		item.title = vitrineInfo.title.persianDigits()
 		item.summary = String(htmlEncodedString: vitrineInfo.description)?.persianDigits()
 
-		item.genre = ListFormatter.persian.string(from: vitrineInfo.categories.map { $0.title })
+		if let categories = oneDetail?.categories {
+			item.genre = ListFormatter.persian.string(from: categories.compactMap { $0.title })
+		}
 
 		if let duration = oneDetail?.duration.value {
 			item.duration = TimeInterval(duration)
@@ -34,7 +36,9 @@ extension CarouselMovie {
 			item.previewVideoURL = URL(string: trailerUrlString)
 		}
 
-		if let cover = vitrineInfo.picture?.big, let imageURL = URL(string: cover) {
+		if let cover = vitrineInfo.poster?.big ?? vitrineInfo.picture?.big,
+			let imageURL = URL(string: cover) {
+			print(imageURL)
 			item.setImageURL(imageURL, for: .screenScale1x)
 			item.setImageURL(imageURL, for: .screenScale2x)
 		}
@@ -60,7 +64,7 @@ extension CarouselMovie {
 	}
 
 	private func makeCarouselNamedAttributes() -> [TVTopShelfNamedAttribute] {
-        var namedAttributes = [TVTopShelfNamedAttribute]()
+		var namedAttributes = [TVTopShelfNamedAttribute]()
 
 		if let directors = oneDetail?.directors?.compactMap({ $0.name }), !directors.isEmpty {
 			namedAttributes.append(TVTopShelfNamedAttribute(name: "کارگردان", values: directors))
@@ -76,6 +80,6 @@ extension CarouselMovie {
 			namedAttributes.append(TVTopShelfNamedAttribute(name: "بازیگران", values: actors))
 		}
 
-        return namedAttributes
-    }
+		return namedAttributes
+	}
 }

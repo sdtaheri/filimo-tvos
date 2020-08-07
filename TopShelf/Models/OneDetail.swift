@@ -23,6 +23,10 @@ struct MovieOneDetailResponse: Codable {
 
 struct MovieDetailGeneral: Codable {
 
+	struct Category: Codable {
+		let title: String
+	}
+	
 	struct Director: Codable {
 		let name: String
 	}
@@ -33,9 +37,10 @@ struct MovieDetailGeneral: Codable {
 
 	let directors: [Director]?
 	let duration: Duration
+	let categories: [Category]
 
 	enum CodingKeys: String, CodingKey {
 		case directors = "director"
-		case duration
+		case duration, categories
 	}
 }

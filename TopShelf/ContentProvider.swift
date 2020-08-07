@@ -33,8 +33,8 @@ extension ContentProvider {
 	
 	private func fetchNewestItems(completion: @escaping ([CarouselMovie]) -> Void) {
 
-		var urlRequest = URLRequest(url: URL.specials)
-        urlRequest.httpMethod = "GET"
+		var urlRequest = URLRequest(url: URL.vitrine)
+		urlRequest.httpMethod = "GET"
 		urlRequest.addAppHeaders()
 
 		URLSession.shared.dataTask(with: urlRequest) { [weak self] data, _, _ in
@@ -44,11 +44,11 @@ extension ContentProvider {
 				return
 			}
 
-			let vitrineMovies = (self?.extractVitrineMovies(from: data) ?? []).prefix(8)
+			let specialMovies = (self?.extractSpecialMovies(from: data) ?? []).prefix(8)
 
-			var items = vitrineMovies.map { CarouselMovie(vitrineInfo: $0) }
+			var items = specialMovies.map { CarouselMovie(vitrineInfo: $0) }
 
-			var remainingRequests = vitrineMovies.count * 2 {
+			var remainingRequests = specialMovies.count * 2 {
 				didSet {
 					if remainingRequests <= 0 {
 						completion(items)
@@ -56,7 +56,7 @@ extension ContentProvider {
 				}
 			}
 
-			for (index, movie) in vitrineMovies.enumerated() {
+			for (index, movie) in specialMovies.enumerated() {
 
 				var oneDetailUrlRequest = URLRequest(url: URL.movieOneDetailURL(uuid: movie.uid))
 				oneDetailUrlRequest.httpMethod = "GET"
@@ -90,12 +90,16 @@ extension ContentProvider {
 		}.resume()
 	}
 	
-	private func extractVitrineMovies(from data: Data) -> [VitrineMovie] {
+	private func extractSpecialMovies(from data: Data) -> [VitrineMovie] {
 		do {
 			let decoder = JSONDecoder()
 			let vitrineResponse = try decoder.decode(VitrineResponse.self, from: data)
 
-			return vitrineResponse.data.flatMap {
+			let specials = vitrineResponse.data.filter {
+				$0.linkKey == "thumbnailspecial"
+			}
+
+			return specials.flatMap {
 				$0.movies.data
 			}
 		} catch {
