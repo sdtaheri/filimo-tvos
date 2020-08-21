@@ -103,10 +103,17 @@
             tv-tint-color: linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
             }
 
+            .channelOverlay {
+            tv-tint-color: linear-gradient(top, transparent, 0.4, transparent, 0.8, rgba(0, 0, 0, 1));
+            padding: 0;
+            }
+
             .channelLogo {
-            tv-tint-color: rgba(0, 0, 0, 0.60);
-            tv-highlight-color: rgb(255,255,255);
-            margin: 8;
+            tv-position: footer;
+            tv-align: right;
+            margin: 0 20 16 0;
+            tv-img-treatment: circle;
+            padding: 0;
             }
 
             .movieCard {
@@ -132,9 +139,6 @@
             .crewCardTitle {
             color: rgba(255, 255, 255, 0.6);
             }
-            .channelLogo {
-            tv-tint-color: rgba(255, 255, 255, 0.50);
-            }
             }
         </style>
     </head>
@@ -142,10 +146,13 @@
         <prototypes>
             <lockup prototype="livetv-thumbplay" playDirectly="true">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
-                <row>
-                    <badge class="channelLogo" binding="@src:{logo};" height="60" width="60"/>
-                    <title binding="textContent:{title};"/>"
-                </row>
+                <title binding="textContent:{title};"/>"
+                <overlay style="padding: 0;">
+                    <background>
+                        <img class="channelOverlay" aspectFill="true" width="425" height="240" srcset="/Resources/transparent.png 1x, /Resources/transparent@2x.png 2x"/>
+                    </background>
+                    <img class="channelLogo" binding="@src:{logo};" height="60" width="60"/>
+                </overlay>
             </lockup>
             <card prototype="movie-theater" class="movieCard" movieDocumentURL="/XMLs/Movie.xml">
                 <background>
