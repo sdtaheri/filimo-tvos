@@ -35,7 +35,7 @@ class VitrineDocumentController extends DocumentController {
 
             this.refreshIntervalId = setInterval(() => {
                 this.isPendingUpdate = true;
-                this.refreshData();
+                this.refreshData(false);
             }, this.refreshInterval);
 
             document.addEventListener("appear", this.handleEvent);
@@ -80,9 +80,9 @@ class VitrineDocumentController extends DocumentController {
         });
     }
 
-    refreshData() {
-        if (this.isOnScreen && appForegroundedDate !== null &&
-            this.isPendingUpdate === true && new Date() - this.lastRefreshDate > this.refreshInterval) {
+    refreshData(isForced) {
+        if (isForced || (this.isOnScreen && appForegroundedDate !== null &&
+            this.isPendingUpdate === true && new Date() - this.lastRefreshDate > this.refreshInterval)) {
             this.dataLoader.fetchList(this.linkKey, (dataObject) => {
                 this.fillGridInCollectionList(dataObject, true);
             });
@@ -177,7 +177,7 @@ class VitrineDocumentController extends DocumentController {
             case "appear": {
                 this.isOnScreen = true;
                 if (this.isPendingUpdate) {
-                    this.refreshData();
+                    this.refreshData(false);
                     return;
                 }
 
@@ -186,14 +186,14 @@ class VitrineDocumentController extends DocumentController {
                     && appForegroundedDate - appBackgroundedDate > this.refreshInterval) {
                     this.isPendingUpdate = true;
                     appBackgroundedDate = null;
-                    this.refreshData();
+                    this.refreshData(false);
                     return;
                 }
 
                 if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
                     this.isLoggedInAtLaunch = UserManager.isLoggedIn();
                     this.isPendingUpdate = true;
-                    this.refreshData();
+                    this.refreshData(true);
                     return;
                 }
 
