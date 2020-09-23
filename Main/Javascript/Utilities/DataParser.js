@@ -507,11 +507,11 @@ class DataParser {
         let resumeTime = result.watchAction.lastWatchedPosition.seconds;
         let resumePercentage = result.watchAction.lastWatchedPosition.percentage;
 
-        if (result.watchAction.castSkip.introStart <= resumeTime) {
+        if (result.watchAction.castSkip.introStart <= resumeTime && result.watchAction.castSkip.introStart !== 0) {
             resumeTime = 0;
             resumePercentage = 0;
         } else if (result.watchAction.castSkip.introEnd
-            && resumeTime >= result.watchAction.castSkip.introEnd) {
+            && resumeTime <= result.watchAction.castSkip.introEnd) {
             resumeTime = 0;
             resumePercentage = 0;
         } else if (resumePercentage > 95) {
