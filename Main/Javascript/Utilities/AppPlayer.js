@@ -18,12 +18,29 @@ class AppPlayer {
             return;
         }
 
+        console.log(url);
+
         const video = new MediaItem('video', url);
         video.title = title;
         video.description = description || null;
         video.artworkImageURL = thumbnail || null;
         if (resumeTime) {
             video.resumeTime = resumeTime;
+        }
+
+        video.loadAssetID = function assetID(url, callback) {
+            console.log(`Load AssetID: ${url}`);
+            callback(null);
+        }
+
+        video.loadCertificate = function certificate(url, callback) {
+            console.log(`Load Certificate: ${url}`);
+            callback(null);
+        }
+
+        video.loadKey = function getKey(url, requestData, callback) {
+            console.log(`Load Key: ${url}`);
+            callback(null);
         }
 
         const player = new Player();
