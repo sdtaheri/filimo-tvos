@@ -514,7 +514,7 @@ class DataParser {
             && resumeTime <= result.watchAction.castSkip.introEnd) {
             resumeTime = 0;
             resumePercentage = 0;
-        } else if (resumePercentage > 95) {
+        } else if (resumePercentage > 95 || resumePercentage < 5) {
             resumeTime = 0;
             resumePercentage = 0;
         }

@@ -315,9 +315,10 @@ class MovieDocumentController extends DocumentController {
                 document.getElementById('title').textContent,
                 productTemplate.getElementsByTagName('heroImg').item(0).getAttribute('src'),
                 document.getElementById('productDescription').textContent,
-                this.watchAction.lastWatchedPosition.seconds,
+                getSafe( () => { return resumeTimeObject[`${this.movieUid}`] }, this.watchAction.lastWatchedPosition.seconds),
                 this.watchAction.visitStats,
-                this.watchAction.castSkip
+                this.watchAction.castSkip,
+                this.movieUid
             );
         }
 

@@ -13,7 +13,7 @@ class AppPlayer {
         }
     }
 
-    playVideo(url, title, thumbnail, description, resumeTime, visitStats, skipIntro) {
+    playVideo(url, title, thumbnail, description, resumeTime, visitStats, skipIntro, uid) {
         if (url === null || url === undefined || url === '') {
             return;
         }
@@ -48,7 +48,7 @@ class AppPlayer {
         player.playlist.push(video);
 
         this.setupSkipIntroOverlayOnPlayer(skipIntro, player);
-        this.setupVisitStatsListener(visitStats, player);
+        this.setupVisitStatsListener(visitStats, player, uid);
 
         player.play();
     }
@@ -96,7 +96,7 @@ class AppPlayer {
         }
     }
 
-    setupVisitStatsListener(visitStats, player) {
+    setupVisitStatsListener(visitStats, player, uid) {
         if (visitStats === null || visitStats === undefined) {
             return;
         }
@@ -104,6 +104,10 @@ class AppPlayer {
         function postWatchStats(elapsedTime) {
             if (action === null || action === '') {
                 return;
+            }
+
+            if (uid !== undefined && uid !== null) {
+                resumeTimeObject[`${uid}`] = elapsedTime;
             }
 
             const xhr = new XMLHttpRequest();
@@ -177,5 +181,7 @@ class AppPlayer {
         return new DOMParser().parseFromString(template, "application/xml");
     }
 }
+
+let resumeTimeObject = { };
 
 registerAttributeName("playDirectly", AppPlayer);
