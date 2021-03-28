@@ -256,7 +256,7 @@ class DataParser {
         result.nextPage = (response.links !== undefined) ? response.links.forward : null;
 
         let filteredItems = response.data.filter((item) => {
-            return (item['link_type'] + '-' + item['theme']) === 'movie-search';
+            return (item['link_type']) === 'movie';
         });
 
         result.dataItems = filteredItems.map((movie) => {
