@@ -73,6 +73,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Televika Release"
+      customArchiveName = "Televika"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

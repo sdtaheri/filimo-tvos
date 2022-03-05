@@ -515,6 +515,7 @@
 		};
 		304769BB24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
@@ -534,6 +535,7 @@
 		};
 		304769BC24AC6E410002714B /* Televika Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
@@ -612,6 +614,7 @@
 		};
 		304769BE24AC6E4B0002714B /* Televika Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
@@ -631,6 +634,7 @@
 		};
 		304769BF24AC6E4B0002714B /* Televika Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C024AC725B0002714B /* Televika.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
@@ -772,6 +776,7 @@
 		};
 		30C5791220448110007E728F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
@@ -791,6 +796,7 @@
 		};
 		30C5791320448110007E728F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
@@ -810,6 +816,7 @@
 		};
 		30ED5316233B55E60068FE95 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
@@ -831,6 +838,7 @@
 		};
 		30ED5317233B55E60068FE95 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CURRENT_PROJECT_VERSION = "$(BUILD)";
