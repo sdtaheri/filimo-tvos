@@ -38,54 +38,50 @@ class DataLoader {
     }
 
     _fetchJSONData(dataURL, params, responseCallback, errorCallback, httpRequest) {
-        return new Promise((resolve, reject) => {
-            let xhr = httpRequest || new XMLHttpRequest();
+        let xhr = httpRequest || new XMLHttpRequest();
 
-            let url = dataURL;
-            if (dataURL.substr(-1) !== "/") {
-                url += "/";
+        let url = dataURL;
+        if (dataURL.substr(-1) !== "/") {
+            url += "/";
+        }
+
+        url += "devicetype/appletv/";
+
+        if (params !== null) {
+            url += "?" + Object
+            .keys(params)
+            .map((key) => {
+                return key + "=" + encodeURIComponent(params[key])
+            })
+            .join("&")
+        }
+
+        xhr.open("GET", url);
+
+        if (UserManager.isLoggedIn()) {
+            xhr.setRequestHeader("Authorization", "Bearer " + UserManager.jwtToken());
+            xhr.setRequestHeader("luser", UserManager.username());
+            xhr.setRequestHeader("ltoken", UserManager.lToken());
+        }
+        xhr.setRequestHeader("PlainJsonApi", "1");
+        xhr.setRequestHeader("JsonType", "simple");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("cache-control", "no-cache");
+        xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
+        xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
+
+        xhr.responseType = "json";
+        xhr.onload = () => {
+            console.log(xhr.status + ": " + url);
+            responseCallback(xhr.response);
+        };
+        xhr.onerror = () => {
+            console.log(xhr.status + ": " + url);
+            if (errorCallback !== undefined) {
+                errorCallback();
             }
-
-            url += "devicetype/appletv/";
-
-            if (params !== null) {
-                url += "?" + Object
-                    .keys(params)
-                    .map((key) => {
-                        return key + "=" + encodeURIComponent(params[key])
-                    })
-                    .join("&")
-            }
-
-            xhr.open("GET", url);
-
-            if (UserManager.isLoggedIn()) {
-                xhr.setRequestHeader("Authorization", "Bearer " + UserManager.jwtToken());
-                xhr.setRequestHeader("luser", UserManager.username());
-                xhr.setRequestHeader("ltoken", UserManager.lToken());
-            }
-            xhr.setRequestHeader("PlainJsonApi", "1");
-            xhr.setRequestHeader("JsonType", "simple");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("cache-control", "no-cache");
-            xhr.setRequestHeader("UserAgent", JSON.stringify(this.userAgent));
-            xhr.setRequestHeader("User-AgentV2", this.slashedUserAgent);
-
-            xhr.responseType = "json";
-            xhr.onload = () => {
-                console.log(xhr.status + ": " + url);
-                responseCallback(xhr.response);
-                resolve();
-            };
-            xhr.onerror = () => {
-                console.log(xhr.status + ": " + url);
-                reject(xhr);
-                if (errorCallback !== undefined) {
-                    errorCallback();
-                }
-            };
-            xhr.send();
-        });
+        };
+        xhr.send();
     }
 
     fetchVitrineNextPage(url, itemsCallback, errorCallback) {
@@ -249,6 +245,21 @@ class DataLoader {
                     this._dataParser.parseMovieDetailResponse(responses, callback);
                 }
             }
+        });
+    }
+
+    fetchLiveInfo(linkKey, callback) {
+        if (linkKey === null || linkKey === '') {
+            callback(null);
+            return;
+        }
+
+        const liveDetailUrl = baseURL + '/live/live/one/live_name/' + linkKey;
+
+        this._fetchJSONData(liveDetailUrl, null, (successResult) => {
+            this._dataParser.parseLiveResponse(successResult, callback);
+        }, () => {
+            callback(null);
         });
     }
 

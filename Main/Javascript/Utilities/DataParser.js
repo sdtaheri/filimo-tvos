@@ -160,12 +160,28 @@ class DataParser {
                         const objectItem = new DataItem(row.type, linkKey);
                         objectItem.title = cleanup(tv['title']);
                         objectItem.titleEn = removeHTMLEntities(tv['title_en']);
-                        objectItem.desc = cleanup(tv['desc']);
+                        objectItem.desc = cleanup(
+                          getSafe(
+                            () => { return tv['live_from_text'] },
+                            getSafe(() => { return tv['desc'] }, "")
+                          )
+                        );
                         objectItem.image = tv['img'];
                         objectItem.cover = null;
                         objectItem.logo = tv['logo'];
                         objectItem.uid = linkKey;
                         objectItem.linkType = tv['link_type'];
+
+                        const liveFromTimestamps = getSafe(() => { return tv['live_from_timestamp'] }, null);
+                        if (liveFromTimestamps !== null) {
+                            const dateText = live_since(new Date(liveFromTimestamps * 1000));
+                            if (objectItem.desc === null || objectItem.desc === '') {
+                                objectItem.desc = dateText;
+                            } else {
+                                objectItem.desc += (" - " + dateText);
+                            }
+                        }
+
                         return objectItem;
                     }).filter(Boolean);
                     break;
@@ -553,5 +569,9 @@ class DataParser {
         } else {
             failureCallback();
         }
+    }
+
+    parseLiveResponse(response, callback) {
+        callback(getSafe(() => { return response.data['watch_action']['src'] }, null));
     }
 }

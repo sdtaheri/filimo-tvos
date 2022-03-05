@@ -7,8 +7,19 @@ class AppPlayer {
             const title = options.event.target['dataItem']['title'];
             const thumbnail = options.event.target['dataItem']['logo'] || options.event.target['dataItem']['image'];
 
-            if (linkType === 'player' && source !== null) {
-                this.playVideo(source, title, thumbnail);
+            if (linkType === 'player' || linkType === 'live') {
+                if (isValidHttpUrl(source)) {
+                    this.playVideo(source, title, thumbnail);
+                } else {
+                    const dataLoader = new DataLoader(null, new DataParser());
+                    dataLoader.fetchLiveInfo(source, (url) => {
+                        if (url === null || url === undefined || url === '') {
+                            return;
+                        }
+
+                        this.playVideo(url, title, thumbnail, url);
+                    });
+                }
             }
         }
     }
@@ -22,7 +33,7 @@ class AppPlayer {
 
         const video = new MediaItem('video', url);
         video.title = title;
-        video.description = description || null;
+        video.description = description || "";
         video.artworkImageURL = thumbnail || null;
         if (resumeTime) {
             video.resumeTime = resumeTime;

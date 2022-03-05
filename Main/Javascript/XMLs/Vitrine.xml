@@ -147,6 +147,7 @@
             <lockup prototype="livetv-thumbplay" playDirectly="true">
                 <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
                 <title binding="textContent:{title};"/>"
+                <text class="subtitle" binding="textContent:{desc};"/>
                 <overlay style="padding: 0;">
                     <background>
                         <img class="channelOverlay" aspectFill="true" width="425" height="240" srcset="/Resources/transparent.png 1x, /Resources/transparent@2x.png 2x"/>

@@ -48,6 +48,13 @@ function string_movie_available_in(remainingInSeconds) {
     return `این فیلم ${productDuration(remainingInSeconds)} دیگر منتشر می‌شود.`;
 }
 
+function live_since(date) {
+    const dt = luxon.DateTime.fromJSDate(date);
+    const formattedDate = dt.setLocale('fa-IR').toLocaleString(luxon.DateTime.TIME_SIMPLE);
+
+    return `از ${formattedDate}`;
+}
+
 function string_go_to_payment_website() {
     let site = isFilimo() ? "https://www.filimo.com/purchase" : "https://www.televika.com/purchase";
     return `با استفاده از مرورگر موبایل یا رایانه شخصی خود،
@@ -165,4 +172,16 @@ function productDuration(durationInSeconds) {
         duration += minute + " " + string_minute;
     }
     return toPersianDigits(duration)
+}
+
+function isValidHttpUrl(string) {
+    let url;
+
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return url.protocol === "http:" || url.protocol === "https:";
 }
