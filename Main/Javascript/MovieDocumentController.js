@@ -124,7 +124,7 @@ class MovieDocumentController extends DocumentController {
                 infoRowToAdd += `<badge src="resource://hd" class="hdBadge" />`
             }
 
-            if (result.hasCC) {
+            if (result.subtitles.length > 0) {
                 infoRowToAdd += `<badge src="resource://cc" class="hdBadge" />`
             }
 
@@ -191,6 +191,7 @@ class MovieDocumentController extends DocumentController {
 
             this.wish = result.wish;
             this.watchAction = result.watchAction;
+            this.subtitles = result.subtitles;
 
             playButton.getElementsByTagName('title')
                 .item(0)
@@ -311,14 +312,45 @@ class MovieDocumentController extends DocumentController {
                 return;
             }
 
-            (new AppPlayer()).playVideo(this.watchAction.movieSource,
-                document.getElementById('title').textContent,
-                productTemplate.getElementsByTagName('heroImg').item(0).getAttribute('src'),
-                document.getElementById('productDescription').textContent,
-                getSafe( () => { return resumeTimeObject[`${this.movieUid}`] }, this.watchAction.lastWatchedPosition.seconds),
-                this.watchAction.visitStats,
-                this.watchAction.castSkip,
-                this.movieUid
+            if (this.subtitles.length > 0) {
+                const updateSrc = updateMovieSrc.bind(this);
+
+                subtitleProvider(
+                  this.watchAction.movieSource,
+                  this.subtitles
+                ).then(
+                  function onFulfill(result) {
+                      console.log(result);
+                      updateSrc(result);
+                      // playMovie.bind(this)();
+                  }.bind(this),
+                  function onError(error) {
+                      console.log(error);
+                  }.bind(this)
+                );
+            } else {
+                playMovie.bind(this)();
+            }
+        }
+
+        function updateMovieSrc(url) {
+            this.watchAction.movieSource = url;
+            playMovie.bind(this)();
+        }
+
+        function playMovie () {
+            (new AppPlayer()).playVideo(
+              this.watchAction.movieSource,
+              document.getElementById('title').textContent,
+              productTemplate.getElementsByTagName('heroImg').
+                item(0).
+                getAttribute('src'),
+              document.getElementById('productDescription').textContent,
+              getSafe(() => { return resumeTimeObject[`${this.movieUid}`] },
+                this.watchAction.lastWatchedPosition.seconds),
+              this.watchAction.visitStats,
+              this.watchAction.castSkip,
+              this.movieUid,
             );
         }
 
@@ -382,6 +414,7 @@ class MovieDocumentController extends DocumentController {
 
                 this.wish = result.wish;
                 this.watchAction = result.watchAction;
+                this.subtitles = result.subtitles;
 
                 playButton.getElementsByTagName('title')
                     .item(0)

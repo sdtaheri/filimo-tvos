@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3016E21E24B5B7ED00A62989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3016E22024B5B7ED00A62989 /* Localizable.strings */; };
 		3016E22224B5BA6100A62989 /* LocalizableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3016E22124B5BA6100A62989 /* LocalizableError.swift */; };
+		304033D427DB56C90076F763 /* SubtitleProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 304033D327DB56C90076F763 /* SubtitleProvider */; };
+		304033DA27DB5E190076F763 /* SubtitleProviderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304033D927DB5E190076F763 /* SubtitleProviderWrapper.swift */; };
 		304769C724AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
 		304769C824AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
 		304769CB24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
@@ -63,6 +65,7 @@
 		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
 		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
 		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
+		304033D927DB5E190076F763 /* SubtitleProviderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleProviderWrapper.swift; sourceTree = "<group>"; };
 		304769C024AC725B0002714B /* Televika.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Televika.xcconfig; sourceTree = "<group>"; };
 		304769C224AC728A0002714B /* Filimo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Filimo.xcconfig; sourceTree = "<group>"; };
 		304769C624AC7E420002714B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				304033D427DB56C90076F763 /* SubtitleProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +203,7 @@
 				30C5790920448110007E728F /* AppDelegate.swift */,
 				304769C624AC7E420002714B /* Config.swift */,
 				3016E22124B5BA6100A62989 /* LocalizableError.swift */,
+				304033D927DB5E190076F763 /* SubtitleProviderWrapper.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -311,6 +316,9 @@
 				30ED5313233B55E60068FE95 /* PBXTargetDependency */,
 			);
 			name = Filimo;
+			packageProductDependencies = (
+				304033D327DB56C90076F763 /* SubtitleProvider */,
+			);
 			productName = Filimo;
 			productReference = 30C5790620448110007E728F /* Filimo.app */;
 			productType = "com.apple.product-type.application";
@@ -344,7 +352,7 @@
 				TargetAttributes = {
 					30C5790520448110007E728F = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1320;
 					};
 					30ED530B233B55E60068FE95 = {
 						CreatedOnToolsVersion = 11.0;
@@ -361,6 +369,9 @@
 				Base,
 			);
 			mainGroup = 30C578FD20448110007E728F;
+			packageReferences = (
+				304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */,
+			);
 			productRefGroup = 30C5790720448110007E728F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -401,6 +412,7 @@
 				30C5790A20448110007E728F /* AppDelegate.swift in Sources */,
 				3016E22224B5BA6100A62989 /* LocalizableError.swift in Sources */,
 				30ED5307233950DA0068FE95 /* main.swift in Sources */,
+				304033DA27DB5E190076F763 /* SubtitleProviderWrapper.swift in Sources */,
 				304769C724AC7E420002714B /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,7 +520,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VERSION = 4.5.2;
 			};
 			name = "Televika Debug";
@@ -606,7 +618,7 @@
 				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 				VERSION = 4.5.2;
 			};
@@ -712,7 +724,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VERSION = 4.5.2;
 			};
 			name = Debug;
@@ -768,7 +780,7 @@
 				SDKROOT = appletvos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TVOS_DEPLOYMENT_TARGET = 13.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 				VERSION = 4.5.2;
 			};
@@ -894,6 +906,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:moallemi/m3u8-subtitle-provider.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		304033D327DB56C90076F763 /* SubtitleProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */;
+			productName = SubtitleProvider;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 30C578FE20448110007E728F /* Project object */;
 }

@@ -59,9 +59,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
             }
         }
 
-		if #available(tvOS 14.0, *) {
-			appControllerContext?.supportsPictureInPicturePlayback = true
-		}
+		appControllerContext?.supportsPictureInPicturePlayback = true
 
 		setupTVApplicationController()
 
@@ -145,5 +143,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationContro
 		}
 		appController = TVApplicationController(context: context, window: window, delegate: self)
 	}
-}
 
+	func appController(_ appController: TVApplicationController, evaluateAppJavaScriptIn jsContext: JSContext) {
+		jsContext.setObject(
+			SubtitleProviderWrapper.self,
+			forKeyedSubscript: "SubtitleProvider" as NSString
+		)
+	}
+}

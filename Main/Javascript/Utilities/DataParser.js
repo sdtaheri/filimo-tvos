@@ -376,7 +376,21 @@ class DataParser {
         result.isSerial = getSafe(() => { return responses.one.data['General']['serial']['enable'] }, false);
 
         result.isDubbed = getSafe(() => { return responses.one.data['General']['dubbed']['enable'] }, false);
-        result.hasCC = getSafe(() => { return responses.one.data['General']['subtitle']['enable'] }, false);
+
+        const hasSubtitle = getSafe(() => { return responses.one.data['General']['subtitle']['enable'] }, false);
+        const subtitles = [];
+        if (hasSubtitle) {
+            for (let subtitle of responses.one.data['General']['subtitle']['data']) {
+                subtitles.push(
+                  {
+                      'isDefault': getSafe(() => { return subtitle['default'] + '' }, 'false'),
+                      'lang': getSafe(() => { return subtitle['lng'] }, 'en'),
+                      'url': getSafe(() => { return subtitle['src_vtt'] }, null)
+                  }
+                );
+            }
+        }
+        result.subtitles = subtitles;
 
         const ageRange = getSafe(() => { return responses.one.data['General']['age_range'] }, null);
         result.ageRange = null;
