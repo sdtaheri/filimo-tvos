@@ -15,11 +15,12 @@ import SubtitleProvider
 		subtitles: [[String: String]]
 	) -> SubtitleProviderWrapper
 
-	func prepareM3U8() -> JSValue
+	func prepareM3U8(completion: JSValue)
+	func stop()
 }
 
 @objc public class SubtitleProviderWrapper: NSObject, SubtitleProviderProtocol {
-	private let merger = SubtitleProvider()
+	private var merger: SubtitleProvider?
 	private let url: String
 	private let subtitles: [Subtitle]
 
@@ -31,6 +32,10 @@ import SubtitleProvider
 	required init(url: String, subtitles: [Subtitle]) {
 		self.url = url
 		self.subtitles = subtitles
+	}
+
+	deinit {
+		print("SubtitleProviderWrapper: Dealloc")
 	}
 
 	static func createWith(url: String, subtitles: [[String : String]]) -> SubtitleProviderWrapper {
@@ -54,22 +59,24 @@ import SubtitleProvider
 		)
 	}
 
-	func prepareM3U8() -> JSValue {
-		guard let context = JSContext.current() else { fatalError("No runtime") }
+	func prepareM3U8(completion: JSValue) {
+		merger = SubtitleProvider()
 
-		return JSValue(newPromiseIn: context) { [weak self] resolve, reject in
-			self?.fetchWatchUrl { result in
-				resolve?.call(withArguments: [result])
+		fetchWatchUrl { result in
+			DispatchQueue.main.async {
+				completion.call(withArguments: [result])
 			}
 		}
 	}
 
+	func stop() {
+		merger = nil
+	}
+
 	private func fetchWatchUrl(completion: @escaping (String) -> Void) {
 		Task {
-			let result = await merger.m3u8WithSubtitles(subtitles, originalM3U8: url)
-			DispatchQueue.main.async {
-				completion(result)
-			}
+			let result = await merger?.m3u8WithSubtitles(subtitles, originalM3U8: url)
+			completion(result ?? url)
 		}
 	}
 }

@@ -312,33 +312,6 @@ class MovieDocumentController extends DocumentController {
                 return;
             }
 
-            if (this.subtitles.length > 0) {
-                const updateSrc = updateMovieSrc.bind(this);
-
-                subtitleProvider(
-                  this.watchAction.movieSource,
-                  this.subtitles
-                ).then(
-                  function onFulfill(result) {
-                      console.log(result);
-                      updateSrc(result);
-                      // playMovie.bind(this)();
-                  }.bind(this),
-                  function onError(error) {
-                      console.log(error);
-                  }.bind(this)
-                );
-            } else {
-                playMovie.bind(this)();
-            }
-        }
-
-        function updateMovieSrc(url) {
-            this.watchAction.movieSource = url;
-            playMovie.bind(this)();
-        }
-
-        function playMovie () {
             (new AppPlayer()).playVideo(
               this.watchAction.movieSource,
               document.getElementById('title').textContent,
@@ -351,6 +324,7 @@ class MovieDocumentController extends DocumentController {
               this.watchAction.visitStats,
               this.watchAction.castSkip,
               this.movieUid,
+              this.subtitles
             );
         }
 

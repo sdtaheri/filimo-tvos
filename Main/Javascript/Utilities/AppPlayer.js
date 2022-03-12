@@ -1,5 +1,4 @@
 class AppPlayer {
-
     constructor(options) {
         if (options && options.event) {
             const linkType = options.event.target['dataItem']['linkType'];
@@ -24,44 +23,68 @@ class AppPlayer {
         }
     }
 
-    playVideo(url, title, thumbnail, description, resumeTime, visitStats, skipIntro, uid) {
+    playVideo(url, title, thumbnail, description, resumeTime, visitStats, skipIntro, uid, subtitles) {
         if (url === null || url === undefined || url === '') {
             return;
         }
 
+        if (subtitles.length > 0 && Device.appVersion > 2203120) {
+            this.subtitleProvider = SubtitleProvider.createWithUrlSubtitles(
+              url,
+              subtitles,
+            )
+
+            this.subtitleProvider.prepareM3U8WithCompletion(
+              (result) => {
+                  url = result
+                  setTimeout(() => {
+                      this.loadPlayer(
+                        url, title, description, thumbnail,
+                        resumeTime, skipIntro, visitStats, uid, true
+                      )
+                  }, 100)
+              },
+            )
+        } else {
+            this.loadPlayer(url, title, description, thumbnail, resumeTime,
+              skipIntro, visitStats, uid, false)
+        }
+    }
+
+    loadPlayer(url, title, description, thumbnail, resumeTime, skipIntro, visitStats, uid, hasSubtitles) {
         console.log(url);
 
-        const video = new MediaItem('video', url);
-        video.title = title;
-        video.description = description || "";
-        video.artworkImageURL = thumbnail || null;
+        const video = new MediaItem('video', url)
+        video.title = title
+        video.description = description || ''
+        video.artworkImageURL = thumbnail || null
         if (resumeTime) {
-            video.resumeTime = resumeTime;
+            video.resumeTime = resumeTime
         }
 
-        video.loadAssetID = function assetID(url, callback) {
-            console.log(`Load AssetID: ${url}`);
-            callback(null);
+        video.loadAssetID = function assetID (url, callback) {
+            console.log(`Load AssetID: ${url}`)
+            callback(null)
         }
 
-        video.loadCertificate = function certificate(url, callback) {
-            console.log(`Load Certificate: ${url}`);
-            callback(null);
+        video.loadCertificate = function certificate (url, callback) {
+            console.log(`Load Certificate: ${url}`)
+            callback(null)
         }
 
-        video.loadKey = function getKey(url, requestData, callback) {
-            console.log(`Load Key: ${url}`);
-            callback(null);
+        video.loadKey = function getKey (url, requestData, callback) {
+            console.log(`Load Key: ${url}`)
+            callback(null)
         }
 
-        const player = new Player();
-        player.playlist = new Playlist();
-        player.playlist.push(video);
+        const player = new Player()
+        player.playlist = new Playlist()
+        player.playlist.push(video)
 
-        this.setupSkipIntroOverlayOnPlayer(skipIntro, player);
-        this.setupVisitStatsListener(visitStats, player, uid);
+        this.setupSkipIntroOverlayOnPlayer(skipIntro, player)
+        this.setupVisitStatsListener(visitStats, player, uid, hasSubtitles)
 
-        player.play();
+        player.play()
     }
 
     setupSkipIntroOverlayOnPlayer(skipIntro, player) {
@@ -96,6 +119,9 @@ class AppPlayer {
             }
 
             skipIntroDoc.getElementById('skipButton').addEventListener('select', () => {
+                didAddOverlay = false;
+                player.interactiveOverlayDocument = null;
+
                 player.seekToTime(skipIntro.introEnd);
             });
 
@@ -107,7 +133,7 @@ class AppPlayer {
         }
     }
 
-    setupVisitStatsListener(visitStats, player, uid) {
+    setupVisitStatsListener(visitStats, player, uid, hasSubtitles) {
         if (visitStats === null || visitStats === undefined) {
             return;
         }
@@ -164,6 +190,10 @@ class AppPlayer {
         player.addEventListener('stateDidChange', (event) => {
             if (event.state === 'end' || event.state === 'paused') {
                 postWatchStats(Math.floor(event['elapsedTime']))
+            }
+
+            if (hasSubtitles && event.state === 'end') {
+                this.subtitleProvider.stop();
             }
         });
     }
