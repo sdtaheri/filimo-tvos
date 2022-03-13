@@ -11,6 +11,7 @@ import SubtitleProvider
 
 @objc protocol SubtitleProviderProtocol: JSExport {
 	static func createWith(
+		id: String?,
 		url: String,
 		subtitles: [[String: String]]
 	) -> SubtitleProviderWrapper
@@ -21,15 +22,19 @@ import SubtitleProvider
 
 @objc public class SubtitleProviderWrapper: NSObject, SubtitleProviderProtocol {
 	private var merger: SubtitleProvider?
+
+	private let id: String
 	private let url: String
 	private let subtitles: [Subtitle]
 
 	private override init() {
+		self.id = UUID().uuidString
 		self.url = ""
 		self.subtitles = []
 	}
 
-	required init(url: String, subtitles: [Subtitle]) {
+	required init(id: String?, url: String, subtitles: [Subtitle]) {
+		self.id = id ?? UUID().uuidString
 		self.url = url
 		self.subtitles = subtitles
 	}
@@ -38,7 +43,7 @@ import SubtitleProvider
 		print("SubtitleProviderWrapper: Dealloc")
 	}
 
-	static func createWith(url: String, subtitles: [[String : String]]) -> SubtitleProviderWrapper {
+	static func createWith(id: String?, url: String, subtitles: [[String : String]]) -> SubtitleProviderWrapper {
 		let mappedSubtitles: [Subtitle] = subtitles.compactMap { dic in
 			guard let url = dic["url"] else {
 				return nil
@@ -54,6 +59,7 @@ import SubtitleProvider
 		}
 
 		return SubtitleProviderWrapper(
+			id: id,
 			url: url,
 			subtitles: mappedSubtitles
 		)
@@ -75,7 +81,7 @@ import SubtitleProvider
 
 	private func fetchWatchUrl(completion: @escaping (String) -> Void) {
 		Task {
-			let result = await merger?.m3u8WithSubtitles(subtitles, originalM3U8: url)
+			let result = await merger?.m3u8WithSubtitles(subtitles, originalM3U8: url, id: id)
 			completion(result ?? url)
 		}
 	}

@@ -29,7 +29,8 @@ class AppPlayer {
         }
 
         if (subtitles.length > 0 && Device.appVersion > 2203120) {
-            this.subtitleProvider = SubtitleProvider.createWithUrlSubtitles(
+            this.subtitleProvider = SubtitleProvider.createWithIdUrlSubtitles(
+              uid,
               url,
               subtitles,
             )
