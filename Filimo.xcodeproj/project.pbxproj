@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3016E21E24B5B7ED00A62989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3016E22024B5B7ED00A62989 /* Localizable.strings */; };
 		3016E22224B5BA6100A62989 /* LocalizableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3016E22124B5BA6100A62989 /* LocalizableError.swift */; };
-		304033D427DB56C90076F763 /* SubtitleProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 304033D327DB56C90076F763 /* SubtitleProvider */; };
+		303560FF2810C16A002F1F80 /* SubtitleProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 303560FE2810C16A002F1F80 /* SubtitleProvider */; };
 		304033DA27DB5E190076F763 /* SubtitleProviderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304033D927DB5E190076F763 /* SubtitleProviderWrapper.swift */; };
 		304769C724AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
 		304769C824AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
@@ -121,7 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				304033D427DB56C90076F763 /* SubtitleProvider in Frameworks */,
+				303560FF2810C16A002F1F80 /* SubtitleProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +317,7 @@
 			);
 			name = Filimo;
 			packageProductDependencies = (
-				304033D327DB56C90076F763 /* SubtitleProvider */,
+				303560FE2810C16A002F1F80 /* SubtitleProvider */,
 			);
 			productName = Filimo;
 			productReference = 30C5790620448110007E728F /* Filimo.app */;
@@ -370,7 +370,7 @@
 			);
 			mainGroup = 30C578FD20448110007E728F;
 			packageReferences = (
-				304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */,
+				303560FD2810C16A002F1F80 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */,
 			);
 			productRefGroup = 30C5790720448110007E728F /* Products */;
 			projectDirPath = "";
@@ -892,20 +892,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */ = {
+		303560FD2810C16A002F1F80 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:moallemi/m3u8-subtitle-provider.git";
+			repositoryURL = "https://github.com/moallemi/m3u8-subtitle-provider";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		304033D327DB56C90076F763 /* SubtitleProvider */ = {
+		303560FE2810C16A002F1F80 /* SubtitleProvider */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 304033D227DB56C90076F763 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */;
+			package = 303560FD2810C16A002F1F80 /* XCRemoteSwiftPackageReference "m3u8-subtitle-provider" */;
 			productName = SubtitleProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
