@@ -36,7 +36,10 @@
     </head>
     <divTemplate>
         <img id="codeImage" class="qrCode" width="320" height="320"/>
-        <title id="descTitle" class="description"/>
-        <title class="code"><b id="verificationCode"/></title>
+        <title id="descContainer1" class="description"/>
+        <title class="code">
+            <b id="verificationCode"/>
+        </title>
+        <title id="descContainer2" class="description"/>
     </divTemplate>
 </document>
