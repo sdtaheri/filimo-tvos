@@ -54,58 +54,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3015FFA42063A4AB0029F8FF /* DocumentLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentLoader.js; sourceTree = "<group>"; };
-		3015FFA52063A51A0029F8FF /* DataLoader.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataLoader.js; sourceTree = "<group>"; };
 		3016E21F24B5B7ED00A62989 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3016E22124B5BA6100A62989 /* LocalizableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableError.swift; sourceTree = "<group>"; };
-		301E4809206B92CE00D44269 /* SearchDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SearchDocumentController.js; sourceTree = "<group>"; };
-		3022612124BE4E8C00246B1F /* MovieDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MovieDocumentController.js; sourceTree = "<group>"; };
-		3022612224BE4EA300246B1F /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
-		3022612324BE4EA300246B1F /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
-		30241805206514C300B46686 /* DocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DocumentController.js; sourceTree = "<group>"; };
-		302418082065246700B46686 /* Index.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Index.xml; sourceTree = "<group>"; };
-		30241809206525F700B46686 /* MenuBarController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = MenuBarController.js; sourceTree = "<group>"; };
+		301972F8282E728600458588 /* Javascript */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Javascript; sourceTree = "<group>"; };
 		304033D927DB5E190076F763 /* SubtitleProviderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleProviderWrapper.swift; sourceTree = "<group>"; };
 		304769C024AC725B0002714B /* Televika.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Televika.xcconfig; sourceTree = "<group>"; };
 		304769C224AC728A0002714B /* Filimo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Filimo.xcconfig; sourceTree = "<group>"; };
 		304769C624AC7E420002714B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		304769CA24AC7F710002714B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		304769CD24AC96BF0002714B /* imdb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imdb.png; sourceTree = "<group>"; };
-		304769CF24AC96BF0002714B /* logo_televika_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika_dark.png; sourceTree = "<group>"; };
-		304769D024AC96BF0002714B /* logo_televika.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_televika.png; sourceTree = "<group>"; };
-		304769D124AC96BF0002714B /* logo_filimo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo.png; sourceTree = "<group>"; };
-		304769D224AC96BF0002714B /* Strings.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Strings.js; sourceTree = "<group>"; };
-		304769D424AC96BF0002714B /* imdb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imdb@2x.png"; sourceTree = "<group>"; };
-		304769D524AC96BF0002714B /* logo_filimo_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_filimo_dark.png; sourceTree = "<group>"; };
-		304769D624AC97A00002714B /* Search.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Search.xml; sourceTree = "<group>"; };
-		304769D724AC97A00002714B /* Seasons.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Seasons.xml; sourceTree = "<group>"; };
-		304769D824AC97A00002714B /* Vitrine.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Vitrine.xml; sourceTree = "<group>"; };
-		304769D924AC97AF0002714B /* SeasonsDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SeasonsDocumentController.js; sourceTree = "<group>"; };
-		304769DA24AC97AF0002714B /* VitrineDocumentController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = VitrineDocumentController.js; sourceTree = "<group>"; };
-		304769DB24AC97C50002714B /* DataParser.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = DataParser.js; sourceTree = "<group>"; };
-		30A8B731208121E600B55E69 /* seasons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seasons@2x.png"; sourceTree = "<group>"; };
-		30A8B732208121E600B55E69 /* seasons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seasons.png; sourceTree = "<group>"; };
-		30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ProfileDocumentController.js; sourceTree = "<group>"; };
-		30B1336624B5D40700CC63EA /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
-		30B1336724B5D40800CC63EA /* pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay@2x.png"; sourceTree = "<group>"; };
-		30B1336824B5D40800CC63EA /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
-		30B1336924B5D40800CC63EA /* signout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signout.png; sourceTree = "<group>"; };
-		30B1336A24B5D40800CC63EA /* pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay.png; sourceTree = "<group>"; };
-		30B1336B24B5D40800CC63EA /* signout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signout@2x.png"; sourceTree = "<group>"; };
-		30B1336C24B5D41400CC63EA /* UserManager.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = UserManager.js; sourceTree = "<group>"; };
-		30B1336D24B5D42900CC63EA /* Profile.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Profile.xml; sourceTree = "<group>"; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		30C5790B20448110007E728F /* Application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Application.js; sourceTree = "<group>"; };
 		30C5790C20448110007E728F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C5790E20448110007E728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30D5167A20683283007995AF /* Login.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Login.xml; sourceTree = "<group>"; };
-		30D5167B206832A5007995AF /* LoginController.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = LoginController.js; sourceTree = "<group>"; };
 		30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselMovie.swift; sourceTree = "<group>"; };
 		30D5A40F24ABE90400F5CF08 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		30EC84B524C884E4000F6C91 /* AppPlayer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = AppPlayer.js; sourceTree = "<group>"; };
-		30EC84B724C884F8000F6C91 /* Movie.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Movie.xml; sourceTree = "<group>"; };
 		30EC84B924C8A9FF000F6C91 /* Vitrine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vitrine.swift; sourceTree = "<group>"; };
 		30EC84BB24C8AA1C000F6C91 /* OneDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDetail.swift; sourceTree = "<group>"; };
 		30EC84BD24C8AA34000F6C91 /* ReviewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetail.swift; sourceTree = "<group>"; };
@@ -136,57 +99,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3015FFA62063A55A0029F8FF /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				30EC84B524C884E4000F6C91 /* AppPlayer.js */,
-				30B1336C24B5D41400CC63EA /* UserManager.js */,
-				3015FFA52063A51A0029F8FF /* DataLoader.js */,
-				304769DB24AC97C50002714B /* DataParser.js */,
-				30241805206514C300B46686 /* DocumentController.js */,
-				3015FFA42063A4AB0029F8FF /* DocumentLoader.js */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		3024180A2065335C00B46686 /* XMLs */ = {
-			isa = PBXGroup;
-			children = (
-				30EC84B724C884F8000F6C91 /* Movie.xml */,
-				30B1336D24B5D42900CC63EA /* Profile.xml */,
-				302418082065246700B46686 /* Index.xml */,
-				30D5167A20683283007995AF /* Login.xml */,
-				304769D624AC97A00002714B /* Search.xml */,
-				304769D724AC97A00002714B /* Seasons.xml */,
-				304769D824AC97A00002714B /* Vitrine.xml */,
-			);
-			path = XMLs;
-			sourceTree = "<group>";
-		};
-		3024180B2065567400B46686 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3022612324BE4EA300246B1F /* like.png */,
-				3022612224BE4EA300246B1F /* like@2x.png */,
-				30B1336A24B5D40800CC63EA /* pay.png */,
-				30B1336724B5D40800CC63EA /* pay@2x.png */,
-				30B1336624B5D40700CC63EA /* profile.png */,
-				30B1336824B5D40800CC63EA /* profile@2x.png */,
-				30B1336924B5D40800CC63EA /* signout.png */,
-				30B1336B24B5D40800CC63EA /* signout@2x.png */,
-				304769CD24AC96BF0002714B /* imdb.png */,
-				304769D424AC96BF0002714B /* imdb@2x.png */,
-				304769D524AC96BF0002714B /* logo_filimo_dark.png */,
-				304769D124AC96BF0002714B /* logo_filimo.png */,
-				304769CF24AC96BF0002714B /* logo_televika_dark.png */,
-				304769D024AC96BF0002714B /* logo_televika.png */,
-				304769D224AC96BF0002714B /* Strings.js */,
-				30A8B732208121E600B55E69 /* seasons.png */,
-				30A8B731208121E600B55E69 /* seasons@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		304769C524AC72A00002714B /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,24 +126,6 @@
 				30B503EC206FD52500D08682 /* TVServices.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		30BF891D20631288009FAB4D /* Javascript */ = {
-			isa = PBXGroup;
-			children = (
-				3022612124BE4E8C00246B1F /* MovieDocumentController.js */,
-				30B1336424B5D3EC00CC63EA /* ProfileDocumentController.js */,
-				30C5790B20448110007E728F /* Application.js */,
-				30D5167B206832A5007995AF /* LoginController.js */,
-				30241809206525F700B46686 /* MenuBarController.js */,
-				301E4809206B92CE00D44269 /* SearchDocumentController.js */,
-				304769D924AC97AF0002714B /* SeasonsDocumentController.js */,
-				304769DA24AC97AF0002714B /* VitrineDocumentController.js */,
-				3024180B2065567400B46686 /* Resources */,
-				3015FFA62063A55A0029F8FF /* Utilities */,
-				3024180A2065335C00B46686 /* XMLs */,
-			);
-			path = Javascript;
 			sourceTree = "<group>";
 		};
 		30BF891E20631298009FAB4D /* Supporting Files */ = {
@@ -269,9 +163,9 @@
 		30C5790820448110007E728F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				307D82772063157800848244 /* Swift */,
-				30BF891D20631288009FAB4D /* Javascript */,
+				301972F8282E728600458588 /* Javascript */,
 				30BF891E20631298009FAB4D /* Supporting Files */,
+				307D82772063157800848244 /* Swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
