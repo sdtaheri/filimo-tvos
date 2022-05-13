@@ -88,6 +88,9 @@
                 <segmentBarItem value="history">
                     <title id="historySegmentBarTitle" />
                 </segmentBarItem>
+                <segmentBarItem value="series">
+                    <title id="seriesSegmentBarTitle" />
+                </segmentBarItem>
             </segmentBar>
         </separator>
 

@@ -70,6 +70,7 @@ function string_go_to_payment_website () {
 
 const string_bookmarks = 'نشان‌ها'
 const string_history = 'مشاهده‌ها‌'
+const string_series = 'سریال‌ها'
 const string_no_items_available = 'ویدئویی در این فهرست وجود ندارد'
 const string_and = 'و'
 const string_comma = '،'

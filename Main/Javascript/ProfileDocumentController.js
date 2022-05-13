@@ -12,6 +12,7 @@ class ProfileDocumentController extends DocumentController {
 
         document.getElementById('bookmarksSegmentBarTitle').textContent = string_bookmarks;
         document.getElementById('historySegmentBarTitle').textContent = string_history;
+        document.getElementById('seriesSegmentBarTitle').textContent = string_series;
 
         const rootNode = document.getElementsByTagName('head').item(0).parentNode;
         const stackTemplate = document.getElementsByTagName('stackTemplate').item(0);
@@ -144,10 +145,13 @@ class ProfileDocumentController extends DocumentController {
                     fillGridWithDataObject.bind(this)(dataObject);
                     showStackView();
                 });
-            }
-
-            if (selectedMode === 'history') {
+            } else if (selectedMode === 'history') {
                 this.dataLoader.fetchHistory((dataObject) => {
+                    fillGridWithDataObject.bind(this)(dataObject);
+                    showStackView();
+                });
+            } else if (selectedMode === 'series') {
+                this.dataLoader.fetchSeries((dataObject) => {
                     fillGridWithDataObject.bind(this)(dataObject);
                     showStackView();
                 });

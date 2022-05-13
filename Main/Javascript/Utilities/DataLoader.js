@@ -185,6 +185,13 @@ class DataLoader {
         });
     }
 
+    fetchFollowedSeries(itemsCallback) {
+        const url = baseURL + '/movie/movie/list/tagid/following';
+        this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
+            this._dataParser.parseVitrineResponse(response, itemsCallback);
+        });
+    }
+
     fetchMovie(uid, callback) {
         if (uid === null || uid === '') {
             return;
