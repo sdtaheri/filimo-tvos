@@ -151,7 +151,7 @@ class ProfileDocumentController extends DocumentController {
                     showStackView();
                 });
             } else if (selectedMode === 'series') {
-                this.dataLoader.fetchSeries((dataObject) => {
+                this.dataLoader.fetchFollowedSeries((dataObject) => {
                     fillGridWithDataObject.bind(this)(dataObject);
                     showStackView();
                 });
