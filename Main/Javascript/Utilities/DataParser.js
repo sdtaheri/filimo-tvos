@@ -415,8 +415,17 @@ class DataParser {
             result.categories = null;
         }
 
+        function fixCastLinkKey (key) {
+            if (key.startsWith('https://www.filimo.com/crew/')) {
+                key = key.replace('https://www.filimo.com/crew/', 'https://www.filimo.com/api/fa/v1/movie/movie/list/tagid/1000300/text/')
+                key = key.concat('/fl/crew')
+            }
+            return key
+        }
+
         const actors = getSafe(() => { return responses.detail.data['ActorCrewData']['profile'] }, []).map((actor) => {
-            const uid = encodeURI(actor['link_key']);
+            const key = fixCastLinkKey(actor['link_key'])
+            const uid = encodeURI(key);
             const item = new DataItem('cast', uid);
             item.name = cleanup(actor.name);
             item.nameEn = removeHTMLEntities(actor['name_en'] || null);
@@ -439,7 +448,8 @@ class DataParser {
         const crew = [];
         for (let data of otherCrewResponse) {
             for (let profile of data['profile']) {
-                const uid = encodeURI(profile['link_key']);
+                const key = fixCastLinkKey(profile['link_key'])
+                const uid = encodeURI(key);
                 const item = new DataItem('cast', uid);
                 item.name = cleanup(profile.name);
                 item.nameEn = removeHTMLEntities(profile['name_en'] || null);
