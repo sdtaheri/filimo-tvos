@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .shelf {
+            tv-align: right;
+            tv-position: bottom;
+            margin: 0 80 220 0;
+            padding: 20;
+            }
+            .image {
+            width: 300;
+            height: 400;
+            border-radius: medium;
+            tv-placeholder: tv;
+            }
+            .header {
+            text-align: natural;
+            tv-text-max-lines: 1;
+            tv-position:bottom;
+            tv-align: leading;
+            margin: 16;
+            tv-text-style: caption2;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 8px #000000;
+            }
+            .title {
+            tv-text-style: callout;
+            tv-text-highlight-style: marquee-on-highlight;
+            }
+        </style>
+    </head>
+    <divTemplate>
+        <background>
+            <img srcset="/Resources/black-alpha.png 1x, /Resources/black-alpha@2x.png 2x"/>
+        </background>
+        <shelf class="shelf">
+            <section>
+                <lockup id="card" movieDocumentURL="/XMLs/Movie.xml">
+                    <img id="image" class="image" width="315" height="420"/>
+                    <title id="countDownTitle" class="header"/>
+                    <subtitle id="title" class="header title"/>
+                </lockup>
+            </section>
+        </shelf>
+    </divTemplate>
+</document>

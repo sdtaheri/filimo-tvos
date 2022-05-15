@@ -71,7 +71,8 @@ App.onLaunch = function (options) {
         "SearchDocumentController",
         "MovieDocumentController",
         "SeasonsDocumentController",
-        "ProfileDocumentController"
+        "ProfileDocumentController",
+		"NextEpisodeDocumentController"
     ].map(
         moduleName => `${jsBaseURL}${moduleName}.js`
     );

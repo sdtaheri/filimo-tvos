@@ -82,9 +82,18 @@ const string_seasons = 'فصل‌ها'
 const string_toman = 'تومان'
 const string_comments = 'نظرات'
 const string_percent_sign = '٪'
+const string_next_episode = 'قسمت بعد'
 
 function string_average_between_comments (count) {
   return 'میانگین از بین ' + toPersianDigits(count) + ' نظر'
+}
+
+function string_play_in_seconds (count) {
+  if (count >= 1) {
+    return 'قسمت بعد: پخش از ' + toPersianDigits(Math.floor(count)) + ' ثانیه دیگر'
+  } else {
+    return 'قسمت بعد:'
+  }
 }
 
 const string_product_of = 'محصول'

@@ -6,13 +6,13 @@ class MovieDocumentController extends DocumentController {
         if (options.event) {
             this.movieUid = options.event.target['dataItem']['uid'];
             this.movieTitle = options.event.target['dataItem'].title || null;
-            this.movieTumbnail = options.event.target['dataItem'].image || null;
-            this.shouldPlayAtLoad = options.event.type === 'play';
+            this.movieThumbnail = options.event.target['dataItem'].image || null;
+            this.shouldPlayAtLoad = options.event.type === 'play' || options.event.target['dataItem'].shouldPlayAtLoad;
         } else {
             this.movieUid = options.movieUid || null;
             this.movieTitle = null;
-            this.movieTumbnail = null;
-            this.shouldPlayAtLoad = options.shouldPlayAtLoad || false;
+            this.movieThumbnail = null;
+            this.shouldPlayAtLoad = options.shouldPlayAtLoad;
         }
 
         if (this.movieUid === null) {
@@ -48,7 +48,9 @@ class MovieDocumentController extends DocumentController {
             });
 
             if (this.shouldPlayAtLoad) {
-                handlePlayScenario.bind(this)();
+                setTimeout( () => {
+                    handlePlayScenario.bind(this)()
+                }, 500)
             }
         });
 
@@ -59,8 +61,8 @@ class MovieDocumentController extends DocumentController {
 
                 loadingTitle.textContent = this.movieTitle || string_loading;
 
-                if (this.movieTumbnail && this.movieTumbnail.length > 0) {
-                    loadingImage.setAttribute('src', this.movieTumbnail);
+                if (this.movieThumbnail && this.movieThumbnail.length > 0) {
+                    loadingImage.setAttribute('src', this.movieThumbnail);
                 } else {
                     loadingImage.parentNode.removeChild(loadingImage);
                 }
@@ -324,7 +326,10 @@ class MovieDocumentController extends DocumentController {
               this.watchAction.visitStats,
               this.watchAction.castSkip,
               this.movieUid,
-              this.subtitles
+              this.subtitles,
+              this.watchAction.nextEpisode.uid,
+              this.watchAction.nextEpisode.title,
+              this.watchAction.nextEpisode.thumbnail
             );
         }
 
