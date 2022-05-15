@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <head>
+        <style>
+            .button {
+            tv-align: right;
+            tv-position: bottom;
+            tv-text-style: body;
+            border-radius: large;
+            margin: 0 80 200 0;
+            padding: 0 20 0 20;
+            }
+        </style>
+    </head>
+    <divTemplate>
+        <button id="skipButton" class="button">
+            <text id="skipButtonTitle"/>
+        </button>
+    </divTemplate>
+</document>

@@ -82,7 +82,7 @@ class AppPlayer {
         player.playlist = new Playlist()
         player.playlist.push(video)
 
-        this.setupSkipIntroOverlayOnPlayer(skipIntro, player)
+        this.setupSkipIntroOverlayOnPlayer(castSkip, player)
         this.setupVisitStatsListener(visitStats, player, uid, hasSubtitles)
 
         player.play()
@@ -90,47 +90,56 @@ class AppPlayer {
 
     setupSkipIntroOverlayOnPlayer(skipIntro, player) {
         if (skipIntro && skipIntro.introStart >= 0 && skipIntro.introEnd > 0) {
-            const skipIntroDoc = this.createSkipIntroDocument();
-            let didAddOverlay = false;
+            const documentLoader = new DocumentLoader(jsBaseURL);
+            const documentURL = documentLoader.prepareURL("/XMLs/SkipIntro.xml");
+            documentLoader.fetch({
+                url: documentURL,
+                success: (skipIntroDoc) => {
+                    let didAddOverlay = false;
 
-            const introStart = skipIntro.introStart === 0 ? 2 : skipIntro.introStart;
+                    const introStart = skipIntro.introStart === 0 ? 2 : skipIntro.introStart;
 
-            const overlayTimeDidChangeListener = (event) => {
-                if (event.target['playbackState'] !== 'playing') {
-                    return;
+                    const overlayTimeDidChangeListener = (event) => {
+                        if (event.target['playbackState'] !== 'playing') {
+                            return;
+                        }
+
+                        const elapsedTime = Math.floor(event['time']);
+
+                        if (elapsedTime !== introStart && elapsedTime !== skipIntro.introEnd) {
+                            return;
+                        }
+
+                        if (!didAddOverlay && (elapsedTime >= introStart && elapsedTime < skipIntro.introEnd)) {
+                            didAddOverlay = true;
+                            player.interactiveOverlayDocument = skipIntroDoc;
+                            player.interactiveOverlayDismissable = true;
+                            return;
+                        }
+
+                        if (didAddOverlay && (elapsedTime >= skipIntro.introEnd || elapsedTime < introStart)) {
+                            didAddOverlay = false;
+                            player.interactiveOverlayDocument = null;
+                        }
+                    }
+
+                    skipIntroDoc.getElementById('skipButtonTitle').textContent = string_skip_intro
+                    skipIntroDoc.getElementById('skipButton').addEventListener('select', () => {
+                        didAddOverlay = false;
+                        player.interactiveOverlayDocument = null;
+
+                        player.seekToTime(skipIntro.introEnd);
+                    });
+
+                    skipIntroDoc.addEventListener('disappear', () => {
+                        player.removeEventListener('timeDidChange', overlayTimeDidChangeListener);
+                    });
+
+                    player.addEventListener('timeDidChange', overlayTimeDidChangeListener, { interval: 1 } );
+                },
+                error: () => {
                 }
-
-                const elapsedTime = Math.floor(event['time']);
-
-                if (elapsedTime !== introStart && elapsedTime !== skipIntro.introEnd) {
-                    return;
-                }
-
-                if (!didAddOverlay && (elapsedTime >= introStart && elapsedTime < skipIntro.introEnd)) {
-                    didAddOverlay = true;
-                    player.interactiveOverlayDocument = skipIntroDoc;
-                    player.interactiveOverlayDismissable = true;
-                    return;
-                }
-
-                if (didAddOverlay && (elapsedTime >= skipIntro.introEnd || elapsedTime < introStart)) {
-                    didAddOverlay = false;
-                    player.interactiveOverlayDocument = null;
-                }
-            }
-
-            skipIntroDoc.getElementById('skipButton').addEventListener('select', () => {
-                didAddOverlay = false;
-                player.interactiveOverlayDocument = null;
-
-                player.seekToTime(skipIntro.introEnd);
-            });
-
-            skipIntroDoc.addEventListener('disappear', () => {
-                player.removeEventListener('timeDidChange', overlayTimeDidChangeListener);
-            });
-
-            player.addEventListener('timeDidChange', overlayTimeDidChangeListener, { interval: 1 } );
+            })
         }
     }
 
@@ -177,7 +186,7 @@ class AppPlayer {
         let id = visitStats.id;
         let action = visitStats.action;
 
-        player.addEventListener('timeDidChange', (event) => {
+        const timeDidChangePostStatsHandler = (event) => {
             const elapsedTime = Math.floor(event.time);
 
             if (elapsedTime < visitStats.callPeriod || action === null) {
@@ -185,12 +194,14 @@ class AppPlayer {
             }
 
             postWatchStats(elapsedTime);
+        }
 
-        }, { interval: visitStats.callPeriod });
+        player.addEventListener('timeDidChange', timeDidChangePostStatsHandler, { interval: visitStats.callPeriod });
 
         player.addEventListener('stateDidChange', (event) => {
             if (event.state === 'end' || event.state === 'paused') {
                 postWatchStats(Math.floor(event['elapsedTime']))
+                player.removeEventListener('timeDidChange', timeDidChangePostStatsHandler)
             }
 
             if (hasSubtitles && event.state === 'end') {
@@ -199,28 +210,6 @@ class AppPlayer {
         });
     }
 
-    createSkipIntroDocument() {
-        const template = `<?xml version="1.0" encoding="UTF-8" ?>
-            <document>
-                <head>
-                    <style>
-                        .skipButton {
-                            tv-align: right;
-                            tv-position: bottom;
-                            tv-text-style: body;
-                            margin: 0 60 40 0;
-                            padding: 0 20 0 20;
-                        }
-                    </style>
-                </head>
-                <divTemplate>
-                    <button id="skipButton" class="skipButton">
-                        <text>${string_skip_intro}</text>
-                    </button>
-                </divTemplate>
-            </document>
-            `;
-        return new DOMParser().parseFromString(template, "application/xml");
     }
 }
 
