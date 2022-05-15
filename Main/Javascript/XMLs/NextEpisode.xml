@@ -11,7 +11,7 @@
             .image {
             width: 300;
             height: 400;
-            border-radius: medium;
+            border-radius: large;
             tv-placeholder: tv;
             }
             .header {

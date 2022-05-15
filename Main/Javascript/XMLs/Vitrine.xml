@@ -6,6 +6,20 @@
             tv-position: top-right;
             }
 
+            .headerSliderLockup {
+            border-radius: large;
+            }
+
+            .movieLockup {
+            tv-placeholder: movie;
+            border-radius: large;
+            }
+
+            .tvLockup {
+            tv-placeholder: tv;
+            border-radius: large;
+            }
+
             .showTextOnHighlight {
             tv-text-highlight-style: show-on-highlight;
             }
@@ -19,14 +33,14 @@
             .movieCard {
             width: 666;
             height: 308;
-            border-radius: 12;
+            border-radius: large;
             background-color: rgba(255, 255, 255, 0.3);
             }
 
             .crewCard {
             width: 1025;
             height: 400;
-            border-radius: 12;
+            border-radius: large;
             background-color: rgba(0, 0, 0, 0.2);
             }
 
@@ -77,8 +91,7 @@
             .categoryCard {
             width: 830;
             height: 180;
-            border-radius: 12;
-            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: large;
             }
 
             .categoryTitle {
@@ -116,14 +129,6 @@
             padding: 0;
             }
 
-            .movieCard {
-            background-color: rgba(0, 0, 0, 0.3);
-            }
-
-            .categoryCard {
-            background-color: rgba(0, 0, 0, 0.3);
-            }
-
             .message {
             text-align: center;
             tv-align: center;
@@ -136,8 +141,17 @@
             .message {
             color: rgba(255, 255, 255, 0.8);
             }
+
             .crewCardTitle {
             color: rgba(255, 255, 255, 0.6);
+            }
+
+            .movieCard {
+            background-color: rgba(0, 0, 0, 0.3);
+            }
+
+            .categoryCard {
+            background-color: rgba(0, 0, 0, 0.3);
             }
             }
         </style>
@@ -145,12 +159,13 @@
     <stackTemplate>
         <prototypes>
             <lockup prototype="livetv-thumbplay" playDirectly="true">
-                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+                <img class="tvLockup" binding="@src:{image};" width="425" height="240"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{desc};"/>
                 <overlay style="padding: 0;">
                     <background>
-                        <img class="channelOverlay" aspectFill="true" width="425" height="240" srcset="/Resources/transparent.png 1x, /Resources/transparent@2x.png 2x"/>
+                        <img class="channelOverlay" aspectFill="true" width="425" height="240"
+                             srcset="/Resources/transparent.png 1x, /Resources/transparent@2x.png 2x"/>
                     </background>
                     <img class="channelLogo" binding="@src:{logo};" height="60" width="60"/>
                 </overlay>
@@ -164,12 +179,12 @@
                 <subtitle class="movieCardSubtitle" binding="textContent:{desc};"/>
             </card>
             <lockup prototype="movie-thumbplay" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="526" height="300"/>
+                <img class="movieLockup" binding="@src:{image};" width="526" height="300"/>
                 <title class="showTextOnHighlight" binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>
             <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <img class="movieLockup" binding="@src:{image};" width="300" height="400"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
                 <placeholder tag="progress"/>
@@ -188,29 +203,29 @@
                 </rules>
             </lockup>
             <lockup prototype="poster-brick" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+                <img class="tvLockup" binding="@src:{image};" width="425" height="240"/>
             </lockup>
             <lockup prototype="poster-brick-list" vitrineDocumentURL="/XMLs/Vitrine.xml">
-                <img style="tv-placeholder: tv;" binding="@src:{image};" width="425" height="240"/>
+                <img class="tvLockup" binding="@src:{image};" width="425" height="240"/>
             </lockup>
             <lockup prototype="poster-theater" movieDocumentURL="/XMLs/Movie.xml">
-                <img binding="@src:{image};" width="900" height="300"/>
+                <img class="movieLockup" binding="@src:{image};" width="900" height="300"/>
             </lockup>
 
             <lockup prototype="headerslider" movieDocumentURL="/XMLs/Movie.xml">
-                <img binding="@src:{cover};" width="1000" height="300"/>
+                <img class="headerSliderLockup" binding="@src:{cover};" width="1000" height="300"/>
                 <overlay style="padding: 0;">
-                    <img class="headerSliderLogo" binding="@src:{logo}" width = "200" height="200" />
+                    <img class="headerSliderLogo" binding="@src:{logo}" width="200" height="200"/>
                 </overlay>
                 <title class="showTextOnHighlight" binding="textContent:{desc};"/>"
             </lockup>
 
-            <card prototype="category" class="categoryCard" vitrineDocumentURL="/XMLs/Vitrine.xml">
-                <background>
-                    <img aspectFill="true" binding="@src:{image};" width="830" height="180"/>
-                </background>
-                <title class="categoryTitle" binding="textContent:{title};"/>
-            </card>
+            <lockup prototype="category" vitrineDocumentURL="/XMLs/Vitrine.xml">
+                <img aspectFill="true" binding="@src:{image};" class="categoryCard"/>
+                <overlay style="padding: 0;">
+                    <title class="categoryTitle" binding="textContent:{title};"/>
+                </overlay>
+            </lockup>
         </prototypes>
 
         <banner>

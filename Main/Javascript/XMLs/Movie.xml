@@ -2,6 +2,10 @@
 <document>
     <head>
         <style>
+            .movieLockup {
+            tv-placeholder: movie;
+            border-radius: large;
+            }
 
             .imdbBadge {
             tv-position:center;
@@ -57,7 +61,7 @@
     <productTemplate>
         <prototypes>
             <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="225" height="300"/>
+                <img class="movieLockup" binding="@src:{image};" width="225" height="300"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
                 <placeholder tag="progress"/>
@@ -77,7 +81,7 @@
             </lockup>
 
             <lockup prototype="movie-serialList" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="225" height="300"/>
+                <img class="movieLockup" binding="@src:{image};" width="225" height="300"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>
@@ -92,7 +96,8 @@
                         binding="@onselect:presentAlertDocument(this.getElementsByTagName('title').item(0).textContent,
                         this.getElementsByTagName('description').item(0).textContent,
                         false,
-                        true)">
+                        true)"
+                        style="border-radius: large;">
                 <title binding="textContent:{name};" style="tv-position: top; margin-bottom: 8;"/>
                 <description binding="textContent:{body};" style="tv-position: center; padding-bottom: 8;"/>
                 <text binding="textContent:{jalaliDate};" style="tv-position: bottom; margin: 10 0"/>
@@ -129,7 +134,7 @@
                     </buttonLockup>
                 </row>
             </stack>
-            <heroImg src=""/>
+            <heroImg style="border-radius: large;" src=""/>
         </banner>
         <shelf id="allEpisodesShelf"/>
         <shelf id="recommendationShelf">
@@ -143,7 +148,7 @@
                 <title id="commentsShelfTitle"/>
             </header>
             <section style="margin: 0 50 0 0;">
-                <ratingCard>
+                <ratingCard style="border-radius: large;">
                     <description style="tv-text-max-lines: 3"/>
                 </ratingCard>
             </section>

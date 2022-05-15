@@ -5,6 +5,7 @@
             .title {
             tv-text-highlight-style: marquee-on-highlight;
             }
+
             .subtitle {
             text-align: center;
             tv-text-style: caption2;
@@ -12,13 +13,18 @@
             color: rgb(255,255,255,0.5);
             tv-highlight-color: rgb(255,255,255);
             }
+
+            .movieLockup {
+            tv-placeholder: movie;
+            border-radius: large;
+            }
         </style>
     </head>
 
     <catalogTemplate>
         <prototypes>
             <lockup prototype="movie-serialList" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <img class="movieLockup" binding="@src:{image};" width="300" height="400"/>
                 <title class="title" binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
             </lockup>

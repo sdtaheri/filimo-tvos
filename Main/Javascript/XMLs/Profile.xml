@@ -2,6 +2,11 @@
 <document>
     <head>
         <style>
+            .movieLockup {
+            tv-placeholder: movie;
+            border-radius: large;
+            }
+
             .subtitle {
             text-align: center;
             tv-text-style: caption2;
@@ -45,7 +50,7 @@
     <stackTemplate>
         <prototypes>
             <lockup prototype="movie-thumbnail" movieDocumentURL="/XMLs/Movie.xml">
-                <img style="tv-placeholder: movie;" binding="@src:{image};" width="300" height="400"/>
+                <img class="movieLockup" binding="@src:{image};" width="300" height="400"/>
                 <title binding="textContent:{title};"/>"
                 <text class="subtitle" binding="textContent:{titleEn};"/>
                 <placeholder tag="progress"/>
@@ -66,16 +71,16 @@
         </prototypes>
 
         <identityBanner style="margin: 60 0 0 0;">
-            <title />
-            <subtitle />
+            <title/>
+            <subtitle/>
             <row>
                 <buttonLockup>
                     <badge srcset="/Resources/pay.png 1x, /Resources/pay@2x.png 2x" width="80" height="80"/>
-                    <title />
+                    <title/>
                 </buttonLockup>
                 <buttonLockup>
                     <badge srcset="/Resources/signout.png 1x, /Resources/signout@2x.png 2x" width="80" height="80"/>
-                    <title />
+                    <title/>
                 </buttonLockup>
             </row>
         </identityBanner>
@@ -83,20 +88,20 @@
         <separator>
             <segmentBar id="resultsMode">
                 <segmentBarItem value="bookmarks">
-                    <title id="bookmarksSegmentBarTitle" />
+                    <title id="bookmarksSegmentBarTitle"/>
                 </segmentBarItem>
                 <segmentBarItem value="history">
-                    <title id="historySegmentBarTitle" />
+                    <title id="historySegmentBarTitle"/>
                 </segmentBarItem>
                 <segmentBarItem value="series">
-                    <title id="seriesSegmentBarTitle" />
+                    <title id="seriesSegmentBarTitle"/>
                 </segmentBarItem>
             </segmentBar>
         </separator>
 
         <collectionList style="margin: 60 0 60 0;">
 
-            <title id="errorMessage" class="message" />
+            <title id="errorMessage" class="message"/>
 
         </collectionList>
     </stackTemplate>
