@@ -3,9 +3,9 @@
     <head>
         <style>
             .shelf {
-            tv-align: right;
+            tv-align: leading;
             tv-position: bottom;
-            margin: 0 80 220 0;
+            margin: 0 80 260 0;
             padding: 20;
             }
             .image {
