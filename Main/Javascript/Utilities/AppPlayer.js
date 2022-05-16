@@ -23,7 +23,7 @@ class AppPlayer {
         }
     }
 
-    playVideo(url, title, thumbnail, description, resumeTime, visitStats, castSkip, uid, subtitles, nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail) {
+    playVideo(url, title, thumbnail, description, resumeTime, visitStats, castSkip, uid, subtitles, nextEpisode) {
         if (url === null || url === undefined || url === '') {
             return;
         }
@@ -42,7 +42,7 @@ class AppPlayer {
                       this.loadPlayer(
                         url, title, description, thumbnail,
                         resumeTime, castSkip, visitStats, uid, true,
-                        nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail
+                        nextEpisode
                       )
                   }, 100)
               },
@@ -50,12 +50,12 @@ class AppPlayer {
         } else {
             this.loadPlayer(url, title, description, thumbnail, resumeTime,
               castSkip, visitStats, uid, false,
-              nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail
-              )
+              nextEpisode
+            )
         }
     }
 
-    loadPlayer(url, title, description, thumbnail, resumeTime, castSkip, visitStats, uid, hasSubtitles, nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail) {
+    loadPlayer(url, title, description, thumbnail, resumeTime, castSkip, visitStats, uid, hasSubtitles, nextEpisode) {
         console.log(url);
 
         const video = new MediaItem('video', url)
@@ -87,7 +87,7 @@ class AppPlayer {
 
         this.setupSkipIntroOverlayOnPlayer(castSkip, player)
         this.setupVisitStatsListener(visitStats, player, uid, hasSubtitles)
-        this.setupNextEpisodeOverlayOnPlayer(nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail, castSkip, player)
+        this.setupNextEpisodeOverlayOnPlayer(nextEpisode, castSkip, player)
 
         player.play()
     }
@@ -109,10 +109,6 @@ class AppPlayer {
                         }
 
                         const elapsedTime = Math.floor(event['time']);
-
-                        if (elapsedTime !== introStart && elapsedTime !== skipIntro.introEnd) {
-                            return;
-                        }
 
                         if (!didAddOverlay && (elapsedTime >= introStart && elapsedTime < skipIntro.introEnd)) {
                             didAddOverlay = true;
@@ -215,11 +211,15 @@ class AppPlayer {
     }
 
     setupNextEpisodeOverlayOnPlayer (
-      nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail, castSkip, player,
+      nextEpisode, castSkip, player,
     ) {
-        if (nextEpisodeUid === undefined || nextEpisodeUid === null) {
+        const nextEpisodeUid = getSafe(() => { return nextEpisode.uid }, null)
+        if (nextEpisodeUid === null) {
             return
         }
+
+        const nextEpisodeTitle = nextEpisode.title
+        const nextEpisodeThumbnail = nextEpisode.thumbnail
 
         let didAddOverlay = false
 
@@ -243,7 +243,7 @@ class AppPlayer {
                       nextEpisodeUid, nextEpisodeTitle, nextEpisodeThumbnail,
                       player, remainingSeconds
                   }, () => {
-                      didAddOverlay = false
+                      player.removeEventListener('timeDidChange', playerTimeChangeListenerForNextEpisode)
                   }
                 )
 

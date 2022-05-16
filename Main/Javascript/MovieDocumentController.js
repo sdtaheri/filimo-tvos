@@ -311,9 +311,20 @@ class MovieDocumentController extends DocumentController {
 
         function handlePlayScenario() {
             if (this.watchAction.movieSource === null || this.watchAction.movieSource === '') {
-                return;
+              return;
             }
 
+            let lastWatchedPosition = getSafe(
+                () => { 
+                    return resumeTimeObject[`${this.movieUid}`] 
+                }, 
+                this.watchAction.lastWatchedPosition.seconds
+            )
+
+            if (this.shouldPlayAtLoad) {
+                lastWatchedPosition = 0
+            }
+			
             (new AppPlayer()).playVideo(
               this.watchAction.movieSource,
               document.getElementById('title').textContent,
@@ -321,15 +332,12 @@ class MovieDocumentController extends DocumentController {
                 item(0).
                 getAttribute('src'),
               document.getElementById('productDescription').textContent,
-              getSafe(() => { return resumeTimeObject[`${this.movieUid}`] },
-                this.watchAction.lastWatchedPosition.seconds),
+              lastWatchedPosition,
               this.watchAction.visitStats,
               this.watchAction.castSkip,
               this.movieUid,
               this.subtitles,
-              this.watchAction.nextEpisode.uid,
-              this.watchAction.nextEpisode.title,
-              this.watchAction.nextEpisode.thumbnail
+              this.watchAction.nextEpisode
             );
         }
 
@@ -350,9 +358,6 @@ class MovieDocumentController extends DocumentController {
                 }, () => {
                     setBookmarkButtonVisuals(null, !newValue);
                 });
-
-            } else {
-
             }
         }
 
