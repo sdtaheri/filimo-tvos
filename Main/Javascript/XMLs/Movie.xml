@@ -103,7 +103,10 @@
                 <text binding="textContent:{jalaliDate};" style="tv-position: bottom; margin: 10 0"/>
             </reviewCard>
         </prototypes>
-        <banner>
+        <background id="background">
+            <img id="movieCover" src="" aspectFill="true"/>
+        </background>
+        <banner id="productBanner">
             <infoList>
                 <info id="genreInfo"/>
                 <info id="directorInfo"/>
@@ -134,7 +137,7 @@
                     </buttonLockup>
                 </row>
             </stack>
-            <heroImg style="border-radius: large;" src=""/>
+            <heroImg style="border-radius: large;" id="movieImage" src="" />
         </banner>
         <shelf id="allEpisodesShelf"/>
         <shelf id="recommendationShelf">

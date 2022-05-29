@@ -32,6 +32,8 @@ class MovieDocumentController extends DocumentController {
         setLoadingVisible.bind(this)(true);
 
         this.dataLoader.fetchMovie(this.movieUid, (result) => {
+            this.movieImage = result.image
+
             setLoadingVisible.bind(this)(false);
 
             fillHeaderInfo(result);
@@ -88,7 +90,20 @@ class MovieDocumentController extends DocumentController {
         function fillHeaderInfo(result) {
             document.getElementById('title').textContent = result.title;
             document.getElementById('englishTitle').textContent = result.titleEn;
-            document.getElementsByTagName('heroImg').item(0).setAttribute('src', result.image);
+
+            if (result.cover !== undefined && result.cover !== null && result.cover.length > 0) {
+                document.getElementById('movieCover').setAttribute('src', result.cover)
+
+                document.getElementById('productBanner').removeChild(
+                  document.getElementById('movieImage')
+                )
+            } else {
+                document.getElementById('movieImage').setAttribute('src', result.image)
+
+                document.getElementsByTagName('productTemplate').item(0).removeChild(
+                  document.getElementById('background')
+                )
+            }
 
             const descriptionElement = document.getElementById('productDescription');
             descriptionElement.textContent = result.desc;
@@ -317,22 +332,20 @@ class MovieDocumentController extends DocumentController {
             }
 
             let lastWatchedPosition = getSafe(
-                () => { 
-                    return resumeTimeObject[`${this.movieUid}`] 
-                }, 
+                () => {
+                    return resumeTimeObject[`${this.movieUid}`]
+                },
                 this.watchAction.lastWatchedPosition.seconds
             )
 
             if (this.shouldPlayAtLoad) {
                 lastWatchedPosition = 0
             }
-			
+
             (new AppPlayer()).playVideo(
               this.watchAction.movieSource,
               document.getElementById('title').textContent,
-              productTemplate.getElementsByTagName('heroImg').
-                item(0).
-                getAttribute('src'),
+              this.movieImage || '',
               document.getElementById('productDescription').textContent,
               lastWatchedPosition,
               this.watchAction.visitStats,
