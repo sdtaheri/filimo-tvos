@@ -17,4 +17,3 @@ _ = UIApplicationMain(
     nil,
     NSStringFromClass(AppDelegate.self)
 )
-

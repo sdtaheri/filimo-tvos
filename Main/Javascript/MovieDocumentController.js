@@ -15,6 +15,8 @@ class MovieDocumentController extends DocumentController {
             this.shouldPlayAtLoad = options.shouldPlayAtLoad;
         }
 
+        this.isLoggedInAtLaunch = UserManager.isLoggedIn()
+
         if (this.movieUid === null) {
             navigationDocument.popDocument();
         }

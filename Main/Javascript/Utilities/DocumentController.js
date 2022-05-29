@@ -13,8 +13,6 @@ class DocumentController {
         this.documentURL = documentURL;
         this.dataLoader = new DataLoader(documentLoader, new DataParser());
         this.fetchDocument(documentURL, loadingDocument);
-
-        this.isLoggedInAtLaunch = UserManager.isLoggedIn();
     }
 
     fetchDocument(documentURL, loadingDocument) {

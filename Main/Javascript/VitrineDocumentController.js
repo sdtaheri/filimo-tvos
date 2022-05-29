@@ -16,7 +16,7 @@ class VitrineDocumentController extends DocumentController {
         this.isHomePage = this.linkKey === HOME;
         this.isPendingUpdate = false;
 
-        this.refreshInterval = 1000 * 60 * 60;
+        this.refreshInterval = 1000 * 60 * 30;
         this.lastRefreshDate = new Date();
     }
 
@@ -40,6 +40,7 @@ class VitrineDocumentController extends DocumentController {
 
             document.addEventListener("appear", this.handleEvent);
             document.addEventListener("disappear", this.handleEvent);
+            document.addEventListener('holdselect', this.handleEvent)
         }
 
         if (this.pageTitle) {
@@ -172,7 +173,6 @@ class VitrineDocumentController extends DocumentController {
     }
 
     handleEvent(event) {
-
         switch (event.type) {
             case "appear": {
                 this.isOnScreen = true;
@@ -190,10 +190,10 @@ class VitrineDocumentController extends DocumentController {
                     return;
                 }
 
-                if (UserManager.isLoggedIn() !== this.isLoggedInAtLaunch) {
-                    this.isLoggedInAtLaunch = UserManager.isLoggedIn();
+                if (UserManager.needsHomePageRefresh) {
                     this.isPendingUpdate = true;
                     this.refreshData(true);
+                    UserManager.needsHomePageRefresh = false
                     return;
                 }
 
@@ -205,11 +205,27 @@ class VitrineDocumentController extends DocumentController {
                 break;
             }
 
+            case 'load': {
+                App.onResume = () => {
+                    if (this.isPendingUpdate) {
+                        this.refreshData(false)
+                    }
+                }
+                break
+            }
             case "unload": {
                 if (this.refreshIntervalId) {
                     clearInterval(this.refreshIntervalId);
                 }
+                App.onResume = function (options) {
+                }
                 break;
+            }
+
+            case 'holdselect': {
+                this.isPendingUpdate = true
+                this.refreshData(true)
+                return
             }
 
             case "select":

@@ -22,6 +22,7 @@ class LoginController extends DocumentController {
             UserManager.setJwtToken(verificationResult.jwtToken)
             UserManager.setUsername(verificationResult.username)
             UserManager.setLToken(verificationResult.lToken)
+            UserManager.needsHomePageRefresh = true
 
             navigationDocument.popDocument()
           }
