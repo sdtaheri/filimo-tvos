@@ -104,9 +104,12 @@
             </reviewCard>
         </prototypes>
         <background id="background">
-            <img id="movieCover" src="" aspectFill="true"/>
+            <img id="movieCover" src="" style="padding-left: 1000;" />
         </background>
         <banner id="productBanner">
+            <background id="background2">
+                <img id="movieCover2" src="" contentsMode="aspectFill" style="width: 1920; height: 720; padding-left: 1000;" />
+            </background>
             <infoList>
                 <info id="genreInfo"/>
                 <info id="directorInfo"/>
