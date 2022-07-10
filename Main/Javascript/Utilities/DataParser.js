@@ -542,7 +542,7 @@ class DataParser {
                     return null;
                 }
             }, null),
-            nextEpisode: result.isSerial ? {
+            nextEpisode: result.isSerial && !(getSafe(() => { return responses.one.data['General']['serial']['last_part'] }, false)) ? {
                 uid: getSafe(() => { return responses.one.data['General']['serial']['next_serial_part']['uid'] }, null),
                 title: toPersianDigits(getSafe(() => { return responses.one.data['General']['serial']['next_serial_part']['movie_title'] }, null)),
                 thumbnail: getSafe(() => { return responses.one.data['General']['serial']['next_serial_part']['thumbnails']['movie_img_m'] }, null)
