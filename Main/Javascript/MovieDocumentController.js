@@ -8,11 +8,13 @@ class MovieDocumentController extends DocumentController {
             this.movieTitle = options.event.target['dataItem'].title || null;
             this.movieThumbnail = options.event.target['dataItem'].image || null;
             this.shouldPlayAtLoad = options.event.type === 'play' || options.event.target['dataItem'].shouldPlayAtLoad;
+            this.shouldSkipIntro = options.event.target['dataItem'].shouldSkipIntro;
         } else {
             this.movieUid = options.movieUid || null;
             this.movieTitle = null;
             this.movieThumbnail = null;
             this.shouldPlayAtLoad = options.shouldPlayAtLoad;
+            this.shouldSkipIntro = options.shouldSkipIntro;
         }
 
         this.isLoggedInAtLaunch = UserManager.isLoggedIn()
@@ -356,7 +358,8 @@ class MovieDocumentController extends DocumentController {
               this.watchAction.castSkip,
               this.movieUid,
               this.subtitles,
-              this.watchAction.nextEpisode
+              this.watchAction.nextEpisode,
+              this.shouldSkipIntro
             );
         }
 

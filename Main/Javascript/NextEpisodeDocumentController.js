@@ -67,6 +67,7 @@ class NextEpisodeDocumentController extends DocumentController {
           dataItem.title = this.nextEpisodeTitle
           dataItem.image = this.nextEpisodeThumbnail
           dataItem.shouldPlayAtLoad = true
+          dataItem.shouldSkipIntro = true
           event.target.dataItem = dataItem
 
           this.player.interactiveOverlayDocument = null

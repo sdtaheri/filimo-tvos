@@ -26,7 +26,7 @@ class AppPlayer {
 
   playVideo (
     url, title, thumbnail, description, resumeTime, visitStats, castSkip, uid,
-    subtitles, nextEpisode) {
+    subtitles, nextEpisode, shouldSkipIntro) {
     if (url === null || url === undefined || url === '') {
       return
     }
@@ -46,7 +46,7 @@ class AppPlayer {
             this.loadPlayer(
               url, title, description, thumbnail,
               resumeTime, castSkip, visitStats, uid, true,
-              nextEpisode,
+              nextEpisode, shouldSkipIntro
             )
           }, 100)
         },
@@ -54,14 +54,14 @@ class AppPlayer {
     } else {
       this.loadPlayer(url, title, description, thumbnail, resumeTime,
         castSkip, visitStats, uid, false,
-        nextEpisode,
+        nextEpisode, shouldSkipIntro
       )
     }
   }
 
   loadPlayer (
     url, title, description, thumbnail, resumeTime, castSkip, visitStats, uid,
-    hasSubtitles, nextEpisode) {
+    hasSubtitles, nextEpisode, shouldSkipIntro) {
     console.log(url)
 
     const video = new MediaItem('video', url)
@@ -91,14 +91,14 @@ class AppPlayer {
     player.playlist = new Playlist()
     player.playlist.push(video)
 
-    this.setupSkipIntroOverlayOnPlayer(castSkip, player)
+    this.setupSkipIntroOverlayOnPlayer(castSkip, player, shouldSkipIntro)
     this.setupVisitStatsListener(visitStats, player, uid, hasSubtitles)
     this.setupNextEpisodeOverlayOnPlayer(nextEpisode, castSkip, player)
 
     player.play()
   }
 
-  setupSkipIntroOverlayOnPlayer (skipIntro, player) {
+  setupSkipIntroOverlayOnPlayer (skipIntro, player, shouldSkipIntro) {
     if (skipIntro && skipIntro.introStart >= 0 && skipIntro.introEnd > 0) {
       const documentLoader = new DocumentLoader(jsBaseURL)
       const documentURL = documentLoader.prepareURL('/XMLs/SkipIntro.xml')
@@ -119,8 +119,17 @@ class AppPlayer {
             if (!didAddOverlay &&
               (elapsedTime >= introStart && elapsedTime < skipIntro.introEnd)) {
               didAddOverlay = true
-              player.interactiveOverlayDocument = skipIntroDoc
-              player.interactiveOverlayDismissable = true
+
+              if (shouldSkipIntro) {
+                player.seekToTime(skipIntro.introEnd)
+                player.removeEventListener(
+                  'timeDidChange',
+                  overlayTimeDidChangeListener
+                )
+              } else {
+                player.interactiveOverlayDocument = skipIntroDoc
+                player.interactiveOverlayDismissable = true
+              }
             } else if (didAddOverlay &&
               (elapsedTime >= skipIntro.introEnd || elapsedTime < introStart)) {
               didAddOverlay = false
@@ -137,8 +146,10 @@ class AppPlayer {
             })
 
           skipIntroDoc.addEventListener('disappear', () => {
-            player.removeEventListener('timeDidChange',
-              overlayTimeDidChangeListener)
+            player.removeEventListener(
+              'timeDidChange',
+              overlayTimeDidChangeListener
+            )
           })
 
           player.addEventListener('timeDidChange', overlayTimeDidChangeListener,
