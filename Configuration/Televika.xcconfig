@@ -11,7 +11,7 @@
 
 ST_APP_NAME = Televika
 ST_APP_NAME_FA = تلویکا
-ST_APP_BUNDLE_ID = com.saeedtaheri.televika.appletv
+ST_APP_BUNDLE_ID = com.saeedtaheri.televika
 ST_URL_SCHEME = televika
 ST_BASE_URL = https:\/\/www.televika.com/api/
 ST_APP_ICON = AppIconTelevika

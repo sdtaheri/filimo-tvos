@@ -15,6 +15,7 @@
 		304769C824AC7E420002714B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304769C624AC7E420002714B /* Config.swift */; };
 		304769CB24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
 		304769CC24AC7F710002714B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304769C924AC7F710002714B /* InfoPlist.strings */; };
+		30489B852892F8B200161F01 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30C5790A20448110007E728F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C5790920448110007E728F /* AppDelegate.swift */; };
 		30C5790D20448110007E728F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C5790C20448110007E728F /* Assets.xcassets */; };
 		30D5A40C24ABE7FD00F5CF08 /* CarouselMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D5A40B24ABE7FD00F5CF08 /* CarouselMovie.swift */; };
@@ -62,6 +63,7 @@
 		304769C224AC728A0002714B /* Filimo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Filimo.xcconfig; sourceTree = "<group>"; };
 		304769C624AC7E420002714B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		304769CA24AC7F710002714B /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30489B842892F8B200161F01 /* Filimo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Filimo.entitlements; sourceTree = "<group>"; };
 		30B503EC206FD52500D08682 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = System/Library/Frameworks/TVServices.framework; sourceTree = SDKROOT; };
 		30C5790620448110007E728F /* Filimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C5790920448110007E728F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30489B852892F8B200161F01 /* TVServices.framework in Frameworks */,
 				303560FF2810C16A002F1F80 /* SubtitleProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +146,7 @@
 		30C578FD20448110007E728F = {
 			isa = PBXGroup;
 			children = (
+				30489B842892F8B200161F01 /* Filimo.entitlements */,
 				304769C524AC72A00002714B /* Configuration */,
 				30C5790820448110007E728F /* Main */,
 				30ED530E233B55E60068FE95 /* TopShelf */,
@@ -426,6 +430,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Filimo.entitlements;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,6 +526,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Filimo.entitlements;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -679,6 +685,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Filimo.entitlements;
+				DEVELOPMENT_TEAM = C48A3SAP44;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -697,6 +705,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ST_APP_ICON)";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Filimo.entitlements;
+				DEVELOPMENT_TEAM = C48A3SAP44;
 				INFOPLIST_FILE = "$(SRCROOT)/Main/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -713,6 +723,7 @@
 			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEVELOPMENT_TEAM = C48A3SAP44;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -733,6 +744,7 @@
 			baseConfigurationReference = 304769C224AC728A0002714B /* Filimo.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				DEVELOPMENT_TEAM = C48A3SAP44;
 				INFOPLIST_FILE = TopShelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
