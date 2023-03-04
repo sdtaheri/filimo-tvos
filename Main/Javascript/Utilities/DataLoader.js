@@ -85,7 +85,7 @@ class DataLoader {
     }
 
     fetchVitrineNextPage(url, itemsCallback, errorCallback) {
-        if (url === null) {
+        if (url === null || url === undefined) {
             if (errorCallback) {
                 errorCallback();
             }
