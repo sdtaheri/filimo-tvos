@@ -179,7 +179,7 @@ class DataLoader {
     }
 
     fetchHistory(itemsCallback) {
-        const url = baseURL + '/movie/movie/list/tagid/history';
+        const url = baseURL + '/movie/movie/list/tagid/1000200';
         this._fetchJSONData(this._documentLoader.prepareURL(url), null, (response) => {
             this._dataParser.parseVitrineResponse(response, itemsCallback);
         });
