@@ -9,7 +9,6 @@
 import Foundation
 import TVServices
 
-
 struct CarouselMovie {
 	let vitrineInfo: VitrineMovie
 	var oneDetail: MovieDetailGeneral?
@@ -17,7 +16,6 @@ struct CarouselMovie {
 }
 
 extension CarouselMovie {
-
 	func makeCarouselItem() -> TVTopShelfCarouselItem {
 		let item = TVTopShelfCarouselItem(identifier: vitrineInfo.uid)
 
@@ -53,7 +51,6 @@ extension CarouselMovie {
 	}
 
 	private func makeCarouselMediaOptions() -> TVTopShelfCarouselItem.MediaOptions {
-
 		var result = TVTopShelfCarouselItem.MediaOptions()
 
 		if vitrineInfo.isHD {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,7 @@
 		30ED5307233950DA0068FE95 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5306233950DA0068FE95 /* main.swift */; };
 		30ED530D233B55E60068FE95 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B503EC206FD52500D08682 /* TVServices.framework */; };
 		30ED5310233B55E60068FE95 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED530F233B55E60068FE95 /* ContentProvider.swift */; };
-		30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30ED530C233B55E60068FE95 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		30ED5314233B55E60068FE95 /* TopShelf.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 30ED530C233B55E60068FE95 /* TopShelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		30ED531C233B9EC60068FE95 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30ED5319233B9EB60068FE95 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,15 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		30B503F8206FD52500D08682 /* Embed App Extensions */ = {
+		30B503F8206FD52500D08682 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				30ED5314233B55E60068FE95 /* TopShelf.appex in Embed App Extensions */,
+				30ED5314233B55E60068FE95 /* TopShelf.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -206,7 +206,7 @@
 				30C5790220448110007E728F /* Sources */,
 				30C5790320448110007E728F /* Frameworks */,
 				30C5790420448110007E728F /* Resources */,
-				30B503F8206FD52500D08682 /* Embed App Extensions */,
+				30B503F8206FD52500D08682 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -245,7 +245,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = Filimo;
 				TargetAttributes = {
 					30C5790520448110007E728F = {
@@ -258,7 +258,7 @@
 				};
 			};
 			buildConfigurationList = 30C5790120448110007E728F /* Build configuration list for PBXProject "Filimo" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (

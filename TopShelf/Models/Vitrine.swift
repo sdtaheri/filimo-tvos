@@ -9,7 +9,6 @@
 import Foundation
 
 struct VitrineResponse: Codable {
-
 	struct Datum: Codable {
 		let linkKey: String?
 		let movies: MovieData
@@ -28,7 +27,6 @@ struct VitrineResponse: Codable {
 }
 
 struct VitrineMovie: Codable {
-
 	struct Picture: Codable {
 		let big: String?
 

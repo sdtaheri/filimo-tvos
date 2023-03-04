@@ -9,7 +9,6 @@
 import Foundation
 
 struct MovieDetailReview: Codable {
-
 	struct Data: Codable {
 		let trailer: Trailer?
 		let actors: Crew?
@@ -23,7 +22,6 @@ struct MovieDetailReview: Codable {
 	}
 
 	let data: Data
-
 }
 
 struct Trailer: Codable {

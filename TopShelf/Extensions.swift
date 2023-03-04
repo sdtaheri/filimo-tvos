@@ -23,39 +23,36 @@ extension URL {
 }
 
 extension String {
-    func persianDigits() -> String {
-        var str = self
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "fa")
-        for i in 0..<10 {
-            let number = NSNumber(integerLiteral: i)
-            str = str.replacingOccurrences(of: number.stringValue, with: formatter.string(from: number)!)
-        }
-        return str
-    }
+	func persianDigits() -> String {
+		var str = self
+		let formatter = NumberFormatter()
+		formatter.locale = Locale(identifier: "fa")
+		for i in 0..<10 {
+			let number = NSNumber(integerLiteral: i)
+			str = str.replacingOccurrences(of: number.stringValue, with: formatter.string(from: number)!)
+		}
+		return str
+	}
 
-    init?(htmlEncodedString: String?) {
+	init?(htmlEncodedString: String?) {
+		guard let data = htmlEncodedString?.data(using: .utf8) else {
+			return nil
+		}
 
-        guard let data = htmlEncodedString?.data(using: .utf8) else {
-            return nil
-        }
+		let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+			.documentType: NSAttributedString.DocumentType.html,
+			.characterEncoding: String.Encoding.utf8.rawValue
+		]
 
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
+		guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
+			return nil
+		}
 
-        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
-            return nil
-        }
-
-        self.init(attributedString.string)
-
-    }
+		self.init(attributedString.string)
+	}
 }
 
 extension URLRequest {
-
 	@discardableResult
 	mutating func addAppHeaders() -> URLRequest {
 		addValue("simple", forHTTPHeaderField: "JsonType")

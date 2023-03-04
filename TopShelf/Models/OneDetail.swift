@@ -9,7 +9,6 @@
 import Foundation
 
 struct MovieOneDetailResponse: Codable {
-
 	struct Data: Codable {
 		let general: MovieDetailGeneral
 
@@ -22,7 +21,6 @@ struct MovieOneDetailResponse: Codable {
 }
 
 struct MovieDetailGeneral: Codable {
-
 	struct Category: Codable {
 		let title: String
 	}
