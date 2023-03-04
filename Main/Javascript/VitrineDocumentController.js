@@ -43,8 +43,10 @@ class VitrineDocumentController extends DocumentController {
             document.addEventListener('holdselect', this.handleEvent)
         }
 
-        if (this.pageTitle) {
+        if (this.pageTitle && !this.isHomePage) {
             this.pageTitleElement.textContent = this.pageTitle;
+        } else {
+            this.pageTitleElement.textContent = '';
         }
 
         this._nextPageURL = null;
@@ -106,12 +108,12 @@ class VitrineDocumentController extends DocumentController {
         for (let i = 0; i < dataObject.rows.length; i++) {
             const row = dataObject.rows[i];
 
-            if (dataObject.rows.length === 1 && row.title && row.title !== '') {
-                this.pageTitle = row.title;
+            if (dataObject.rows.length === 1 && row.title && row.title.length !== 0) {
+                this.pageTitle = this.isHomePage ? '' : row.title;
                 this.pageTitleElement.textContent = this.pageTitle;
             }
 
-            const shouldAddHeader = row.title && (row.title !== '') && row.title !== this.pageTitle;
+            const shouldAddHeader = row.title && (row.title.length !== 0) && row.title !== this.pageTitle;
 
             if (row.type === "crew-single") {
                 const item = row.dataItems[0] || null;

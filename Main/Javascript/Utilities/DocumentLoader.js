@@ -73,7 +73,8 @@ class DocumentLoader {
      */
     prepareURL(url) {
         // Handle URLs relative to the "server root" (baseURL)
-        if (url.indexOf("/") === 0) {
+        let index = url.indexOf("/");
+        if (index !== undefined && index === 0) {
             url = this.jsBaseURL + url.substr(1);
         }
         return url;
