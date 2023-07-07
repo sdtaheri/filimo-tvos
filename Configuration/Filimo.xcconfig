@@ -11,7 +11,7 @@
 
 ST_APP_NAME = Filimo
 ST_APP_NAME_FA = فیلیمو
-ST_APP_BUNDLE_ID = com.saeedtaheri.filimo
+ST_APP_BUNDLE_ID = com.bluevod.f
 ST_URL_SCHEME = filimo
 ST_BASE_URL = https:\/\/www.filimo.com/api/
 ST_APP_ICON = AppIconFilimo

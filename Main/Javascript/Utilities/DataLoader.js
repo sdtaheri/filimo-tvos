@@ -27,7 +27,10 @@ class DataLoader {
             di: `Apple*${Device.model}*${Device.productType}*${Device.productType}*${Device.productType}`,
             s: "ab",
             oui: "",
-            pkg: Device.appIdentifier.replace("com.saeedtaheri", "com.sabaidea"),
+            pkg: Device.appIdentifier
+              .replace("com.saeedtaheri", "com.sabaidea")
+              .replace("com.bluevod.f", "com.sabaidea.filimo")
+              .replace("com.bluevod.t", "com.sabaidea.televika"),
             afcn: Device.vendorIdentifier
         }
 
